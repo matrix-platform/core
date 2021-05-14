@@ -1,0 +1,17 @@
+{
+    "name": "matrix-platform/core",
+    "authors": [
+        {
+            "name": "jrealm",
+            "email": "jrealm@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "autoload": {
+        "files": [
+            "include/bootstrap.php"
+        ]
+    },
+    "require": {
+    }
+}
