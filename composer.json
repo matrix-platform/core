@@ -13,5 +13,7 @@
         ]
     },
     "require": {
+        "twig/string-extra": "^3.3",
+        "twig/twig": "^3.3"
     }
 }
