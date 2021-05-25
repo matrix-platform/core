@@ -33,6 +33,14 @@ function get_data_file($path, $verify = true) {
     return false;
 }
 
+function i18n($token, $default = null) {
+    list($name, $key) = preg_split('/\./', $token, 2);
+
+    $bundle = load_i18n($name);
+
+    return $bundle[$key] ?? $default ?? "{{$token}}";
+}
+
 function isolate_require() {
     return require func_get_arg(0);
 }
@@ -60,6 +68,10 @@ function load_bundle($name) {
 
 function load_cfg($name) {
     return load_bundle("cfg/{$name}");
+}
+
+function load_i18n($name, $language = LANGUAGE) {
+    return load_bundle("i18n/{$language}/{$name}");
 }
 
 function load_resource($path, $resolve = true) {
