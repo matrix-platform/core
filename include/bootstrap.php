@@ -33,3 +33,11 @@ spl_autoload_register(function ($name) {
         isolate_require($file);
     }
 }, true, true);
+
+if (PHP_SAPI === 'cli') {
+    $loader = 'cli.php';
+} else {
+    $loader = 'web.php';
+}
+
+require $loader;
