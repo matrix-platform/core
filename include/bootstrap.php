@@ -37,6 +37,10 @@ spl_autoload_register(function ($name) {
 if (PHP_SAPI === 'cli') {
     $loader = 'cli.php';
 } else {
+    if (strtolower(@$_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+        define('AJAX', true);
+    }
+
     $loader = 'web.php';
 }
 
