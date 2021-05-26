@@ -1,15 +1,19 @@
 <?php //>
 
+use Monolog\ErrorHandler;
+
 define('MATRIX', dirname(__DIR__) . '/');
 
 require 'functions.php';
 require APP_HOME . 'config.php';
 
 $data = APP_HOME . 'data/';
+$logs = APP_HOME . 'logs/';
 $folders = [];
 
 if (defined('CUSTOM_APP')) {
     $data = $data . CUSTOM_APP . '/';
+    $logs = $logs . CUSTOM_APP . '/';
     $folders['custom'] = APP_HOME . CUSTOM_APP . '/';
 }
 
@@ -24,6 +28,7 @@ if (defined('PACKAGES')) {
 $folders['core'] = MATRIX;
 
 define('APP_DATA', $data);
+define('APP_LOG', $logs);
 define('RESOURCE_FOLDERS', $folders);
 
 spl_autoload_register(function ($name) {
@@ -43,5 +48,7 @@ if (PHP_SAPI === 'cli') {
 
     $loader = 'web.php';
 }
+
+ErrorHandler::register(logger('ERROR'));
 
 require $loader;

@@ -2,6 +2,9 @@
 
 use matrix\view\Native;
 use matrix\view\Twig;
+use Monolog\Handler\FirePHPHandler;
+use Monolog\Handler\RotatingFileHandler;
+use Monolog\Logger;
 
 function cfg($token) {
     list($name, $key) = preg_split('/\./', $token, 2);
@@ -92,6 +95,24 @@ function load_resource($path, $resolve = true) {
     }
 
     return $resources[$file];
+}
+
+function logger($name = 'message') {
+    static $loggers = [];
+
+    if (!key_exists($name, $loggers)) {
+        $file = (PHP_SAPI === 'cli') ? "cli-{$name}" : $name;
+
+        $handlers = [new RotatingFileHandler(APP_LOG . $file)];
+
+        if (cfg('system.debug')) {
+            $handlers[] = new FirePHPHandler();
+        }
+
+        $loggers[$name] = new Logger($name, $handlers);
+    }
+
+    return $loggers[$name];
 }
 
 function resolve($view) {
