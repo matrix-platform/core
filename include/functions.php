@@ -14,6 +14,19 @@ function cfg($token) {
     return @$bundle[$key];
 }
 
+function create_folder($path) {
+    if (!is_dir($path)) {
+        create_folder(dirname($path));
+
+        $origin = umask(0);
+
+        mkdir($path, 0777);
+        umask($origin);
+    }
+
+    return $path;
+}
+
 function find_resource($path) {
     foreach (RESOURCE_FOLDERS as $folder) {
         $file = $folder . $path;
@@ -103,7 +116,7 @@ function logger($name = 'message') {
     if (!key_exists($name, $loggers)) {
         $file = (PHP_SAPI === 'cli') ? "cli-{$name}" : $name;
 
-        $handlers = [new RotatingFileHandler(APP_LOG . $file)];
+        $handlers = [new RotatingFileHandler(create_folder(APP_LOG) . $file)];
 
         if (cfg('system.debug')) {
             $handlers[] = new FirePHPHandler();
