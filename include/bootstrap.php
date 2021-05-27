@@ -1,7 +1,5 @@
 <?php //>
 
-use Monolog\ErrorHandler;
-
 define('MATRIX', dirname(__DIR__) . '/');
 
 require 'functions.php';
@@ -39,16 +37,4 @@ spl_autoload_register(function ($name) {
     }
 }, true, true);
 
-if (PHP_SAPI === 'cli') {
-    $loader = 'cli.php';
-} else {
-    if (strtolower(@$_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
-        define('AJAX', true);
-    }
-
-    $loader = 'web.php';
-}
-
-ErrorHandler::register(logger('ERROR'));
-
-require $loader;
+require PHP_SAPI === 'cli' ? 'cli.php' : 'web.php';
