@@ -1,5 +1,6 @@
 <?php //>
 
+use matrix\db\Connection;
 use matrix\view\Native;
 use matrix\view\Twig;
 use Monolog\Handler\FirePHPHandler;
@@ -25,6 +26,24 @@ function create_folder($path) {
     }
 
     return $path;
+}
+
+function db($prefix = 'DB') {
+    static $instances = [];
+
+    if (!key_exists($prefix, $instances)) {
+        $name = @constant("{$prefix}_NAME");
+        $user = @constant("{$prefix}_USER");
+        $password = @constant("{$prefix}_PASSWORD");
+
+        if ($name && $user) {
+            $instances[$prefix] = new Connection($name, $user, $password);
+        } else {
+            $instances[$prefix] = null;
+        }
+    }
+
+    return $instances[$prefix];
 }
 
 function find_resource($path) {
@@ -128,6 +147,10 @@ function logger($name = 'message') {
     return $loggers[$name];
 }
 
+function model($name) {
+    return table($name)->model();
+}
+
 function resolve($view) {
     switch (pathinfo($view, PATHINFO_EXTENSION)) {
     case 'twig':
@@ -135,6 +158,16 @@ function resolve($view) {
     }
 
     return new Native($view);
+}
+
+function table($name) {
+    $table = load_resource("table/{$name}.php");
+
+    if ($table) {
+        return $table->name($name);
+    }
+
+    throw new Exception("Table `{$name}` not found.");
 }
 
 function union_resource($path) {

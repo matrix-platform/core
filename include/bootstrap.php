@@ -38,3 +38,5 @@ spl_autoload_register(function ($name) {
 }, true, true);
 
 require PHP_SAPI === 'cli' ? 'cli.php' : 'web.php';
+
+define('MULTILINGUAL', count(LANGUAGES) > 1);
