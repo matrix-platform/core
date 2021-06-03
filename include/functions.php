@@ -87,10 +87,9 @@ function load_bundle($name) {
         $bundle = union_resource("{$name}.php");
 
         if ($bundle) {
-            $file = get_data_file($name);
+            $data = load_data($name);
 
-            if ($file !== false) {
-                $data = json_decode(file_get_contents($file), true);
+            if ($data) {
                 $bundle = array_replace_recursive($bundle, $data);
             }
         }
@@ -103,6 +102,12 @@ function load_bundle($name) {
 
 function load_cfg($name) {
     return load_bundle("cfg/{$name}");
+}
+
+function load_data($name) {
+    $file = get_data_file($name);
+
+    return $file === false ? [] : json_decode(file_get_contents($file), true);
 }
 
 function load_i18n($name, $language = LANGUAGE) {
