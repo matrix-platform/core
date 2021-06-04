@@ -2,6 +2,8 @@
 
 namespace matrix\view;
 
+use Exception;
+
 class Native {
 
     private $view;
@@ -11,7 +13,13 @@ class Native {
     }
 
     public function render($controller, $form, $result) {
-        require find_resource("view/native/{$this->view}");
+        $file = find_resource("view/native/{$this->view}");
+
+        if ($file === false) {
+            throw new Exception("View `{$this->view}` not found.");
+        }
+
+        require $file;
     }
 
 }

@@ -1,0 +1,7 @@
+/config-sample.php
+/data/
+/logs/
+/vendor/
+/www/.htaccess
+/www/files/
+/www/index.php

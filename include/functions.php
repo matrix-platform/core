@@ -7,6 +7,14 @@ use Monolog\Handler\FirePHPHandler;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
 
+function base64_urldecode($data) {
+    return base64_decode(str_replace(['-', '_'], ['+', '/'], $data));
+}
+
+function base64_urlencode($data) {
+    return str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($data));
+}
+
 function cfg($token) {
     list($name, $key) = preg_split('/\./', $token, 2);
 
