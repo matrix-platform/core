@@ -6,6 +6,8 @@ use matrix\view\Twig;
 use Monolog\Handler\FirePHPHandler;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 
 function base64_urldecode($data) {
     return base64_decode(str_replace(['-', '_'], ['+', '/'], $data));
@@ -162,6 +164,12 @@ function logger($name = 'message') {
 
 function model($name) {
     return table($name)->model();
+}
+
+function render($template, $data) {
+    $twig = new Environment(new ArrayLoader(['template' => $template]));
+
+    return $twig->render('template', $data);
 }
 
 function resolve($view) {
