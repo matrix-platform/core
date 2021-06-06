@@ -10,7 +10,7 @@ class Boolean extends Column {
     public function __construct($values) {
         parent::__construct($values + [
             'formStyle' => 'radio',
-            'options' => 'yes-no',
+            'options' => load_options('yes-no'),
         ]);
     }
 

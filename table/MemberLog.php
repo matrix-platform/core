@@ -13,7 +13,7 @@ $tbl->add('member_id', Integer::class)
     ->required(true);
 
 $tbl->add('type', Integer::class)
-    ->options('member-log-type')
+    ->options(load_options('member-log-type'))
     ->readonly(true)
     ->required(true);
 

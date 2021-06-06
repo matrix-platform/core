@@ -124,6 +124,10 @@ function load_i18n($name, $language = LANGUAGE) {
     return load_bundle("i18n/{$language}/{$name}");
 }
 
+function load_options($name) {
+    return load_i18n("options/{$name}");
+}
+
 function load_resource($path, $resolve = true) {
     static $resources = [];
 

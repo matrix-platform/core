@@ -13,7 +13,7 @@ abstract class Column extends ValueObject {
         'mapping' => 'name',
     ];
 
-    public function associate($alias, $foreign, $parent = false, $target = 'id') {
+    public function associate($alias, $foreign, $parent = false, $filter = [], $target = 'id') {
         $this->table()->register([
             'type' => 'association',
             'column' => $this,
@@ -21,10 +21,29 @@ abstract class Column extends ValueObject {
             'foreign' => $foreign,
             'target' => $target,
             'parent' => $parent,
+            'filter' => $filter,
         ]);
 
         if ($parent) {
             $this->invisible(true)->readonly(true);
+        } else {
+            $this->options(function ($column) {
+                static $options;
+
+                if ($options === null) {
+                    $relation = $column->table()->getRelation($column->association());
+
+                    $model = $relation['foreign']->model();
+                    $name = $relation['target']->name();
+                    $options = [];
+
+                    foreach ($model->query($relation['filter']) as $item) {
+                        $options[$item[$name]] = $model->toString($item);
+                    }
+                }
+
+                return $options;
+            });
         }
 
         return $this->association($alias);
