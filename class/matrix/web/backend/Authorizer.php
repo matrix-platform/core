@@ -24,8 +24,9 @@ trait Authorizer {
         if ($menu) {
             $path = @$menu['group'] ? $node : $menu['parent'];
             $permissions = $this->permissions();
+            $tag = $menu['tag'];
 
-            if (@$permissions[$path][$menu['tag']] || USER_ID === 1) {
+            if (@$permissions[$path][$tag] || USER_ID <= ($tag === 'system' ? 1 : 2)) {
                 return $menu;
             }
         }

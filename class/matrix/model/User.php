@@ -18,15 +18,18 @@ class User extends Model {
     protected function before($type, $prev, $curr) {
         switch ($type) {
         case self::DELETE:
-            if ($prev['id'] === 1) {
+            if ($prev['id'] <= 2) {
                 throw new AppException('error.permission-denied');
             }
             break;
         case self::INSERT:
+            if ($curr['id'] <= 2) {
+                throw new AppException('error.permission-denied');
+            }
             $encrypt = isset($curr['password']);
             break;
         case self::UPDATE:
-            if ($prev['id'] === 1 && @constant('USER_ID') !== 1) {
+            if ($prev['id'] <= 2 && $prev['id'] < constant('USER_ID')) {
                 throw new AppException('error.permission-denied');
             }
             if (isset($curr['password'])) {

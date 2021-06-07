@@ -2,6 +2,8 @@
 
 namespace matrix\web;
 
+use matrix\db\Model;
+
 class UserController extends Controller {
 
     use UserAware;
@@ -11,6 +13,8 @@ class UserController extends Controller {
     }
 
     public function execute() {
+        Model::enableAdministration();
+
         if ($this->authorize()) {
             parent::execute();
         }
