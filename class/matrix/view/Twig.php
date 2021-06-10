@@ -26,7 +26,13 @@ class Twig {
             }
         }
 
-        $twig = new Environment(new FilesystemLoader($paths));
+        if (defined('TWIG_CACHE')) {
+            $options = ['auto_reload' => true, 'cache' => APP_DATA . 'twig'];
+        } else {
+            $options = [];
+        }
+
+        $twig = new Environment(new FilesystemLoader($paths), $options);
 
         $twig->addExtension(new StringExtension());
         $twig->addExtension(new StringLoaderExtension());
