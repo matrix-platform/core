@@ -4,9 +4,11 @@ namespace matrix\core;
 
 use matrix\utility\ValueObject;
 
-class Controller extends ValueObject {
+trait Handler {
 
-    public function execute() {
+    use ValueObject;
+
+    protected function handle() {
         $this->init();
 
         $form = $this->trim($this->wrap());

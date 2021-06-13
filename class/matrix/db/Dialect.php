@@ -2,7 +2,57 @@
 
 namespace matrix\db;
 
-abstract class Dialect {
+trait Dialect {
+
+    public function between($expression, $values) {
+        return "{$expression} BETWEEN ? AND ?";
+    }
+
+    public function equal($expression, $values) {
+        return "{$expression} = ?";
+    }
+
+    public function greaterThan($expression, $values) {
+        return "{$expression} > ?";
+    }
+
+    public function greaterThanOrEqual($expression, $values) {
+        return "{$expression} >= ?";
+    }
+
+    public function iLike($expression, $values) {
+        return "LOWER({$expression}) LIKE LOWER(?)";
+    }
+
+    public function in($expression, $values) {
+        $count = count($values);
+
+        switch ($count) {
+        case 0:
+            return '1 <> 1';
+        case 1:
+            return "{$expression} = ?";
+        default:
+            $params = implode(',', array_fill(0, $count, '?'));
+            return "{$expression} IN ({$params})";
+        }
+    }
+
+    public function isNull($expression, $values) {
+        return "{$expression} IS NULL";
+    }
+
+    public function lessThan($expression, $values) {
+        return "{$expression} < ?";
+    }
+
+    public function lessThanOrEqual($expression, $values) {
+        return "{$expression} <= ?";
+    }
+
+    public function like($expression, $values) {
+        return "{$expression} LIKE ?";
+    }
 
     public function makeCountSelection($table, $criteria) {
         $command = "SELECT COUNT(*) FROM {$table->mapping()} AS _";
@@ -173,6 +223,40 @@ abstract class Dialect {
         $command = "UPDATE {$table->mapping()} AS _ SET {$set}";
 
         return $this->makeCriteria($command, $criteria);
+    }
+
+    public function notBetween($expression, $values) {
+        return "{$expression} NOT BETWEEN ? AND ?";
+    }
+
+    public function notEqual($expression, $values) {
+        return "{$expression} <> ?";
+    }
+
+    public function notILike($expression, $values) {
+        return "LOWER({$expression}) NOT LIKE LOWER(?)";
+    }
+
+    public function notIn($expression, $values) {
+        $count = count($values);
+
+        switch ($count) {
+        case 0:
+            return false;
+        case 1:
+            return "{$expression} <> ?";
+        default:
+            $params = implode(',', array_fill(0, $count, '?'));
+            return "{$expression} NOT IN ({$params})";
+        }
+    }
+
+    public function notLike($expression, $values) {
+        return "{$expression} NOT LIKE ?";
+    }
+
+    public function notNull($expression, $values) {
+        return "{$expression} IS NOT NULL";
     }
 
     abstract public function quote($name);

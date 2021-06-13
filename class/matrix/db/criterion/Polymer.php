@@ -17,16 +17,6 @@ class Polymer implements Criterion {
         return new self($column, Criteria::createOr($criterion));
     }
 
-    private static function supported($name) {
-        static $helper;
-
-        if (!$helper) {
-            $helper = new ReflectionClass(Helper::class);
-        }
-
-        return $helper->hasMethod($name);
-    }
-
     private $column;
     private $criteria;
     private $criterion;
@@ -37,7 +27,7 @@ class Polymer implements Criterion {
     }
 
     public function __call($name, $args) {
-        if (!self::supported($name)) {
+        if (!$this->supported($name)) {
             throw new Exception('Unsupported operation.');
         }
 
@@ -69,6 +59,17 @@ class Polymer implements Criterion {
 
     public function with($language) {
         return $this->criteria->with($language);
+    }
+
+    private function supported($name) {
+        static $methods;
+
+        if (!$methods) {
+            $helper = new ReflectionClass(Helper::class);
+            $methods = array_column($helper->getMethods(), 'class', 'name');
+        }
+
+        return key_exists($name, $methods);
     }
 
 }

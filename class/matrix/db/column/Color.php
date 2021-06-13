@@ -2,10 +2,18 @@
 
 namespace matrix\db\column;
 
-class Color extends Text {
+use matrix\db\Column;
+
+class Color {
+
+    use Column, type\Text;
 
     public function __construct($values) {
-        parent::__construct($values + ['formStyle' => 'color']);
+        $this->values = $values + [
+            'formStyle' => 'color',
+            'searchStyle' => false,
+            'unordered' => true,
+        ];
     }
 
 }

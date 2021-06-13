@@ -2,13 +2,18 @@
 
 namespace matrix\db\column;
 
-class Html extends Text {
+use matrix\db\Column;
+
+class Html {
+
+    use Column, type\Text;
 
     public function __construct($values) {
-        parent::__construct($values + [
+        $this->values = $values + [
             'formStyle' => 'html',
+            'searchStyle' => false,
             'unordered' => true,
-        ]);
+        ];
     }
 
 }

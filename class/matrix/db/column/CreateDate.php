@@ -2,14 +2,20 @@
 
 namespace matrix\db\column;
 
-class CreateDate extends Date {
+use matrix\db\Column;
+
+class CreateDate {
+
+    use Column, type\DateTime;
 
     public function __construct($values) {
-        parent::__construct($values + [
+        $this->values = $values + [
             'blankStyle' => 'hidden',
+            'formStyle' => 'date',
+            'pattern' => cfg('system.date'),
             'readonly' => true,
-            'required' => true,
-        ]);
+            'searchStyle' => 'between',
+        ];
     }
 
     public function generate($value) {

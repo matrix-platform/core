@@ -2,13 +2,18 @@
 
 namespace matrix\db\column;
 
-class Url extends Text {
+use matrix\db\Column;
+
+class Url {
+
+    use Column, type\Text;
 
     public function __construct($values) {
-        parent::__construct($values + [
+        $this->values = $values + [
             'formStyle' => 'url',
+            'searchStyle' => 'like',
             'validation' => 'url',
-        ]);
+        ];
     }
 
 }

@@ -4,13 +4,9 @@ namespace matrix\utility;
 
 use Closure;
 
-class ValueObject {
+trait ValueObject {
 
     protected $values;
-
-    public function __construct($values = []) {
-        $this->values = $values;
-    }
 
     public function __call($name, $args) {
         if ($args) {

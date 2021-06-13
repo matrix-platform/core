@@ -2,10 +2,17 @@
 
 namespace matrix\db\column;
 
-class Textarea extends Text {
+use matrix\db\Column;
+
+class Textarea {
+
+    use Column, type\Text;
 
     public function __construct($values) {
-        parent::__construct($values + ['formStyle' => 'textarea']);
+        $this->values = $values + [
+            'formStyle' => 'textarea',
+            'searchStyle' => 'like',
+        ];
     }
 
 }

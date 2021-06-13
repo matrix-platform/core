@@ -2,9 +2,7 @@
 
 namespace matrix\model;
 
-use matrix\db\Model;
-
-abstract class CommonMember extends Model {
+trait CommonMember {
 
     public function queryById($id) {
         return $this->queryValidMember(['id' => $id]);

@@ -4,4 +4,6 @@ define('APP_HOME', dirname(__DIR__) . '/');
 
 require APP_HOME . 'vendor/autoload.php';
 
-matrix\core\App::getInstance()->run();
+define('MATRIX', APP_HOME . 'vendor/matrix-platform/core/');
+
+require MATRIX . 'app.php';

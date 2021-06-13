@@ -4,9 +4,13 @@ namespace matrix\web;
 
 use matrix\db\Model;
 
-class UserController extends Controller {
+class UserController {
 
-    use UserAware;
+    use RequestHandler, UserAuthenticator;
+
+    public function __construct($values = []) {
+        $this->values = $values;
+    }
 
     public function available() {
         return ($this->method() === 'POST' && $this->name() === $this->path());
@@ -15,29 +19,9 @@ class UserController extends Controller {
     public function execute() {
         Model::enableAdministration();
 
-        if ($this->authorize()) {
-            parent::execute();
+        if ($this->authenticate()) {
+            $this->handle();
         }
-    }
-
-    protected function authorize() {
-        $user = $this->user();
-
-        if ($user) {
-            define('USER_ID', $user['id']);
-
-            return true;
-        }
-
-        if (defined('AJAX')) {
-            header('HTTP/1.1 401 Unauthorized');
-        } else {
-            $path = base64_urlencode($_SERVER['REQUEST_URI']);
-
-            header('Location: ' . APP_ROOT . 'backend/login/' . $path);
-        }
-
-        return false;
     }
 
 }

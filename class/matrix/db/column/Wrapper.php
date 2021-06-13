@@ -2,9 +2,7 @@
 
 namespace matrix\db\column;
 
-use matrix\db\Column;
-
-class Wrapper extends Column {
+class Wrapper {
 
     private $alias;
     private $column;
@@ -14,23 +12,18 @@ class Wrapper extends Column {
         $this->alias = $alias;
         $this->column = $column;
         $this->relation = $relation;
-        $this->values = $column->values;
+    }
+
+    public function __call($name, $args) {
+        return call_user_func_array([$this->column, $name], $args);
     }
 
     public function alias() {
         return $this->alias;
     }
 
-    public function convert($value) {
-        return $this->column->convert($value);
-    }
-
     public function expression($dialect, $language = null, $prefix = null) {
-        return $this->column->expression($dialect, $language, $prefix ?? $this->alias);
-    }
-
-    public function generate($value) {
-        return $this->column->generate($value);
+        return $this->column->expression($dialect, $language, $prefix ?: $this->alias);
     }
 
     public function isCounter() {
@@ -41,16 +34,8 @@ class Wrapper extends Column {
         return true;
     }
 
-    public function regenerate($value) {
-        return $this->column->regenerate($value);
-    }
-
     public function relation() {
         return $this->relation;
-    }
-
-    public function type() {
-        return $this->column->type();
     }
 
 }

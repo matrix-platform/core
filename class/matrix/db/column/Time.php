@@ -2,14 +2,19 @@
 
 namespace matrix\db\column;
 
-class Time extends AbstractDateTime {
+use matrix\db\Column;
+
+class Time {
+
+    use Column, type\DateTime;
 
     public function __construct($values) {
-        parent::__construct($values + [
+        $this->values = $values + [
             'formStyle' => 'time',
             'pattern' => cfg('system.time'),
+            'searchStyle' => 'between',
             'validation' => 'time',
-        ]);
+        ];
     }
 
 }

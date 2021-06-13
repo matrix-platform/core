@@ -4,14 +4,16 @@ namespace matrix\db\criterion;
 
 use matrix\db\Criterion;
 
-abstract class AbstractCriterion implements Criterion {
+class Monomer implements Criterion {
 
     protected $column;
     protected $language = LANGUAGE;
+    protected $operator;
     protected $values;
 
-    public function __construct($column, $values) {
+    public function __construct($column, $operator, $values) {
         $this->column = $column;
+        $this->operator = $operator;
         $this->values = array_map([$column, 'convert'], $values);
     }
 
@@ -38,7 +40,7 @@ abstract class AbstractCriterion implements Criterion {
     public function make($dialect) {
         $expression = $this->column->expression($dialect, $this->language);
 
-        return $this->build($dialect, $expression);
+        return $dialect->{$this->operator}($expression, $this->values);
     }
 
     public function or() {
@@ -50,7 +52,5 @@ abstract class AbstractCriterion implements Criterion {
 
         return $this;
     }
-
-    abstract protected function build($dialect, $expression);
 
 }

@@ -423,7 +423,7 @@ class Model {
         $statement->bindValue(2, constant('CONTROLLER'), PDO::PARAM_STR);
         $statement->bindValue(3, @constant('USER_ID'), PDO::PARAM_INT);
         $statement->bindValue(4, @constant('MEMBER_ID'), PDO::PARAM_INT);
-        $statement->bindValue(5, @constant('REMOTE_ADDR'), PDO::PARAM_STR);
+        $statement->bindValue(5, constant('REMOTE_ADDR'), PDO::PARAM_STR);
         $statement->bindValue(6, $this->table->name(), PDO::PARAM_STR);
         $statement->bindValue(7, $dataId, PDO::PARAM_INT);
         $statement->bindValue(8, $prev, PDO::PARAM_STR);

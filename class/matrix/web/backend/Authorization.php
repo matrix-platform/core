@@ -4,7 +4,7 @@ namespace matrix\web\backend;
 
 use matrix\utility\Fn;
 
-trait Authorizer {
+trait Authorization {
 
     private $menus;
     private $permissions;

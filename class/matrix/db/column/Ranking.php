@@ -2,16 +2,25 @@
 
 namespace matrix\db\column;
 
-class Ranking extends Integer {
+use matrix\db\Column;
+
+class Ranking {
+
+    use Column, type\Integer;
 
     public function __construct($values) {
-        parent::__construct($values + ['sequence' => 'base_ranking']);
+        $this->values = $values + [
+            'formStyle' => 'integer',
+            'searchStyle' => false,
+            'sequence' => 'base_ranking',
+            'validation' => 'integer',
+        ];
 
         $this->table()->ranking($this->name());
     }
 
     public function generate($value) {
-        return $value ?? db()->next($this->sequence());
+        return $value ?: db()->next($this->sequence());
     }
 
     public function regenerate($value) {

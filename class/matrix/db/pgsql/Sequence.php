@@ -2,9 +2,15 @@
 
 namespace matrix\db\pgsql;
 
-use matrix\db\Sequence as AbstractSequence;
+use matrix\db\Sequence as SequenceInterface;
 
-class Sequence extends AbstractSequence {
+class Sequence implements SequenceInterface {
+
+    private $db;
+
+    public function __construct($db) {
+        $this->db = $db;
+    }
 
     public function next($name) {
         $statement = $this->db->prepare("SELECT NEXTVAL('{$name}')");

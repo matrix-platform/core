@@ -2,21 +2,23 @@
 
 namespace matrix\db\column;
 
-class ModifierAddress extends Text {
+use matrix\db\Column;
+
+class ModifierAddress {
+
+    use Column, type\Text;
 
     public function __construct($values) {
-        parent::__construct($values + [
+        $this->values = $values + [
             'blankStyle' => 'hidden',
             'disabled' => true,
-        ]);
+            'formStyle' => 'text',
+            'searchStyle' => 'like',
+        ];
     }
 
     public function generate($value) {
-        if (defined('REMOTE_ADDR')) {
-            return REMOTE_ADDR;
-        }
-
-        return null;
+        return constant('REMOTE_ADDR');
     }
 
     public function regenerate($value) {

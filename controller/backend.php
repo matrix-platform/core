@@ -4,7 +4,7 @@ use matrix\utility\Fn;
 
 return new class() extends matrix\web\UserController {
 
-    use matrix\web\backend\Authorizer;
+    use matrix\web\backend\Authorization;
 
     public function available() {
         if ($this->method() === 'GET') {

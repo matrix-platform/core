@@ -8,18 +8,20 @@ use matrix\db\column\Id;
 use matrix\db\column\Wrapper;
 use matrix\utility\ValueObject;
 
-class Table extends ValueObject {
+class Table {
+
+    use ValueObject;
 
     private $columns = [];
     private $names = [];
     private $relations = [];
 
     public function __construct($mapping, $traceable = true, $namespace = 'matrix\model') {
-        parent::__construct(['mapping' => $mapping, 'namespace' => $namespace]);
-
-        if ($traceable) {
-            $this->traceable(true);
-        }
+        $this->values = [
+            'mapping' => $mapping,
+            'namespace' => $namespace,
+            'traceable' => $traceable,
+        ];
 
         $this->add('id', Id::class);
     }

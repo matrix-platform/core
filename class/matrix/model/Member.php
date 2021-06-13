@@ -2,5 +2,10 @@
 
 namespace matrix\model;
 
-class Member extends CommonMember {
+use matrix\db\Model;
+
+class Member extends Model {
+
+    use CommonMember;
+
 }

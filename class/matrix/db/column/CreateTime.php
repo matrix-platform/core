@@ -2,14 +2,20 @@
 
 namespace matrix\db\column;
 
-class CreateTime extends Timestamp {
+use matrix\db\Column;
+
+class CreateTime {
+
+    use Column, type\DateTime;
 
     public function __construct($values) {
-        parent::__construct($values + [
+        $this->values = $values + [
             'blankStyle' => 'hidden',
+            'formStyle' => 'timestamp',
+            'pattern' => cfg('system.timestamp'),
             'readonly' => true,
-            'required' => true,
-        ]);
+            'searchStyle' => 'between',
+        ];
     }
 
     public function generate($value) {

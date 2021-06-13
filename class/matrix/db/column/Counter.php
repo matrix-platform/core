@@ -2,17 +2,24 @@
 
 namespace matrix\db\column;
 
-class Counter extends Integer {
+use matrix\db\Column;
+
+class Counter {
+
+    use Column, type\Integer {
+        expression as private columnExpression;
+    }
 
     public function __construct($values = []) {
-        parent::__construct($values + [
+        $this->values = $values + [
             'formStyle' => 'counter',
             'name' => 'count',
-        ]);
+            'searchStyle' => 'between',
+        ];
     }
 
     public function expression($dialect, $language = null, $prefix = null) {
-        $expression = parent::expression($dialect, $language, $prefix);
+        $expression = $this->columnExpression($dialect, $language, $prefix);
 
         return $dialect->makeDefaultExpression($expression, 0);
     }

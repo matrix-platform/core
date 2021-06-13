@@ -25,7 +25,7 @@ return new class() extends matrix\web\Controller {
         $result = ['success' => true, 'path' => $path];
 
         if ($this->user()) {
-            $result['view'] = 'web/302.php';
+            $result['view'] = '302.php';
         }
 
         return $result;

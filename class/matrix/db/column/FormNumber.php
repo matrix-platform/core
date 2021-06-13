@@ -2,13 +2,19 @@
 
 namespace matrix\db\column;
 
-class FormNumber extends Text {
+use matrix\db\Column;
+
+class FormNumber {
+
+    use Column, type\Text;
 
     public function __construct($values) {
-        parent::__construct($values + [
+        $this->values = $values + [
+            'formStyle' => 'text',
             'length' => 3,
             'pattern' => 'Ymd',
-        ]);
+            'searchStyle' => 'like',
+        ];
     }
 
     public function generate($value) {

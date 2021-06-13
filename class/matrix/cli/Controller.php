@@ -2,18 +2,28 @@
 
 namespace matrix\cli;
 
-use matrix\core\Controller as AbstractController;
+use matrix\core\Handler;
 
-class Controller extends AbstractController {
+class Controller {
+
+    use Handler;
 
     public function __construct($values = []) {
-        $values['view'] = $values['view'] ?? 'empty.php';
-
-        parent::__construct($values);
+        $this->values = $values + ['view' => 'empty.php'];
     }
 
     public function available() {
-        return ($this->method() === 'cli');
+        if ($this->method() === 'cli') {
+            $pattern = preg_quote($this->name(), '/');
+
+            return preg_match("/^{$pattern}(\/.+)?$/", $this->path());
+        }
+
+        return false;
+    }
+
+    public function execute() {
+        $this->handle();
     }
 
     protected function wrap() {

@@ -23,7 +23,7 @@ class Version implements Criterion {
     }
 
     public function make($dialect) {
-        return '__version__ = ?';
+        return $dialect->equal('__version__', [$this->value]);
     }
 
     public function with($language) {

@@ -2,10 +2,18 @@
 
 namespace matrix\db\column;
 
-class Password extends Text {
+use matrix\db\Column;
+
+class Password {
+
+    use Column, type\Text;
 
     public function __construct($values) {
-        parent::__construct($values + ['formStyle' => 'password']);
+        $this->values = $values + [
+            'formStyle' => 'password',
+            'searchStyle' => false,
+            'unordered' => true,
+        ];
     }
 
 }

@@ -2,10 +2,14 @@
 
 namespace matrix\db\column;
 
-class Modifier extends Integer {
+use matrix\db\Column;
+
+class Modifier {
+
+    use Column, type\Integer;
 
     public function __construct($values) {
-        parent::__construct($values + ['invisible' => true]);
+        $this->values = $values + ['invisible' => true];
     }
 
     public function generate($value) {

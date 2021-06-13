@@ -2,13 +2,20 @@
 
 namespace matrix\db\column;
 
-class ModifiedTime extends Timestamp {
+use matrix\db\Column;
+
+class ModifiedTime {
+
+    use Column, type\DateTime;
 
     public function __construct($values) {
-        parent::__construct($values + [
+        $this->values = $values + [
             'blankStyle' => 'hidden',
             'disabled' => true,
-        ]);
+            'formStyle' => 'timestamp',
+            'pattern' => cfg('system.timestamp'),
+            'searchStyle' => 'between',
+        ];
     }
 
     public function generate($value) {

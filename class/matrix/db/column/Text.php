@@ -3,23 +3,16 @@
 namespace matrix\db\column;
 
 use matrix\db\Column;
-use PDO;
 
-class Text extends Column {
+class Text {
+
+    use Column, type\Text;
 
     public function __construct($values) {
-        parent::__construct($values + [
+        $this->values = $values + [
             'formStyle' => 'text',
             'searchStyle' => 'like',
-        ]);
-    }
-
-    public function convert($value) {
-        return strval($value);
-    }
-
-    public function type() {
-        return PDO::PARAM_STR;
+        ];
     }
 
 }

@@ -5,9 +5,9 @@ namespace matrix\db;
 use matrix\db\criterion\Helper;
 use matrix\utility\ValueObject;
 
-abstract class Column extends ValueObject {
+trait Column {
 
-    use Helper;
+    use Helper, ValueObject;
 
     protected static $defaults = [
         'mapping' => 'name',

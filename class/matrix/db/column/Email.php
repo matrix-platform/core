@@ -2,13 +2,18 @@
 
 namespace matrix\db\column;
 
-class Email extends Text {
+use matrix\db\Column;
+
+class Email {
+
+    use Column, type\Text;
 
     public function __construct($values) {
-        parent::__construct($values + [
+        $this->values = $values + [
             'formStyle' => 'email',
+            'searchStyle' => 'like',
             'validation' => 'email',
-        ]);
+        ];
     }
 
 }

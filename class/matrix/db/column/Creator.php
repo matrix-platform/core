@@ -2,14 +2,17 @@
 
 namespace matrix\db\column;
 
-class Creator extends Integer {
+use matrix\db\Column;
+
+class Creator {
+
+    use Column, type\Integer;
 
     public function __construct($values) {
-        parent::__construct($values + [
+        $this->values = $values + [
             'invisible' => true,
             'readonly' => true,
-            'required' => true,
-        ]);
+        ];
     }
 
     public function generate($value) {

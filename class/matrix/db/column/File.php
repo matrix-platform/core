@@ -3,23 +3,17 @@
 namespace matrix\db\column;
 
 use matrix\db\Column;
-use PDO;
 
-class File extends Column {
+class File {
+
+    use Column, type\File;
 
     public function __construct($values) {
-        parent::__construct($values + [
+        $this->values = $values + [
             'formStyle' => 'file',
             'unordered' => true,
-        ]);
-    }
-
-    public function convert($value) {
-        return strval($value);
-    }
-
-    public function type() {
-        return PDO::PARAM_STR;
+            'validation' => 'file',
+        ];
     }
 
 }

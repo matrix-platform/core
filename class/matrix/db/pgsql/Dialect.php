@@ -2,9 +2,11 @@
 
 namespace matrix\db\pgsql;
 
-use matrix\db\Dialect as AbstractDialect;
+use matrix\db\Dialect as DialectTrait;
 
-class Dialect extends AbstractDialect {
+class Dialect {
+
+    use DialectTrait;
 
     public function makeDefaultExpression($expression, $default) {
         return "COALESCE({$expression}, {$default})";

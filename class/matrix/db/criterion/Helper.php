@@ -5,19 +5,19 @@ namespace matrix\db\criterion;
 trait Helper {
 
     public function between($from, $to) {
-        return new Between($this, [$from, $to]);
+        return new Monomer($this, 'between', [$from, $to]);
     }
 
     public function equal($value) {
-        return new Equal($this, [$value]);
+        return new Monomer($this, 'equal', [$value]);
     }
 
     public function greaterThan($value) {
-        return new GreaterThan($this, [$value]);
+        return new Monomer($this, 'greaterThan', [$value]);
     }
 
     public function greaterThanOrEqual($value) {
-        return new GreaterThanOrEqual($this, [$value]);
+        return new Monomer($this, 'greaterThanOrEqual', [$value]);
     }
 
     public function in(...$values) {
@@ -25,35 +25,31 @@ trait Helper {
             $values = $values[0];
         }
 
-        return new In($this, $values);
+        return new Monomer($this, 'in', $values);
     }
 
     public function isNull() {
-        return new IsNull($this, []);
+        return new Monomer($this, 'isNull', []);
     }
 
     public function lessThan($value) {
-        return new LessThan($this, [$value]);
+        return new Monomer($this, 'lessThan', [$value]);
     }
 
     public function lessThanOrEqual($value) {
-        return new LessThanOrEqual($this, [$value]);
+        return new Monomer($this, 'lessThanOrEqual', [$value]);
     }
 
     public function like($value, $insensitive = false) {
-        if ($insensitive) {
-            return new ILike($this, [$value]);
-        } else {
-            return new Like($this, [$value]);
-        }
+        return new Monomer($this, $insensitive ? 'iLike' : 'like', [$value]);
     }
 
     public function notBetween($from, $to) {
-        return new NotBetween($this, [$from, $to]);
+        return new Monomer($this, 'notBetween', [$from, $to]);
     }
 
     public function notEqual($value) {
-        return new NotEqual($this, [$value]);
+        return new Monomer($this, 'notEqual', [$value]);
     }
 
     public function notIn(...$values) {
@@ -61,19 +57,15 @@ trait Helper {
             $values = $values[0];
         }
 
-        return new NotIn($this, $values);
+        return new Monomer($this, 'notIn', $values);
     }
 
     public function notLike($value, $insensitive = false) {
-        if ($insensitive) {
-            return new NotILike($this, [$value]);
-        } else {
-            return new NotLike($this, [$value]);
-        }
+        return new Monomer($this, $insensitive ? 'notILike' : 'notLike', [$value]);
     }
 
     public function notNull() {
-        return new NotNull($this, []);
+        return new Monomer($this, 'notNull', []);
     }
 
 }
