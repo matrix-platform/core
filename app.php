@@ -35,6 +35,8 @@ spl_autoload_register(function ($name) {
     }
 }, true, true);
 
+define('APP_PATH', preg_replace('/^\/?(.*\/)[^\/]+$/', '/$1', $_SERVER['SCRIPT_NAME']));
+
 if (PHP_SAPI === 'cli') {
     (new Run())->prependHandler(new PlainTextHandler())->register();
 
@@ -65,6 +67,7 @@ if (PHP_SAPI === 'cli') {
             session_name(APP_NAME);
         }
 
+        session_set_cookie_params(['path' => APP_PATH, 'samesite' => 'None', 'secure' => true]);
         session_start();
     }
 
@@ -80,8 +83,6 @@ ErrorHandler::register(logger('error'));
 $languages = cfg('system.languages');
 
 preg_match("/^(\/({$languages}))?(\/.*)?$/", $path, $info, PREG_UNMATCHED_AS_NULL);
-
-define('APP_PATH', preg_replace('/^\/?(.*\/)[^\/]+$/', '/$1', $_SERVER['SCRIPT_NAME']));
 
 if (@$info[2]) {
     define('APP_ROOT', APP_PATH . "{$info[2]}/");

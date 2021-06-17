@@ -1,5 +1,3 @@
-Header edit Set-Cookie ^(.*)$ "$1; SameSite=None; Secure"
-
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-d
