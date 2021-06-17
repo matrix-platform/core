@@ -26,10 +26,10 @@ class Twig {
             }
         }
 
-        if (defined('TWIG_CACHE')) {
-            $options = ['auto_reload' => true, 'cache' => APP_DATA . 'twig'];
-        } else {
+        if (PHP_SAPI === 'cli') {
             $options = [];
+        } else {
+            $options = ['auto_reload' => true, 'cache' => APP_DATA . 'twig'];
         }
 
         $twig = new Environment(new FilesystemLoader($paths), $options);

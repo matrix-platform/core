@@ -86,7 +86,7 @@ class Model {
     }
 
     public function insert($data) {
-        foreach ($this->table->getColumns() as $name => $column) {
+        foreach ($this->table->getColumns(false) as $name => $column) {
             if ($column->pseudo()) {
                 continue;
             }
@@ -107,7 +107,7 @@ class Model {
         $command = $this->dialect->makeInsertion($this->table, null);
         $statement = $this->db->prepare($command);
 
-        foreach ($this->table->getColumns() as $name => $column) {
+        foreach ($this->table->getColumns(false) as $name => $column) {
             if ($column->pseudo()) {
                 continue;
             }
@@ -196,7 +196,7 @@ class Model {
             return null;
         }
 
-        foreach ($this->table->getColumns() as $name => $column) {
+        foreach ($this->table->getColumns(false) as $name => $column) {
             if ($column->pseudo() || $column->readonly()) {
                 continue;
             }
@@ -224,7 +224,7 @@ class Model {
         $command = $this->dialect->makeUpdation($this->table, null, $criteria);
         $statement = $this->db->prepare($command);
 
-        foreach ($this->table->getColumns() as $name => $column) {
+        foreach ($this->table->getColumns(false) as $name => $column) {
             if ($column->pseudo() || $column->readonly()) {
                 continue;
             }
@@ -268,7 +268,7 @@ class Model {
     }
 
     private function cleanup($data) {
-        foreach ($this->table->getColumns() as $name => $column) {
+        foreach ($this->table->getColumns(false) as $name => $column) {
             if ($column->multilingual()) {
                 unset($data[$name]);
             }
@@ -331,7 +331,7 @@ class Model {
         $rows = $statement->fetchAll();
 
         if (!self::$administration) {
-            foreach ($this->table->getColumns() as $name => $column) {
+            foreach ($this->table->getColumns(false) as $name => $column) {
                 if ($column->pseudo()) {
                     continue;
                 }
@@ -378,7 +378,7 @@ class Model {
             if ($curr) {
                 $diff = [];
 
-                foreach ($this->table->getColumns() as $name => $column) {
+                foreach ($this->table->getColumns(false) as $name => $column) {
                     if ($column->pseudo() || $column->readonly()) {
                         continue;
                     }

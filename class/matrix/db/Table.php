@@ -89,6 +89,10 @@ class Table {
     }
 
     public function getColumns($names = null) {
+        if ($names === false) {
+            return $this->columns;
+        }
+
         $columns = [];
 
         foreach ($names ?: $this->names as $name) {

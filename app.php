@@ -72,7 +72,6 @@ if (PHP_SAPI === 'cli') {
     }
 
     define('REMOTE_ADDR', $_SERVER['REMOTE_ADDR']);
-    define('TWIG_CACHE', true);
 
     $path = $_SERVER['PATH_INFO'];
     $method = $_SERVER['REQUEST_METHOD'];

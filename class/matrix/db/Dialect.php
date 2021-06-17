@@ -82,7 +82,7 @@ trait Dialect {
     public function makeInsertion($table, $columns) {
         $expressions = [];
 
-        foreach ($columns ?: $table->getColumns() as $column) {
+        foreach ($columns ?: $table->getColumns(false) as $column) {
             if ($column->pseudo()) {
                 continue;
             }
@@ -151,7 +151,7 @@ trait Dialect {
         $expressions = [];
         $multilinguals = [];
 
-        foreach ($columns ?: $table->getColumns() as $name => $column) {
+        foreach ($columns ?: $table->getColumns(false) as $name => $column) {
             if ($column->pseudo()) {
                 continue;
             }
@@ -198,7 +198,7 @@ trait Dialect {
     public function makeUpdation($table, $columns, $criteria) {
         $expressions = [];
 
-        foreach ($columns ?: $table->getColumns() as $column) {
+        foreach ($columns ?: $table->getColumns(false) as $column) {
             if ($column->pseudo() || $column->readonly()) {
                 continue;
             }
