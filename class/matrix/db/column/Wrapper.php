@@ -2,20 +2,20 @@
 
 namespace matrix\db\column;
 
+use matrix\utility\ValueObject;
+
 class Wrapper {
 
+    use ValueObject;
+
     private $alias;
-    private $column;
     private $relation;
 
     public function __construct($alias, $column, $relation) {
         $this->alias = $alias;
-        $this->column = $column;
+        $this->decorated = $column;
         $this->relation = $relation;
-    }
-
-    public function __call($name, $args) {
-        return call_user_func_array([$this->column, $name], $args);
+        $this->values = [];
     }
 
     public function alias() {
@@ -23,11 +23,11 @@ class Wrapper {
     }
 
     public function expression($dialect, $language = null, $prefix = null) {
-        return $this->column->expression($dialect, $language, $prefix ?: $this->alias);
+        return $this->decorated->expression($dialect, $language, $prefix ?: $this->alias);
     }
 
     public function isCounter() {
-        return ($this->column instanceof Counter);
+        return ($this->decorated instanceof Counter);
     }
 
     public function readonly() {

@@ -6,6 +6,7 @@ use Closure;
 
 trait ValueObject {
 
+    protected $decorated;
     protected $values;
 
     public function __call($name, $args) {
@@ -20,7 +21,9 @@ trait ValueObject {
 
             if ($value instanceof Closure) {
                 return call_user_func($value, $this);
-            } else {
+            }
+
+            if ($value !== null) {
                 return $value;
             }
         }
@@ -29,7 +32,7 @@ trait ValueObject {
             return $this->{static::$defaults[$name]}();
         }
 
-        return null;
+        return $this->decorated ? $this->decorated->{$name}() : null;
     }
 
 }
