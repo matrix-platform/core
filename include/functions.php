@@ -254,3 +254,22 @@ function union_resource($path) {
 
     return $bundle;
 }
+
+function validate($value, $options) {
+    if (is_string($options)) {
+        $validation = $options;
+        $options = [];
+    } else {
+        $validation = $options['validation'];
+    }
+
+    foreach (preg_split('/\|/', $validation, 0, PREG_SPLIT_NO_EMPTY) as $type) {
+        $validator = load_resource("include/validator/{$type}.php");
+
+        if (call_user_func($validator, $value, $options) === false) {
+            return $type;
+        }
+    }
+
+    return true;
+}

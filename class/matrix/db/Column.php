@@ -87,4 +87,8 @@ trait Column {
 
     abstract public function type();
 
+    public function validate($value) {
+        return validate($value, $this->values);
+    }
+
 }
