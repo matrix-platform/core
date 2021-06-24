@@ -2,6 +2,8 @@
 
 return [
 
+    'delete-confirmation' => null,
+
     'form' => null,
 
     'form-modal' => null,

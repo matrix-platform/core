@@ -33,7 +33,11 @@ return [
     'subtotal' => 'Sub Total',
     'list-rows' => 'Total {{ count }} rows, {{ page|raw }} pages, {{ size|raw }} rows per page.',
 
+    'delete-success' => 'Delete Successfully',
     'save-success' => 'Save Successfully',
+
+    'confirm-delete' => 'Delete Confirmation',
+    'confirm-delete-message' => 'Are you sure to delete the data?',
 
     'copyright' => 'Copyright © 2021',
 

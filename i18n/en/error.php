@@ -4,7 +4,13 @@ return [
 
     'data-not-found' => 'No Data',
 
+    'data-outdated' => 'Data Outdated',
+
+    'delete-failed' => 'Delete Failed',
+
     'inconsistent-passwords' => 'Inconsistent Passwords',
+
+    'insert-failed' => 'Save Failed',
 
     'password-failed' => 'Change Password Failed',
 

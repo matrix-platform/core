@@ -48,7 +48,9 @@ class Monomer implements Criterion {
     }
 
     public function with($language) {
-        $this->language = $language;
+        if ($language) {
+            $this->language = $language;
+        }
 
         return $this;
     }

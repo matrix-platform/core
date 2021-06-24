@@ -206,10 +206,10 @@ class Model {
             if ($column->multilingual()) {
                 foreach (LANGUAGES as $lang) {
                     $prop = "{$name}__{$lang}";
-                    $data[$prop] = $this->forUpdate($column, $data, $prop);
+                    $data[$prop] = $this->forUpdate($column, $data, $prop, $previous);
                 }
             } else {
-                $data[$name] = $this->forUpdate($column, $data, $name);
+                $data[$name] = $this->forUpdate($column, $data, $name, $previous);
             }
         }
 
@@ -361,11 +361,15 @@ class Model {
         return $column->generate($value);
     }
 
-    private function forUpdate($column, $data, $name) {
-        $value = @$data[$name];
+    private function forUpdate($column, $data, $name, $previous) {
+        if (key_exists($name, $data)) {
+            $value = $data[$name];
 
-        if ($value !== null) {
-            $value = $column->convert($value);
+            if ($value !== null) {
+                $value = $column->convert($value);
+            }
+        } else {
+            $value = $previous[$name];
         }
 
         return $column->regenerate($value);

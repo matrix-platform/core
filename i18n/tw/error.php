@@ -4,7 +4,13 @@ return [
 
     'data-not-found' => '查無資料',
 
+    'data-outdated' => '資料已逾期',
+
+    'delete-failed' => '刪除失敗',
+
     'inconsistent-passwords' => '兩次輸入的密碼不一致',
+
+    'insert-failed' => '儲存失敗',
 
     'password-failed' => '變更密碼失敗',
 
