@@ -22,10 +22,12 @@ return [
     'cancel' => '取消',
     'save' => '儲存',
     'new' => '新增',
+    'insert' => '儲存',
     'delete' => '刪除',
     'export' => '匯出',
     'search' => '查詢',
     'view' => '檢視',
+    'update' => '儲存',
 
     'operation' => '操作',
     'subtotal' => '小計',
@@ -39,5 +41,8 @@ return [
     'login-logo' => '後台管理系統',
     'login-message' => '',
     'login-submit' => '登入',
+
+    'tab-default' => '基本資料',
+    'tab-other' => '其他',
 
 ];

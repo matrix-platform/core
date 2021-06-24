@@ -22,10 +22,12 @@ return [
     'cancel' => 'Cancel',
     'save' => 'Save',
     'new' => 'New',
+    'insert' => 'Save',
     'delete' => 'Delete',
     'export' => 'Export',
     'search' => 'Search',
     'view' => 'View',
+    'update' => 'Save',
 
     'operation' => 'Operation',
     'subtotal' => 'Sub Total',
@@ -39,5 +41,8 @@ return [
     'login-logo' => 'Backend',
     'login-message' => '',
     'login-submit' => 'Login',
+
+    'tab-default' => 'Data',
+    'tab-other' => 'Other',
 
 ];

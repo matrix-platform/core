@@ -13,6 +13,7 @@ class Ranking {
             'formStyle' => 'integer',
             'searchStyle' => false,
             'sequence' => 'base_ranking',
+            'tab' => 'other',
             'validation' => 'integer',
         ];
 

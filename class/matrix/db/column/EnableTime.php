@@ -13,6 +13,7 @@ class EnableTime {
             'formStyle' => 'timestamp',
             'pattern' => cfg('system.timestamp'),
             'searchStyle' => 'between',
+            'tab' => 'other',
             'validation' => 'timestamp',
         ];
 

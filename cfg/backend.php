@@ -2,6 +2,10 @@
 
 return [
 
+    'form' => null,
+
+    'form-modal' => null,
+
     'index' => null,
 
     'label' => null,

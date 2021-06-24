@@ -11,7 +11,7 @@ return function ($menus, $node, $list) {
             $data = array_pop($list);
 
             if ($data) {
-                $menu['subtitle'] = $data['.title'];
+                $menu['subtitle'] = @$data['.title'];
 
                 if (key_exists('pattern', $menu)) {
                     $node = render($menu['pattern'], $data);
