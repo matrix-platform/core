@@ -2,6 +2,8 @@
 
 return [
 
+    'data-not-found' => '查無資料',
+
     'inconsistent-passwords' => '兩次輸入的密碼不一致',
 
     'password-failed' => '變更密碼失敗',

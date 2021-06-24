@@ -21,6 +21,16 @@ return [
 
     'cancel' => 'Cancel',
     'save' => 'Save',
+    'new' => 'New',
+    'delete' => 'Delete',
+    'export' => 'Export',
+    'search' => 'Search',
+    'view' => 'View',
+
+    'operation' => 'Operation',
+    'subtotal' => 'Sub Total',
+    'list-rows' => 'Total {{ count }} rows, {{ page|raw }} pages, {{ size|raw }} rows per page.',
+
     'save-success' => 'Save Successfully',
 
     'copyright' => 'Copyright © 2021',

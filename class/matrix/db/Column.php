@@ -10,6 +10,7 @@ trait Column {
     use Helper, ValueObject;
 
     protected static $defaults = [
+        'listStyle' => 'formStyle',
         'mapping' => 'name',
     ];
 

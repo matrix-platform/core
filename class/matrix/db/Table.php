@@ -14,6 +14,7 @@ class Table {
 
     private $columns = [];
     private $names = [];
+    private $parent;
     private $relations = [];
 
     public function __construct($mapping, $traceable = true, $namespace = 'matrix\model') {
@@ -103,19 +104,11 @@ class Table {
     }
 
     public function getParentRelation() {
-        $parent = false;
-
-        foreach ($this->relations as $alias => $relation) {
-            if (@$relation['parent']) {
-                if ($parent) {
-                    return false;
-                }
-
-                $parent = $this->getRelation($alias);
-            }
+        if (is_string($this->parent)) {
+            $this->parent = $this->getRelation($this->parent);
         }
 
-        return $parent;
+        return $this->parent;
     }
 
     public function getRelation($alias) {
@@ -169,6 +162,10 @@ class Table {
         }
 
         $this->relations[$alias] = $relation;
+
+        if (@$relation['parent'] && $this->parent !== false) {
+            $this->parent = $this->parent ? false : $alias;
+        }
     }
 
 }

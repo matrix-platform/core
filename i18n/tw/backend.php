@@ -21,6 +21,16 @@ return [
 
     'cancel' => '取消',
     'save' => '儲存',
+    'new' => '新增',
+    'delete' => '刪除',
+    'export' => '匯出',
+    'search' => '查詢',
+    'view' => '檢視',
+
+    'operation' => '操作',
+    'subtotal' => '小計',
+    'list-rows' => '共 {{ count }} 筆資料，第 {{ page|raw }} 頁，每頁 {{ size|raw }} 筆',
+
     'save-success' => '儲存成功',
 
     'copyright' => 'Copyright © 2021',

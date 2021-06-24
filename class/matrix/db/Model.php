@@ -153,6 +153,8 @@ class Model {
                 $parent = $model->find([$relation['target']->equal($value)]);
 
                 if ($parent) {
+                    $parent['.title'] = $model->toString($parent);
+
                     $parents = $model->parents($parent);
                     $parents[] = $parent;
 
@@ -330,16 +332,16 @@ class Model {
     private function fetch($statement) {
         $rows = $statement->fetchAll();
 
-        if (!self::$administration) {
-            foreach ($this->table->getColumns(false) as $name => $column) {
-                if ($column->pseudo()) {
-                    continue;
-                }
+        foreach ($this->table->getColumns(false) as $name => $column) {
+            if ($column->pseudo()) {
+                continue;
+            }
 
-                if ($column->multilingual()) {
-                    foreach ($rows as &$row) {
-                        $row[$name] = $row[$name . '__' . LANGUAGE];
-                    }
+            if ($column->multilingual()) {
+                $local = $name . '__' . LANGUAGE;
+
+                foreach ($rows as &$row) {
+                    $row[$name] = $row[$local];
                 }
             }
         }

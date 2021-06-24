@@ -10,6 +10,7 @@
     "require": {
         "filp/whoops": "^2.12",
         "monolog/monolog": "^2.2",
+        "phpoffice/phpspreadsheet": "^1.18",
         "twig/string-extra": "^3.3",
         "twig/twig": "^3.3"
     }

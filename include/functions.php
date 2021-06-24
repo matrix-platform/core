@@ -260,7 +260,7 @@ function validate($value, $options) {
         $validation = $options;
         $options = [];
     } else {
-        $validation = $options['validation'];
+        $validation = @$options['validation'];
     }
 
     foreach (preg_split('/\|/', $validation, 0, PREG_SPLIT_NO_EMPTY) as $type) {

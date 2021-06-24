@@ -8,6 +8,8 @@ return [
 
     'label-updated' => null,
 
+    'list' => null,
+
     'login-form' => null,
 
     'menus' => '',

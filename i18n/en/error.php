@@ -2,6 +2,8 @@
 
 return [
 
+    'data-not-found' => 'No Data',
+
     'inconsistent-passwords' => 'Inconsistent Passwords',
 
     'password-failed' => 'Change Password Failed',
