@@ -10,8 +10,8 @@ class Image {
 
     public function __construct($values) {
         $this->values = $values + [
+            'attachment' => true,
             'formStyle' => 'image',
-            'mimeType' => 'image\/[\w]+',
             'unordered' => true,
             'validation' => 'image',
         ];

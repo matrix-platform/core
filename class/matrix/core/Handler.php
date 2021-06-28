@@ -13,6 +13,7 @@ trait Handler {
 
         $form = $this->trim($this->wrap());
         $result = $this->validate($form);
+        $success = false;
 
         if ($result) {
             $view = $this->validationView() ?: cfg('default.validation-view');
@@ -29,7 +30,9 @@ trait Handler {
             } catch (AppException $exception) {
                 $result = ['error' => $exception->getMessage()];
             } finally {
-                if (@$result['success']) {
+                $success = @$result['success'];
+
+                if ($success) {
                     if ($tx) {
                         $tx->commit();
                     }
@@ -45,12 +48,16 @@ trait Handler {
             $view = @$result['view'];
 
             if (!$view) {
-                if (@$result['success']) {
+                if ($success) {
                     $view = $this->view() ?: cfg('default.success-view');
                 } else {
                     $view = $this->errorView() ?: cfg('default.error-view');
                 }
             }
+        }
+
+        if (!$success) {
+            $this->cleanup();
         }
 
         resolve($view)->render($this, $form, $result);
@@ -77,6 +84,9 @@ trait Handler {
 
     protected function postprocess($form, $result) {
         return $result;
+    }
+
+    protected function cleanup() {
     }
 
     private function trim($value) {

@@ -43,6 +43,36 @@ trait RequestHandler {
         }
     }
 
+    protected function cleanup() {
+        Attachment::cleanup();
+    }
+
+    protected function wrapFile($form, ...$names) {
+        foreach ($names as $name) {
+            $filename = @$form["{$name}#filename"];
+            $content = @$form[$name];
+            $description = @$form["{$name}#description"];
+
+            if (is_array($content)) {
+                foreach ($content as $idx => $data) {
+                    $file = Attachment::from(@$filename[$idx], $data, @$description[$idx]);
+
+                    if ($file) {
+                        $form[$name][$idx] = $file;
+                    }
+                }
+            } else {
+                $file = Attachment::from($filename, $content, $description);
+
+                if ($file) {
+                    $form[$name] = $file;
+                }
+            }
+        }
+
+        return $form;
+    }
+
     protected function wrapGet() {
         return $_GET;
     }

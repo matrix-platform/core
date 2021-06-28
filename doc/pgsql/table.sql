@@ -56,3 +56,23 @@ CREATE TABLE base_user_log (
     create_time TIMESTAMP NOT NULL
 );
 
+CREATE TABLE base_file (
+    id            INTEGER   NOT NULL PRIMARY KEY,
+    parent_id     INTEGER       NULL,
+    type          INTEGER   NOT NULL,
+    name          TEXT      NOT NULL,
+    path          TEXT          NULL UNIQUE,
+    size          BIGINT        NULL,
+    hash          TEXT          NULL,
+    description   TEXT          NULL,
+    mime_type     TEXT          NULL,
+    width         INTEGER       NULL,
+    height        INTEGER       NULL,
+    seconds       INTEGER       NULL,
+    privilege     INTEGER   NOT NULL,
+    owner_id      INTEGER   NOT NULL,
+    group_id      INTEGER       NULL,
+    modified_time TIMESTAMP NOT NULL,
+    deleted       BOOLEAN   NOT NULL
+);
+

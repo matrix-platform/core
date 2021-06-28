@@ -6,7 +6,9 @@ trait Wrapper {
 
     private function wrapInput($column, $form, $name) {
         if (key_exists($name, $form)) {
-            if ($column->multiple()) {
+            if ($column->attachment()) {
+                $form = $this->wrapFile($form, $name);
+            } else if ($column->multiple()) {
                 if (is_array($form[$name])) {
                     $form[$name] = implode(',', $form[$name]);
                 }

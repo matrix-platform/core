@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "filp/whoops": "^2.12",
+        "mhor/php-mediainfo": "^5.4",
         "monolog/monolog": "^2.2",
         "phpoffice/phpspreadsheet": "^1.18",
         "twig/string-extra": "^3.3",

@@ -1,0 +1,13 @@
+<?php //>
+
+$data = $result['data'];
+
+$result = [
+    'type' => 'file-info',
+    'id' => $data['id'],
+    'name' => $data['name'],
+    'description' => $data['description'],
+    'message' => i18n('backend.save-success'),
+];
+
+resolve('raw.php')->render($controller, $form, $result);

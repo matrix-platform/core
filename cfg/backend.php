@@ -18,7 +18,7 @@ return [
 
     'login-form' => null,
 
-    'menus' => '',
+    'menus' => 'common',
 
     'overview' => null,
 
