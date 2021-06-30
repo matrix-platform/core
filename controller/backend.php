@@ -4,7 +4,7 @@ use matrix\utility\Fn;
 
 return new class() extends matrix\web\UserController {
 
-    use matrix\web\backend\Authorization;
+    use matrix\web\backend\authority\Authorization;
 
     public function available() {
         if ($this->method() === 'GET') {
@@ -38,7 +38,7 @@ return new class() extends matrix\web\UserController {
                     $node = null;
                 }
             } else {
-                if (!$this->permitted($path)) {
+                if (!@$node['tag'] || !$this->permitted($path)) {
                     $node = null;
                 }
             }

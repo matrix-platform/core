@@ -8,7 +8,7 @@ use matrix\web\UserAuthenticator;
 
 class Controller {
 
-    use Authorization, RequestHandler, UserAuthenticator;
+    use authority\Authorization, RequestHandler, UserAuthenticator;
 
     public function __construct($values = []) {
         $this->values = $values;

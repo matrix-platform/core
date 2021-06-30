@@ -15,9 +15,8 @@ return [
 
     'logout' => 'Logout',
 
-    'edit-label' => 'Edit Label',
     'label-name' => 'Code',
-    'label-content' => 'Content',
+    'label-content' => 'Text',
 
     'cancel' => 'Cancel',
     'save' => 'Save',

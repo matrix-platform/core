@@ -1,6 +1,6 @@
 <?php //>
 
-namespace matrix\web\backend;
+namespace matrix\web\backend\authority;
 
 use matrix\utility\Fn;
 
@@ -38,8 +38,8 @@ trait Authorization {
         if ($this->permissions === null) {
             $user = $this->user();
 
-            $u = Fn::load_permission('user', $user['id']);
-            $g = Fn::load_permission('group', $user['group_id']);
+            $u = load_data("permission/User/{$user['id']}");
+            $g = load_data("permission/Group/{$user['group_id']}");
 
             $this->permissions = $u ? ($g ? array_replace_recursive($g, $u) : $u) : $g;
         }

@@ -15,9 +15,8 @@ return [
 
     'logout' => '登出',
 
-    'edit-label' => '修改網頁文字',
     'label-name' => '代碼',
-    'label-content' => '內容',
+    'label-content' => '文字',
 
     'cancel' => '取消',
     'save' => '儲存',
