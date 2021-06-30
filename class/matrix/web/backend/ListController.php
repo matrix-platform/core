@@ -38,10 +38,6 @@ class ListController extends Controller {
             $this->columns = [];
 
             foreach ($this->columns() ?: $this->table()->getColumns() as $name => $column) {
-                if ($column->association() && !$column->visible() && !$column->editable()) {
-                    continue;
-                }
-
                 if ($column->invisible() && !$column->editable()) {
                     continue;
                 }
@@ -80,7 +76,21 @@ class ListController extends Controller {
                 foreach ([$name, "-{$name}"] as $token) {
                     $value = @$search[$token];
 
-                    if ($value !== null) {
+                    if (is_array($value)) {
+                        $values = [];
+
+                        foreach ($value as $item) {
+                            $item = urldecode($item);
+
+                            if ($column->searchStyle() === 'like' || $column->validate($item) === true) {
+                                $values[] = $item;
+                            }
+                        }
+
+                        if ($values) {
+                            $conditions[$token] = $values;
+                        }
+                    } else if ($value !== null) {
                         $value = urldecode($value);
 
                         if ($column->searchStyle() === 'like' || $column->validate($value) === true) {
@@ -103,10 +113,17 @@ class ListController extends Controller {
 
                     switch ($column->searchStyle()) {
                     case 'like':
-                        if ($from === null) {
-                            $from = $to;
+                        if (is_array($from)) {
+                            $like = Criteria::createOr();
+
+                            foreach ($from as $tag) {
+                                $like->add($column->like("%{$tag}%", true));
+                            }
+
+                            $criteria->add($like);
+                        } else {
+                            $criteria->add($column->like("%{$from}%", true));
                         }
-                        $criteria->add($column->like("%{$from}%", true));
                         break;
                     case 'between':
                         if ($from !== $to && !$column->association() && !$column->options()) {
@@ -120,7 +137,7 @@ class ListController extends Controller {
                             break;
                         }
                     default:
-                        $criteria->add($column->equal($from));
+                        $criteria->add(is_array($from) ? $column->in($from) : $column->equal($from));
                     }
 
                     $column->inSearch(true);

@@ -2,11 +2,12 @@
 
 namespace matrix\db\column;
 
+use matrix\db\criterion\Helper;
 use matrix\utility\ValueObject;
 
 class Wrapper {
 
-    use ValueObject;
+    use Helper, ValueObject;
 
     private $alias;
     private $relation;
@@ -20,6 +21,10 @@ class Wrapper {
 
     public function alias() {
         return $this->alias;
+    }
+
+    public function convert($value) {
+        return $this->decorated->convert($value);
     }
 
     public function expression($dialect, $language = null, $prefix = null) {
@@ -36,6 +41,14 @@ class Wrapper {
 
     public function relation() {
         return $this->relation;
+    }
+
+    public function type() {
+        return $this->decorated->type();
+    }
+
+    public function validate($value) {
+        return $this->decorated->validate($value);
     }
 
 }

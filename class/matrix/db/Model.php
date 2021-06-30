@@ -280,6 +280,10 @@ class Model {
     }
 
     private function createCriteria($conditions, $filter = false) {
+        if ($conditions instanceof Closure) {
+            $conditions = call_user_func($conditions, $this->table);
+        }
+
         $criteria = Criteria::createAnd();
 
         foreach ($conditions as $name => $value) {

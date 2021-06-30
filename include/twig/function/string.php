@@ -1,5 +1,13 @@
 <?php //>
 
 return new Twig\TwigFunction('string', function ($value) {
-    return $value === null || is_string($value) ? $value : var_export($value, true);
+    if ($value === null || is_string($value)) {
+        return $value;
+    }
+
+    if (is_array($value)) {
+        return implode(',', $value);
+    }
+
+    return var_export($value, true);
 });

@@ -28,4 +28,18 @@ trait UserAware {
         return $this->user;
     }
 
+    protected function loadSetting() {
+        $user = $this->user();
+
+        if ($user) {
+            $file = create_folder(APP_DATA . 'setting/') . $user['id'];
+
+            if (file_exists($file)) {
+                return json_decode(file_get_contents($file), true);
+            }
+        }
+
+        return [];
+    }
+
 }

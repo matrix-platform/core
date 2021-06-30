@@ -221,10 +221,13 @@ function route($path, $method) {
         list($name, $file, $args) = array_pop($candidates);
 
         $controller = load_resource("controller{$name}{$file}.php");
-        $controller->args($args)->method($method)->name($name)->path($path);
 
-        if ($controller->available()) {
-            return $controller;
+        if ($controller) {
+            $controller->args($args)->method($method)->name($name)->path($path);
+
+            if ($controller->available()) {
+                return $controller;
+            }
         }
     }
 

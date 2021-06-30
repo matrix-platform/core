@@ -74,8 +74,6 @@ class Table {
             } else {
                 $column = $relation['foreign']->{$column};
 
-                $relation['column']->invisible(true);
-
                 array_splice($this->names, array_search($relation['column']->name(), $this->names), 0, $name);
             }
 
