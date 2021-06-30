@@ -2,9 +2,11 @@
 
 namespace matrix\web\backend;
 
+use matrix\db\Transaction;
+
 class InsertController extends Controller {
 
-    use BlankForm, Validator, Wrapper;
+    use BlankForm, Transaction, Validator, Wrapper;
 
     public function __construct($name) {
         $this->values = [
