@@ -38,6 +38,46 @@ return [
 
                 'group/update' => ['parent' => 'group', 'tag' => 'update'],
 
+        'cfg' => ['icon' => 'fas fa-cogs', 'ranking' => 200, 'parent' => 'system'],
+
+            'cfg/base' => ['icon' => 'fas fa-cog', 'ranking' => 100, 'parent' => 'cfg', 'group' => true, 'tag' => 'query'],
+
+                'cfg/base/' => ['parent' => 'cfg/base', 'tag' => 'query'],
+
+                'cfg/base/update' => ['parent' => 'cfg/base', 'tag' => 'update'],
+
+        'i18n' => ['icon' => 'fas fa-globe', 'ranking' => 300, 'parent' => 'system'],
+
+            'i18n/base' => ['icon' => 'fas fa-language', 'ranking' => 100, 'parent' => 'i18n', 'group' => true, 'tag' => 'query'],
+
+                'i18n/base/' => ['parent' => 'i18n/base', 'tag' => 'query'],
+
+                'i18n/base/update' => ['parent' => 'i18n/base', 'tag' => 'update'],
+
+            'i18n/menu' => ['icon' => 'fas fa-bars', 'ranking' => 200, 'parent' => 'i18n', 'group' => true, 'tag' => 'system'],
+
+                'i18n/menu/' => ['parent' => 'i18n/menu', 'tag' => 'system'],
+
+                'i18n/menu/update' => ['parent' => 'i18n/menu', 'tag' => 'system'],
+
+            'i18n/options' => ['icon' => 'fas fa-check', 'ranking' => 300, 'parent' => 'i18n', 'group' => true, 'tag' => 'system'],
+
+                'i18n/options/' => ['parent' => 'i18n/options', 'tag' => 'system'],
+
+                'i18n/options/update' => ['parent' => 'i18n/options', 'tag' => 'system'],
+
+            'i18n/table' => ['icon' => 'fas fa-table', 'ranking' => 400, 'parent' => 'i18n', 'group' => true, 'tag' => 'system'],
+
+                'i18n/table/' => ['parent' => 'i18n/table', 'tag' => 'system'],
+
+                'i18n/table/update' => ['parent' => 'i18n/table', 'tag' => 'system'],
+
+            'i18n/template' => ['icon' => 'far fa-comment-dots', 'ranking' => 500, 'parent' => 'i18n', 'group' => true, 'tag' => 'query'],
+
+                'i18n/template/' => ['parent' => 'i18n/template', 'tag' => 'query'],
+
+                'i18n/template/update' => ['parent' => 'i18n/template', 'tag' => 'update'],
+
         'other' => ['ranking' => 900, 'parent' => 'system'],
 
             'label' => ['parent' => 'other', 'group' => true, 'tag' => 'update'],

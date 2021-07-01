@@ -48,4 +48,7 @@ return [
     'tab-default' => 'Data',
     'tab-other' => 'Other',
 
+    'bundle-name' => 'Name',
+    'bundle-remark' => 'Remark',
+
 ];

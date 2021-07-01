@@ -132,6 +132,8 @@ class Attachment {
 
             $this->info = model('File')->insert($this->info);
         }
+
+        return $this->info['path'];
     }
 
 }

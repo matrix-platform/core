@@ -48,4 +48,7 @@ return [
     'tab-default' => '基本資料',
     'tab-other' => '其他',
 
+    'bundle-name' => '名稱',
+    'bundle-remark' => '說明',
+
 ];

@@ -22,6 +22,34 @@ return [
 
                 'group/new' => '新增群組',
 
+        'cfg' => '系統設定',
+
+            'cfg/base' => '一般設定',
+
+                'cfg/base/' => '一般設定',
+
+        'i18n' => '多國語言',
+
+            'i18n/base' => '文字訊息',
+
+                'i18n/base/' => '文字訊息',
+
+            'i18n/menu' => '選單',
+
+                'i18n/menu/' => '選單',
+
+            'i18n/options' => '選項',
+
+                'i18n/options/' => '選項',
+
+            'i18n/table' => '資料表',
+
+                'i18n/table/' => '資料表',
+
+            'i18n/template' => '訊息樣板',
+
+                'i18n/template/' => '訊息樣板',
+
         'other' => '其他',
 
             'label' => '介面文字',
