@@ -48,7 +48,11 @@ class UpdateController extends Controller {
             return ['error' => 'error.update-failed'];
         }
 
-        return ['success' => true, 'data' => $data];
+        return $this->subprocess($form, ['success' => true, 'data' => $data]);
+    }
+
+    protected function subprocess($form, $result) {
+        return $result;
     }
 
 }

@@ -205,7 +205,7 @@ class ListController extends Controller {
             $data = $count ? $model->query($form, $orders ?: $this->defaultRanking(), $size, $page): [];
         }
 
-        return [
+        return $this->subprocess($form, [
             'success' => true,
             'view' => $export,
             'count' => $count,
@@ -213,7 +213,11 @@ class ListController extends Controller {
             'page' => $page,
             'size' => $size,
             'orders' => $orders,
-        ];
+        ]);
+    }
+
+    protected function subprocess($form, $result) {
+        return $result;
     }
 
     private function groupFilter($group) {

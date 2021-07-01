@@ -37,7 +37,11 @@ class GetController extends Controller {
 
         $data['.title'] = $model->toString($data);
 
-        return ['success' => true, 'data' => $data];
+        return $this->subprocess($form, ['success' => true, 'data' => $data]);
+    }
+
+    protected function subprocess($form, $result) {
+        return $result;
     }
 
 }

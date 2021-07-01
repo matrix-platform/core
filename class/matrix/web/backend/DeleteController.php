@@ -61,7 +61,11 @@ class DeleteController extends Controller {
             return ['error' => 'error.data-not-found'];
         }
 
-        return ['success' => true, 'list' => $list];
+        return $this->subprocess($form, ['success' => true, 'list' => $list]);
+    }
+
+    protected function subprocess($form, $result) {
+        return $result;
     }
 
     private function delete($table, $data) {

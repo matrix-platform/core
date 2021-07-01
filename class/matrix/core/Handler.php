@@ -79,7 +79,11 @@ trait Handler {
     }
 
     protected function process($form) {
-        return ['success' => true];
+        return $this->subprocess($form, ['success' => true]);
+    }
+
+    protected function subprocess($form, $result) {
+        return $result;
     }
 
     protected function postprocess($form, $result) {

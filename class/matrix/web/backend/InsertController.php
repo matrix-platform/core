@@ -26,7 +26,11 @@ class InsertController extends Controller {
             return ['error' => 'error.insert-failed'];
         }
 
-        return ['success' => true, 'data' => $data];
+        return $this->subprocess($form, ['success' => true, 'data' => $data]);
+    }
+
+    protected function subprocess($form, $result) {
+        return $result;
     }
 
 }
