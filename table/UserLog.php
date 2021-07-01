@@ -5,10 +5,18 @@ use matrix\db\column\CreatorAddress;
 use matrix\db\column\Integer;
 use matrix\db\Table;
 
+$filter = function ($table, $conditions = []) {
+    if (!defined('USER_ID') || USER_ID > 1) {
+        $conditions[] = $table->id->greaterThan(1);
+    }
+
+    return $conditions;
+};
+
 $tbl = new Table('base_user_log', false);
 
 $tbl->add('user_id', Integer::class)
-    ->associate('user', 'User')
+    ->associate('user', 'User', false, $filter)
     ->readonly(true)
     ->required(true);
 
