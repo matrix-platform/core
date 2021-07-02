@@ -19,8 +19,18 @@ class ListController extends Controller {
     }
 
     public function available() {
-        if ($this->table()->getParentRelation()) {
+        $table = $this->table();
+        $relation = $table->getParentRelation();
+
+        if ($relation) {
             if ($this->method() === 'POST') {
+                if ($relation['self-referencing']) {
+                    $pattern = preg_quote($this->name(), '/');
+                    $relation = $table->getComposition($table);
+
+                    return preg_match("/^{$pattern}(\/[\d-]+\/{$relation['alias']})?$/", $this->path());
+                }
+
                 $info = pathinfo($this->name());
                 $pattern = preg_quote($info['dirname'], '/');
 
@@ -42,7 +52,7 @@ class ListController extends Controller {
                     continue;
                 }
 
-                if ($column->isCounter()) {
+                if ($column->isCounter() && !$column->relation()['self-referencing']) {
                     if (!$this->permitted("{$this->node()}/{$column->alias()}")) {
                         continue;
                     }
@@ -151,7 +161,8 @@ class ListController extends Controller {
         $relation = $this->table()->getParentRelation();
 
         if ($relation) {
-            $form[$relation['column']->name()] = $this->args()[0];
+            $args = $this->args();
+            $form[$relation['column']->name()] = $args ? $args[0] : null;
         }
 
         return $form;
@@ -202,7 +213,7 @@ class ListController extends Controller {
                 $page = intval(ceil($count / $size));
             }
 
-            $data = $count ? $model->query($form, $orders ?: $this->defaultRanking(), $size, $page): [];
+            $data = $count ? $model->query($form, $orders ?: $this->defaultRanking(), $size, $page) : [];
         }
 
         return $this->subprocess($form, [
@@ -210,7 +221,7 @@ class ListController extends Controller {
             'view' => $export,
             'count' => $count,
             'data' => $data,
-            'page' => $page,
+            'page' => $page ?: 1,
             'size' => $size,
             'orders' => $orders,
         ]);

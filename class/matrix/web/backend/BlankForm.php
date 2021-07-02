@@ -7,10 +7,20 @@ use ReflectionMethod;
 trait BlankForm {
 
     public function available() {
-        if ($this->table()->getParentRelation()) {
+        $table = $this->table();
+        $relation = $table->getParentRelation();
+
+        if ($relation) {
             if ($this->method() === 'POST') {
                 $info = pathinfo($this->name());
                 $action = $info['basename'];
+
+                if ($relation['self-referencing']) {
+                    $pattern = preg_quote($info['dirname'], '/');
+                    $relation = $table->getComposition($table);
+
+                    return preg_match("/^{$pattern}(\/[\d]+\/{$relation['alias']})?\/{$action}$/", $this->path());
+                }
 
                 $info = pathinfo($info['dirname']);
                 $pattern = preg_quote($info['dirname'], '/');
@@ -40,7 +50,8 @@ trait BlankForm {
         $relation = $this->table()->getParentRelation();
 
         if ($relation) {
-            $form[$relation['column']->name()] = $this->args()[0];
+            $args = $this->args();
+            $form[$relation['column']->name()] = $args ? $args[0] : null;
         }
 
         return $form;

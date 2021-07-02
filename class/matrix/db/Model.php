@@ -148,17 +148,20 @@ class Model {
             $relation = $this->table->getParentRelation();
 
             if ($relation) {
-                $model = $relation['foreign']->model();
                 $value = $data[$relation['column']->name()];
-                $parent = $model->find([$relation['target']->equal($value)]);
 
-                if ($parent) {
-                    $parent['.title'] = $model->toString($parent);
+                if ($value !== null) {
+                    $model = $relation['foreign']->model();
+                    $parent = $model->find([$relation['target']->equal($value)]);
 
-                    $parents = $model->parents($parent);
-                    $parents[] = $parent;
+                    if ($parent) {
+                        $parent['.title'] = $model->toString($parent);
 
-                    return $parents;
+                        $parents = $model->parents($parent);
+                        $parents[] = $parent;
+
+                        return $parents;
+                    }
                 }
             }
         }
@@ -290,7 +293,9 @@ class Model {
             if ($value instanceof Criterion) {
                 $criteria->add($value);
             } else if (isset($this->table->{$name})) {
-                if (is_array($value)) {
+                if ($value === null) {
+                    $criteria->add($this->table->{$name}->isNull());
+                } else if (is_array($value)) {
                     $criteria->add($this->table->{$name}->in($value));
                 } else {
                     $criteria->add($this->table->{$name}->equal($value));

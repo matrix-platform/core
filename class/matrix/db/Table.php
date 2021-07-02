@@ -103,6 +103,18 @@ class Table {
         return $columns;
     }
 
+    public function getComposition($table) {
+        foreach ($this->relations as $alias => ['foreign' => $foreign, 'type' => $type]) {
+            if ($type === 'composition') {
+                if ($foreign === $table || $foreign === $table->name()) {
+                    return $this->getRelation($alias);
+                }
+            }
+        }
+
+        return null;
+    }
+
     public function getParentRelation() {
         if (is_string($this->parent)) {
             $this->parent = $this->getRelation($this->parent);
@@ -131,6 +143,7 @@ class Table {
 
             $relation['foreign'] = $foreign;
             $relation['target'] = $foreign->{$relation['target']};
+            $relation['self-referencing'] = $foreign === $this;
 
             $this->relations[$alias] = $relation;
         }
