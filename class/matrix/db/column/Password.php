@@ -11,6 +11,7 @@ class Password {
     public function __construct($values) {
         $this->values = $values + [
             'formStyle' => 'password',
+            'listStyle' => 'hidden',
             'searchStyle' => false,
             'unordered' => true,
         ];

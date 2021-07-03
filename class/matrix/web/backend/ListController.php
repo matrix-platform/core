@@ -58,7 +58,7 @@ class ListController extends Controller {
                     }
                 }
 
-                if ($column->listStyle() === 'hidden') {
+                if ($column->listStyle() === 'hidden' || $column->tab()) {
                     continue;
                 }
 
@@ -71,6 +71,20 @@ class ListController extends Controller {
 
     public function remix($styles, $list) {
         return $styles;
+    }
+
+    protected function init() {
+        $table = $this->table();
+
+        foreach ($table->getRelations() as ['alias' => $alias, 'type' => $type]) {
+            if ($type === 'composition') {
+                $name = "{$alias}_count";
+
+                if (!isset($table->{$name})) {
+                    $table->add($name, "{$alias}.count");
+                }
+            }
+        }
     }
 
     protected function wrap() {
