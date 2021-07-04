@@ -25,7 +25,7 @@ class UpdateBundle extends Controller {
         return false;
     }
 
-    protected function menuNode() {
+    public function menuNode() {
         return preg_replace('/^\/backend\/(.+)\/[\w-]+$/', '$1', $this->path());
     }
 

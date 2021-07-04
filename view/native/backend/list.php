@@ -52,10 +52,13 @@ $result['controls'] = $controls;
 
 //--
 
-if ($table->enableTime()) {
-    $result['groups'] = $table->disableTime() ? [0, 1, 2, 3, 4] : [0, 1, 2, 3];
+$enable = $table->enableTime();
+$disable = $table->disableTime();
+
+if ($enable) {
+    $result['groups'] = $disable ? [0, 1, 2, 3, 4] : [0, 1, 2, 3];
 } else {
-    $result['groups'] = $table->disableTime() ? [0, 1, 2, 4] : [];
+    $result['groups'] = $disable ? [0, 1, 2, 4] : [];
 }
 
 //--
@@ -152,15 +155,42 @@ $result['orders'] = $orders;
 //--
 
 $actions = $controller->actions() ?: [];
+$switches = [];
 
 if ($controller->permitted("{$node}/")) {
     $actions[] = [
         'ranking' => 100,
         'type' => 'view',
     ];
+
+    if ($enable || $disable) {
+        $now = date(cfg('system.timestamp'));
+
+        foreach ($result['data'] as &$data) {
+            $data['.visible'] = true;
+
+            if ($enable) {
+                if (!$data[$enable] || strcmp($data[$enable], $now) > 0) {
+                    $data['.visible'] = false;
+                }
+            }
+
+            if ($disable) {
+                if ($data[$disable] && strcmp($data[$disable], $now) < 0) {
+                    $data['.visible'] = false;
+                }
+            }
+        }
+
+        $switches[] = [
+            'ranking' => 100,
+            'type' => 'visible',
+        ];
+    }
 }
 
 $result['actions'] = $actions;
+$result['switches'] = $switches;
 
 //--
 

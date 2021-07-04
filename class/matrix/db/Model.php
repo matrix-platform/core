@@ -321,12 +321,6 @@ class Model {
 
                 $criteria->add($column->isNull()->or()->greaterThan($now));
             }
-
-            $invisible = $this->table->invisible();
-
-            if ($invisible) {
-                $criteria->add($this->table->{$invisible}->equal(false));
-            }
         }
 
         return $criteria;

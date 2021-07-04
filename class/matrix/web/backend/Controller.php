@@ -33,7 +33,7 @@ class Controller {
         }
     }
 
-    protected function menuNode() {
+    public function menuNode() {
         return preg_replace('/^\/backend\/(.+)$/', '$1', $this->name());
     }
 

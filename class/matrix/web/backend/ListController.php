@@ -246,39 +246,44 @@ class ListController extends Controller {
     }
 
     private function groupFilter($group) {
+        if (!$group) {
+            return null;
+        }
+
         $criteria = Criteria::createAnd();
-        $enable = $this->table()->enableTime();
-        $disable = $this->table()->disableTime();
+        $table = $this->table();
+        $enable = $table->enableTime();
+        $disable = $table->disableTime();
         $now = date(cfg('system.timestamp'));
 
         switch ($group) {
         case 1:
             if ($enable) {
-                $criteria->add($this->table()->{$enable}->notNull()->lessThanOrEqual($now));
+                $criteria->add($table->{$enable}->notNull()->lessThanOrEqual($now));
             }
             if ($disable) {
-                $criteria->add($this->table()->{$disable}->isNull()->or()->greaterThan($now));
+                $criteria->add($table->{$disable}->isNull()->or()->greaterThan($now));
             }
             break;
         case 2:
             if ($disable) {
-                $criteria->add($this->table()->{$disable}->notNull()->lessThanOrEqual($now));
+                $criteria->add($table->{$disable}->notNull()->lessThanOrEqual($now));
             }
             if ($enable) {
-                $criteria = Criteria::createOr($this->table()->{$enable}->isNull()->or()->greaterThan($now), $criteria);
+                $criteria = Criteria::createOr($table->{$enable}->isNull()->or()->greaterThan($now), $criteria);
             }
             break;
         case 3:
             if ($enable) {
-                $criteria->add($this->table()->{$enable}->notNull()->greaterThan($now));
+                $criteria->add($table->{$enable}->notNull()->greaterThan($now));
             }
             break;
         case 4:
             if ($disable) {
                 if ($enable) {
-                    $criteria->add($this->table()->{$enable}->notNull()->lessThanOrEqual($now));
+                    $criteria->add($table->{$enable}->notNull()->lessThanOrEqual($now));
                 }
-                $criteria->add($this->table()->{$disable}->notNull()->greaterThan($now));
+                $criteria->add($table->{$disable}->notNull()->greaterThan($now));
             }
             break;
         }

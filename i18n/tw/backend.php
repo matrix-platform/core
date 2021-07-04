@@ -29,6 +29,7 @@ return [
     'update' => '儲存',
 
     'operation' => '操作',
+    'visible' => '顯示',
     'subtotal' => '小計',
     'list-rows' => '共 {{ count }} 筆資料，第 {{ page|raw }} 頁，每頁 {{ size|raw }} 筆',
 

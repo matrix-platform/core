@@ -29,6 +29,7 @@ return [
     'update' => 'Save',
 
     'operation' => 'Operation',
+    'visible' => 'Visible',
     'subtotal' => 'Sub Total',
     'list-rows' => 'Total {{ count }} rows, {{ page|raw }} pages, {{ size|raw }} rows per page.',
 
