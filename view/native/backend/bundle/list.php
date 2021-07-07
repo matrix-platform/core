@@ -19,14 +19,16 @@ $result['styles'] = [
 
 $actions = [];
 
-if ($controller->permitted("{$path}/")) {
-    $actions[] = [
+if (!isset($actions['view']) && $controller->permitted("{$path}/")) {
+    $actions['view'] = [
+        'link' => !$controller->modalForm(),
+        'path' => "{$path}/{{ id }}",
         'ranking' => 100,
-        'type' => 'view',
     ];
 }
 
 $result['actions'] = $actions;
+$result['switches'] = [];
 
 //--
 

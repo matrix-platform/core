@@ -46,7 +46,7 @@ foreach ($controller->columns() ?: $table->getColumns() as $name => $column) {
     ];
 }
 
-$result['styles'] = $controller->remix($styles, $list);
+$result['styles'] = $controller->remix($styles);
 
 if ($table->versionable()) {
     $result['styles'][] = ['name' => '__version__', 'type' => 'hidden'];
@@ -56,23 +56,15 @@ if ($table->versionable()) {
 
 $buttons = $controller->buttons() ?: [];
 
-$buttons[] = [
-    'ranking' => 100,
-    'type' => 'cancel',
-];
+if (!isset($buttons['cancel'])) {
+    $buttons['cancel'] = ['ranking' => 100];
+}
 
-if ($controller->permitted("{$node}/update")) {
-    $buttons[] = [
-        'ranking' => 200,
-        'type' => 'update',
-    ];
+if (!isset($buttons['update']) && $controller->permitted("{$node}/update")) {
+    $buttons['update'] = ['path' => "{$node}/update/{{ id }}", 'ranking' => 200];
 }
 
 $result['buttons'] = $buttons;
-
-//--
-
-$result['path'] = $node;
 
 //--
 

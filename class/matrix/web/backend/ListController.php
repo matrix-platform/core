@@ -13,6 +13,7 @@ class ListController extends Controller {
             'defaultPage' => 1,
             'defaultPageSize' => 10,
             'defaultRanking' => true,
+            'modalForm' => false,
             'table' => table($name),
             'view' => 'backend/list.php',
         ];
@@ -47,7 +48,7 @@ class ListController extends Controller {
         if ($this->columns === null) {
             $this->columns = [];
 
-            foreach ($this->columns() ?: $this->table()->getColumns() as $name => $column) {
+            foreach ($this->columns() ?? $this->table()->getColumns() as $name => $column) {
                 if ($column->invisible() && !$column->editable()) {
                     continue;
                 }
@@ -69,7 +70,7 @@ class ListController extends Controller {
         return $this->columns;
     }
 
-    public function remix($styles, $list) {
+    public function remix($styles) {
         return $styles;
     }
 

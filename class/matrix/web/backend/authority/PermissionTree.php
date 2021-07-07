@@ -4,7 +4,7 @@ namespace matrix\web\backend\authority;
 
 trait PermissionTree {
 
-    public function remix($styles, $list) {
+    public function remix($styles) {
         $menus = $this->menus();
         $nodes = [];
 

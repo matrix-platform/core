@@ -21,30 +21,28 @@ $result['breadcrumbs'] = Fn::breadcrumbs($controller->menus(), $node, $list);
 
 $controls = $controller->controls() ?: [];
 
-if ($controller->permitted("{$node}/new")) {
-    $controls[] = [
+if (!isset($controls['new']) && $controller->permitted("{$node}/new")) {
+    $controls['new'] = [
+        'link' => !$controller->modalForm(),
         'path' => "{$path}/new",
         'ranking' => 100,
-        'type' => 'new',
     ];
 }
 
-if ($controller->permitted("{$node}/delete")) {
-    $controls[] = [
+if (!isset($controls['delete']) && $controller->permitted("{$node}/delete")) {
+    $controls['delete'] = [
         'least' => 1,
         'path' => "{$node}/delete",
         'ranking' => 200,
-        'type' => 'delete',
     ];
 }
 
-if ($controller->permitted("{$node}/export")) {
-    $controls[] = [
+if (!isset($controls['export']) && $controller->permitted("{$node}/export")) {
+    $controls['export'] = [
         'least' => 0,
         'parameters' => array_intersect_key($form, array_flip(['g', 'o', 'q'])),
         'path' => "{$path}/export",
         'ranking' => 300,
-        'type' => 'export',
     ];
 }
 
@@ -101,7 +99,7 @@ foreach ($controller->getColumns() as $name => $column) {
     ];
 }
 
-$result['styles'] = $controller->remix($styles, $list);
+$result['styles'] = $controller->remix($styles);
 
 //--
 
@@ -155,13 +153,16 @@ $result['orders'] = $orders;
 //--
 
 $actions = $controller->actions() ?: [];
-$switches = [];
+$switches = $controller->switches() ?: [];
 
 if ($controller->permitted("{$node}/")) {
-    $actions[] = [
-        'ranking' => 100,
-        'type' => 'view',
-    ];
+    if (!isset($actions['view'])) {
+        $actions['view'] = [
+            'link' => !$controller->modalForm(),
+            'path' => "{$node}/{{ id }}",
+            'ranking' => 100,
+        ];
+    }
 
     if ($enable || $disable) {
         $now = date(cfg('system.timestamp'));
@@ -182,10 +183,9 @@ if ($controller->permitted("{$node}/")) {
             }
         }
 
-        $switches[] = [
-            'ranking' => 100,
-            'type' => 'visible',
-        ];
+        if (!isset($switches['visible'])) {
+            $switches['visible'] = ['ranking' => 100];
+        }
     }
 }
 

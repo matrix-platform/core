@@ -57,16 +57,12 @@ $result['styles'] = $styles;
 
 $buttons = [];
 
-$buttons[] = [
-    'ranking' => 100,
-    'type' => 'cancel',
-];
+if (!isset($buttons['cancel'])) {
+    $buttons['cancel'] = ['ranking' => 100];
+}
 
-if ($controller->permitted("{$path}/update")) {
-    $buttons[] = [
-        'ranking' => 200,
-        'type' => 'update',
-    ];
+if (!isset($buttons['update']) && $controller->permitted("{$path}/update")) {
+    $buttons['update'] = ['path' => "{$path}/update/{{ id }}", 'ranking' => 200];
 }
 
 $result['buttons'] = $buttons;
@@ -74,8 +70,9 @@ $result['buttons'] = $buttons;
 //--
 
 $result['data']['id'] = $id;
-$result['path'] = $path;
 
 //--
 
-resolve(cfg('backend.form'))->render($controller, $form, $result);
+$view = cfg(@$form['args'] === 'modal' ? 'backend.form-modal' : 'backend.form');
+
+resolve($view)->render($controller, $form, $result);

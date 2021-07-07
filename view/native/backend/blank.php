@@ -3,6 +3,7 @@
 use matrix\utility\Fn;
 
 $node = $controller->menu()['parent'];
+$path = preg_replace('/^\/backend\/(.+)\/[\w]+$/', '$1', $controller->path());
 $table = $controller->table();
 
 //--
@@ -33,7 +34,9 @@ foreach ($controller->columns() ?: $table->getColumns() as $name => $column) {
     }
 
     if ($column->options()) {
-        $form[$name] = $column->default();
+        if (!isset($form[$name])) {
+            $form[$name] = $column->default();
+        }
 
         if ($type !== 'radio' && $type !== 'select') {
             $type = $column->association() ? 'select' : 'radio';
@@ -50,22 +53,18 @@ foreach ($controller->columns() ?: $table->getColumns() as $name => $column) {
     ];
 }
 
-$result['styles'] = $controller->remix($styles, $list);
+$result['styles'] = $controller->remix($styles);
 
 //--
 
 $buttons = $controller->buttons() ?: [];
 
-$buttons[] = [
-    'ranking' => 100,
-    'type' => 'cancel',
-];
+if (!isset($buttons['cancel'])) {
+    $buttons['cancel'] = ['ranking' => 100];
+}
 
-if ($controller->permitted("{$node}/insert")) {
-    $buttons[] = [
-        'ranking' => 200,
-        'type' => 'insert',
-    ];
+if (!isset($buttons['insert']) && $controller->permitted("{$node}/insert")) {
+    $buttons['insert'] = ['path' => "{$path}/insert", 'ranking' => 200];
 }
 
 $result['buttons'] = $buttons;
@@ -73,7 +72,6 @@ $result['buttons'] = $buttons;
 //--
 
 $result['data'] = $form;
-$result['path'] = preg_replace('/^\/backend\/(.+)\/[\w]+$/', '$1', $controller->path());
 
 //--
 

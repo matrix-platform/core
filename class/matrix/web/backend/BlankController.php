@@ -13,7 +13,7 @@ class BlankController extends Controller {
         ];
     }
 
-    public function remix($styles, $list) {
+    public function remix($styles) {
         return $styles;
     }
 

@@ -7,7 +7,10 @@ use matrix\web\backend\Controller;
 class ListBundle extends Controller {
 
     public function __construct() {
-        $this->values = ['view' => 'backend/bundle/list.php'];
+        $this->values = [
+            'modalForm' => false,
+            'view' => 'backend/bundle/list.php',
+        ];
     }
 
     public function available() {
