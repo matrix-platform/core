@@ -20,6 +20,8 @@ return [
 
     'menus' => 'common',
 
+    'modules' => null,
+
     'overview' => null,
 
     'password-changed' => null,

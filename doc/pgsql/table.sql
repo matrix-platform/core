@@ -87,3 +87,47 @@ CREATE TABLE base_menu (
     ranking      INTEGER   NOT NULL
 );
 
+CREATE TABLE base_page (
+    id           INTEGER   NOT NULL PRIMARY KEY,
+    path         TEXT      NOT NULL UNIQUE,
+    title        TEXT          NULL,
+    description  TEXT          NULL,
+    fluid        BOOLEAN   NOT NULL,
+    color        TEXT          NULL,
+    bg_color     TEXT          NULL,
+    header       BOOLEAN   NOT NULL,
+    footer       BOOLEAN   NOT NULL,
+    enable_time  TIMESTAMP     NULL,
+    disable_time TIMESTAMP     NULL
+);
+
+CREATE TABLE base_block (
+    id           INTEGER   NOT NULL PRIMARY KEY,
+    page_id      INTEGER   NOT NULL,
+    module       TEXT      NOT NULL,
+    title        TEXT          NULL,
+    content      TEXT          NULL,
+    image        TEXT          NULL,
+    url          TEXT          NULL,
+    extra        TEXT          NULL,
+    padding_y    INTEGER   NOT NULL,
+    color        TEXT          NULL,
+    bg_color     TEXT          NULL,
+    enable_time  TIMESTAMP     NULL,
+    disable_time TIMESTAMP     NULL,
+    ranking      INTEGER   NOT NULL
+);
+
+CREATE TABLE base_block_item (
+    id           INTEGER   NOT NULL PRIMARY KEY,
+    block_id     INTEGER   NOT NULL,
+    title        TEXT          NULL,
+    content      TEXT          NULL,
+    image        TEXT          NULL,
+    url          TEXT          NULL,
+    extra        TEXT          NULL,
+    enable_time  TIMESTAMP     NULL,
+    disable_time TIMESTAMP     NULL,
+    ranking      INTEGER   NOT NULL
+);
+

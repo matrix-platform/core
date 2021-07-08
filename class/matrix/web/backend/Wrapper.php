@@ -4,7 +4,7 @@ namespace matrix\web\backend;
 
 trait Wrapper {
 
-    private function wrapInput($column, $form, $name) {
+    protected function wrapInput($column, $form, $name) {
         if (key_exists($name, $form)) {
             if ($column->attachment()) {
                 $form = $this->wrapFile($form, $name);

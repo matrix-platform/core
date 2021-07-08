@@ -27,6 +27,7 @@ return [
     'search' => 'Search',
     'view' => 'View',
     'update' => 'Save',
+    'next' => 'Next',
 
     'operation' => 'Operation',
     'visible' => 'Visible',
@@ -48,6 +49,7 @@ return [
 
     'tab-default' => 'Data',
     'tab-other' => 'Other',
+    'tab-style' => 'Style',
 
     'bundle-name' => 'Name',
     'bundle-remark' => 'Remark',

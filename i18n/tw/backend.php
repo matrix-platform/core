@@ -27,6 +27,7 @@ return [
     'search' => '查詢',
     'view' => '檢視',
     'update' => '儲存',
+    'next' => '下一步',
 
     'operation' => '操作',
     'visible' => '顯示',
@@ -48,6 +49,7 @@ return [
 
     'tab-default' => '基本資料',
     'tab-other' => '其他',
+    'tab-style' => '樣式',
 
     'bundle-name' => '名稱',
     'bundle-remark' => '說明',

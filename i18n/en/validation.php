@@ -12,4 +12,6 @@ return [
 
     'required' => 'Required',
 
+    'url' => 'Invalid URL Format',
+
 ];
