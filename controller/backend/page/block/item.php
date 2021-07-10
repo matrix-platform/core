@@ -20,7 +20,7 @@ return new class('BlockItem') extends matrix\web\backend\ListController {
 
                 $fields[] = [
                     'column' => $field,
-                    'i18n' => key_exists($name, $bundle) ? "{$prefix}.{$name}" : "module.{$name}",
+                    'i18n' => key_exists($name, $bundle) ? "{$prefix}.{$name}" : "label.{$name}",
                     'name' => $name,
                     'readonly' => true,
                     'type' => $field->options() ? 'select' : $type,

@@ -1,0 +1,16 @@
+<?php //>
+
+{% for type in result.types %}
+use matrix\db\column\{{ type }};
+{% endfor %}
+use matrix\db\Table;
+
+$tbl = new Table('{{ result.table }}');
+
+{% for name, info in result.metadata %}
+$tbl->add('{{ name }}', {{ result.types[info.data_type] }}::class){% if not info.is_nullable %}
+
+    ->required(true){% endif %};
+
+{% endfor %}
+return $tbl;

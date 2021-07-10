@@ -1,0 +1,9 @@
+<?php //>
+
+return [
+
+{% for name in result.metadata|keys %}
+    '{{ name }}' => '{{ result.label[name] }}',
+
+{% endfor %}
+];

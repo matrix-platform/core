@@ -1,0 +1,15 @@
+<?php //>
+
+return new class('{{ result.model }}') extends matrix\web\backend\ListController {
+
+    protected function init() {
+        $table = $this->table();
+
+        $this->columns($table->getColumns([
+{% for name in result.metadata|keys %}
+            '{{ name }}',
+{% endfor %}
+        ]));
+    }
+
+};

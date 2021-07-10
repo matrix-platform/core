@@ -27,7 +27,7 @@ trait Form {
 
             $fields[] = [
                 'column' => $field,
-                'i18n' => key_exists($name, $bundle) ? "{$prefix}.{$name}" : "module.{$name}",
+                'i18n' => key_exists($name, $bundle) ? "{$prefix}.{$name}" : "label.{$name}",
                 'name' => $name,
                 'required' => $field->required(),
                 'type' => $type,

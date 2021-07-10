@@ -1,0 +1,25 @@
+------------------------------------------------------------
+menu
+============================================================
+
+    '{{ result.path }}' => ['icon' => '', 'ranking' => 0, 'parent' => '', 'group' => true, 'tag' => 'query'],
+
+        '{{ result.path }}/' => ['parent' => '{{ result.path }}', 'tag' => 'query'],
+
+        '{{ result.path }}/delete' => ['parent' => '{{ result.path }}', 'tag' => 'delete'],
+
+        '{{ result.path }}/insert' => ['parent' => '{{ result.path }}', 'tag' => 'insert'],
+
+        '{{ result.path }}/new' => ['parent' => '{{ result.path }}', 'tag' => 'insert'],
+
+        '{{ result.path }}/update' => ['parent' => '{{ result.path }}', 'tag' => 'update'],
+
+============================================================
+
+    '{{ result.path }}' => '{{ result.model }}',
+
+        '{{ result.path }}/' => '{{ result.model }}',
+
+        '{{ result.path }}/new' => '{{ result.model }}',
+
+============================================================
