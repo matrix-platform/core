@@ -3,18 +3,13 @@
 use matrix\db\column\Text;
 use matrix\utility\Fn;
 
-$path = $controller->menu()['parent'];
+$file = @$result['file'];
+$path = $result['path'];
 $prefix = $result['prefix'];
 
 //--
 
-$id = $controller->args()[1];
-
-$result['subtitle'] = i18n($prefix, $id);
-
-//--
-
-$data = ['.title' => $result['subtitle']];
+$data = key_exists('subtitle', $result) ? ['.title' => $result['subtitle']] : null;
 
 $result['breadcrumbs'] = Fn::breadcrumbs($controller->menus(), $controller->node(), [$data]);
 
@@ -57,19 +52,15 @@ $result['styles'] = $styles;
 
 $buttons = [];
 
-if (!isset($buttons['cancel'])) {
+if ($file && !isset($buttons['cancel'])) {
     $buttons['cancel'] = ['ranking' => 100];
 }
 
 if (!isset($buttons['update']) && $controller->permitted("{$path}/update")) {
-    $buttons['update'] = ['path' => "{$path}/update/{{ id }}", 'ranking' => 200];
+    $buttons['update'] = ['path' => "{$path}/update" . ($file ? "/{$file}" : ''), 'ranking' => 200];
 }
 
 $result['buttons'] = $buttons;
-
-//--
-
-$result['data']['id'] = $id;
 
 //--
 

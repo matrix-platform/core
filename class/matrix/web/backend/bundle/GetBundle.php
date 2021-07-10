@@ -47,7 +47,10 @@ class GetBundle extends Controller {
             'success' => true,
             'data' => array_replace_recursive($default, load_data("{$folder}/{$file}")),
             'default' => $default,
+            'file' => $file,
+            'path' => $this->menu()['parent'],
             'prefix' => $prefix,
+            'subtitle' => i18n($prefix, $file),
         ];
     }
 
