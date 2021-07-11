@@ -8,6 +8,16 @@ trait RequestHandler {
 
     use Handler;
 
+    public function verify() {
+        if ($this->method() === 'POST') {
+            $token = @$_SERVER['HTTP_MATRIX_TOKEN'];
+
+            return $token ? ($token === @$_COOKIE['matrix-token']) : false;
+        }
+
+        return true;
+    }
+
     protected function destroy() {
         return session_destroy();
     }

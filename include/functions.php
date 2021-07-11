@@ -226,7 +226,7 @@ function route($path, $method) {
             $controller->args($args)->method($method)->name($name)->path($path);
 
             if ($controller->available()) {
-                return $controller;
+                return $controller->verify() ? $controller : null;
             }
         }
     }

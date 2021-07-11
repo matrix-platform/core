@@ -67,7 +67,7 @@ if (PHP_SAPI === 'cli') {
             session_name(APP_NAME);
         }
 
-        session_set_cookie_params(['path' => APP_PATH, 'samesite' => 'None', 'secure' => true]);
+        session_set_cookie_params(['httponly' => true, 'path' => APP_PATH, 'samesite' => 'none', 'secure' => true]);
         session_start();
     }
 

@@ -26,6 +26,10 @@ class Controller {
         $this->handle();
     }
 
+    public function verify() {
+        return true;
+    }
+
     protected function wrap() {
         $form = [];
 
