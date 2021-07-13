@@ -6,6 +6,8 @@ return [
 
     'duplicated' => 'Existed',
 
+    'email' => 'Invalid Email Format',
+
     'image' => 'Invalid Image Format',
 
     'regex' => 'Dismatched',

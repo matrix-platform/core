@@ -88,14 +88,12 @@ $result['filters'] = $filters;
 $styles = [];
 
 foreach ($controller->getColumns() as $name => $column) {
-    $options = $column->options();
-
     $styles[] = [
         'column' => $column,
         'i18n' => "table/{$table->name()}.{$name}",
         'name' => $name,
         'readonly' => !$column->editable(),
-        'type' => $options ? 'select' : $column->listStyle(),
+        'type' => $column->options() ? 'select' : $column->listStyle(),
     ];
 }
 

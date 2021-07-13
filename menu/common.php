@@ -2,12 +2,6 @@
 
 return [
 
-    'common' => ['parent' => null, 'group' => true],
-
-        'file-info/' => ['parent' => 'common', 'tag' => 'user'],
-
-        'file-info/update' => ['parent' => 'common', 'tag' => 'user'],
-
     'system' => ['icon' => 'fas fa-desktop', 'ranking' => 9000, 'parent' => null],
 
         'authority' => ['icon' => 'fas fa-users-cog', 'ranking' => 100, 'parent' => 'system'],
@@ -79,6 +73,12 @@ return [
                 'i18n/template/update' => ['parent' => 'i18n/template', 'tag' => 'update'],
 
         'other' => ['ranking' => 900, 'parent' => 'system'],
+
+            'file-info' => ['parent' => 'other', 'group' => true, 'tag' => 'user'],
+
+                'file-info/' => ['parent' => 'file-info', 'tag' => 'user'],
+
+                'file-info/update' => ['parent' => 'file-info', 'tag' => 'user'],
 
             'label' => ['parent' => 'other', 'group' => true, 'tag' => 'update'],
 

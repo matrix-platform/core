@@ -6,6 +6,8 @@ return [
 
     'duplicated' => '資料已存在',
 
+    'email' => 'Email 格式錯誤',
+
     'image' => '圖檔格式錯誤',
 
     'regex' => '格式錯誤',

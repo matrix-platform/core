@@ -2,8 +2,6 @@
 
 return [
 
-    'file-info/' => '檔案資訊',
-
     'system' => '系統管理',
 
         'authority' => '權限管理',
@@ -51,6 +49,8 @@ return [
                 'i18n/template/' => '訊息樣板',
 
         'other' => '其他',
+
+            'file-info/' => '檔案資訊',
 
             'label' => '介面文字',
 

@@ -2,8 +2,6 @@
 
 return [
 
-    'file-info/' => 'File Info',
-
     'system' => 'System',
 
         'authority' => 'Authority',
@@ -51,6 +49,8 @@ return [
                 'i18n/template/' => 'Template',
 
         'other' => 'Other',
+
+            'file-info/' => 'File Info',
 
             'label' => 'Backend Label',
 

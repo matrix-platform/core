@@ -12,6 +12,7 @@ class Image {
         $this->values = $values + [
             'attachment' => true,
             'formStyle' => 'image',
+            'searchStyle' => false,
             'unordered' => true,
             'validation' => 'image',
         ];

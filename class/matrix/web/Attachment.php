@@ -116,6 +116,10 @@ class Attachment {
         return $this->info['path'];
     }
 
+    public function getInfo() {
+        return $this->info;
+    }
+
     public function save($parent_id = -1) {
         $duplicated = model('File')->query([
             'parent_id' => $parent_id,

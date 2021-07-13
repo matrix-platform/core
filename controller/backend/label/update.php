@@ -9,7 +9,7 @@ return new class() extends matrix\web\backend\Controller {
     protected function process($form) {
         list($name, $key) = preg_split('/\./', $form['name'], 2);
 
-        $path = 'i18n/' . constant('LANGUAGE') . '/' . $name;
+        $path = 'i18n/' . LANGUAGE . '/' . $name;
         $bundle = union_resource("{$path}.php");
         $file = get_data_file($path, false);
 
@@ -18,32 +18,21 @@ return new class() extends matrix\web\backend\Controller {
         }
 
         if (file_exists($file)) {
-            if (!is_file($file) || !is_readable($file)) {
-                return ['error' => 'error.update-failed'];
-            }
-
             $data = json_decode(file_get_contents($file), true);
+            $info = pathinfo($file);
 
-            unlink($file);
+            rename($file, "{$info['dirname']}/.{$info['basename']}-" . microtime(true) . '-' . USER_ID);
         } else {
             $data = [];
         }
 
-        if ($form['content'] === null || $form['content'] === @$bundle[$key]) {
+        if (@$form['content'] === null || $form['content'] === @$bundle[$key]) {
             unset($data[$key]);
         } else {
             $data[$key] = $form['content'];
         }
 
-        if ($data) {
-            $data = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-
-            file_put_contents($file, $data);
-        } else {
-            $data = '{}';
-        }
-
-        file_put_contents($file . '.' . db()->next('base_manipulation') . '.' . USER_ID, $data);
+        file_put_contents($file, $data ? json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '{}');
 
         return ['success' => true];
     }
