@@ -18,8 +18,7 @@ class Attachment {
 
     public static function from($filename, $content, $description) {
         if (is_string($content) && preg_match('/^data:/', $content)) {
-            $folder = defined('FILES_HOME') ? FILES_HOME : (APP_HOME . 'www/files/');
-            $file = tempnam(create_folder($folder . date('Ymd')), '');
+            $file = tempnam(create_folder(APP_HOME . 'www/files/' . date('Ymd')), '');
             $handle = fopen($file, 'w');
             $raw = tmpfile();
 

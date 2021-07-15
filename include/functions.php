@@ -120,6 +120,27 @@ function load_data($name) {
     return $file === false ? [] : json_decode(file_get_contents($file), true);
 }
 
+function load_file_data($path) {
+    $file = get_data_file("files/{$path}", false);
+
+    if (is_file($file)) {
+        return json_decode(file_get_contents($file), true);
+    }
+
+    if (is_string($path)) {
+        $data = model('File')->find(['path' => $path]);
+    } else {
+        $data = model('File')->get($path);
+    }
+
+    if ($data) {
+        create_folder(dirname($file));
+        file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    }
+
+    return $data;
+}
+
 function load_i18n($name, $language = LANGUAGE) {
     return load_bundle("i18n/{$language}/{$name}");
 }

@@ -13,13 +13,10 @@ return new class() extends matrix\web\Controller {
     }
 
     protected function process($form) {
-        $folder = defined('FILES_HOME') ? FILES_HOME : (APP_HOME . 'www/files/');
         $file = implode('/', $this->args());
 
-        if (is_file($folder . $file)) {
-            $root = defined('FILES_HOME') ? '/' : APP_PATH;
-
-            return ['view' => '302.php', 'path' => "{$root}files/{$file}"];
+        if (is_file(APP_HOME . 'www/files/' . $file)) {
+            return ['view' => '302.php', 'path' => APP_PATH . 'files/' . $file];
         }
 
         return ['view' => '404.php'];

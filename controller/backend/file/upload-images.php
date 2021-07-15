@@ -1,7 +1,5 @@
 <?php //>
 
-use matrix\utility\Fn;
-
 return new class() extends matrix\web\UserController {
 
     protected function wrap() {
@@ -21,9 +19,7 @@ return new class() extends matrix\web\UserController {
         $paths = [];
 
         foreach ($form['images'] as $image) {
-            $image->save();
-
-            $paths[] = 'files/' . Fn::optimize_image(strval($image));
+            $paths[] = APP_PATH . 'images/' . base64_urlencode($image->save());
         }
 
         return ['success' => true, 'type' => 'insert-images', 'target' => @$form['target'], 'paths' => $paths];

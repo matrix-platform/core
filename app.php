@@ -71,6 +71,14 @@ if (PHP_SAPI === 'cli') {
         session_start();
     }
 
+    if (!key_exists('WEBP', $_SESSION)) {
+        if (strpos($_SERVER['HTTP_ACCEPT'], 'image/webp') === false) {
+            define('NO_WEBP', true);
+        } else {
+            $_SESSION['WEBP'] = true;
+        }
+    }
+
     define('REMOTE_ADDR', $_SERVER['REMOTE_ADDR']);
 
     $path = $_SERVER['PATH_INFO'];

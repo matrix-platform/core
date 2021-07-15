@@ -5,5 +5,5 @@ return new Twig\TwigFilter('file', function ($file) {
         return $file;
     }
 
-    return (defined('FILES_HOME') ? '/' : APP_PATH) . 'files/' . $file;
+    return APP_PATH . 'files/' . $file;
 });

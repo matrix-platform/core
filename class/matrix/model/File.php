@@ -9,9 +9,11 @@ class File extends Model {
     protected function after($type, $prev, $curr) {
         switch ($type) {
         case self::UPDATE:
-            $file = get_data_file("files/{$prev['path']}", false);
-            if (is_file($file)) {
-                unlink($file);
+            foreach (['id', 'path'] as $name) {
+                $file = get_data_file("files/{$prev[$name]}");
+                if ($file) {
+                    unlink($file);
+                }
             }
             break;
         }

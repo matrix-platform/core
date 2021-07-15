@@ -14,8 +14,7 @@ return new class() extends matrix\cli\Controller {
             return ['message' => 'invalid arguments'];
         }
 
-        $folder = defined('FILES_HOME') ? FILES_HOME : (APP_HOME . 'www/files/');
-        $file = "{$folder}{$path}";
+        $file = APP_HOME . 'www/files/' . $path;
 
         if (!is_file($file)) {
             return ['message' => "file `{$path}` not found"];
