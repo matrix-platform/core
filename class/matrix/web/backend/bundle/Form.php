@@ -12,8 +12,8 @@ trait Form {
     protected function wrap() {
         $form = parent::wrap();
 
-        foreach ($this->columns() as $name => $column) {
-            $form = $this->wrapInput($column, $form, $name);
+        foreach ($this->inputs() as $name => $input) {
+            $form = $this->wrapInput($input, $form, $name);
         }
 
         return $form;
@@ -22,15 +22,15 @@ trait Form {
     protected function validate($form) {
         $errors = [];
 
-        foreach ($this->columns() as $name => $column) {
+        foreach ($this->inputs() as $name => $input) {
             $value = @$form[$name];
 
             if ($value === null) {
-                if ($column->required()) {
+                if ($input->required()) {
                     $errors[] = ['name' => $name, 'type' => 'required'];
                 }
             } else {
-                $type = $column->validate($value);
+                $type = $input->validate($value);
 
                 if ($type !== true) {
                     $errors[] = ['name' => $name, 'type' => $type];
@@ -42,19 +42,19 @@ trait Form {
     }
 
     protected function init() {
-        $columns = [];
         $data = union_resource("{$this->folder()}/{$this->file()}.php");
+        $inputs = [];
         $prefix = $this->prefix();
 
         foreach ($data as $name => $ignore) {
             $class = cfg("style/{$prefix}.{$name}");
 
             if ($class) {
-                $columns[$name] = new $class([]);
+                $inputs[$name] = new $class([]);
             }
         }
 
-        $this->columns($columns)->data($data);
+        $this->data($data)->inputs($inputs);
     }
 
     private function save($form, $file, $data) {

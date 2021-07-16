@@ -12,17 +12,7 @@ return new class('File') extends matrix\web\backend\GetController {
         $table->height->group(2);
         $table->seconds->group(2);
 
-        $names = [
-            'name',
-            'description',
-            'size',
-            'width',
-            'height',
-            'seconds',
-            'modified_time',
-        ];
-
-        $this->columns($table->getColumns($names));
+        $this->columns('name', 'description', 'size', 'width', 'height', 'seconds', 'modified_time');
     }
 
     protected function postprocess($form, $result) {

@@ -10,6 +10,7 @@ class UpdateController extends Controller {
 
     public function __construct($name) {
         $this->values = [
+            'columns' => false,
             'table' => table($name),
             'view' => 'backend/save-success.php',
         ];

@@ -19,7 +19,7 @@ trait Wrapper {
     }
 
     private function wrapModel($form) {
-        foreach ($this->columns() ?: $this->table()->getColumns(false) as $name => $column) {
+        foreach ($this->table()->getColumns($this->columns()) as $name => $column) {
             if ($column->multilingual()) {
                 foreach (LANGUAGES as $language) {
                     $form = $this->wrapInput($column, $form, "{$name}__{$language}");

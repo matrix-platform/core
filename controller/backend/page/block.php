@@ -7,11 +7,7 @@ return new class('Block') extends matrix\web\backend\ListController {
 
         $table->add('item_count', 'item.count');
 
-        $this->columns($table->getColumns([
-            'module',
-            'title',
-            'item_count',
-        ]));
+        $this->columns('module', 'title', 'item_count');
 
         $this->controls([
             'new' => ['path' => 'page/{{ page_id }}/block/prepare-new', 'ranking' => 100],

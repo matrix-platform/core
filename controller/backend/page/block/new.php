@@ -25,16 +25,7 @@ return new class('Block') extends matrix\web\backend\BlankController {
 
         $this->buttons(['insert' => ['path' => 'page/{{ page_id }}/block/insert', 'ranking' => 200]]);
 
-        $this->columns($table->getColumns([
-            'module',
-            'title',
-            'padding_y',
-            'color',
-            'bg_color',
-            'enable_time',
-            'disable_time',
-            'ranking',
-        ]));
+        $this->columns('module', 'title', 'padding_y', 'color', 'bg_color', 'enable_time', 'disable_time', 'ranking');
     }
 
     protected function preprocess($form) {

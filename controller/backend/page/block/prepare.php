@@ -3,9 +3,7 @@
 return new class('Block') extends matrix\web\backend\InsertController {
 
     protected function init() {
-        $this->columns($this->table()->getColumns([
-            'module',
-        ]));
+        $this->columns(['module']);
     }
 
     protected function process($form) {

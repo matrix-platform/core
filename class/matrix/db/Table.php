@@ -94,7 +94,7 @@ class Table {
 
         $columns = [];
 
-        foreach ($names ?: $this->names as $name) {
+        foreach (is_array($names) ? $names : $this->names as $name) {
             if (key_exists($name, $this->columns)) {
                 $columns[$name] = $this->columns[$name];
             }

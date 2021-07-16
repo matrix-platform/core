@@ -7,11 +7,7 @@ return new class('Page') extends matrix\web\backend\ListController {
 
         $table->add('block_count', 'block.count');
 
-        $this->columns($table->getColumns([
-            'path',
-            'title',
-            'block_count',
-        ]));
+        $this->columns('path', 'title', 'block_count');
     }
 
 };

@@ -5,16 +5,7 @@ return new class('Block') extends matrix\web\backend\GetController {
     use matrix\web\backend\block\Form;
 
     protected function init() {
-        $this->columns($this->table()->getColumns([
-            'module',
-            'title',
-            'padding_y',
-            'color',
-            'bg_color',
-            'enable_time',
-            'disable_time',
-            'ranking',
-        ]));
+        $this->columns('module', 'title', 'padding_y', 'color', 'bg_color', 'enable_time', 'disable_time', 'ranking');
     }
 
     protected function postprocess($form, $result) {

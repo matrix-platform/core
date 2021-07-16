@@ -63,10 +63,7 @@ if (PHP_SAPI === 'cli') {
     }
 
     if (session_id() === '') {
-        if (defined('APP_NAME')) {
-            session_name(APP_NAME);
-        }
-
+        session_name('matrix');
         session_set_cookie_params(['httponly' => true, 'path' => APP_PATH, 'samesite' => 'none', 'secure' => true]);
         session_start();
     }

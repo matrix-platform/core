@@ -22,7 +22,7 @@ $result['breadcrumbs'] = Fn::breadcrumbs($controller->menus(), $controller->node
 
 $styles = [];
 
-foreach ($controller->columns() ?: $table->getColumns() as $name => $column) {
+foreach ($table->getColumns($controller->columns()) as $name => $column) {
     if ($column->invisible()) {
         continue;
     }

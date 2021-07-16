@@ -48,7 +48,7 @@ class ListController extends Controller {
         if ($this->columns === null) {
             $this->columns = [];
 
-            foreach ($this->columns() ?? $this->table()->getColumns() as $name => $column) {
+            foreach ($this->table()->getColumns($this->columns()) as $name => $column) {
                 if ($column->invisible() && !$column->editable()) {
                     continue;
                 }
