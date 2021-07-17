@@ -74,6 +74,12 @@ return [
 
         'other' => ['ranking' => 900, 'parent' => 'system'],
 
+            'deployment' => ['parent' => 'other', 'group' => true, 'tag' => 'user'],
+
+                'deployment/' => ['parent' => 'deployment', 'tag' => 'user'],
+
+                'deployment/update' => ['parent' => 'deployment', 'tag' => 'user'],
+
             'file-info' => ['parent' => 'other', 'group' => true, 'tag' => 'user'],
 
                 'file-info/' => ['parent' => 'file-info', 'tag' => 'user'],

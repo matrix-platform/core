@@ -4,6 +4,8 @@ return [
 
     'delete-confirmation' => null,
 
+    'deployment-modal' => null,
+
     'form' => null,
 
     'form-modal' => null,

@@ -1,5 +1,6 @@
 <?php //>
 
+use matrix\db\column\Ranking;
 use matrix\utility\Fn;
 
 $node = $controller->node();
@@ -44,6 +45,18 @@ if (!isset($controls['export']) && $controller->permitted("{$node}/export")) {
         'path' => "{$path}/export",
         'ranking' => 300,
     ];
+}
+
+if (!isset($controls['deploy'])) {
+    $ranking = ltrim($table->ranking(), '-');
+
+    if ($ranking && $table->{$ranking} instanceof Ranking) {
+        $controls['deploy'] = [
+            'least' => 0,
+            'path' => 'deployment/' . base64_urlencode($path),
+            'ranking' => 400,
+        ];
+    }
 }
 
 $result['controls'] = $controls;

@@ -243,7 +243,7 @@ function route($path, $method) {
 
         $controller = load_resource("controller{$name}{$file}.php");
 
-        if ($controller) {
+        if (is_object($controller)) {
             $controller->args($args)->method($method)->name($name)->path($path);
 
             if ($controller->available()) {

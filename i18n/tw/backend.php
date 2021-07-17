@@ -24,6 +24,7 @@ return [
     'insert' => '儲存',
     'delete' => '刪除',
     'export' => '匯出',
+    'deploy' => '排序',
     'search' => '查詢',
     'view' => '檢視',
     'update' => '儲存',
@@ -53,5 +54,9 @@ return [
 
     'bundle-name' => '名稱',
     'bundle-remark' => '說明',
+
+    'deploy-both' => '資料部署',
+    'deploy-visible' => '資料上下架',
+    'deploy-ranking' => '資料排序',
 
 ];

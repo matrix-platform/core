@@ -24,6 +24,7 @@ return [
     'insert' => 'Save',
     'delete' => 'Delete',
     'export' => 'Export',
+    'deploy' => 'Sort',
     'search' => 'Search',
     'view' => 'View',
     'update' => 'Save',
@@ -53,5 +54,9 @@ return [
 
     'bundle-name' => 'Name',
     'bundle-remark' => 'Remark',
+
+    'deploy-both' => 'Deploy Data',
+    'deploy-visible' => 'Arrange Data',
+    'deploy-ranking' => 'Sort Data',
 
 ];
