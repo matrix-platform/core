@@ -11,6 +11,7 @@ class DisableTime {
     public function __construct($values) {
         $this->values = $values + [
             'formStyle' => 'timestamp',
+            'group' => 'arrange',
             'pattern' => cfg('system.timestamp'),
             'searchStyle' => 'between',
             'tab' => 'other',

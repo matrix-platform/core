@@ -6,7 +6,11 @@ return [
 
     'title' => '標題',
 
-    'padding_y' => '垂直外間距',
+    'padding_top' => '上間距',
+
+    'padding_bottom' => '下間距',
+
+    'fluid' => '滿版寬度',
 
     'color' => '文字顏色',
 

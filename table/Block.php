@@ -1,7 +1,9 @@
 <?php //>
 
+use matrix\db\column\Boolean;
 use matrix\db\column\Color;
 use matrix\db\column\DisableTime;
+use matrix\db\column\Double;
 use matrix\db\column\EnableTime;
 use matrix\db\column\Integer;
 use matrix\db\column\Ranking;
@@ -44,9 +46,18 @@ $tbl->add('url', Text::class);
 
 $tbl->add('extra', Text::class);
 
-$tbl->add('padding_y', Integer::class)
-    ->options(load_options('spacing'))
-    ->required(true)
+$tbl->add('padding_top', Double::class)
+    ->group('py')
+    ->tab('style')
+    ->unit('unit.rem');
+
+$tbl->add('padding_bottom', Double::class)
+    ->group('py')
+    ->tab('style')
+    ->unit('unit.rem');
+
+$tbl->add('fluid', Boolean::class)
+    ->options(load_options('fluid'))
     ->tab('style');
 
 $tbl->add('color', Color::class)

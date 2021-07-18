@@ -6,7 +6,11 @@ return [
 
     'title' => 'Title',
 
-    'padding_y' => 'Vertical Margin',
+    'padding_top' => 'Margin Top',
+
+    'padding_bottom' => 'Margin Bottom',
+
+    'fluid' => 'Viewport Width',
 
     'color' => 'Text Color',
 

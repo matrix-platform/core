@@ -102,20 +102,22 @@ CREATE TABLE base_page (
 );
 
 CREATE TABLE base_block (
-    id           INTEGER   NOT NULL PRIMARY KEY,
-    page_id      INTEGER   NOT NULL,
-    module       TEXT      NOT NULL,
-    title        TEXT          NULL,
-    content      TEXT          NULL,
-    image        TEXT          NULL,
-    url          TEXT          NULL,
-    extra        TEXT          NULL,
-    padding_y    INTEGER   NOT NULL,
-    color        TEXT          NULL,
-    bg_color     TEXT          NULL,
-    enable_time  TIMESTAMP     NULL,
-    disable_time TIMESTAMP     NULL,
-    ranking      INTEGER   NOT NULL
+    id             INTEGER          NOT NULL PRIMARY KEY,
+    page_id        INTEGER          NOT NULL,
+    module         TEXT             NOT NULL,
+    title          TEXT                 NULL,
+    content        TEXT                 NULL,
+    image          TEXT                 NULL,
+    url            TEXT                 NULL,
+    extra          TEXT                 NULL,
+    padding_top    DOUBLE PRECISION     NULL,
+    padding_bottom DOUBLE PRECISION     NULL,
+    fluid          BOOLEAN              NULL,
+    color          TEXT                 NULL,
+    bg_color       TEXT                 NULL,
+    enable_time    TIMESTAMP            NULL,
+    disable_time   TIMESTAMP            NULL,
+    ranking        INTEGER          NOT NULL
 );
 
 CREATE TABLE base_block_item (

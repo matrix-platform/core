@@ -36,6 +36,14 @@ trait Form {
 
         array_splice($styles, -3, 0, $fields);
 
+        $excludes = $this->module()['excludes'];
+
+        if ($excludes) {
+            $styles = array_filter($styles, function ($style) use ($excludes) {
+                return !in_array($style['name'], $excludes);
+            });
+        }
+
         return $styles;
     }
 
