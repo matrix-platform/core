@@ -38,7 +38,9 @@ foreach ($table->getColumns($controller->columns()) as $name => $column) {
             $form[$name] = $column->default();
         }
 
-        if ($type !== 'radio' && $type !== 'select') {
+        if ($column->multiple()) {
+            $type = $column->sortable() ? 'sortable-options' : 'select';
+        } else if ($type !== 'radio' && $type !== 'select') {
             $type = $column->association() ? 'select' : 'radio';
         }
     }

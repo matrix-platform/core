@@ -32,8 +32,12 @@ foreach ($table->getColumns($controller->columns()) as $name => $column) {
         continue;
     }
 
-    if ($column->options() && $type !== 'radio' && $type !== 'select') {
-        $type = $column->association() ? 'select' : 'radio';
+    if ($column->options()) {
+        if ($column->multiple()) {
+            $type = $column->sortable() ? 'sortable-options' : 'select';
+        } else if ($type !== 'radio' && $type !== 'select') {
+            $type = $column->association() ? 'select' : 'radio';
+        }
     }
 
     $styles[] = [
