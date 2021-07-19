@@ -32,6 +32,12 @@ $tbl->add('color', Color::class)
 $tbl->add('bg_color', Color::class)
     ->tab('style');
 
+$tbl->add('bulletin', Boolean::class)
+    ->default(true)
+    ->options(load_options('visible'))
+    ->required(true)
+    ->tab('style');
+
 $tbl->add('header', Boolean::class)
     ->default(true)
     ->options(load_options('visible'))

@@ -14,6 +14,8 @@ return [
 
     'bg_color' => '預設背景顏色',
 
+    'bulletin' => '公告',
+
     'header' => '頁首',
 
     'footer' => '頁尾',

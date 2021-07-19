@@ -47,12 +47,10 @@ $tbl->add('url', Text::class);
 $tbl->add('extra', Text::class);
 
 $tbl->add('padding_top', Double::class)
-    ->group('py')
     ->tab('style')
     ->unit('unit.rem');
 
 $tbl->add('padding_bottom', Double::class)
-    ->group('py')
     ->tab('style')
     ->unit('unit.rem');
 

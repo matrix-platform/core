@@ -95,6 +95,7 @@ CREATE TABLE base_page (
     fluid        BOOLEAN   NOT NULL,
     color        TEXT          NULL,
     bg_color     TEXT          NULL,
+    bulletin     BOOLEAN   NOT NULL,
     header       BOOLEAN   NOT NULL,
     footer       BOOLEAN   NOT NULL,
     enable_time  TIMESTAMP     NULL,

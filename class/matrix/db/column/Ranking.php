@@ -11,7 +11,6 @@ class Ranking {
     public function __construct($values) {
         $this->values = $values + [
             'formStyle' => 'integer',
-            'group' => 'arrange',
             'searchStyle' => false,
             'sequence' => 'base_ranking',
             'tab' => 'other',

@@ -14,6 +14,8 @@ return [
 
     'bg_color' => 'Default Background Color',
 
+    'bulletin' => 'Bulletin',
+
     'header' => 'Header',
 
     'footer' => 'Footer',
