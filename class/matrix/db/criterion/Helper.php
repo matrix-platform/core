@@ -68,4 +68,12 @@ trait Helper {
         return new Monomer($this, 'notNull', []);
     }
 
+    public function overlap(...$values) {
+        if (count($values) === 1 && is_array($values[0])) {
+            $values = $values[0];
+        }
+
+        return new Monomer($this, 'overlap', [implode(',', $values)]);
+    }
+
 }

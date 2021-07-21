@@ -18,8 +18,8 @@ class Counter {
         ];
     }
 
-    public function expression($dialect, $language = null, $prefix = null) {
-        $expression = $this->columnExpression($dialect, $language, $prefix);
+    public function expression($dialect, $language = null, $prefix = null, $select = false) {
+        $expression = $this->columnExpression($dialect, $language, $prefix, $select);
 
         return $dialect->makeDefaultExpression($expression, 0);
     }

@@ -36,6 +36,10 @@ trait BlankForm {
 
     public function isRequired($column, $exists = true) {
         if ($column->required() && $column->default() === null) {
+            if ($column->relation()) {
+                return true;
+            }
+
             $method = new ReflectionMethod($column, 'generate');
 
             if (basename($method->getFileName()) === 'Column.php') {

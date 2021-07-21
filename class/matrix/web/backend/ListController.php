@@ -77,12 +77,12 @@ class ListController extends Controller {
     protected function init() {
         $table = $this->table();
 
-        foreach ($table->getRelations() as ['alias' => $alias, 'type' => $type]) {
-            if ($type === 'composition') {
-                $name = "{$alias}_count";
+        foreach ($table->getRelations() as $relation) {
+            if ($relation['type'] === 'composition' && !$relation['junction']) {
+                $name = "{$relation['alias']}_count";
 
                 if (!isset($table->{$name})) {
-                    $table->add($name, "{$alias}.count");
+                    $table->add($name, "{$relation['alias']}.count");
                 }
             }
         }
@@ -162,7 +162,11 @@ class ListController extends Controller {
                             break;
                         }
                     default:
-                        $criteria->add(is_array($from) ? $column->in($from) : $column->equal($from));
+                        if ($column->isJunction()) {
+                            $criteria->add($column->overlap($from));
+                        } else {
+                            $criteria->add(is_array($from) ? $column->in($from) : $column->equal($from));
+                        }
                     }
 
                     $column->inSearch(true);

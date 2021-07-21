@@ -27,36 +27,37 @@ trait Column {
 
         if ($parent) {
             $this->invisible(true)->readonly(true);
-        } else {
-            $this->options(function ($column) {
-                static $options;
-
-                if ($options === null) {
-                    $relation = $column->table()->getRelation($column->association());
-
-                    $model = $relation['foreign']->model();
-                    $name = $relation['target']->name();
-                    $options = [];
-
-                    foreach ($model->query($relation['filter']) as $item) {
-                        $options[$item[$name]] = $model->toString($item);
-                    }
-                }
-
-                return $options;
-            });
         }
+
+        $this->options(function ($column) {
+            static $options;
+
+            if ($options === null) {
+                $relation = $column->table()->getRelation($column->association());
+
+                $model = $relation['foreign']->model();
+                $name = $relation['target']->name();
+                $options = [];
+
+                foreach ($model->query($relation['filter']) as $item) {
+                    $options[$item[$name]] = $model->toString($item);
+                }
+            }
+
+            return $options;
+        });
 
         return $this->association($alias);
     }
 
-    public function composite($alias, $foreign, $target = null) {
+    public function composite($alias, $foreign, $junction = false, $target = null) {
         $this->table()->register([
             'type' => 'composition',
             'column' => $this,
             'alias' => $alias,
             'foreign' => $foreign,
             'target' => $target,
+            'junction' => $junction,
         ]);
 
         return $this;
@@ -64,7 +65,7 @@ trait Column {
 
     abstract public function convert($value);
 
-    public function expression($dialect, $language = null, $prefix = null) {
+    public function expression($dialect, $language = null, $prefix = null, $select = false) {
         $mapping = $this->mapping();
 
         if ($language !== null && $this->multilingual()) {

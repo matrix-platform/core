@@ -59,6 +59,12 @@ class Model {
             return false;
         }
 
+        foreach ($this->table->getColumns(false) as $name => $column) {
+            if ($column->isJunction() && isset($previous[$name])) {
+                $this->deleteJunction($column, $previous);
+            }
+        }
+
         $this->log($previous, null);
         $this->after(self::DELETE, $previous, null);
 
@@ -86,8 +92,18 @@ class Model {
     }
 
     public function insert($data) {
+        $junctions = [];
+
         foreach ($this->table->getColumns(false) as $name => $column) {
             if ($column->pseudo()) {
+                continue;
+            }
+
+            if ($column->isJunction()) {
+                if (isset($data[$name])) {
+                    $junctions[] = $column;
+                }
+
                 continue;
             }
 
@@ -108,7 +124,7 @@ class Model {
         $statement = $this->db->prepare($command);
 
         foreach ($this->table->getColumns(false) as $name => $column) {
-            if ($column->pseudo()) {
+            if ($column->pseudo() || $column->isJunction()) {
                 continue;
             }
 
@@ -131,6 +147,10 @@ class Model {
 
         if ($statement->rowCount() !== 1) {
             return false;
+        }
+
+        foreach ($junctions as $column) {
+            $this->insertJunction($column, $data);
         }
 
         $current = $this->get($data['id']);
@@ -201,8 +221,18 @@ class Model {
             return null;
         }
 
+        $junctions = [];
+
         foreach ($this->table->getColumns(false) as $name => $column) {
             if ($column->pseudo() || $column->readonly()) {
+                continue;
+            }
+
+            if ($column->isJunction()) {
+                if (key_exists($name, $data) && $previous[$name] !== $data[$name]) {
+                    $junctions[$name] = $column;
+                }
+
                 continue;
             }
 
@@ -230,7 +260,7 @@ class Model {
         $statement = $this->db->prepare($command);
 
         foreach ($this->table->getColumns(false) as $name => $column) {
-            if ($column->pseudo() || $column->readonly()) {
+            if ($column->pseudo() || $column->readonly() || $column->isJunction()) {
                 continue;
             }
 
@@ -253,6 +283,16 @@ class Model {
 
         if ($statement->rowCount() !== 1) {
             return false;
+        }
+
+        foreach ($junctions as $name => $column) {
+            if ($previous[$name]) {
+                $this->deleteJunction($column, $previous);
+            }
+
+            if ($data[$name]) {
+                $this->insertJunction($column, $data);
+            }
         }
 
         $current = $this->get($previous['id']);
@@ -326,6 +366,17 @@ class Model {
         return $criteria;
     }
 
+    private function deleteJunction($column, $data) {
+        $relation = $column->relation();
+        $model = $relation['foreign']->model();
+        $from = $relation['target']->name();
+        $id = $data[$relation['column']->name()];
+
+        foreach ($model->query([$from => $id]) as $row) {
+            $model->delete($row);
+        }
+    }
+
     private function execute($statement, $bindings) {
         logger('sql')->debug($statement->queryString, $bindings);
 
@@ -376,6 +427,18 @@ class Model {
         }
 
         return $column->regenerate($value);
+    }
+
+    private function insertJunction($column, $data) {
+        $relation = $column->relation();
+        $model = $relation['foreign']->model();
+        $from = $relation['target']->name();
+        $id = $data[$relation['column']->name()];
+        $to = $relation['reference']->name();
+
+        foreach (explode(',', $data[$column->name()]) as $value) {
+            $model->insert([$from => $id, $to => $value]);
+        }
     }
 
     private function log($prev, $curr) {

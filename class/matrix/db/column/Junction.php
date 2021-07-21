@@ -1,0 +1,34 @@
+<?php //>
+
+namespace matrix\db\column;
+
+use matrix\db\Column;
+
+class Junction {
+
+    use Column, type\Text {
+        expression as private columnExpression;
+    }
+
+    private $column;
+
+    public function __construct($name, $column) {
+        $this->column = $column;
+        $this->values = ['multiple' => true, 'name' => $name];
+    }
+
+    public function expression($dialect, $language = null, $prefix = null, $select = false) {
+        $expression = $this->columnExpression($dialect, $language, $prefix, $select);
+
+        return $select ? $dialect->makeImplodeExpression($expression, ',') : $expression;
+    }
+
+    public function mapping() {
+        return $this->column->mapping();
+    }
+
+    public function options() {
+        return $this->column->options();
+    }
+
+}

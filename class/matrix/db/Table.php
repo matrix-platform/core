@@ -5,6 +5,7 @@ namespace matrix\db;
 use Exception;
 use matrix\db\column\Counter;
 use matrix\db\column\Id;
+use matrix\db\column\Junction;
 use matrix\db\column\Wrapper;
 use matrix\utility\ValueObject;
 
@@ -62,12 +63,16 @@ class Table {
             $relation = $this->getRelation($alias);
 
             if ($relation['type'] === 'composition') {
-                switch ($column) {
-                case 'count':
-                    $column = new Counter();
-                    break;
-                default:
-                    throw new Exception("Unsupported \$typeName `{$typeName}`.");
+                if ($relation['junction']) {
+                    $column = new Junction($name, $relation['foreign']->{$column});
+                } else {
+                    switch ($column) {
+                    case 'count':
+                        $column = new Counter();
+                        break;
+                    default:
+                        throw new Exception("Unsupported \$typeName `{$typeName}`.");
+                    }
                 }
 
                 $this->names[] = $name;
@@ -115,7 +120,19 @@ class Table {
         return null;
     }
 
-    public function getParentRelation() {
+    public function getParentRelation($foreign = null) {
+        if ($foreign) {
+            foreach ($this->relations as $alias => $relation) {
+                if (@$relation['parent']) {
+                    if ($relation['foreign'] === $foreign || $relation['foreign'] === $foreign->name()) {
+                        return $this->getRelation($alias);
+                    }
+                }
+            }
+
+            return null;
+        }
+
         if (is_string($this->parent)) {
             $this->parent = $this->getRelation($this->parent);
         }
@@ -133,11 +150,31 @@ class Table {
         if (is_string($relation['foreign'])) {
             $foreign = table($relation['foreign']);
 
-            if ($relation['type'] === 'composition' && !$relation['target']) {
-                $reverse = $foreign->getParentRelation();
+            if ($relation['type'] === 'composition') {
+                if (!$relation['target']) {
+                    $reverse = $foreign->getParentRelation($this);
 
-                if ($reverse && $reverse['foreign']->name() === $this->name()) {
-                    $relation['target'] = $reverse['column']->name();
+                    if ($reverse) {
+                        $relation['target'] = $reverse['column']->name();
+                    }
+                }
+
+                if ($relation['junction']) {
+                    foreach ($foreign->relations as $r) {
+                        if (@$r['parent'] && $r['column']->name() !== $relation['target']) {
+                            $relation['reference'] = $r['column'];
+                            break;
+                        }
+                    }
+
+                    if (!@$relation['reference']) {
+                        foreach ($foreign->columns as $name => $column) {
+                            if ($name !== $relation['target'] && $column->options()) {
+                                $relation['reference'] = $column;
+                                break;
+                            }
+                        }
+                    }
                 }
             }
 

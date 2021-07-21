@@ -79,11 +79,13 @@ trait Dialect {
         return $this->makeCriteria($command, $criteria);
     }
 
+    abstract public function makeImplodeExpression($expression, $separator);
+
     public function makeInsertion($table, $columns) {
         $expressions = [];
 
         foreach ($columns ?: $table->getColumns(false) as $column) {
-            if ($column->pseudo()) {
+            if ($column->pseudo() || $column->isJunction()) {
                 continue;
             }
 
@@ -158,7 +160,7 @@ trait Dialect {
 
             if ($column->multilingual()) {
                 foreach (LANGUAGES as $lang) {
-                    $expression = $column->expression($this, $lang);
+                    $expression = $column->expression($this, $lang, null, true);
                     $quoted = $this->quote("{$name}__{$lang}");
 
                     $expressions["{$name}__{$lang}"] = "{$expression} AS {$quoted}";
@@ -166,7 +168,7 @@ trait Dialect {
 
                 $multilinguals[$name] = true;
             } else {
-                $expression = $column->expression($this);
+                $expression = $column->expression($this, null, null, true);
                 $quoted = $this->quote($name);
 
                 $expressions[$name] = "{$expression} AS {$quoted}";
@@ -195,11 +197,13 @@ trait Dialect {
         return $command;
     }
 
+    abstract public function makeToArrayExpression($expression);
+
     public function makeUpdation($table, $columns, $criteria) {
         $expressions = [];
 
         foreach ($columns ?: $table->getColumns(false) as $column) {
-            if ($column->pseudo() || $column->readonly()) {
+            if ($column->pseudo() || $column->readonly() || $column->isJunction()) {
                 continue;
             }
 
@@ -259,6 +263,8 @@ trait Dialect {
         return "{$expression} IS NOT NULL";
     }
 
+    abstract public function overlap($expression, $values);
+
     abstract public function quote($name);
 
     private function makeRelationJoin($command, $table) {
@@ -272,7 +278,14 @@ trait Dialect {
             $target = $relation['target']->mapping();
 
             if ($relation['type'] === 'composition') {
-                $foreign = "(SELECT {$target}, COUNT(*) AS count FROM {$foreign} GROUP BY {$target})";
+                if ($relation['junction']) {
+                    $reference = $relation['reference']->mapping();
+                    $aggregate = $this->makeToArrayExpression($reference);
+
+                    $foreign = "(SELECT {$target}, {$aggregate} AS {$reference} FROM {$foreign} GROUP BY {$target})";
+                } else {
+                    $foreign = "(SELECT {$target}, COUNT(*) AS count FROM {$foreign} GROUP BY {$target})";
+                }
             }
 
             $command = "{$command} LEFT JOIN {$foreign} AS _{$alias} ON (_{$alias}.{$target} = {$column})";

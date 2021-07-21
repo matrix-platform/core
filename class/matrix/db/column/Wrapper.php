@@ -17,6 +17,10 @@ class Wrapper {
         $this->decorated = $column;
         $this->relation = $relation;
         $this->values = [];
+
+        if (!$this->isJunction()) {
+            $this->values['readonly'] = true;
+        }
     }
 
     public function alias() {
@@ -27,16 +31,16 @@ class Wrapper {
         return $this->decorated->convert($value);
     }
 
-    public function expression($dialect, $language = null, $prefix = null) {
-        return $this->decorated->expression($dialect, $language, $prefix ?: $this->alias);
+    public function expression($dialect, $language = null, $prefix = null, $select = false) {
+        return $this->decorated->expression($dialect, $language, $prefix ?: $this->alias, $select);
     }
 
     public function isCounter() {
         return ($this->decorated instanceof Counter);
     }
 
-    public function readonly() {
-        return true;
+    public function isJunction() {
+        return ($this->decorated instanceof Junction);
     }
 
     public function relation() {
