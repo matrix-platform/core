@@ -158,7 +158,13 @@ function load_i18n($name, $language = LANGUAGE) {
 }
 
 function load_options($name) {
-    return load_i18n("options/{$name}");
+    $options = [];
+
+    foreach (load_i18n("options/{$name}") as $value => $title) {
+        $options[$value] = ['title' => $title];
+    }
+
+    return $options;
 }
 
 function load_resource($path, $resolve = true) {

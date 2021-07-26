@@ -39,7 +39,7 @@ foreach ($result['data'] as $data) {
         $options = $column->options();
 
         if ($options && key_exists($value, $options)) {
-            $value = $options[$value];
+            $value = $options[$value]['title'];
         }
 
         setValue($sheet, $x++, $y, $value);

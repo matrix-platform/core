@@ -34,13 +34,25 @@ trait Column {
 
             if ($options === null) {
                 $relation = $column->table()->getRelation($column->association());
+                $cascade = $relation['foreign']->getParentRelation();
+
+                if ($cascade) {
+                    $column->cascade($cascade);
+                    $cascade_id = $cascade['column']->name();
+                }
 
                 $model = $relation['foreign']->model();
                 $name = $relation['target']->name();
                 $options = [];
 
                 foreach ($model->query($relation['filter']) as $item) {
-                    $options[$item[$name]] = $model->toString($item);
+                    $option = ['title' => $model->toString($item)];
+
+                    if ($cascade) {
+                        $option['parent_id'] = $item[$cascade_id];
+                    }
+
+                    $options[$item[$name]] = $option;
                 }
             }
 
