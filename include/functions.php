@@ -141,6 +141,18 @@ function load_file_data($path) {
     return $data;
 }
 
+function load_fn($name, $wrap = false) {
+    $fn = load_resource("include/fn/{$name}.php");
+
+    if ($wrap) {
+        return function () use ($fn) {
+            return $fn;
+        };
+    }
+
+    return $fn;
+}
+
 function load_i18n($name, $language = LANGUAGE) {
     return load_bundle("i18n/{$language}/{$name}");
 }
