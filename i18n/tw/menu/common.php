@@ -48,6 +48,8 @@ return [
 
                 'i18n/template/' => '訊息樣板',
 
+        'sms-log' => '簡訊紀錄',
+
         'other' => '其他',
 
             'file-info/' => '檔案資訊',

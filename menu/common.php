@@ -72,6 +72,8 @@ return [
 
                 'i18n/template/update' => ['parent' => 'i18n/template', 'tag' => 'update'],
 
+        'sms-log' => ['icon' => 'fas fa-sms', 'ranking' => 400, 'parent' => 'system', 'group' => true, 'tag' => 'query'],
+
         'other' => ['ranking' => 900, 'parent' => 'system'],
 
             'deployment' => ['parent' => 'other', 'group' => true, 'tag' => 'user'],

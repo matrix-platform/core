@@ -76,6 +76,16 @@ CREATE TABLE base_file (
     deleted       BOOLEAN   NOT NULL
 );
 
+CREATE TABLE base_sms_log (
+    id          INTEGER   NOT NULL PRIMARY KEY,
+    receiver    TEXT      NOT NULL,
+    content     TEXT      NOT NULL,
+    response    TEXT          NULL,
+    ip          TEXT      NOT NULL,
+    create_time TIMESTAMP NOT NULL,
+    status      INTEGER   NOT NULL
+);
+
 CREATE TABLE base_menu (
     id           INTEGER   NOT NULL PRIMARY KEY,
     parent_id    INTEGER       NULL,

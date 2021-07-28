@@ -48,6 +48,8 @@ return [
 
                 'i18n/template/' => 'Template',
 
+        'sms-log' => 'SMS Log',
+
         'other' => 'Other',
 
             'file-info/' => 'File Info',
