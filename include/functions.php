@@ -297,6 +297,16 @@ function union_resource($path) {
     return $bundle;
 }
 
+function url($path) {
+    if (defined('BASE_URL')) {
+        return BASE_URL . $path;
+    } else {
+        $protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
+
+        return "{$protocol}://{$_SERVER['HTTP_HOST']}{$path}";
+    }
+}
+
 function validate($value, $options) {
     if (is_string($options)) {
         $validation = $options;
