@@ -14,8 +14,12 @@ $loader = function () {
     static $options;
 
     if ($options === null) {
-        $names = explode('|', cfg('backend.modules'));
-        $options = array_intersect_key(load_options('block-module'), array_flip($names));
+        $names = cfg('backend.modules');
+        $options = load_options('block-module');
+
+        if ($names) {
+            $options = array_intersect_key($options, array_flip(explode('|', $names)));
+        }
     }
 
     return $options;

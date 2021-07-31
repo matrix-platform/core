@@ -33,7 +33,7 @@ foreach ($table->getColumns($controller->columns()) as $name => $column) {
         continue;
     }
 
-    if ($column->options()) {
+    if (is_array($column->options())) {
         if (!isset($form[$name])) {
             $form[$name] = $column->default();
         }

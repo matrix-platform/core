@@ -12,8 +12,10 @@ class Counter {
 
     public function __construct($values = []) {
         $this->values = $values + [
-            'formStyle' => 'counter',
+            'formStyle' => 'integer',
+            'listStyle' => 'counter',
             'name' => 'count',
+            'readonly' => true,
             'searchStyle' => 'between',
         ];
     }

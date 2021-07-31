@@ -48,7 +48,9 @@ class ListController extends Controller {
         if ($this->columns === null) {
             $this->columns = [];
 
-            foreach ($this->table()->getColumns($this->columns()) as $name => $column) {
+            $names = $this->columns();
+
+            foreach ($this->table()->getColumns($names) as $name => $column) {
                 if ($column->invisible() && !$column->editable()) {
                     continue;
                 }
@@ -59,8 +61,14 @@ class ListController extends Controller {
                     }
                 }
 
-                if ($column->listStyle() === 'hidden' || $column->tab()) {
+                if ($column->listStyle() === 'hidden') {
                     continue;
+                }
+
+                if ($column->tab()) {
+                    if (!$names || !in_array($name, $names)) {
+                        continue;
+                    }
                 }
 
                 $this->columns[$name] = $column;
