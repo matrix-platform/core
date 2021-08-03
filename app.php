@@ -35,7 +35,7 @@ spl_autoload_register(function ($name) {
     }
 }, true, true);
 
-define('APP_PATH', preg_replace('/^\/?(.*\/)[^\/]+$/', '/$1', $_SERVER['SCRIPT_NAME']));
+define('APP_PATH', preg_replace('/^\/?(.*\/)?[^\/]+$/', '/$1', $_SERVER['SCRIPT_NAME']));
 
 if (PHP_SAPI === 'cli') {
     (new Run())->prependHandler(new PlainTextHandler())->register();
