@@ -4,9 +4,9 @@ return [
 
     'auth_url' => 'https://access.line.me/oauth2/v2.1/authorize',
 
-    'client_id' => '',
+    'client_id' => null,
 
-    'client_secret' => '',
+    'client_secret' => null,
 
     'profile_url' => 'https://api.line.me/v2/profile',
 

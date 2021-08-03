@@ -8,6 +8,8 @@ return [
 
     'email' => 'Email 格式錯誤',
 
+    'file' => '檔案格式錯誤',
+
     'image' => '圖檔格式錯誤',
 
     'regex' => '格式錯誤',

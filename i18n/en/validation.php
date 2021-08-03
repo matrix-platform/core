@@ -8,6 +8,8 @@ return [
 
     'email' => 'Invalid Email Format',
 
+    'file' => 'Invalid File Format',
+
     'image' => 'Invalid Image Format',
 
     'regex' => 'Dismatched',

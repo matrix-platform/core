@@ -2,9 +2,9 @@
 
 return [
 
-    'app_id' => '',
+    'app_id' => null,
 
-    'app_secret' => '',
+    'app_secret' => null,
 
     'default_graph_version' => 'v2.2',
 
