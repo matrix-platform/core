@@ -19,4 +19,8 @@ class Sequence implements SequenceInterface {
         return $statement->fetchColumn();
     }
 
+    public function reset($name) {
+        $this->db->prepare("ALTER SEQUENCE {$name} RESTART")->execute();
+    }
+
 }

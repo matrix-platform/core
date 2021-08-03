@@ -6,4 +6,6 @@ interface Sequence {
 
     function next($name);
 
+    function reset($name);
+
 }

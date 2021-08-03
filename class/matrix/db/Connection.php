@@ -68,6 +68,10 @@ class Connection {
         return $this->delegate->prepare($statement);
     }
 
+    public function reset($name) {
+        $this->sequence->reset($name);
+    }
+
     public function rollback() {
         if ($this->delegate->inTransaction()) {
             $this->delegate->rollBack();
