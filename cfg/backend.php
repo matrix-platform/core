@@ -6,6 +6,8 @@ return [
 
     'deployment-modal' => null,
 
+    'exclude-menu-nodes' => null,
+
     'form' => null,
 
     'form-modal' => null,

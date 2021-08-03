@@ -12,6 +12,18 @@ trait Authorization {
     public function menus() {
         if ($this->menus === null) {
             $this->menus = Fn::load_menu(explode('|', cfg('backend.menus')));
+
+            $excludes = cfg('backend.exclude-menu-nodes');
+
+            if ($excludes) {
+                foreach (explode('|', $excludes) as $path) {
+                    if (key_exists($path, $this->menus)) {
+                        $this->menus[$path]['parent'] = null;
+
+                        unset($this->menus[$path]['ranking']);
+                    }
+                }
+            }
         }
 
         return $this->menus;
