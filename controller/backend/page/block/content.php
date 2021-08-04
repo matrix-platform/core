@@ -5,6 +5,8 @@ return new class('Block') extends matrix\web\backend\GetController {
     use matrix\web\backend\block\Form;
 
     protected function init() {
+        $this->table()->module->formStyle('select');
+
         $this->columns([
             'module',
             'title',

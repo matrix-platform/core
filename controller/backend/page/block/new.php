@@ -21,7 +21,7 @@ return new class('Block') extends matrix\web\backend\BlankController {
     protected function init() {
         $table = $this->table();
 
-        $table->module->disabled(true);
+        $table->module->disabled(true)->formStyle('select');
 
         $this->buttons(['insert' => ['path' => 'page/{{ page_id }}/block/insert', 'ranking' => 200]]);
 
