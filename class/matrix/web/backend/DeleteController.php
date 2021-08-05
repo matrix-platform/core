@@ -2,11 +2,7 @@
 
 namespace matrix\web\backend;
 
-use matrix\db\Transaction;
-
 class DeleteController extends Controller {
-
-    use Transaction;
 
     public function __construct($name) {
         $this->values = [

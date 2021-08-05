@@ -93,6 +93,10 @@ trait Handler {
     protected function cleanup() {
     }
 
+    protected function transaction() {
+        return db();
+    }
+
     private function trim($value) {
         if (is_string($value)) {
             $value = trim($value);

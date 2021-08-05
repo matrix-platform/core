@@ -2,11 +2,9 @@
 
 namespace matrix\web\backend;
 
-use matrix\db\Transaction;
-
 class UpdateController extends Controller {
 
-    use Form, Transaction, Validator, Wrapper;
+    use Form, Validator, Wrapper;
 
     public function __construct($name) {
         $this->values = [

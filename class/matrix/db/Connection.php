@@ -9,14 +9,16 @@ class Connection {
     private $delegate;
     private $dialect;
     private $models = [];
+    private $name;
+    private $password;
     private $sequence;
+    private $transaction;
+    private $user;
 
     public function __construct($name, $user, $password) {
-        $this->delegate = new PDO($name, $user, $password, [
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_ORACLE_NULLS => PDO::NULL_EMPTY_STRING,
-        ]);
+        $this->name = $name;
+        $this->user = $user;
+        $this->password = $password;
 
         $type = strstr($name, ':', true);
         $dialect = "matrix\\db\\{$type}\\Dialect";
@@ -27,15 +29,17 @@ class Connection {
     }
 
     public function begin() {
-        if ($this->delegate->inTransaction()) {
-            return;
-        }
+        $this->transaction = true;
 
-        $this->delegate->beginTransaction();
+        if ($this->delegate && !$this->delegate->inTransaction()) {
+            $this->delegate->beginTransaction();
+        }
     }
 
     public function commit() {
-        if ($this->delegate->inTransaction()) {
+        $this->transaction = false;
+
+        if ($this->delegate && $this->delegate->inTransaction()) {
             $this->delegate->commit();
         }
     }
@@ -65,6 +69,18 @@ class Connection {
     }
 
     public function prepare($statement) {
+        if (!$this->delegate) {
+            $this->delegate = new PDO($this->name, $this->user, $this->password, [
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_ORACLE_NULLS => PDO::NULL_EMPTY_STRING,
+            ]);
+
+            if ($this->transaction) {
+                $this->delegate->beginTransaction();
+            }
+        }
+
         return $this->delegate->prepare($statement);
     }
 
@@ -73,7 +89,9 @@ class Connection {
     }
 
     public function rollback() {
-        if ($this->delegate->inTransaction()) {
+        $this->transaction = false;
+
+        if ($this->delegate && $this->delegate->inTransaction()) {
             $this->delegate->rollBack();
         }
     }

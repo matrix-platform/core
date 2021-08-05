@@ -2,8 +2,6 @@
 
 return new class() extends matrix\web\UserController {
 
-    use matrix\db\Transaction;
-
     protected function init() {
         $this->view(cfg('backend.password-changed'));
     }
