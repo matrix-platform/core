@@ -8,6 +8,7 @@
     ],
     "license": "MIT",
     "require": {
+        "dompdf/dompdf": "^1.0",
         "facebook/graph-sdk": "^5.7",
         "filp/whoops": "^2.14",
         "mhor/php-mediainfo": "^5.4",
@@ -15,7 +16,6 @@
         "nesbot/carbon": "^2.51",
         "phpmailer/phpmailer": "^6.5",
         "phpoffice/phpspreadsheet": "^1.18",
-        "tecnickcom/tcpdf": "^6.4",
         "twig/string-extra": "^3.3",
         "twig/twig": "^3.3"
     }
