@@ -12,6 +12,8 @@ return [
 
     'image' => '圖檔格式錯誤',
 
+    'ip' => 'IP 格式錯誤',
+
     'regex' => '格式錯誤',
 
     'required' => '必填',

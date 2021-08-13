@@ -13,14 +13,16 @@ trait Authorization {
         if ($this->menus === null) {
             $this->menus = Fn::load_menu(explode('|', cfg('backend.menus')));
 
-            $excludes = cfg('backend.exclude-menu-nodes');
+            if (USER_ID !== 1) {
+                $excludes = cfg('backend.exclude-menu-nodes');
 
-            if ($excludes) {
-                foreach (explode('|', $excludes) as $path) {
-                    if (key_exists($path, $this->menus)) {
-                        $this->menus[$path]['parent'] = null;
+                if ($excludes) {
+                    foreach (explode('|', $excludes) as $path) {
+                        if (key_exists($path, $this->menus)) {
+                            $this->menus[$path]['parent'] = null;
 
-                        unset($this->menus[$path]['ranking']);
+                            unset($this->menus[$path]['ranking']);
+                        }
                     }
                 }
             }

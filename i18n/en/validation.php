@@ -12,6 +12,8 @@ return [
 
     'image' => 'Invalid Image Format',
 
+    'ip' => 'Invalid IP Format',
+
     'regex' => 'Dismatched',
 
     'required' => 'Required',

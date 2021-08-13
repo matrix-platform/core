@@ -84,7 +84,7 @@ trait Form {
 
         file_put_contents($file, $diff ? json_encode($diff, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '{}');
 
-        return ['success' => true];
+        return ['success' => true, 'data' => $data, 'diff' => $diff];
     }
 
 }
