@@ -54,6 +54,10 @@ return function ($image, $width = 0, $height = 0) {
                 $img = imagescale($img, $w);
             }
 
+            if ($type === 'png' && $to === 'webp') {
+                imagepalettetotruecolor($img);
+            }
+
             call_user_func("image{$to}", $img, $folder . $file);
 
             imagedestroy($img);

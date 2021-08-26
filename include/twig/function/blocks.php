@@ -1,10 +1,10 @@
 <?php //>
 
-return new Twig\TwigFunction('blocks', function ($page_id) {
+return new Twig\TwigFunction('blocks', function ($page) {
     $blocks = [];
     $modules = [];
 
-    foreach (model('Block')->query(['page_id' => $page_id]) as $block) {
+    foreach (model('Block')->query(['page_id' => $page['id']]) as $block) {
         $module = load_cfg("module/{$block['module']}");
 
         if ($module['sub-module']) {
@@ -21,6 +21,10 @@ return new Twig\TwigFunction('blocks', function ($page_id) {
             }
 
             $block = array_merge($block, $extra);
+        }
+
+        if (is_null($block['fluid'])) {
+            $block['fluid'] = $page['fluid'];
         }
 
         $blocks[$block['id']] = $block;

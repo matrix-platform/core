@@ -1,5 +1,20 @@
 <?php //>
 
-return new Twig\TwigFunction('query', function ($name, $conditions = [], $size = 0) {
-    return model($name)->query($conditions, true, $size);
+return new Twig\TwigFunction('query', function ($name, $filter = [], $size = 0) {
+    $conditions = [];
+    $table = table($name);
+
+    foreach ($filter as $column => $value) {
+        $column = @$table->{$column};
+
+        if ($column) {
+            if ($column->association() && $column->multiple()) {
+                $conditions[] = $column->like("%{$value}%");
+            } else {
+                $conditions[] = $column->equal($value);
+            }
+        }
+    }
+
+    return $table->model()->query($conditions, true, $size);
 });

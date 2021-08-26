@@ -1,6 +1,6 @@
 <?php //>
 
-return new Twig\TwigFunction('style', function ($values) {
+return new Twig\TwigFunction('style', function ($values, $selector = null) {
     $styles = [];
 
     foreach ($values as $name => $value) {
@@ -17,5 +17,7 @@ return new Twig\TwigFunction('style', function ($values) {
         }
     }
 
-    return implode(';', $styles);
+    $expression = implode(';', $styles);
+
+    return new Twig\Markup($selector ? "{$selector} { {$expression} }" : $expression, 'UTF-8');
 });
