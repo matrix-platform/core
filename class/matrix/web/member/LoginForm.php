@@ -2,7 +2,6 @@
 
 namespace matrix\web\member;
 
-use Facebook\Facebook;
 use matrix\web\Controller;
 use matrix\web\MemberAware;
 
@@ -24,28 +23,6 @@ class LoginForm extends Controller {
         return false;
     }
 
-    public function getFbAuthUrl($path = 'member/fb-login') {
-        $fb = new Facebook(load_cfg('facebook'));
-        $url = url(APP_ROOT . $path);
-
-        return $fb->getRedirectLoginHelper()->getLoginUrl($url, ['email']);
-    }
-
-    public function getLineAuthUrl($path = 'member/line-login') {
-        $line = load_cfg('line');
-        $state = sha1(time());
-
-        $this->set('LINE_LOGIN_STATE', $state);
-
-        return $line['auth_url'] . '?' . http_build_query([
-            'client_id' => $line['client_id'],
-            'redirect_uri' => url(APP_ROOT . $path),
-            'response_type' => 'code',
-            'scope' => $line['scope'],
-            'state' => $state,
-        ]);
-    }
-
     protected function process($form) {
         $args = $this->args();
         $path = $args ? base64_urldecode($args[0]) : APP_ROOT;
@@ -54,6 +31,8 @@ class LoginForm extends Controller {
 
         if ($this->member()) {
             $result['view'] = '302.php';
+        } else if ($args) {
+            $this->set('RETURN_PATH', $path);
         }
 
         return $result;

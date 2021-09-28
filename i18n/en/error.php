@@ -14,6 +14,16 @@ return [
 
     'insert-failed' => 'Save Failed',
 
+    'invalid-fb-access-token' => 'Login Failed',
+
+    'invalid-google-access-token' => 'Login Failed',
+
+    'invalid-line-access-token' => 'Login Failed',
+
+    'invalid-line-profile' => 'Invalid Profile',
+
+    'invalid-line-state' => 'Invalid State',
+
     'invalid-mobile' => 'Invalid Mobile',
 
     'invalid-password' => 'Invalid Password',

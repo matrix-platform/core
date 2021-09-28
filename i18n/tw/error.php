@@ -14,6 +14,16 @@ return [
 
     'insert-failed' => '儲存失敗',
 
+    'invalid-fb-access-token' => '登入失敗',
+
+    'invalid-google-access-token' => '登入失敗',
+
+    'invalid-line-access-token' => '登入失敗',
+
+    'invalid-line-profile' => '帳號錯誤',
+
+    'invalid-line-state' => '狀態錯誤',
+
     'invalid-mobile' => '手機號碼格式錯誤',
 
     'invalid-password' => '無效的密碼格式',

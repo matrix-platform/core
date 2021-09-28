@@ -14,6 +14,16 @@ return [
 
     'insert-failed' => '储存失败',
 
+    'invalid-fb-access-token' => '登入失败',
+
+    'invalid-google-access-token' => '登入失败',
+
+    'invalid-line-access-token' => '登入失败',
+
+    'invalid-line-profile' => '帐号错误',
+
+    'invalid-line-state' => '状态错误',
+
     'invalid-mobile' => '手机号码格式错误',
 
     'invalid-password' => '无效的密码格式',
