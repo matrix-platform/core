@@ -17,7 +17,7 @@ class Attachment {
     }
 
     public static function from($filename, $content, $description) {
-        if (is_string($content) && preg_match('/^data:/', $content)) {
+        if (preg_match('/^data:/', $content)) {
             $file = tempnam(create_folder(APP_HOME . 'www/files/' . date('Ymd')), '');
             $handle = fopen($file, 'w');
             $raw = tmpfile();
@@ -29,15 +29,18 @@ class Attachment {
             fclose($handle);
             fclose($raw);
             chmod($file, 0644);
-
-            $instance = new Attachment($filename, $file, $description);
-
-            self::$files[] = $instance->info['file'];
-
-            return $instance;
+        } else if (file_exists($content)) {
+            $file = tempnam(create_folder(APP_HOME . 'www/files/' . date('Ymd')), '');
+            rename($content, $file);
+        } else {
+            return null;
         }
 
-        return null;
+        $instance = new Attachment($filename, $file, $description);
+
+        self::$files[] = $instance->info['file'];
+
+        return $instance;
     }
 
     public static function validate($files, $type) {
