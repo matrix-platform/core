@@ -254,10 +254,6 @@ class ListController extends Controller {
         ]);
     }
 
-    protected function subprocess($form, $result) {
-        return $result;
-    }
-
     private function groupFilter($group) {
         if (!$group) {
             return null;

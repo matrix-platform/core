@@ -14,7 +14,7 @@ require APP_HOME . 'config.php';
 $folders = [];
 
 if (defined('CUSTOM_APP')) {
-    $folders['custom'] = APP_HOME . CUSTOM_APP . '/';
+    $folders['custom'] = APP_HOME . 'custom/' . CUSTOM_APP . '/';
 }
 
 $folders['base'] = APP_HOME;

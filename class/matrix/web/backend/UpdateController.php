@@ -50,8 +50,4 @@ class UpdateController extends Controller {
         return $this->subprocess($form, ['success' => true, 'data' => $data]);
     }
 
-    protected function subprocess($form, $result) {
-        return $result;
-    }
-
 }

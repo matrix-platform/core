@@ -4,7 +4,7 @@ namespace matrix\web\backend;
 
 class GetController extends Controller {
 
-    use Form;
+    use Form, FormRemixer;
 
     public function __construct($name) {
         $this->values = [
@@ -23,10 +23,6 @@ class GetController extends Controller {
         return false;
     }
 
-    public function remix($styles) {
-        return $styles;
-    }
-
     protected function process($form) {
         $model = $this->table()->model();
         $data = $model->get($this->args()[0]);
@@ -38,10 +34,6 @@ class GetController extends Controller {
         $data['.title'] = $model->toString($data);
 
         return $this->subprocess($form, ['success' => true, 'data' => $data]);
-    }
-
-    protected function subprocess($form, $result) {
-        return $result;
     }
 
 }
