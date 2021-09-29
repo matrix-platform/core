@@ -3,13 +3,14 @@
 use matrix\utility\Fn;
 
 $node = $controller->menu()['parent'];
-$path = preg_replace('/^\/backend\/(.+)\/[\w]+$/', '$1', $controller->path());
+$path = preg_replace('/^\/backend\/(.+?)\/[\w]+(\/[\d]+)?$/', '$1', $controller->path());
+$suffix = preg_replace('/^.*?(\/[\d]+)?$/', '$1', $controller->path());
 $table = $controller->table();
 
 //--
 
-$list = $table->model()->parents($form);
-$list[] = $form;
+$list = $table->model()->parents($result['data']);
+$list[] = $result['data'];
 $titles = array_filter(array_column($list, '.title'), 'is_string');
 
 $result['subtitle'] = array_pop($titles);
@@ -66,14 +67,10 @@ if (!isset($buttons['cancel'])) {
 }
 
 if (!isset($buttons['insert']) && $controller->permitted("{$node}/insert")) {
-    $buttons['insert'] = ['path' => "{$path}/insert", 'ranking' => 200];
+    $buttons['insert'] = ['path' => "{$path}/insert{$suffix}", 'ranking' => 200];
 }
 
 $result['buttons'] = $buttons;
-
-//--
-
-$result['data'] = $form;
 
 //--
 

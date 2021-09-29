@@ -210,6 +210,14 @@ if ($controller->permitted("{$node}/")) {
     }
 }
 
+if ($table->cloneable() && !isset($actions['clone']) && $controller->permitted("{$node}/new")) {
+    $actions['clone'] = [
+        'link' => !$controller->modalForm(),
+        'path' => "{$path}/new/{{ id }}",
+        'ranking' => 200,
+    ];
+}
+
 $result['actions'] = $actions;
 $result['switches'] = $switches;
 

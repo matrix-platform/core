@@ -7,11 +7,11 @@ use ReflectionMethod;
 trait BlankForm {
 
     public function available() {
-        $table = $this->table();
-        $relation = $table->getParentRelation();
+        if ($this->method() === 'POST') {
+            $table = $this->table();
+            $relation = $table->getParentRelation();
 
-        if ($relation) {
-            if ($this->method() === 'POST') {
+            if ($relation) {
                 $info = pathinfo($this->name());
                 $action = $info['basename'];
 
@@ -19,19 +19,21 @@ trait BlankForm {
                     $pattern = preg_quote($info['dirname'], '/');
                     $relation = $table->getComposition($table);
 
-                    return preg_match("/^{$pattern}(\/[\d]+\/{$relation['alias']})?\/{$action}$/", $this->path());
+                    return preg_match("/^{$pattern}(\/[\d]+\/{$relation['alias']})?\/{$action}(\/[\d]+)?$/", $this->path());
+                } else {
+                    $info = pathinfo($info['dirname']);
+                    $pattern = preg_quote($info['dirname'], '/');
+
+                    return preg_match("/^{$pattern}\/[\d]+\/{$info['basename']}\/{$action}(\/[\d]+)?$/", $this->path());
                 }
+            } else {
+                $pattern = preg_quote($this->name(), '/');
 
-                $info = pathinfo($info['dirname']);
-                $pattern = preg_quote($info['dirname'], '/');
-
-                return preg_match("/^{$pattern}\/[\d]+\/{$info['basename']}\/{$action}$/", $this->path());
+                return preg_match("/^{$pattern}(\/[\d]+)?$/", $this->path());
             }
-
-            return false;
         }
 
-        return parent::available();
+        return false;
     }
 
     public function isRequired($column, $exists = true) {

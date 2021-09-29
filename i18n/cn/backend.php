@@ -22,6 +22,7 @@ return [
     'save' => '储存',
     'new' => '新增',
     'insert' => '储存',
+    'clone' => '复制',
     'delete' => '删除',
     'export' => '汇出',
     'deploy' => '排序',

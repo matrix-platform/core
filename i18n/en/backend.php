@@ -22,6 +22,7 @@ return [
     'save' => 'Save',
     'new' => 'New',
     'insert' => 'Save',
+    'clone' => 'Clone',
     'delete' => 'Delete',
     'export' => 'Export',
     'deploy' => 'Sort',
