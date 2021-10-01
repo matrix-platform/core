@@ -197,7 +197,7 @@ class ListController extends Controller {
 
     protected function process($form) {
         $criteria = $this->criteria();
-        $export = $this->export();
+        $export = @$form['export'];
 
         if ($export) {
             $page = 1;
@@ -245,7 +245,7 @@ class ListController extends Controller {
 
         return $this->subprocess($form, [
             'success' => true,
-            'view' => $export,
+            'view' => $export ? 'backend/export.php' : null,
             'count' => $count,
             'data' => $data,
             'page' => $page ?: 1,

@@ -38,11 +38,11 @@ if (!isset($controls['delete']) && $controller->permitted("{$node}/delete")) {
     ];
 }
 
-if (!isset($controls['export']) && $controller->permitted("{$node}/export")) {
+if ($table->exportable() && !isset($controls['export'])) {
     $controls['export'] = [
         'least' => 0,
-        'parameters' => array_intersect_key($form, array_flip(['g', 'o', 'q'])),
-        'path' => "{$path}/export",
+        'parameters' => ['export' => 1] + array_intersect_key($form, array_flip(['g', 'o', 'q'])),
+        'path' => $path,
         'ranking' => 300,
     ];
 }

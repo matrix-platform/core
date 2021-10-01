@@ -31,4 +31,4 @@ $tbl->add('create_time', CreateTime::class);
 
 $tbl->ranking('-id');
 
-return $tbl;
+return $tbl->exportable(true);

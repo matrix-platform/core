@@ -33,4 +33,4 @@ $tbl->add('status', Integer::class)
 
 $tbl->ranking('-id');
 
-return $tbl;
+return $tbl->exportable(true);
