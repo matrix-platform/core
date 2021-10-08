@@ -8,6 +8,12 @@ class Dialect {
 
     use DialectTrait;
 
+    public function makeDateTimeExpression($expression, $pattern) {
+        $format = str_replace(['Y', 'm', 'd', 'H', 'i', 's'], ['YYYY', 'MM', 'DD', 'HH24', 'MI', 'SS'], $pattern);
+
+        return "TO_CHAR({$expression}, '{$format}')";
+    }
+
     public function makeDefaultExpression($expression, $default) {
         return "COALESCE({$expression}, {$default})";
     }

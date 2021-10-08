@@ -2,10 +2,13 @@
 
 namespace matrix\db\column\type;
 
+use matrix\db\Column;
 use matrix\web\Attachment;
 use PDO;
 
 trait File {
+
+    use Column;
 
     public function convert($value) {
         $files = is_array($value) ? $value : [$value];

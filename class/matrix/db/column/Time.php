@@ -2,11 +2,9 @@
 
 namespace matrix\db\column;
 
-use matrix\db\Column;
-
 class Time {
 
-    use Column, type\DateTime;
+    use type\DateTime;
 
     public function __construct($values) {
         $this->values = $values + [

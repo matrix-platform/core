@@ -71,6 +71,8 @@ trait Dialect {
         return "{$command} WHERE {$conditions}";
     }
 
+    abstract public function makeDateTimeExpression($expression, $pattern);
+
     abstract public function makeDefaultExpression($expression, $default);
 
     public function makeDeletion($table, $criteria) {

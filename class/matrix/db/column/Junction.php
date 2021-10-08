@@ -2,11 +2,9 @@
 
 namespace matrix\db\column;
 
-use matrix\db\Column;
-
 class Junction {
 
-    use Column, type\Text {
+    use type\Text {
         expression as private columnExpression;
     }
 

@@ -2,9 +2,12 @@
 
 namespace matrix\db\column\type;
 
+use matrix\db\Column;
 use PDO;
 
 trait Boolean {
+
+    use Column;
 
     public function convert($value) {
         if (is_string($value)) {

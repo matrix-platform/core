@@ -312,6 +312,12 @@ class Model {
         return $curr;
     }
 
+    protected function execute($statement, $bindings) {
+        logger('sql')->debug($statement->queryString, $bindings);
+
+        $statement->execute();
+    }
+
     private function cleanup($data) {
         foreach ($this->table->getColumns(false) as $name => $column) {
             if ($column->multilingual()) {
@@ -375,12 +381,6 @@ class Model {
         foreach ($model->query([$from => $id]) as $row) {
             $model->delete($row);
         }
-    }
-
-    private function execute($statement, $bindings) {
-        logger('sql')->debug($statement->queryString, $bindings);
-
-        $statement->execute();
     }
 
     private function fetch($statement) {

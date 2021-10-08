@@ -2,11 +2,9 @@
 
 namespace matrix\db\column;
 
-use matrix\db\Column;
-
 class Image {
 
-    use Column, type\File;
+    use type\File;
 
     public function __construct($values) {
         $this->values = $values + [

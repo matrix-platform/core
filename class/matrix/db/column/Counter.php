@@ -2,11 +2,9 @@
 
 namespace matrix\db\column;
 
-use matrix\db\Column;
-
 class Counter {
 
-    use Column, type\Integer {
+    use type\Integer {
         expression as private columnExpression;
     }
 
