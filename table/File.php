@@ -44,6 +44,7 @@ $tbl->add('seconds', Integer::class)
     ->readonly(true);
 
 $tbl->add('privilege', Integer::class)
+    ->default(0)
     ->required(true);
 
 $tbl->add('owner_id', Creator::class)

@@ -1,5 +1,6 @@
 /config-sample.php
 /data/
+/files/
 /logs/
 /vendor/
 /www/.htaccess

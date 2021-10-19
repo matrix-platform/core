@@ -16,9 +16,11 @@ class Attachment {
         self::$files = [];
     }
 
-    public static function from($filename, $content, $description) {
+    public static function from($filename, $content, $description, $privilege = null) {
+        $folder = $privilege ? 'files/p' : 'www/files/';
+
         if (preg_match('/^data:/', $content)) {
-            $file = tempnam(create_folder(APP_HOME . 'www/files/' . date('Ymd')), '');
+            $file = tempnam(create_folder(APP_HOME . $folder . date('Ymd')), '');
             $handle = fopen($file, 'w');
             $raw = tmpfile();
 
@@ -30,13 +32,13 @@ class Attachment {
             fclose($raw);
             chmod($file, 0644);
         } else if (file_exists($content)) {
-            $file = tempnam(create_folder(APP_HOME . 'www/files/' . date('Ymd')), '');
+            $file = tempnam(create_folder(APP_HOME . $folder . date('Ymd')), '');
             rename($content, $file);
         } else {
             return null;
         }
 
-        $instance = new Attachment($filename, $file, $description);
+        $instance = new Attachment($filename, $file, $description, $privilege);
 
         self::$files[] = $instance->info['file'];
 
@@ -65,7 +67,7 @@ class Attachment {
 
     private $info;
 
-    public function __construct($name, $file, $description = null) {
+    public function __construct($name, $file, $description = null, $privilege = null) {
         if (strtolower(pathinfo($name, PATHINFO_EXTENSION)) === 'svg') {
             $svg = "{$file}.svg";
             rename($file, $svg);
@@ -86,7 +88,7 @@ class Attachment {
             'hash' => md5_file($file),
             'description' => $description,
             'mime_type' => $mime_type,
-            'privilege' => 9,
+            'privilege' => $privilege,
         ];
 
         switch (strstr($mime_type, '/', true)) {
