@@ -12,6 +12,8 @@ return [
 
     'mail' => 'Email',
 
+    'avatar' => '头像',
+
     'disabled' => '停用',
 
 ];

@@ -12,6 +12,8 @@ return [
 
     'mail' => 'Email',
 
+    'avatar' => 'Avatar',
+
     'disabled' => 'Disabled',
 
 ];

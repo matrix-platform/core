@@ -2,6 +2,7 @@
 
 use matrix\db\column\Boolean;
 use matrix\db\column\Email;
+use matrix\db\column\Image;
 use matrix\db\column\Password;
 use matrix\db\column\Text;
 use matrix\db\Table;
@@ -19,6 +20,8 @@ $tbl->add('name', Text::class);
 $tbl->add('mobile', Text::class);
 
 $tbl->add('mail', Email::class);
+
+$tbl->add('avatar', Image::class);
 
 $tbl->add('disabled', Boolean::class)
     ->default(false)

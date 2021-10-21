@@ -6,6 +6,7 @@ CREATE TABLE common_member (
     name     TEXT        NULL,
     mobile   TEXT        NULL,
     mail     TEXT        NULL,
+    avatar   TEXT        NULL,
     disabled BOOLEAN NOT NULL
 );
 
