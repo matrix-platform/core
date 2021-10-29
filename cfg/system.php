@@ -6,6 +6,12 @@ return [
 
     'debug' => false,
 
+    'event-notify-url' => null,
+
+    'event-secret' => '',
+
+    'event-secret-timeout' => 10000,
+
     'languages' => 'en|tw',
 
     'sms-cooldown' => 60,
