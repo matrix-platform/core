@@ -8,4 +8,4 @@ cp ${folder}/doc/htaccess www/.htaccess
 mkdir -p cfg class controller/backend data doc files i18n logs menu table view/{native,twig} www/files
 chmod 777 data files logs www/files
 
-mkdir -p www/backend www/{cn,en,tw}/backend
+mkdir -p www/{backend,vendor} www/{cn,en,tw}/{backend,vendor}

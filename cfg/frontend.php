@@ -12,4 +12,6 @@ return [
 
     'register-form' => null,
 
+    'vendor-login-form' => null,
+
 ];
