@@ -167,7 +167,7 @@ function load_options($name) {
     return $options;
 }
 
-function load_resource($path, $resolve = true) {
+function load_resource($path, $resolve = true, $cache = true) {
     static $resources = [];
 
     if ($resolve) {
@@ -180,11 +180,15 @@ function load_resource($path, $resolve = true) {
         return null;
     }
 
-    if (!key_exists($file, $resources)) {
-        $resources[$file] = isolate_require($file);
+    if ($cache) {
+        if (!key_exists($file, $resources)) {
+            $resources[$file] = isolate_require($file);
+        }
+
+        return $resources[$file];
     }
 
-    return $resources[$file];
+    return isolate_require($file);
 }
 
 function logger($name = 'message') {
@@ -273,8 +277,8 @@ function route($path, $method) {
     return null;
 }
 
-function table($name) {
-    $table = load_resource("table/{$name}.php");
+function table($name, $cache = true) {
+    $table = load_resource("table/{$name}.php", true, $cache);
 
     if ($table) {
         return $table->name($name);

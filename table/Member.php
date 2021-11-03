@@ -1,3 +1,3 @@
 <?php //>
 
-return table('CommonMember');
+return table('CommonMember', false);

@@ -39,6 +39,16 @@ CREATE TABLE base_member_log (
     create_time TIMESTAMP NOT NULL
 );
 
+CREATE TABLE base_vendor () INHERITS (common_member);
+
+CREATE TABLE base_vendor_log (
+    id          INTEGER   NOT NULL PRIMARY KEY,
+    vendor_id   INTEGER   NOT NULL,
+    type        INTEGER   NOT NULL, -- options: vendor-log-type
+    ip          TEXT      NOT NULL,
+    create_time TIMESTAMP NOT NULL
+);
+
 CREATE TABLE base_user (
     id          INTEGER NOT NULL PRIMARY KEY,
     username    TEXT    NOT NULL UNIQUE,
