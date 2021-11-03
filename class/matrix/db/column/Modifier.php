@@ -19,6 +19,10 @@ class Modifier {
             return MEMBER_ID;
         }
 
+        if (defined('VENDOR_ID')) {
+            return VENDOR_ID;
+        }
+
         return null;
     }
 
