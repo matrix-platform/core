@@ -1,0 +1,11 @@
+{% set root = constant('APP_PATH') %}
+        <script src="{{ root }}socket.io/socket.io.js"></script>
+        <script>
+            let matrix = window.io.connect({path: "{{ root }}socket.io/"});
+
+            matrix.on("connect", () => {
+                $.get("{{ root }}{{ type }}/event-token").done((data) => {
+                    matrix.emit(":bind", {token: data.token});
+                });
+            });
+        </script>
