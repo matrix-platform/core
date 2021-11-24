@@ -30,13 +30,14 @@ class Attachment {
             stream_copy_to_stream($raw, $handle);
             fclose($handle);
             fclose($raw);
-            chmod($file, 0644);
         } else if (file_exists($content)) {
             $file = tempnam(create_folder(APP_HOME . $folder . date('Ymd')), '');
             rename($content, $file);
         } else {
             return null;
         }
+
+        chmod($file, 0644);
 
         $instance = new Attachment($filename, $file, $description, $privilege);
 
