@@ -1,6 +1,6 @@
 <?php //>
 
-use matrix\utility\Fn;
+use matrix\utility\Func;
 
 return new Twig\TwigFilter('img', function ($image, $width = 0, $height = 0) {
     if (!$image || preg_match('/^data:/', $image)) {
@@ -10,6 +10,6 @@ return new Twig\TwigFilter('img', function ($image, $width = 0, $height = 0) {
     if (defined('NO_WEBP')) {
         return APP_PATH . 'images/' . $width . '/' . $height . '/' . base64_urlencode($image);
     } else {
-        return APP_PATH . 'files/' . Fn::optimize_image($image, $width, $height);
+        return APP_PATH . 'files/' . Func::optimize_image($image, $width, $height);
     }
 });

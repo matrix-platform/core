@@ -2,7 +2,7 @@
 
 // php index.php /console/import-file path=xxxxxxxx/xxxxxx [name=filename]
 
-use matrix\utility\Fn;
+use matrix\utility\Func;
 use matrix\web\Attachment;
 
 return new class() extends matrix\cli\Controller {
@@ -36,7 +36,7 @@ return new class() extends matrix\cli\Controller {
         $model->insert($info);
 
         if (strtok($info['mime_type'], '/') === 'image' && strtok('/') !== 'svg+xml') {
-            Fn::optimize_image($path);
+            Func::optimize_image($path);
         }
 
         return ['success' => true];

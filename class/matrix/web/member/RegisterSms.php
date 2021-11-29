@@ -2,7 +2,7 @@
 
 namespace matrix\web\member;
 
-use matrix\utility\Fn;
+use matrix\utility\Func;
 use matrix\web\Controller;
 
 class RegisterSms extends Controller {
@@ -18,7 +18,7 @@ class RegisterSms extends Controller {
             return ['error' => 'error.retry-sms-later'];
         }
 
-        if (Fn::count_sms(REMOTE_ADDR, $register['cooldown'])) {
+        if (Func::count_sms(REMOTE_ADDR, $register['cooldown'])) {
             return ['error' => 'error.retry-sms-later'];
         }
 
@@ -42,7 +42,7 @@ class RegisterSms extends Controller {
         $options['mobile'] = $mobile;
         $options['text'] = render(i18n('sms.register'), ['code' => $code]);
 
-        if (!Fn::send_sms($options)) {
+        if (!Func::send_sms($options)) {
             return ['error' => 'error.sms-failed'];
         }
 

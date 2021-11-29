@@ -1,7 +1,7 @@
 <?php //>
 
 use matrix\db\column\Text;
-use matrix\utility\Fn;
+use matrix\utility\Func;
 
 $file = @$result['file'];
 $path = $result['path'];
@@ -11,7 +11,7 @@ $prefix = $result['prefix'];
 
 $data = key_exists('subtitle', $result) ? ['.title' => $result['subtitle']] : null;
 
-$result['breadcrumbs'] = Fn::breadcrumbs($controller->menus(), $controller->node(), [$data]);
+$result['breadcrumbs'] = Func::breadcrumbs($controller->menus(), $controller->node(), [$data]);
 
 //--
 

@@ -1,6 +1,6 @@
 <?php //>
 
-use matrix\utility\Fn;
+use matrix\utility\Func;
 
 $node = $controller->menu()['parent'];
 $path = preg_replace('/^\/backend\/(.+?)\/[\w]+(\/[\d]+)?$/', '$1', $controller->path());
@@ -17,7 +17,7 @@ $result['subtitle'] = array_pop($titles);
 
 //--
 
-$result['breadcrumbs'] = Fn::breadcrumbs($controller->menus(), $controller->node(), $list);
+$result['breadcrumbs'] = Func::breadcrumbs($controller->menus(), $controller->node(), $list);
 
 //--
 

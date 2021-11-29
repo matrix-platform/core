@@ -1,6 +1,6 @@
 <?php //>
 
-use matrix\utility\Fn;
+use matrix\utility\Func;
 
 return new class() extends matrix\web\Controller {
 
@@ -21,7 +21,7 @@ return new class() extends matrix\web\Controller {
         $width = array_shift($args);
         $height = array_shift($args);
 
-        $file = Fn::optimize_image(base64_urldecode($path), intval($width), intval($height));
+        $file = Func::optimize_image(base64_urldecode($path), intval($width), intval($height));
 
         return ['view' => '302.php', 'path' => APP_PATH . 'files/' . $file];
     }

@@ -2,7 +2,7 @@
 
 namespace matrix\web\backend\authority;
 
-use matrix\utility\Fn;
+use matrix\utility\Func;
 
 trait Authorization {
 
@@ -11,7 +11,7 @@ trait Authorization {
 
     public function menus() {
         if ($this->menus === null) {
-            $this->menus = Fn::load_menu(explode('|', cfg('backend.menus')));
+            $this->menus = Func::load_menu(explode('|', cfg('backend.menus')));
 
             if (USER_ID !== 1) {
                 $excludes = cfg('backend.exclude-menu-nodes');

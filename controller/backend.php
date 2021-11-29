@@ -1,6 +1,6 @@
 <?php //>
 
-use matrix\utility\Fn;
+use matrix\utility\Func;
 
 return new class() extends matrix\web\UserController {
 
@@ -21,7 +21,7 @@ return new class() extends matrix\web\UserController {
     }
 
     protected function process($form) {
-        $nodes = Fn::menu_tree($this->menus());
+        $nodes = Func::menu_tree($this->menus());
 
         return [
             'success' => true,

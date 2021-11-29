@@ -2,7 +2,7 @@
 
 namespace matrix\utility;
 
-class Fn {
+class Func {
 
     public static function __callStatic($name, $args) {
         static $functions = [];

@@ -1,7 +1,7 @@
 <?php //>
 
 use matrix\db\column\Ranking;
-use matrix\utility\Fn;
+use matrix\utility\Func;
 
 $node = $controller->node();
 $path = preg_replace('/^\/backend\/(.+)$/', '$1', $controller->path());
@@ -16,7 +16,7 @@ $result['subtitle'] = array_pop($titles);
 
 //--
 
-$result['breadcrumbs'] = Fn::breadcrumbs($controller->menus(), $node, $list);
+$result['breadcrumbs'] = Func::breadcrumbs($controller->menus(), $node, $list);
 
 //--
 

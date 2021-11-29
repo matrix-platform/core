@@ -1,12 +1,12 @@
 <?php //>
 
-use matrix\utility\Fn;
+use matrix\utility\Func;
 
 $path = $controller->node();
 
 //--
 
-$result['breadcrumbs'] = Fn::breadcrumbs($controller->menus(), $path, []);
+$result['breadcrumbs'] = Func::breadcrumbs($controller->menus(), $path, []);
 
 //--
 
