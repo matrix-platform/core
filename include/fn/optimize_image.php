@@ -42,7 +42,7 @@ return function ($image, $width = 0, $height = 0) {
 
     if (!file_exists($folder . $file)) {
         $loader = "imagecreatefrom{$type}";
-        $source = "{folder}{path}";
+        $source = "{$folder}{$path}";
 
         if (function_exists($loader)) {
             $img = @call_user_func($loader, $source);
@@ -59,7 +59,7 @@ return function ($image, $width = 0, $height = 0) {
                 imagepalettetotruecolor($img);
             }
 
-            $exif = exif_read_data($source);
+            $exif = @exif_read_data($source);
 
             switch (@$exif['Orientation']) {
             case 3:
