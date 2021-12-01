@@ -42,11 +42,12 @@ return function ($image, $width = 0, $height = 0) {
 
     if (!file_exists($folder . $file)) {
         $loader = "imagecreatefrom{$type}";
+        $source = "{folder}{path}";
 
         if (function_exists($loader)) {
-            $img = @call_user_func($loader, $folder . $path);
+            $img = @call_user_func($loader, $source);
         } else {
-            $img = @imagecreatefromstring(file_get_contents($folder . $path));
+            $img = @imagecreatefromstring(file_get_contents($source));
         }
 
         if ($img) {
@@ -56,6 +57,26 @@ return function ($image, $width = 0, $height = 0) {
 
             if ($type === 'png' && $to === 'webp') {
                 imagepalettetotruecolor($img);
+            }
+
+            $exif = exif_read_data($source);
+
+            switch (@$exif['Orientation']) {
+            case 3:
+                $angle = 180;
+                break;
+            case 6:
+                $angle = 270;
+                break;
+            case 8:
+                $angle = 90;
+                break;
+            default:
+                $angle = 0;
+            }
+
+            if ($angle) {
+                $img = imagerotate($img, $angle, 0);
             }
 
             call_user_func("image{$to}", $img, $folder . $file);
