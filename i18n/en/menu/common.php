@@ -50,6 +50,8 @@ return [
 
         'sms-log' => 'SMS Log',
 
+            'sms-log/' => 'SMS Log',
+
         'other' => 'Other',
 
             'file-info/' => 'File Info',

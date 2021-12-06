@@ -6,6 +6,8 @@ return [
 
     'content' => '讯息内容',
 
+    'response' => '纪录',
+
     'ip' => 'IP',
 
     'create_time' => '发送时间',

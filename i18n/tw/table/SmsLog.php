@@ -6,6 +6,8 @@ return [
 
     'content' => '訊息內容',
 
+    'response' => '紀錄',
+
     'ip' => 'IP',
 
     'create_time' => '發送時間',

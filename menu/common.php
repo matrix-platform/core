@@ -74,6 +74,8 @@ return [
 
         'sms-log' => ['icon' => 'fas fa-sms', 'ranking' => 400, 'parent' => 'system', 'group' => true, 'tag' => 'query'],
 
+            'sms-log/' => ['parent' => 'sms-log', 'tag' => 'query'],
+
         'other' => ['ranking' => 900, 'parent' => 'system'],
 
             'deployment' => ['parent' => 'other', 'group' => true, 'tag' => 'user'],
