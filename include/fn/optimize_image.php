@@ -17,6 +17,20 @@ return function ($image, $width = 0, $height = 0) {
 
     $path = $data['path'];
 
+    if (!$width && !$height) {
+        $max = cfg('system.max-thumb-size');
+
+        if ($data['width'] >= $data['height']) {
+            if ($data['width'] > $max) {
+                $width = $max;
+            }
+        } else {
+            if ($data['height'] > $max) {
+                $height = $max;
+            }
+        }
+    }
+
     if ($width > 0 || $height > 0) {
         $w = $data['width'];
         $h = $data['height'];

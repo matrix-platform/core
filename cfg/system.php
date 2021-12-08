@@ -14,6 +14,8 @@ return [
 
     'languages' => 'en|tw',
 
+    'max-thumb-size' => 1920,
+
     'sms-cooldown' => 60,
 
     'time' => 'H:i',
