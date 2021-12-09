@@ -329,3 +329,17 @@ function validate($value, $options) {
 
     return true;
 }
+
+function webp() {
+    static $supported;
+
+    if ($supported === null) {
+        if (strpos(@$_SERVER['HTTP_ACCEPT'], 'image/webp') === false) {
+            $supported = false;
+        } else {
+            $supported = true;
+        }
+    }
+
+    return $supported;
+}

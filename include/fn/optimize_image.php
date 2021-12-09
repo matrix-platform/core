@@ -9,10 +9,10 @@ return function ($image, $width = 0, $height = 0) {
 
     $type = strtok('/');
 
-    if (defined('NO_WEBP')) {
-        $to = in_array($type, ['gif', 'png']) ? $type : 'jpeg';
-    } else {
+    if (webp()) {
         $to = 'webp';
+    } else {
+        $to = in_array($type, ['gif', 'png']) ? $type : 'jpeg';
     }
 
     $path = $data['path'];

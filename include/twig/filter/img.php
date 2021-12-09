@@ -7,9 +7,9 @@ return new Twig\TwigFilter('img', function ($image, $width = 0, $height = 0) {
         return $image;
     }
 
-    if (defined('NO_WEBP')) {
-        return APP_PATH . 'images/' . $width . '/' . $height . '/' . base64_urlencode($image);
-    } else {
+    if (webp()) {
         return APP_PATH . 'files/' . Func::optimize_image($image, $width, $height);
+    } else {
+        return APP_PATH . 'images/' . $width . '/' . $height . '/' . base64_urlencode($image);
     }
 });
