@@ -62,12 +62,6 @@ if (PHP_SAPI === 'cli') {
         (new Run())->prependHandler($handler)->register();
     }
 
-    if (session_id() === '') {
-        session_name('matrix');
-        session_set_cookie_params(['httponly' => true, 'path' => APP_PATH, 'samesite' => 'none', 'secure' => true]);
-        session_start();
-    }
-
     define('REMOTE_ADDR', $_SERVER['REMOTE_ADDR']);
 
     $path = $_SERVER['PATH_INFO'];
