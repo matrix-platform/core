@@ -16,7 +16,11 @@ return new Twig\TwigFunction('blocks', function ($page) {
         if ($extra) {
             foreach ($module['fields'] as $name => $field) {
                 if ($field->multilingual()) {
-                    $extra[$name] = @$extra[$name . '__' . LANGUAGE];
+                    $local = $name . '__' . LANGUAGE;
+
+                    if (key_exists($local, $extra)) {
+                        $extra[$name] = $extra[$local];
+                    }
                 }
             }
 
@@ -36,7 +40,11 @@ return new Twig\TwigFunction('blocks', function ($page) {
         if ($extra) {
             foreach ($modules[$item['block_id']]['fields'] as $name => $field) {
                 if ($field->multilingual()) {
-                    $extra[$name] = @$extra[$name . '__' . LANGUAGE];
+                    $local = $name . '__' . LANGUAGE;
+
+                    if (key_exists($local, $extra)) {
+                        $extra[$name] = $extra[$local];
+                    }
                 }
             }
 
