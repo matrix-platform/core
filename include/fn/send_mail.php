@@ -25,5 +25,16 @@ return function ($options) {
         $mailer->AddAddress($to);
     }
 
-    return $mailer->Send();
+    if ($mailer->Send()) {
+        model('MailLog')->insert([
+            'sender' => $options['username'],
+            'receiver' => $options['to'],
+            'subject' => $mailer->Subject,
+            'content' => $mailer->Body,
+        ]);
+
+        return true;
+    }
+
+    return false;
 };

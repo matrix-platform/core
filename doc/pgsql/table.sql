@@ -97,6 +97,17 @@ CREATE TABLE base_sms_log (
     status      INTEGER   NOT NULL
 );
 
+CREATE TABLE base_mail_log (
+    id          INTEGER   NOT NULL PRIMARY KEY,
+    sender      TEXT      NOT NULL,
+    receiver    TEXT      NOT NULL,
+    subject     TEXT      NOT NULL,
+    content     TEXT      NOT NULL,
+    ip          TEXT      NOT NULL,
+    create_time TIMESTAMP NOT NULL,
+    status      INTEGER   NOT NULL
+);
+
 CREATE TABLE base_menu (
     id           INTEGER   NOT NULL PRIMARY KEY,
     parent_id    INTEGER       NULL,

@@ -52,6 +52,10 @@ return [
 
             'sms-log/' => 'SMS Log',
 
+        'mail-log' => 'E-mail Log',
+
+            'mail-log/' => 'E-mail Log',
+
         'other' => 'Other',
 
             'file-info/' => 'File Info',

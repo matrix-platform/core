@@ -52,6 +52,10 @@ return [
 
             'sms-log/' => '简讯纪录',
 
+        'mail-log' => 'E-mail 纪录',
+
+            'mail-log/' => 'E-mail 纪录',
+
         'other' => '其他',
 
             'file-info/' => '档案资讯',

@@ -52,6 +52,10 @@ return [
 
             'sms-log/' => '簡訊紀錄',
 
+        'mail-log' => 'E-mail 紀錄',
+
+            'mail-log/' => 'E-mail 紀錄',
+
         'other' => '其他',
 
             'file-info/' => '檔案資訊',

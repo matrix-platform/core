@@ -76,6 +76,10 @@ return [
 
             'sms-log/' => ['parent' => 'sms-log', 'tag' => 'query'],
 
+        'mail-log' => ['icon' => 'fas fa-at', 'ranking' => 500, 'parent' => 'system', 'group' => true, 'tag' => 'query'],
+
+            'mail-log/' => ['parent' => 'mail-log', 'tag' => 'query'],
+
         'other' => ['ranking' => 900, 'parent' => 'system'],
 
             'deployment' => ['parent' => 'other', 'group' => true, 'tag' => 'user'],
