@@ -56,6 +56,10 @@ return [
 
             'mail-log/' => 'E-mail Log',
 
+        'system-log' => 'System Log',
+
+            'system-log/' => 'System Log',
+
         'other' => 'Other',
 
             'file-info/' => 'File Info',

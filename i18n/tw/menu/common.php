@@ -56,6 +56,10 @@ return [
 
             'mail-log/' => 'E-mail 紀錄',
 
+        'system-log' => '系統紀錄',
+
+            'system-log/' => '系統紀錄',
+
         'other' => '其他',
 
             'file-info/' => '檔案資訊',

@@ -108,6 +108,13 @@ CREATE TABLE base_mail_log (
     status      INTEGER   NOT NULL
 );
 
+CREATE TABLE base_system_log (
+    id          INTEGER   NOT NULL PRIMARY KEY,
+    type        INTEGER   NOT NULL,
+    content     TEXT          NULL,
+    create_time TIMESTAMP NOT NULL
+);
+
 CREATE TABLE base_menu (
     id           INTEGER   NOT NULL PRIMARY KEY,
     parent_id    INTEGER       NULL,

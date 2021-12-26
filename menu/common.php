@@ -80,6 +80,10 @@ return [
 
             'mail-log/' => ['parent' => 'mail-log', 'tag' => 'query'],
 
+        'system-log' => ['icon' => 'far fa-list-alt', 'ranking' => 600, 'parent' => 'system', 'group' => true, 'tag' => 'query'],
+
+            'system-log/' => ['parent' => 'system-log', 'tag' => 'query'],
+
         'other' => ['ranking' => 900, 'parent' => 'system'],
 
             'deployment' => ['parent' => 'other', 'group' => true, 'tag' => 'user'],
