@@ -8,7 +8,7 @@ class ListBundle extends Controller {
 
     public function __construct() {
         $this->values = [
-            'modalForm' => false,
+            'modalForm' => cfg('backend.modal-form'),
             'view' => 'backend/bundle/list.php',
         ];
     }

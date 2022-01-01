@@ -13,7 +13,7 @@ class ListController extends Controller {
             'defaultPage' => 1,
             'defaultPageSize' => 10,
             'defaultRanking' => true,
-            'modalForm' => false,
+            'modalForm' => cfg('backend.modal-form'),
             'table' => table($name),
             'view' => 'backend/list.php',
         ];

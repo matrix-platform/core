@@ -24,6 +24,8 @@ return [
 
     'menus' => 'common',
 
+    'modal-form' => null,
+
     'modules' => null,
 
     'overview' => null,
