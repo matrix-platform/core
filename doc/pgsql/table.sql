@@ -81,7 +81,7 @@ CREATE TABLE base_file (
     height        INTEGER       NULL,
     seconds       INTEGER       NULL,
     privilege     INTEGER   NOT NULL,
-    owner_id      INTEGER   NOT NULL,
+    owner_id      INTEGER       NULL,
     group_id      INTEGER       NULL,
     modified_time TIMESTAMP NOT NULL,
     deleted       BOOLEAN   NOT NULL

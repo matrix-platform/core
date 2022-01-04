@@ -47,8 +47,7 @@ $tbl->add('privilege', Integer::class)
     ->default(0)
     ->required(true);
 
-$tbl->add('owner_id', Creator::class)
-    ->required(true);
+$tbl->add('owner_id', Creator::class);
 
 $tbl->add('group_id', Integer::class);
 
