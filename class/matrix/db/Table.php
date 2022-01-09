@@ -92,6 +92,12 @@ class Table {
         return $column;
     }
 
+    public function filter($conditions = null) {
+        $collection = new Collection($this);
+
+        return $conditions === null ? $collection : $collection->filter($conditions);
+    }
+
     public function getColumns($names = null) {
         if ($names === false) {
             return $this->columns;

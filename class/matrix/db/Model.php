@@ -120,7 +120,7 @@ class Model {
         $data = $this->before(self::INSERT, null, $data);
 
         $bindings = [];
-        $command = $this->dialect->makeInsertion($this->table, null);
+        $command = $this->dialect->makeInsertion($this->table, false);
         $statement = $this->db->prepare($command);
 
         foreach ($this->table->getColumns(false) as $name => $column) {
@@ -189,9 +189,9 @@ class Model {
         return [];
     }
 
-    public function query($conditions = [], $orders = true, $size = 0, $page = 1) {
+    public function query($conditions = [], $orders = true, $size = 0, $page = 1, $columns = false) {
         $criteria = $this->createCriteria($conditions, $this->filter);
-        $command = $this->dialect->makeSelection($this->table, null, $criteria, $orders);
+        $command = $this->dialect->makeSelection($this->table, $columns, $criteria, $orders);
 
         if ($size > 0 && $page > 0) {
             $command = $this->dialect->makePager($command, $size, $page);
@@ -256,7 +256,7 @@ class Model {
         }
 
         $criteria = $this->createCriteria($conditions);
-        $command = $this->dialect->makeUpdation($this->table, null, $criteria);
+        $command = $this->dialect->makeUpdation($this->table, false, $criteria);
         $statement = $this->db->prepare($command);
 
         foreach ($this->table->getColumns(false) as $name => $column) {
