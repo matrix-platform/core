@@ -2,6 +2,12 @@
 
 return [
 
+    'embedded-content' => 'Frontend Embedded Content',
+    'embedded-content.head-beginning' => 'After Beginning of HEAD',
+    'embedded-content.head-ending' => 'Before Ending of HEAD',
+    'embedded-content.body-beginning' => 'After Beginning of BODY',
+    'embedded-content.body-ending' => 'Before Ending of BODY',
+
     'facebook' => 'Facebook Login',
     'facebook.app_id' => 'App Id',
     'facebook.app_secret' => 'App Secret',

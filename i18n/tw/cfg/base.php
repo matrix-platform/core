@@ -2,6 +2,12 @@
 
 return [
 
+    'embedded-content' => '前台嵌入內容',
+    'embedded-content.head-beginning' => '於 HEAD 起始後',
+    'embedded-content.head-ending' => '於 HEAD 結束前',
+    'embedded-content.body-beginning' => '於 BODY 起始後',
+    'embedded-content.body-ending' => '於 BODY 結束前',
+
     'facebook' => 'Facebook Login',
     'facebook.app_id' => 'App Id',
     'facebook.app_secret' => 'App 密鑰',
