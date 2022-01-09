@@ -6,6 +6,7 @@ use PDO;
 
 class Connection {
 
+    private $caches = [];
     private $delegate;
     private $dialect;
     private $models = [];
@@ -34,7 +35,15 @@ class Connection {
 
         if ($this->delegate && !$this->delegate->inTransaction()) {
             $this->delegate->beginTransaction();
+
+            foreach ($this->caches as $cache) {
+                $cache->remove();
+            }
         }
+    }
+
+    public function cacheable() {
+        return $this->delegate && $this->delegate->inTransaction();
     }
 
     public function commit() {
@@ -43,6 +52,14 @@ class Connection {
         if ($this->delegate && $this->delegate->inTransaction()) {
             $this->delegate->commit();
         }
+    }
+
+    public function createCache() {
+        $cache = new Cache();
+
+        $this->caches[] = $cache;
+
+        return $cache;
     }
 
     public function dialect() {

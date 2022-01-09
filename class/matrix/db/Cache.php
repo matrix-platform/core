@@ -14,8 +14,14 @@ class Cache {
         $this->cache[$data['id']] = $data;
     }
 
-    public function remove($id) {
-        unset($this->cache[$id]);
+    public function remove($id = null) {
+        if ($id === null) {
+            if ($this->cache) {
+                $this->cache = [];
+            }
+        } else {
+            unset($this->cache[$id]);
+        }
     }
 
 }

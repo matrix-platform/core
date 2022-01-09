@@ -25,7 +25,7 @@ class Model {
     protected $table;
 
     public function __construct($db, $table) {
-        $this->cache = new Cache();
+        $this->cache = $db->createCache();
         $this->db = $db;
         $this->dialect = $db->dialect();
         $this->filter = !self::$administration;
@@ -92,7 +92,7 @@ class Model {
     }
 
     public function get($id) {
-        if ($this->table->cacheable()) {
+        if ($this->db->cacheable() && $this->table->cacheable()) {
             $data = $this->cache->get($id);
 
             if ($data) {
@@ -414,7 +414,7 @@ class Model {
             }
         }
 
-        if ($this->table->cacheable()) {
+        if ($this->db->cacheable() && $this->table->cacheable()) {
             array_walk($rows, [$this->cache, 'put']);
         }
 
