@@ -18,12 +18,14 @@ class Model {
         self::$administration = true;
     }
 
+    protected $cache;
     protected $db;
     protected $dialect;
     protected $filter;
     protected $table;
 
     public function __construct($db, $table) {
+        $this->cache = new Cache();
         $this->db = $db;
         $this->dialect = $db->dialect();
         $this->filter = !self::$administration;
@@ -54,6 +56,8 @@ class Model {
         $statement = $this->db->prepare($command);
 
         $this->execute($statement, $criteria->bind($statement, []));
+
+        $this->cache->remove($previous['id']);
 
         if ($statement->rowCount() !== 1) {
             return false;
@@ -88,6 +92,14 @@ class Model {
     }
 
     public function get($id) {
+        if ($this->table->cacheable()) {
+            $data = $this->cache->get($id);
+
+            if ($data) {
+                return $data;
+            }
+        }
+
         return $this->find(['id' => $id]);
     }
 
@@ -281,6 +293,8 @@ class Model {
 
         $this->execute($statement, $criteria->bind($statement, $bindings));
 
+        $this->cache->remove($previous['id']);
+
         if ($statement->rowCount() !== 1) {
             return false;
         }
@@ -398,6 +412,10 @@ class Model {
                     $row[$name] = $row[$local];
                 }
             }
+        }
+
+        if ($this->table->cacheable()) {
+            array_walk($rows, [$this->cache, 'put']);
         }
 
         return $rows;

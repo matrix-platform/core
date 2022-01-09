@@ -12,6 +12,7 @@ class Connection {
     private $name;
     private $password;
     private $sequence;
+    private $statements = [];
     private $transaction;
     private $user;
 
@@ -68,7 +69,7 @@ class Connection {
         return $this->sequence->next($name);
     }
 
-    public function prepare($statement) {
+    public function prepare($command) {
         if (!$this->delegate) {
             $this->delegate = new PDO($this->name, $this->user, $this->password, [
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -81,7 +82,11 @@ class Connection {
             }
         }
 
-        return $this->delegate->prepare($statement);
+        if (!key_exists($command, $this->statements)) {
+            $this->statements[$command] = $this->delegate->prepare($command);
+        }
+
+        return $this->statements[$command];
     }
 
     public function reset($name) {

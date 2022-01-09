@@ -20,6 +20,7 @@ class Table {
 
     public function __construct($mapping, $traceable = true, $namespace = 'matrix\model') {
         $this->values = [
+            'cacheable' => true,
             'mapping' => $mapping,
             'namespace' => $namespace,
             'traceable' => $traceable,
