@@ -15,19 +15,17 @@ return new class() extends matrix\web\backend\Controller {
     }
 
     protected function process($form) {
-        $controller = route('/backend/' . base64_urldecode($this->args()[0]), 'POST');
+        $controller = routing('/backend/' . base64_urldecode($this->args()[0]), 'POST');
 
         if ($controller instanceof ListController) {
             if ($controller->permitted("{$controller->menuNode()}/update")) {
                 return $this->sort($controller, @$form['id']);
             }
 
-            header('HTTP/1.1 403 Forbidden');
+            return ['view' => '403.php'];
         } else {
-            header('HTTP/1.1 404 Not Found');
+            return ['view' => '404.php'];
         }
-
-        return ['view' => 'empty.php'];
     }
 
     private function sort($controller, $list) {

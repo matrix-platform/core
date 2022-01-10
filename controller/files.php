@@ -31,9 +31,7 @@ return new class() extends matrix\web\Controller {
         }
 
         if (!$data) {
-            header('HTTP/1.1 404 Not Found');
-
-            return ['view' => 'empty.php'];
+            return ['view' => '404.php'];
         }
 
         return ['success' => true, 'view' => 'file.php', 'data' => $data, 'file' => $file];

@@ -12,7 +12,7 @@ trait Line {
 
         return $line['auth_url'] . '?' . http_build_query([
             'client_id' => $line['client_id'],
-            'redirect_uri' => url(APP_ROOT . $path),
+            'redirect_uri' => get_url(APP_ROOT . $path),
             'response_type' => 'code',
             'scope' => $line['scope'],
             'state' => $state,

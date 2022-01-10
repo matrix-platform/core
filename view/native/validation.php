@@ -11,7 +11,4 @@ foreach ($result as $error) {
     ];
 }
 
-resolve('raw.php')->render($controller, $form, [
-    'type' => 'validation',
-    'errors' => $errors,
-]);
+$controller->response()->json(['type' => 'validation', 'errors' => $errors]);

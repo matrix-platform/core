@@ -327,7 +327,7 @@ class Model {
     }
 
     protected function execute($statement, $bindings) {
-        logger('sql')->debug($statement->queryString, $bindings);
+        logging('sql')->debug($statement->queryString, $bindings);
 
         $statement->execute();
     }

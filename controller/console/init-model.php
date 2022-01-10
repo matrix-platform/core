@@ -55,7 +55,7 @@ return new class() extends matrix\cli\Controller {
         $metadata = $this->getDefinition($table);
 
         if (!$metadata) {
-            return ['message' => 'table not found'];
+            return ['message' => "table `{$table}` not found"];
         }
 
         $types = [];
@@ -70,7 +70,7 @@ return new class() extends matrix\cli\Controller {
 
         ob_start();
 
-        resolve('console/model/table.twig')->render($this, [], [
+        lookup('console/model/table.twig')->render($this, [], [
             'table' => $table,
             'metadata' => $metadata,
             'types' => $types,
@@ -83,7 +83,7 @@ return new class() extends matrix\cli\Controller {
         foreach (LANGUAGES as $lang) {
             ob_start();
 
-            resolve('console/model/i18n.twig')->render($this, [], [
+            lookup('console/model/i18n.twig')->render($this, [], [
                 'metadata' => $metadata,
                 'label' => load_i18n('label', $lang),
             ]);
@@ -97,7 +97,7 @@ return new class() extends matrix\cli\Controller {
 
         ob_start();
 
-        resolve('console/model/list.twig')->render($this, [], [
+        lookup('console/model/list.twig')->render($this, [], [
             'model' => $model,
             'metadata' => $metadata,
         ]);
@@ -111,7 +111,7 @@ return new class() extends matrix\cli\Controller {
         foreach (['content', 'delete', 'insert', 'new', 'update'] as $action) {
             ob_start();
 
-            resolve("console/model/{$action}.twig")->render($this, [], ['model' => $model]);
+            lookup("console/model/{$action}.twig")->render($this, [], ['model' => $model]);
 
             $this->save(APP_HOME . "controller/backend/{$path}/{$action}.php", ob_get_clean(), @$form['debug']);
         }
@@ -120,7 +120,7 @@ return new class() extends matrix\cli\Controller {
 
         ob_start();
 
-        resolve('console/model/menu.twig')->render($this, [], [
+        lookup('console/model/menu.twig')->render($this, [], [
             'model' => $model,
             'path' => $path,
             'metadata' => $metadata,

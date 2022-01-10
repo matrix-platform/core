@@ -30,7 +30,7 @@ class LineLogin extends Controller {
                 'content' => http_build_query([
                     'grant_type' => 'authorization_code',
                     'code' => @$form['code'],
-                    'redirect_uri' => url(APP_ROOT . $this->redirect_uri()),
+                    'redirect_uri' => get_url(APP_ROOT . $this->redirect_uri()),
                     'client_id' => $line['client_id'],
                     'client_secret' => $line['client_secret'],
                 ]),

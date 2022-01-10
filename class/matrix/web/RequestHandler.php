@@ -6,16 +6,10 @@ use matrix\core\Handler;
 
 trait RequestHandler {
 
-    use Handler;
+    use Handler, Responsible, Verification;
 
-    public function verify() {
-        if ($this->method() === 'POST') {
-            $token = @$_SERVER['HTTP_MATRIX_TOKEN'];
-
-            return $token ? ($token === @$_COOKIE['matrix-token']) : false;
-        }
-
-        return true;
+    protected function cleanup() {
+        Attachment::cleanup();
     }
 
     protected function get($name) {
@@ -49,10 +43,6 @@ trait RequestHandler {
         default:
             return [];
         }
-    }
-
-    protected function cleanup() {
-        Attachment::cleanup();
     }
 
     protected function wrapFile($form, $name, $privilege = null) {

@@ -6,7 +6,7 @@ return new class() extends matrix\web\UserController {
 
     protected function process($form) {
         $path = preg_replace('/^visible:(.*)\/(\d+)$/', '/backend/$1/update/$2', @$form['id']);
-        $controller = route($path, 'POST');
+        $controller = routing($path, 'POST');
 
         if ($controller instanceof UpdateController) {
             if ($controller->permitted($controller->menuNode())) {
@@ -42,12 +42,10 @@ return new class() extends matrix\web\UserController {
                 }
             }
 
-            header('HTTP/1.1 403 Forbidden');
+            return ['view' => '403.php'];
         } else {
-            header('HTTP/1.1 404 Not Found');
+            return ['view' => '404.php'];
         }
-
-        return ['view' => 'empty.php'];
     }
 
 };

@@ -36,4 +36,4 @@ $result['path'] = $path;
 
 //--
 
-resolve(cfg('backend.list'))->render($controller, $form, $result);
+lookup(cfg('backend.list'))->render($controller, $form, $result);

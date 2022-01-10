@@ -10,4 +10,4 @@ $result = [
     'message' => i18n('backend.save-success'),
 ];
 
-resolve('raw.php')->render($controller, $form, $result);
+$controller->response()->json($result);

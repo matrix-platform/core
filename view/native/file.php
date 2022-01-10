@@ -2,7 +2,9 @@
 
 $data = $result['data'];
 $file = $result['file'];
-$path = APP_HOME . 'files/' . $file;
+
+$folder = $data['privilege'] ? (APP_HOME . 'files/') : FILES_HOME;
+$path = "{$folder}{$file}";
 
 if ($data['path'] === $file) {
     $size = $data['size'];
@@ -14,9 +16,7 @@ if ($data['path'] === $file) {
     finfo_close($finfo);
 }
 
-header_remove();
-
-header("Content-Length: {$size}");
-header("Content-Type: {$type}");
-
-readfile($path);
+$controller->response()->file($path)->headers([
+    'Content-Length' => $size,
+    'Content-Type' => $type,
+]);

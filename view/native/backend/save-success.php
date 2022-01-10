@@ -8,4 +8,4 @@ if (@$form['form-type'] === 'modal') {
     $result = ['type' => 'backward', 'backward' => @$form['r'], 'message' => $message];
 }
 
-resolve('raw.php')->render($controller, $form, $result);
+$controller->response()->json($result);

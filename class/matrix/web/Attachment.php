@@ -17,10 +17,10 @@ class Attachment {
     }
 
     public static function from($filename, $content, $description, $privilege = null) {
-        $folder = $privilege ? 'files/p' : 'www/files/';
+        $folder = $privilege ? (APP_HOME . 'files/p') : FILES_HOME;
 
         if (preg_match('/^data:/', $content)) {
-            $file = tempnam(create_folder(APP_HOME . $folder . date('Ymd')), '');
+            $file = tempnam(create_folder($folder . date('Ymd')), '');
             $handle = fopen($file, 'w');
             $raw = tmpfile();
 
@@ -31,7 +31,7 @@ class Attachment {
             fclose($handle);
             fclose($raw);
         } else if (file_exists($content)) {
-            $file = tempnam(create_folder(APP_HOME . $folder . date('Ymd')), '');
+            $file = tempnam(create_folder($folder . date('Ymd')), '');
             rename($content, $file);
         } else {
             return null;

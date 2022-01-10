@@ -8,8 +8,7 @@ return new class() extends matrix\web\Controller {
         $vendor = $this->vendor();
 
         if (!$vendor) {
-            header('HTTP/1.1 404 Not Found');
-            return ['view' => 'empty.php'];
+            return ['view' => '404.php'];
         }
 
         $id = $vendor['id'];

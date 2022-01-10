@@ -16,11 +16,9 @@ trait UserAuthenticator {
         }
 
         if (defined('AJAX')) {
-            header('HTTP/1.1 401 Unauthorized');
+            $this->response()->status(401);
         } else {
-            $path = base64_urlencode($_SERVER['REQUEST_URI']);
-
-            header('Location: ' . APP_ROOT . 'backend/login/' . $path);
+            $this->response()->redirect(APP_ROOT . 'backend/login/' . base64_urlencode($_SERVER['REQUEST_URI']));
         }
 
         return false;

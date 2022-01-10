@@ -4,6 +4,8 @@ namespace matrix\cli;
 
 class NotFound {
 
+    use Responsible;
+
     private $path;
 
     public function __construct($path) {

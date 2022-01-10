@@ -52,7 +52,7 @@ return function ($image, $width = 0, $height = 0) {
         $file = "{$path}.{$to}";
     }
 
-    $folder = APP_HOME . ($data['privilege'] ? 'files/' : 'www/files/');
+    $folder = $data['privilege'] ? (APP_HOME . 'files/') : FILES_HOME;
 
     if (!file_exists($folder . $file)) {
         $loader = "imagecreatefrom{$type}";

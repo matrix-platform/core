@@ -16,7 +16,7 @@ return new class() extends matrix\web\backend\Controller {
 
     protected function process($form) {
         $path = $this->args()[0];
-        $controller = route('/backend/' . base64_urldecode($path), 'POST');
+        $controller = routing('/backend/' . base64_urldecode($path), 'POST');
 
         if ($controller instanceof ListController) {
             $conditions = [];
@@ -42,11 +42,9 @@ return new class() extends matrix\web\backend\Controller {
                 'data' => $data,
                 'path' => $path,
             ];
-        } else {
-            header('HTTP/1.1 404 Not Found');
         }
 
-        return ['view' => 'empty.php'];
+        return ['view' => '404.php'];
     }
 
 };

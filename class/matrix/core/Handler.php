@@ -60,7 +60,7 @@ trait Handler {
             $this->cleanup();
         }
 
-        resolve($view)->render($this, $form, $result);
+        lookup($view)->render($this, $form, $result);
     }
 
     protected function init() {

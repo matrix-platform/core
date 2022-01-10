@@ -1,10 +1,7 @@
 <?php //>
 
 if (defined('AJAX')) {
-    resolve('raw.php')->render($controller, $form, [
-        'type' => 'location',
-        'path' => $result['path'],
-    ]);
+    $controller->response()->json(['type' => 'location', 'path' => $result['path']]);
 } else {
-    header("Location: {$result['path']}");
+    $controller->response()->redirect($result['path']);
 }

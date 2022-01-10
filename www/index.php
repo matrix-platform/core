@@ -1,9 +1,11 @@
 <?php //>
 
 define('APP_HOME', dirname(__DIR__) . '/');
+define('FILES_HOME', APP_HOME . 'www/files/');
+define('VENDOR_HOME', APP_HOME . 'vendor/');
 
-require APP_HOME . 'vendor/autoload.php';
+require VENDOR_HOME . 'autoload.php';
 
-define('MATRIX', APP_HOME . 'vendor/matrix-platform/core/');
+define('MATRIX', VENDOR_HOME . 'matrix-platform/core/');
 
 require MATRIX . 'app.php';

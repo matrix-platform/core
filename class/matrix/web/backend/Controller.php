@@ -28,7 +28,7 @@ class Controller {
             if ($menu) {
                 $this->menu($menu)->node($node)->handle();
             } else {
-                header('HTTP/1.1 403 Forbidden');
+                $this->response()->status(403);
             }
         }
     }

@@ -238,4 +238,4 @@ if ($result['parameters']) {
 
 $view = $controller->customView() ?: cfg('backend.list');
 
-resolve($view)->render($controller, $form, $result);
+lookup($view)->render($controller, $form, $result);

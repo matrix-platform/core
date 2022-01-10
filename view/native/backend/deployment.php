@@ -44,4 +44,4 @@ $result['buttons'] = $buttons;
 
 //--
 
-resolve(cfg('backend.deployment-modal'))->render($controller, $form, $result);
+lookup(cfg('backend.deployment-modal'))->render($controller, $form, $result);

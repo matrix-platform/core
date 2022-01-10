@@ -78,6 +78,16 @@ function get_data_file($path, $verify = true) {
     return false;
 }
 
+function get_url($path) {
+    if (defined('BASE_URL')) {
+        return BASE_URL . $path;
+    } else {
+        $protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
+
+        return "{$protocol}://{$_SERVER['HTTP_HOST']}{$path}";
+    }
+}
+
 function i18n($token, $default = null) {
     list($name, $key) = preg_split('/\./', $token, 2);
 
@@ -191,7 +201,7 @@ function load_resource($path, $resolve = true, $cache = true) {
     return isolate_require($file);
 }
 
-function logger($name = 'message') {
+function logging($name = 'message') {
     static $loggers = [];
 
     if (!key_exists($name, $loggers)) {
@@ -209,6 +219,15 @@ function logger($name = 'message') {
     return $loggers[$name];
 }
 
+function lookup($view) {
+    switch (pathinfo($view, PATHINFO_EXTENSION)) {
+    case 'twig':
+        return new Twig($view);
+    }
+
+    return new Native($view);
+}
+
 function model($name) {
     return table($name)->model();
 }
@@ -219,16 +238,7 @@ function render($template, $data) {
     return $twig->render('template', $data);
 }
 
-function resolve($view) {
-    switch (pathinfo($view, PATHINFO_EXTENSION)) {
-    case 'twig':
-        return new Twig($view);
-    }
-
-    return new Native($view);
-}
-
-function route($path, $method) {
+function routing($path, $method) {
     $args = [];
     $current = '';
     $tokens = preg_split('/\//', $path, 0, PREG_SPLIT_NO_EMPTY);
@@ -299,16 +309,6 @@ function union_resource($path) {
     }
 
     return $bundle;
-}
-
-function url($path) {
-    if (defined('BASE_URL')) {
-        return BASE_URL . $path;
-    } else {
-        $protocol = $_SERVER['HTTPS'] ? 'https' : 'http';
-
-        return "{$protocol}://{$_SERVER['HTTP_HOST']}{$path}";
-    }
 }
 
 function validate($value, $options) {

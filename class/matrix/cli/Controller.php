@@ -6,7 +6,7 @@ use matrix\core\Handler;
 
 class Controller {
 
-    use Handler;
+    use Handler, Responsible;
 
     public function __construct($values = []) {
         $this->values = $values + ['view' => 'empty.php'];

@@ -76,4 +76,4 @@ $result['buttons'] = $buttons;
 
 $view = $controller->customView() ?: cfg(@$form['args'] === 'modal' ? 'backend.form-modal' : 'backend.form');
 
-resolve($view)->render($controller, $form, $result);
+lookup($view)->render($controller, $form, $result);

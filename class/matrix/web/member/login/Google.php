@@ -12,7 +12,7 @@ trait Google {
         $client->addScope(Oauth2::USERINFO_EMAIL);
         $client->addScope(Oauth2::USERINFO_PROFILE);
         $client->setAuthConfig(APP_DATA . $config);
-        $client->setRedirectUri(url(APP_ROOT . $path));
+        $client->setRedirectUri(get_url(APP_ROOT . $path));
 
         return $client->createAuthUrl();
     }

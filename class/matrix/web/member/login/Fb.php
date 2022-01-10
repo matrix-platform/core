@@ -8,7 +8,7 @@ trait Fb {
 
     public function getFbAuthUrl($path = 'member/fb-login') {
         $fb = new Facebook(load_cfg('facebook'));
-        $url = url(APP_ROOT . $path);
+        $url = get_url(APP_ROOT . $path);
 
         return $fb->getRedirectLoginHelper()->getLoginUrl($url, ['email']);
     }

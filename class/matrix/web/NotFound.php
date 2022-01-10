@@ -4,11 +4,13 @@ namespace matrix\web;
 
 class NotFound {
 
+    use Responsible;
+
     public function __construct($path, $method) {
     }
 
     public function execute() {
-        header('HTTP/1.1 404 Not Found');
+        $this->response()->status(404);
     }
 
 }

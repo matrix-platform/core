@@ -20,14 +20,14 @@ function setValue($sheet, $x, $y, $value, $column = null) {
                 if ($column->multiple()) {
                     $files = [];
                     foreach (preg_split('/,/', $value, 0, PREG_SPLIT_NO_EMPTY) as $token) {
-                        $files[] = url(APP_PATH . 'files/' . $token);
+                        $files[] = get_url(APP_PATH . 'files/' . $token);
                     }
                     $value = implode("\n", $files);
                     $wrap = true;
                 } else {
                     $file = load_file_data($value);
                     if ($file) {
-                        $url = url(APP_PATH . 'files/' . $value);
+                        $url = get_url(APP_PATH . 'files/' . $value);
                         $value = $file['name'];
                     }
                 }
@@ -131,4 +131,4 @@ $result = [
 
 unlink($file);
 
-resolve('raw.php')->render($controller, $form, $result);
+$controller->response()->json($result);
