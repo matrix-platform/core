@@ -8,6 +8,8 @@ return [
 
     'exclude-menu-nodes' => null,
 
+    'folder' => null,
+
     'form' => null,
 
     'form-modal' => null,

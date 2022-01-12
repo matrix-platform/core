@@ -20,7 +20,7 @@ return new class() extends matrix\web\Controller {
 
     protected function process($form) {
         $args = $this->args();
-        $path = $args ? base64_urldecode($args[0]) : (APP_ROOT . 'backend/');
+        $path = $args ? base64_urldecode($args[0]) : (APP_ROOT . (cfg('backend.folder') ?: 'backend') . '/');
 
         $result = ['success' => true, 'path' => $path];
 

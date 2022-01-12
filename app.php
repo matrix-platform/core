@@ -38,7 +38,7 @@ $languages = cfg('system.languages');
 
 preg_match("/^(\/({$languages}))?(\/.*)?$/", $path, $info, PREG_UNMATCHED_AS_NULL);
 
-if (@$info[2]) {
+if ($info[2]) {
     define('APP_ROOT', APP_PATH . "{$info[2]}/");
     define('LANGUAGE', $info[2]);
 } else {
@@ -49,7 +49,13 @@ if (@$info[2]) {
 define('LANGUAGES', preg_split('/\|/', $languages));
 define('MULTILINGUAL', count(LANGUAGES) > 1);
 
-$path = @$info[3] ?: '/';
+if ($info[3]) {
+    $folder = cfg('backend.folder');
+    $path = $folder ? preg_replace("/^\/{$folder}(\/.*)?$/", '/backend$1', $info[3]) : $info[3];
+} else {
+    $path = '/';
+}
+
 $controller = routing($path, $method);
 
 if ($controller) {
