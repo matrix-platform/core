@@ -25,8 +25,7 @@ $tbl->add('content', Html::class)
     ->readonly(true)
     ->required(true);
 
-$tbl->add('ip', CreatorAddress::class)
-    ->required(true);
+$tbl->add('ip', CreatorAddress::class);
 
 $tbl->add('create_time', CreateTime::class)
     ->required(true);

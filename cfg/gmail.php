@@ -4,8 +4,10 @@ return [
 
     'from' => null,
 
+    'username' => null,
+
     'password' => null,
 
-    'username' => null,
+    'queue' => null,
 
 ];

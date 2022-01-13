@@ -92,7 +92,7 @@ CREATE TABLE base_sms_log (
     receiver    TEXT      NOT NULL,
     content     TEXT      NOT NULL,
     response    TEXT          NULL,
-    ip          TEXT      NOT NULL,
+    ip          TEXT          NULL,
     create_time TIMESTAMP NOT NULL,
     status      INTEGER   NOT NULL
 );
@@ -103,7 +103,7 @@ CREATE TABLE base_mail_log (
     receiver    TEXT      NOT NULL,
     subject     TEXT      NOT NULL,
     content     TEXT      NOT NULL,
-    ip          TEXT      NOT NULL,
+    ip          TEXT          NULL,
     create_time TIMESTAMP NOT NULL,
     status      INTEGER   NOT NULL
 );

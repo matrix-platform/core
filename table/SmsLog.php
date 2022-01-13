@@ -20,8 +20,7 @@ $tbl->add('content', Text::class)
 $tbl->add('response', Textarea::class)
     ->readonly(true);
 
-$tbl->add('ip', CreatorAddress::class)
-    ->required(true);
+$tbl->add('ip', CreatorAddress::class);
 
 $tbl->add('create_time', CreateTime::class)
     ->required(true);

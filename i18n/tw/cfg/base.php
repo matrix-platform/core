@@ -17,6 +17,7 @@ return [
     'gmail.from' => '寄件者名稱',
     'gmail.password' => '密碼',
     'gmail.username' => '帳號',
+    'gmail.queue' => '發信佇列',
 
     'line' => 'LINE Login',
     'line.auth_url' => 'Auth 網址',
