@@ -42,7 +42,7 @@ return [
     'confirm-delete' => 'Delete Confirmation',
     'confirm-delete-message' => 'Are you sure to delete the data?',
 
-    'copyright' => 'Copyright © 2021',
+    'copyright' => 'Copyright © 2022',
 
     'login-title' => 'Login',
     'login-logo' => 'Backend',

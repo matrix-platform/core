@@ -42,7 +42,7 @@ return [
     'confirm-delete' => '刪除確認',
     'confirm-delete-message' => '您確定要刪除資料嗎？',
 
-    'copyright' => 'Copyright © 2021',
+    'copyright' => 'Copyright © 2022',
 
     'login-title' => '登入',
     'login-logo' => '後台管理系統',
