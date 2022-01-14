@@ -22,7 +22,7 @@ if (cfg('system.debug')) {
 
 define('REMOTE_ADDR', $_SERVER['REMOTE_ADDR']);
 
-$path = $_SERVER['PATH_INFO'];
+$path = $_SERVER['PATH_INFO'] ?? '/';
 $method = $_SERVER['REQUEST_METHOD'];
 
 ErrorHandler::register(logging('error'));
