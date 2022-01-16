@@ -4,7 +4,7 @@ namespace matrix\web;
 
 class VendorController {
 
-    use RequestHandler, VendorAware;
+    use RequestHandler, Session, VendorAware;
 
     public function __construct($values = []) {
         $this->values = $values;

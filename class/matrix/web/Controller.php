@@ -4,7 +4,7 @@ namespace matrix\web;
 
 class Controller {
 
-    use RequestHandler;
+    use RequestHandler, Session;
 
     public function __construct($values = []) {
         $this->values = $values;

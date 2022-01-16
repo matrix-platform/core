@@ -4,7 +4,7 @@ namespace matrix\web;
 
 class MemberController {
 
-    use MemberAware, RequestHandler;
+    use MemberAware, RequestHandler, Session;
 
     public function __construct($values = []) {
         $this->values = $values;

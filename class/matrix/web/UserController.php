@@ -6,7 +6,7 @@ use matrix\db\Model;
 
 class UserController {
 
-    use RequestHandler, UserAuthenticator;
+    use RequestHandler, Session, UserAuthenticator;
 
     public function __construct($values = []) {
         $this->values = $values;

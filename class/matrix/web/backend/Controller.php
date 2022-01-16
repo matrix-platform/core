@@ -4,11 +4,12 @@ namespace matrix\web\backend;
 
 use matrix\db\Model;
 use matrix\web\RequestHandler;
+use matrix\web\Session;
 use matrix\web\UserAuthenticator;
 
 class Controller {
 
-    use authority\Authorization, RequestHandler, UserAuthenticator;
+    use authority\Authorization, RequestHandler, Session, UserAuthenticator;
 
     public function __construct($values = []) {
         $this->values = $values;
