@@ -1,6 +1,7 @@
 <?php //>
 
 use PHPMailer\PHPMailer\PHPMailer;
+use matrix\utility\Func;
 
 return new class() {
 
@@ -58,19 +59,13 @@ return new class() {
         ]);
 
         if ($log) {
-            $cipher = 'aes-128-gcm';
-            $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($cipher));
-            $text = openssl_encrypt(json_encode($log), $cipher, $options['password'], 0, $iv, $tag);
-
             $request = [
                 'http' => [
                     'header' => "Content-Type: application/json\r\n",
                     'method' => 'POST',
                     'content' => json_encode([
                         'mailer' => $options['username'],
-                        'data' => $text,
-                        'iv' => base64_encode($iv),
-                        'tag' => base64_encode($tag),
+                        'data' => Func::encrypt(json_encode($log), $options['password']),
                     ]),
                 ],
             ];
