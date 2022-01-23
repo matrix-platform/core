@@ -2,7 +2,6 @@
 
 namespace matrix\web\backend;
 
-use matrix\db\Model;
 use matrix\web\RequestHandler;
 use matrix\web\Session;
 use matrix\web\UserAuthenticator;
@@ -20,8 +19,6 @@ class Controller {
     }
 
     public function execute() {
-        Model::enableAdministration();
-
         if ($this->authenticate()) {
             $node = $this->menuNode();
             $menu = $this->permitted($node);

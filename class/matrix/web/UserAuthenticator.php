@@ -2,6 +2,8 @@
 
 namespace matrix\web;
 
+use matrix\db\Model;
+
 trait UserAuthenticator {
 
     use UserAware;
@@ -10,6 +12,8 @@ trait UserAuthenticator {
         $user = $this->user();
 
         if ($user) {
+            Model::enableAdministration();
+
             define('USER_ID', $user['id']);
 
             return true;

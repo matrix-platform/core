@@ -67,6 +67,28 @@ CREATE TABLE base_user_log (
     create_time TIMESTAMP NOT NULL
 );
 
+CREATE TABLE base_auth_token (
+    id          INTEGER   NOT NULL PRIMARY KEY,
+    token       TEXT      NOT NULL UNIQUE,
+    type        INTEGER   NOT NULL, -- options: auth-token-type
+    target_id   INTEGER   NOT NULL,
+    user_agent  TEXT          NULL,
+    ip          TEXT      NOT NULL,
+    modify_time TIMESTAMP NOT NULL,
+    create_time TIMESTAMP NOT NULL,
+    expire_time TIMESTAMP     NULL
+);
+
+CREATE TABLE base_one_time_password (
+    id          INTEGER   NOT NULL PRIMARY KEY,
+    type        INTEGER   NOT NULL, -- options: otp-type
+    target      TEXT      NOT NULL,
+    password    TEXT      NOT NULL,
+    ip          TEXT      NOT NULL,
+    verify_time TIMESTAMP     NULL,
+    create_time TIMESTAMP NOT NULL
+);
+
 CREATE TABLE base_file (
     id            INTEGER   NOT NULL PRIMARY KEY,
     parent_id     INTEGER       NULL,

@@ -2,8 +2,6 @@
 
 namespace matrix\web;
 
-use matrix\db\Model;
-
 class UserController {
 
     use RequestHandler, Session, UserAuthenticator;
@@ -17,8 +15,6 @@ class UserController {
     }
 
     public function execute() {
-        Model::enableAdministration();
-
         if ($this->authenticate()) {
             $this->handle();
         }
