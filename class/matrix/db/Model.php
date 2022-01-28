@@ -213,7 +213,7 @@ class Model {
 
         $this->execute($statement, $criteria->bind($statement, []));
 
-        return $this->fetch($statement);
+        return $this->fetch($statement, $columns);
     }
 
     public function toString($data) {
@@ -397,10 +397,10 @@ class Model {
         }
     }
 
-    private function fetch($statement) {
+    private function fetch($statement, $columns) {
         $rows = $statement->fetchAll();
 
-        foreach ($this->table->getColumns(false) as $name => $column) {
+        foreach ($this->table->getColumns($columns) as $name => $column) {
             if ($column->pseudo()) {
                 continue;
             }
@@ -414,7 +414,7 @@ class Model {
             }
         }
 
-        if ($this->db->cacheable() && $this->table->cacheable()) {
+        if ($columns === false && $this->db->cacheable() && $this->table->cacheable()) {
             array_walk($rows, [$this->cache, 'put']);
         }
 

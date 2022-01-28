@@ -1,9 +1,9 @@
 <?php //>
 
-$controller = $result['controller'];
+$delegate = $result['controller'];
 $form = $result['form'];
-$model = $controller->table()->model();
-$node = $controller->menuNode();
+$model = $delegate->table()->model();
+$node = $delegate->menuNode();
 
 //--
 
@@ -18,7 +18,7 @@ if ($form) {
     $titles = [];
 }
 
-$titles[] = i18n($controller->menus()[$node]['i18n']);
+$titles[] = i18n($delegate->menus()[$node]['i18n']);
 
 $result['titles'] = $titles;
 
@@ -36,7 +36,7 @@ $result['data'] = $data;
 
 $buttons = ['cancel' => ['ranking' => 100]];
 
-if ($controller->permitted("{$node}/update")) {
+if ($delegate->permitted("{$node}/update")) {
     $buttons['update'] = ['path' => 'deployment/update/' . $result['path'], 'ranking' => 200];
 }
 
