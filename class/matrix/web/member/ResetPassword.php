@@ -57,7 +57,7 @@ class ResetPassword extends Controller {
     protected function validatePassword($password) {
         $pattern = cfg('frontend.password-pattern');
 
-        return preg_match("/^{$pattern}$/", $password);
+        return $pattern ? preg_match($pattern, $password) : true;
     }
 
 }

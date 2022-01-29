@@ -2,7 +2,7 @@
 
 return [
 
-    'not-found' => '查无资料',
+    'double' => '格式错误',
 
     'duplicated' => '资料已存在',
 
@@ -13,6 +13,8 @@ return [
     'image' => '图档格式错误',
 
     'ip' => 'IP 格式错误',
+
+    'not-found' => '查无资料',
 
     'regex' => '格式错误',
 

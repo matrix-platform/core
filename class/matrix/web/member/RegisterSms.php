@@ -59,7 +59,7 @@ class RegisterSms extends Controller {
     protected function validateMobile($mobile) {
         $pattern = cfg('frontend.mobile-pattern');
 
-        return preg_match("/^{$pattern}$/", $mobile);
+        return $pattern ? preg_match($pattern, $mobile) : true;
     }
 
 }

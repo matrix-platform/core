@@ -75,9 +75,7 @@ class Attachment {
             $file = $svg;
             $mime_type = 'image/svg+xml';
         } else {
-            $finfo = finfo_open(FILEINFO_MIME_TYPE);
-            $mime_type = finfo_file($finfo, $file);
-            finfo_close($finfo);
+            $mime_type = mime_content_type($file);
         }
 
         $info = [

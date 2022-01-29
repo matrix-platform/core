@@ -10,10 +10,8 @@ if ($data['path'] === $file) {
     $size = $data['size'];
     $type = $data['mime_type'];
 } else {
-    $finfo = finfo_open(FILEINFO_MIME_TYPE);
     $size = filesize($path);
-    $type = finfo_file($finfo, $path);
-    finfo_close($finfo);
+    $type = mime_content_type($path);
 }
 
 $controller->response()->file($path)->headers([

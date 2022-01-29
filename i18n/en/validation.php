@@ -2,7 +2,7 @@
 
 return [
 
-    'not-found' => 'Not Found',
+    'double' => 'Invalid Format',
 
     'duplicated' => 'Existed',
 
@@ -13,6 +13,8 @@ return [
     'image' => 'Invalid Image Format',
 
     'ip' => 'Invalid IP Format',
+
+    'not-found' => 'Not Found',
 
     'regex' => 'Dismatched',
 

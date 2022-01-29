@@ -1,7 +1,9 @@
 <?php //>
 
 return function ($value, $options) {
-    if (preg_match("/{$options['pattern']}/", $value)) {
+    $pattern = @$options['pattern'];
+
+    if ($pattern && preg_match($pattern, $value)) {
         return true;
     }
 

@@ -17,7 +17,9 @@ $tbl->add('password', Password::class);
 
 $tbl->add('name', Text::class);
 
-$tbl->add('mobile', Text::class);
+$tbl->add('mobile', Text::class)
+    ->pattern(cfg('frontend.mobile-pattern'))
+    ->validation('regex');
 
 $tbl->add('mail', Email::class);
 
