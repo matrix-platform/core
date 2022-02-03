@@ -36,6 +36,10 @@ trait RequestHandler {
 
         if (is_array($content)) {
             foreach ($content as $idx => $data) {
+                if (is_string($data) && substr($data, 0, 5) === 'blob:') {
+                    $data = $form[str_replace('.', '_', $data)][0]['path'];
+                }
+
                 $file = Attachment::from(@$filename[$idx], $data, @$description[$idx], $privilege);
 
                 if ($file) {
@@ -43,6 +47,10 @@ trait RequestHandler {
                 }
             }
         } else {
+            if (is_string($content) && substr($content, 0, 5) === 'blob:') {
+                $content = $form[str_replace('.', '_', $content)][0]['path'];
+            }
+
             $file = Attachment::from($filename, $content, $description, $privilege);
 
             if ($file) {
@@ -64,7 +72,7 @@ trait RequestHandler {
     }
 
     protected function wrapPost() {
-        $form = $_POST;
+        $form = key_exists('JSON', $_POST) ? json_decode($_POST['JSON'], true) : $_POST;
 
         foreach ($_FILES as $name => $value) {
             $files = [];

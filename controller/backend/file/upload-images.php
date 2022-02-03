@@ -1,5 +1,7 @@
 <?php //>
 
+use matrix\web\Attachment;
+
 return new class() extends matrix\web\UserController {
 
     protected function wrap() {
@@ -7,7 +9,7 @@ return new class() extends matrix\web\UserController {
         $images = [];
 
         foreach ($form['images'] as $image) {
-            $images[] = $this->wrapFile($image, 'file')['file'];
+            $images[] = Attachment::from($image['name'], $image['path'], null);
         }
 
         $form['images'] = $images;
