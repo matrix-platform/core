@@ -26,6 +26,9 @@ return new class() extends matrix\web\UserController {
         return [
             'success' => true,
             'nodes' => $this->filter($nodes),
+            'post_max_size' => $this->getBytes(ini_get('post_max_size')),
+            'max_file_uploads' => $this->getBytes(ini_get('max_file_uploads')),
+            'upload_max_filesize' => $this->getBytes(ini_get('upload_max_filesize')),
         ];
     }
 
@@ -45,6 +48,21 @@ return new class() extends matrix\web\UserController {
         }
 
         return array_filter($nodes);
+    }
+
+    private function getBytes($size) {
+        $value = intval($size);
+
+        switch (strtoupper(substr($size, -1))) {
+        case 'G':
+            return $value << 30;
+        case 'K':
+            return $value << 10;
+        case 'M':
+            return $value << 20;
+        }
+
+        return $value;
     }
 
 };

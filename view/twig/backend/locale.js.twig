@@ -1,0 +1,2 @@
+{% set ignore = controller.response.headers({'Content-Type': 'application/javascript; charset=UTF-8'}) %}
+const i18n = {{ result.locale|json_encode(constant('JSON_UNESCAPED_UNICODE'))|raw }};
