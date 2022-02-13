@@ -14,12 +14,14 @@ class RegisterSms extends Controller {
     protected function process($form) {
         $register = $this->get('Register');
 
-        if ($register && $register['time'] + $register['cooldown'] - time() > 0) {
-            return ['error' => 'error.retry-sms-later'];
-        }
+        if ($register) {
+            if ($register['time'] + $register['cooldown'] - time() > 0) {
+                return ['error' => 'error.retry-sms-later'];
+            }
 
-        if (Func::count_sms(REMOTE_ADDR, $register['cooldown'])) {
-            return ['error' => 'error.retry-sms-later'];
+            if (Func::count_sms(REMOTE_ADDR, $register['cooldown'])) {
+                return ['error' => 'error.retry-sms-later'];
+            }
         }
 
         $mobile = @$form['mobile'];

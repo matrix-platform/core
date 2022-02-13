@@ -14,15 +14,23 @@ class ForgotSms extends Controller {
     protected function process($form) {
         $forgot = $this->get('Forgot');
 
-        if ($forgot && $forgot['time'] + $forgot['cooldown'] - time() > 0) {
-            return ['error' => 'error.retry-sms-later'];
+        if ($forgot) {
+            if ($forgot['time'] + $forgot['cooldown'] - time() > 0) {
+                return ['error' => 'error.retry-sms-later'];
+            }
+
+            if (Func::count_sms(REMOTE_ADDR, $forgot['cooldown'])) {
+                return ['error' => 'error.retry-sms-later'];
+            }
         }
 
-        if (Func::count_sms(REMOTE_ADDR, $forgot['cooldown'])) {
-            return ['error' => 'error.retry-sms-later'];
+        $mobile = @$form['mobile'];
+
+        if ($mobile === null) {
+            return ['error' => 'error.mobile-required'];
         }
 
-        $member = model('Member')->find(['mobile' => @$form['mobile']]);
+        $member = model('Member')->find(['mobile' => $mobile]);
 
         if (!$member) {
             return ['error' => 'error.mobile-not-found'];

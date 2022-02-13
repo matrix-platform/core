@@ -1,9 +1,11 @@
 /.vscode/
 /config-sample.php
 /data/
+/files
 /files/
 /logs/
 /vendor/
 /www/.htaccess
+/www/files
 /www/files/
 /www/index.php
