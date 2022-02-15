@@ -1,5 +1,7 @@
 <?php //>
 
+use matrix\utility\Func;
+
 return new class() {
 
     public function __invoke($args) {
@@ -29,6 +31,17 @@ return new class() {
 
         if (preg_match('/statuscode=(\d+)/', $response, $matches) && $matches[1] < 5) {
             $this->log($args, $response);
+
+            if (preg_match('/AccountPoint=(\d+)/', $response, $matches) && $matches[1] < $args['safe-point']) {
+                $content = load_i18n('template/mitake-warning');
+
+                if ($content['to']) {
+                    $content['current'] = $matches[1];
+                    $content['safe'] = $args['safe-point'];
+
+                    Func::send_mail(array_merge(load_cfg($content['mailer']), $content));
+                }
+            }
 
             return true;
         }
