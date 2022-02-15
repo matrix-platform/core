@@ -32,7 +32,6 @@ $tbl->add('create_time', CreateTime::class)
 
 $tbl->add('status', Integer::class)
     ->default(0)
-    ->invisible(true)
     ->options(load_options('mail-status'))
     ->required(true);
 

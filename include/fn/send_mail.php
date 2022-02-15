@@ -9,25 +9,25 @@ return new class() {
         if (@$options['queue']) {
             return $this->queue($options);
         } else {
-            return $this->gmail($options);
+            return $this->send($options);
         }
     }
 
-    private function gmail($options) {
+    private function send($options) {
         $mailer = new PHPMailer();
 
-        $mailer->CharSet = 'utf-8';
-        $mailer->From = $options['username'];
-        $mailer->Host = 'smtp.gmail.com';
-        $mailer->Password = $options['password'];
-        $mailer->Port = 465;
+        $mailer->Host = $options['host'];
+        $mailer->Port = $options['port'];
         $mailer->SMTPAuth = true;
-        $mailer->SMTPSecure = 'ssl';
+        $mailer->SMTPSecure = $options['secure'];
         $mailer->Username = $options['username'];
+        $mailer->Password = $options['password'];
 
         $mailer->isHTML(true);
         $mailer->isSMTP();
 
+        $mailer->CharSet = 'utf-8';
+        $mailer->From = $options['username'];
         $mailer->FromName = $options['from'];
         $mailer->Subject = render($options['subject'], $options);
         $mailer->Body = render($options['content'], $options);
@@ -36,18 +36,24 @@ return new class() {
             $mailer->AddAddress($to);
         }
 
-        if ($mailer->Send()) {
-            model('MailLog')->insert([
-                'sender' => $options['username'],
-                'receiver' => $options['to'],
-                'subject' => $mailer->Subject,
-                'content' => $mailer->Body,
-            ]);
+        $log = [
+            'sender' => $options['username'],
+            'receiver' => $options['to'],
+            'subject' => $mailer->Subject,
+            'content' => $mailer->Body,
+        ];
 
-            return true;
+        $result = $mailer->send();
+
+        if (!$result) {
+            logging('error')->error($mailer->ErrorInfo);
+
+            $log['status'] = 9;
         }
 
-        return false;
+        model('MailLog')->insert($log);
+
+        return $result;
     }
 
     private function queue($options) {

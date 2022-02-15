@@ -17,6 +17,9 @@ return [
     'gmail.from' => '寄件者名称',
     'gmail.password' => '密码',
     'gmail.username' => '帐号',
+    'gmail.host' => '主机',
+    'gmail.port' => '埠号',
+    'gmail.secure' => '安全连线',
     'gmail.queue' => '发信伫列',
 
     'line' => 'LINE Login',

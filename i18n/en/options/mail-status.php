@@ -2,6 +2,8 @@
 
 return [
 
-    '0' => 'None',
+    '0' => 'Normal',
+
+    '9' => 'Fail',
 
 ];

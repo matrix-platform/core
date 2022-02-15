@@ -17,6 +17,9 @@ return [
     'gmail.from' => 'From Name',
     'gmail.password' => 'Password',
     'gmail.username' => 'Username',
+    'gmail.host' => 'Host',
+    'gmail.port' => 'Port',
+    'gmail.secure' => 'Secure',
     'gmail.queue' => 'Mail Queue',
 
     'line' => 'LINE Login',

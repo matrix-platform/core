@@ -6,9 +6,9 @@ return new class('MailLog') extends matrix\web\backend\ListController {
         $this->columns([
             'receiver',
             'subject',
-            'content',
             'ip',
             'create_time',
+            'status',
         ]);
     }
 
