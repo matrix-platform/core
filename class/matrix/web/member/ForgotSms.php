@@ -18,10 +18,12 @@ class ForgotSms extends Controller {
             if ($forgot['time'] + $forgot['cooldown'] - time() > 0) {
                 return ['error' => 'error.retry-sms-later'];
             }
+        }
 
-            if (Func::count_sms(REMOTE_ADDR, $forgot['cooldown'])) {
-                return ['error' => 'error.retry-sms-later'];
-            }
+        $cooldown = cfg('system.sms-cooldown');
+
+        if (Func::count_sms(REMOTE_ADDR, $cooldown)) {
+            return ['error' => 'error.retry-sms-later'];
         }
 
         $mobile = @$form['mobile'];
@@ -53,7 +55,7 @@ class ForgotSms extends Controller {
         $this->set('Forgot', [
             'member_id' => $member['id'],
             'code' => $code,
-            'cooldown' => cfg('system.sms-cooldown'),
+            'cooldown' => $cooldown,
             'time' => time(),
         ]);
 

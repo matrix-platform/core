@@ -10,7 +10,7 @@ use matrix\db\Table;
 $tbl = new Table('base_user');
 
 $tbl->add('username', Text::class)
-    ->pattern('^\w+$')
+    ->pattern('/^\w+$/')
     ->required(true)
     ->unique(true)
     ->validation('regex');
