@@ -53,6 +53,9 @@ return new class() extends matrix\web\backend\Controller {
         $values = array_column($data, $ranking);
         $data = array_combine(array_column($data, $table->id()), $data);
 
+        $unique = array_unique($values, SORT_NUMERIC);
+        $reset = count($values) !== count($unique);
+
         foreach (array_combine($list, $values) as $id => $value) {
             $row = @$data[$id];
 
@@ -60,7 +63,11 @@ return new class() extends matrix\web\backend\Controller {
                 return ['error' => 'error.update-failed'];
             }
 
-            if ($row[$ranking] !== $value) {
+            if ($reset) {
+                $row[$ranking] = null;
+
+                $model->update($row);
+            } else if ($row[$ranking] !== $value) {
                 $row[$ranking] = $value;
 
                 $model->update($row);

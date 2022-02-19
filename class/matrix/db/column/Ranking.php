@@ -9,6 +9,7 @@ class Ranking {
     public function __construct($values) {
         $this->values = $values + [
             'formStyle' => 'integer',
+            'invisible' => true,
             'searchStyle' => false,
             'sequence' => 'base_ranking',
             'tab' => 'other',
