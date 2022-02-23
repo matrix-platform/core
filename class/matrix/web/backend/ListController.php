@@ -20,13 +20,13 @@ class ListController extends Controller {
     }
 
     public function available() {
-        $table = $this->table();
-        $relation = $table->getParentRelation();
+        $relation = $this->getParentRelation();
 
         if ($relation) {
             if ($this->method() === 'POST') {
                 if ($relation['self-referencing']) {
                     $pattern = preg_quote($this->name(), '/');
+                    $table = $this->table();
                     $relation = $table->getComposition($table);
 
                     return preg_match("/^{$pattern}(\/[\d-]+\/{$relation['alias']})?$/", $this->path());
@@ -80,6 +80,10 @@ class ListController extends Controller {
 
     public function remix($styles) {
         return $styles;
+    }
+
+    protected function getParentRelation() {
+        return $this->table()->getParentRelation();
     }
 
     protected function init() {
@@ -185,7 +189,7 @@ class ListController extends Controller {
             }
         }
 
-        $relation = $this->table()->getParentRelation();
+        $relation = $this->getParentRelation();
 
         if ($relation) {
             $args = $this->args();
