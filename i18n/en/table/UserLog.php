@@ -2,9 +2,11 @@
 
 return [
 
-    'user_id' => 'Username',
+    'username' => 'Username',
 
     'type' => 'Event',
+
+    'content' => 'Content',
 
     'ip' => 'IP',
 

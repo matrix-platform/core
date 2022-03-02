@@ -14,6 +14,8 @@ return [
 
             'user-log' => 'User Log',
 
+                'user-log/' => 'User Log',
+
             'group' => 'Group',
 
                 'group/' => 'Group',

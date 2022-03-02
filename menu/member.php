@@ -16,7 +16,7 @@ return [
 
             'member/update' => ['parent' => 'member', 'tag' => 'update'],
 
-            'member/substitute' => ['parent' => 'member', 'tag' => 'system'],
+            'member/switch' => ['parent' => 'member', 'tag' => 'switch'],
 
         'member-log' => ['icon' => 'far fa-list-alt', 'ranking' => 1100, 'parent' => 'members', 'group' => true, 'tag' => 'query'],
 

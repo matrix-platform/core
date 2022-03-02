@@ -36,5 +36,6 @@ return [
     'sms.prefix' => 'Default Country Code',
     'sms.screct' => 'Secret',
     'sms.url' => 'Api URL',
+    'sms.safe-point' => 'Safe Balance',
 
 ];

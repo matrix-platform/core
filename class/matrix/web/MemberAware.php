@@ -15,7 +15,7 @@ trait MemberAware {
             $member = $this->get('Member') ?: $this->recall();
 
             if ($member) {
-                $current = model('Member')->queryById($member['id']);
+                $current = @$member['original_user'] ? $member : model('Member')->queryById($member['id']);
 
                 if ($current && $current['password'] === $member['password']) {
                     $this->member = $current;

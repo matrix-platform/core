@@ -16,7 +16,7 @@ return [
 
             'vendor/update' => ['parent' => 'vendor', 'tag' => 'update'],
 
-            'vendor/substitute' => ['parent' => 'vendor', 'tag' => 'system'],
+            'vendor/switch' => ['parent' => 'vendor', 'tag' => 'switch'],
 
         'vendor-log' => ['icon' => 'far fa-list-alt', 'ranking' => 1100, 'parent' => 'vendors', 'group' => true, 'tag' => 'query'],
 

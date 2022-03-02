@@ -3,6 +3,7 @@
 use matrix\db\column\CreateTime;
 use matrix\db\column\CreatorAddress;
 use matrix\db\column\Integer;
+use matrix\db\column\Textarea;
 use matrix\db\Table;
 
 $filter = function ($table, $conditions = []) {
@@ -24,6 +25,9 @@ $tbl->add('type', Integer::class)
     ->options(load_options('user-log-type'))
     ->readonly(true)
     ->required(true);
+
+$tbl->add('content', Textarea::class)
+    ->readonly(true);
 
 $tbl->add('ip', CreatorAddress::class);
 

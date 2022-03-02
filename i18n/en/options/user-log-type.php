@@ -10,4 +10,8 @@ return [
 
     '4' => 'Login failed',
 
+    '5' => 'Switch Member',
+
+    '6' => 'Switch Vendor',
+
 ];

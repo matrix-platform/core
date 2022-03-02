@@ -40,7 +40,7 @@ trait Authorization {
             $permissions = $this->permissions();
             $tag = $menu['tag'];
 
-            if (@$permissions[$path][$tag] || $tag === 'user' || USER_ID <= ($tag === 'system' ? 1 : 2)) {
+            if (@$permissions[$path][$tag] || $tag === 'user' || USER_LEVEL <= ($tag === 'system' ? 1 : 2)) {
                 return $menu;
             }
         }

@@ -13,13 +13,25 @@ return new class() extends matrix\web\backend\Controller {
     }
 
     protected function process($form) {
-        $member = model('Member')->queryById($this->args()[0]);
+        $member = model('Member')->get($this->args()[0]);
 
         if (!$member) {
             return ['error' => 'error.data-not-found'];
         }
 
+        $member['original_user'] = USER_ID;
+
         $this->set('Member', $member);
+
+        //--
+
+        $content = array_intersect_key($member, array_flip(['id', 'username']));
+
+        model('UserLog')->insert([
+            'user_id' => USER_ID,
+            'type' => 5,
+            'content' => json_encode($content, JSON_PRETTY_PRINT),
+        ]);
 
         return [
             'success' => true,

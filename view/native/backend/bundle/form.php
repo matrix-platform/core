@@ -6,6 +6,7 @@ use matrix\utility\Func;
 $file = @$result['file'];
 $path = $result['path'];
 $prefix = $result['prefix'];
+$tabbed = in_array($prefix, preg_split('/\|/', cfg("backend.tabbed-bundle")));
 
 //--
 
@@ -19,6 +20,7 @@ $styles = [];
 
 foreach ($result['default'] as $name => $value) {
     $options = cfg("style/{$prefix}.{$name}.options");
+    $tab = $tabbed && preg_match('/^([^_]+)_.*$/', $name, $matches) ? $matches[1] : null;
 
     if ($options) {
         if ($options instanceof Closure) {
@@ -29,10 +31,10 @@ foreach ($result['default'] as $name => $value) {
             $type = 'radio';
         }
 
-        $column = ['options' => $options];
+        $column = ['options' => $options, 'tab' => $tab];
     } else {
         $class = cfg("style/{$prefix}.{$name}") ?: Text::class;
-        $column = new $class([]);
+        $column = new $class(['tab' => $tab]);
 
         $type = $column->formStyle();
     }

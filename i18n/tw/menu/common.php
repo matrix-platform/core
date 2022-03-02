@@ -14,6 +14,8 @@ return [
 
             'user-log' => '帳號紀錄',
 
+                'user-log/' => '帳號紀錄',
+
             'group' => '群組',
 
                 'group/' => '群組',

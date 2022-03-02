@@ -2,9 +2,11 @@
 
 return [
 
-    'user_id' => '帐号',
+    'username' => '帐号',
 
     'type' => '事件',
+
+    'content' => '内容',
 
     'ip' => 'IP',
 

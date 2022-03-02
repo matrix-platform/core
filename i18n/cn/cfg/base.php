@@ -36,5 +36,6 @@ return [
     'sms.prefix' => '预设国码',
     'sms.screct' => '密钥',
     'sms.url' => 'Api 网址',
+    'sms.safe-point' => '点数安全存量',
 
 ];

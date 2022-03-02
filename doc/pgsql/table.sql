@@ -35,6 +35,7 @@ CREATE TABLE base_member_log (
     id          INTEGER   NOT NULL PRIMARY KEY,
     member_id   INTEGER   NOT NULL,
     type        INTEGER   NOT NULL, -- options: member-log-type
+    content     TEXT          NULL,
     ip          TEXT      NOT NULL,
     create_time TIMESTAMP NOT NULL
 );
@@ -45,6 +46,7 @@ CREATE TABLE base_vendor_log (
     id          INTEGER   NOT NULL PRIMARY KEY,
     vendor_id   INTEGER   NOT NULL,
     type        INTEGER   NOT NULL, -- options: vendor-log-type
+    content     TEXT          NULL,
     ip          TEXT      NOT NULL,
     create_time TIMESTAMP NOT NULL
 );
@@ -63,6 +65,7 @@ CREATE TABLE base_user_log (
     id          INTEGER   NOT NULL PRIMARY KEY,
     user_id     INTEGER   NOT NULL,
     type        INTEGER   NOT NULL, -- options: user-log-type
+    content     TEXT          NULL,
     ip          TEXT      NOT NULL,
     create_time TIMESTAMP NOT NULL
 );

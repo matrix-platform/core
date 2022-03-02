@@ -8,6 +8,8 @@ return [
 
     'query' => '查询',
 
+    'switch' => '切换',
+
     'update' => '修改',
 
 ];

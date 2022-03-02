@@ -8,6 +8,8 @@ return [
 
     'query' => 'Read',
 
+    'switch' => 'Switch',
+
     'update' => 'Update',
 
 ];

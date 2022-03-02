@@ -6,6 +6,8 @@ return [
 
     'type' => 'Event',
 
+    'content' => 'Content',
+
     'ip' => 'IP',
 
     'create_time' => 'Time',

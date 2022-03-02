@@ -15,6 +15,7 @@ class UserController extends Controller {
             Model::enableAdministration();
 
             define('USER_ID', $user['id']);
+            define('USER_LEVEL', USER_ID > 1000 ? 3 : (USER_ID > 1 ? 2 : 1));
 
             return true;
         } else {
