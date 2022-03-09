@@ -15,7 +15,7 @@ trait VendorAware {
             $vendor = $this->get('Vendor') ?: $this->recall();
 
             if ($vendor) {
-                $current = @$vendor['original_user'] ? $vendor : model('Vendor')->queryById($vendor['id']);
+                $current = @$vendor['original_user'] ? model('Vendor')->get($vendor['id']) : model('Vendor')->queryById($vendor['id']);
 
                 if ($current && $current['password'] === $vendor['password']) {
                     $this->vendor = $current;

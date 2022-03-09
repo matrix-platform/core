@@ -36,7 +36,9 @@ class Register extends Controller {
 
         $member = $this->saveMember($register, $form);
 
-        if (!$member) {
+        if ($member) {
+            $this->data($member);
+        } else {
             return ['error' => 'error.insert-failed'];
         }
 
