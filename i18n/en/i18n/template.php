@@ -2,10 +2,10 @@
 
 return [
 
-    'mitake-warning' => 'Email Notify: Not enough Mitake\'s points',
-    'mitake-warning.mailer' => 'Mailer',
-    'mitake-warning.to' => 'To',
-    'mitake-warning.subject' => 'Subject',
-    'mitake-warning.content' => 'Content',
+    'sms-warning' => 'Email Notify: Not enough SMS points',
+    'sms-warning.mailer' => 'Mailer',
+    'sms-warning.to' => 'To',
+    'sms-warning.subject' => 'Subject',
+    'sms-warning.content' => 'Content',
 
 ];

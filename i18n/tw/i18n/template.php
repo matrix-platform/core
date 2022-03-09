@@ -2,10 +2,10 @@
 
 return [
 
-    'mitake-warning' => 'Email 通知: 三竹簡訊點數不足',
-    'mitake-warning.mailer' => '郵遞系統',
-    'mitake-warning.to' => '收件人',
-    'mitake-warning.subject' => '主旨',
-    'mitake-warning.content' => '內容',
+    'sms-warning' => 'Email 通知: 簡訊點數不足',
+    'sms-warning.mailer' => '郵遞系統',
+    'sms-warning.to' => '收件人',
+    'sms-warning.subject' => '主旨',
+    'sms-warning.content' => '內容',
 
 ];

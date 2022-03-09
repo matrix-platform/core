@@ -4,6 +4,6 @@ use matrix\db\column\Html;
 
 return [
 
-    'mitake-warning.content' => Html::class,
+    'sms-warning.content' => Html::class,
 
 ];
