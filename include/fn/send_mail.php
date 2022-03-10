@@ -19,9 +19,14 @@ return new class() {
         $mailer->Host = $options['host'];
         $mailer->Port = $options['port'];
         $mailer->SMTPAuth = true;
-        $mailer->SMTPSecure = $options['secure'];
         $mailer->Username = $options['username'];
         $mailer->Password = $options['password'];
+
+        if ($options['secure']) {
+            $mailer->SMTPSecure = $options['secure'];
+        } else {
+            $mailer->SMTPAutoTLS = false;
+        }
 
         $mailer->isHTML(true);
         $mailer->isSMTP();
