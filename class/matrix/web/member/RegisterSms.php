@@ -42,11 +42,7 @@ class RegisterSms extends Controller {
 
         $code = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
 
-        $options = load_cfg('sms');
-        $options['mobile'] = $mobile;
-        $options['text'] = render(i18n('sms.register'), ['code' => $code]);
-
-        if (!Func::send_sms($options)) {
+        if (!$this->sendSms($mobile, $code)) {
             return ['error' => 'error.sms-failed'];
         }
 
@@ -58,6 +54,14 @@ class RegisterSms extends Controller {
         ]);
 
         return ['success' => true, 'message' => i18n('common.sms-success')];
+    }
+
+    protected function sendSms($mobile, $code) {
+        $options = load_cfg('sms');
+        $options['mobile'] = $mobile;
+        $options['text'] = render(i18n('sms.register'), ['code' => $code]);
+
+        return Func::send_sms($options);
     }
 
     protected function validateMobile($mobile) {
