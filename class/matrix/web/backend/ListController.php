@@ -105,9 +105,14 @@ class ListController extends Controller {
         $search = @$form['q'];
 
         if ($search) {
+            $search = json_decode(base64_urldecode($search), true);
+        } else {
+            $search = $this->defaultSearch();
+        }
+
+        if ($search) {
             $columns = $this->getColumns();
             $conditions = [];
-            $search = json_decode(base64_urldecode($search), true);
 
             foreach ($columns as $name => $column) {
                 foreach ([$name, "-{$name}"] as $token) {
