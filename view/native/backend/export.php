@@ -7,11 +7,15 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 function setValue($sheet, $x, $y, $value, $column = null) {
     if (is_string($value)) {
+        $type = DataType::TYPE_STRING;
         $url = null;
         $wrap = false;
 
         if ($column) {
             switch ($column->listStyle()) {
+            case 'double':
+                $type = DataType::TYPE_NUMERIC;
+                break;
             case 'email':
                 $url = "mailto:{$value}";
                 break;
@@ -39,7 +43,7 @@ function setValue($sheet, $x, $y, $value, $column = null) {
         }
 
         $cell = $sheet->getCellByColumnAndRow($x, $y);
-        $cell->setValueExplicit($value, DataType::TYPE_STRING);
+        $cell->setValueExplicit($value, $type);
 
         if ($url) {
             $cell->getHyperlink()->setUrl($url);
