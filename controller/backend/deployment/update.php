@@ -33,7 +33,7 @@ return new class() extends matrix\web\backend\Controller {
             return ['error' => 'error.data-not-found'];
         }
 
-        $conditions = [];
+        $conditions = $controller->preprocess([]);
         $table = $controller->table();
         $model = $table->model();
         $relation = $table->getParentRelation();

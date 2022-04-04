@@ -19,7 +19,7 @@ return new class() extends matrix\web\backend\Controller {
         $controller = routing('/backend/' . base64_urldecode($path), 'POST');
 
         if ($controller instanceof ListController) {
-            $conditions = [];
+            $conditions = $controller->preprocess([]);
             $table = $controller->table();
             $relation = $table->getParentRelation();
 

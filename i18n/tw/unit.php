@@ -2,6 +2,8 @@
 
 return [
 
+    'percent' => '%',
+
     'px' => 'px',
 
     'rem' => 'rem',

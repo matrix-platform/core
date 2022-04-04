@@ -180,7 +180,7 @@ class Model {
             $relation = $this->table->getParentRelation();
 
             if ($relation) {
-                $value = $data[$relation['column']->name()];
+                $value = @$data[$relation['column']->name()];
 
                 if ($value !== null) {
                     $model = $relation['foreign']->model();
