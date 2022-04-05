@@ -83,7 +83,7 @@ foreach ($controller->filters() ?: [] as $name => $column) {
         continue;
     }
 
-    $options = $column->options();
+    $options = is_array($column->options());
 
     $filters[] = [
         'column' => $column,
@@ -139,7 +139,7 @@ if (!$filters) {
             $selected = count($filters);
         }
 
-        $options = $column->options();
+        $options = is_array($column->options());
 
         $filters[] = [
             'column' => $column,
