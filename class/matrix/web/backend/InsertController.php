@@ -32,7 +32,7 @@ class InsertController extends Controller {
         if ($this->deepClone()) {
             $args = $this->args();
 
-            if ($table->getParentRelation()) {
+            if ($this->getParentRelation()) {
                 array_shift($args);
             }
 

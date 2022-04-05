@@ -24,7 +24,7 @@ class BlankController extends Controller {
         if ($table->cloneable()) {
             $args = $this->args();
 
-            if ($table->getParentRelation()) {
+            if ($this->getParentRelation()) {
                 array_shift($args);
             }
 

@@ -8,8 +8,7 @@ trait BlankForm {
 
     public function available() {
         if ($this->method() === 'POST') {
-            $table = $this->table();
-            $relation = $table->getParentRelation();
+            $relation = $this->getParentRelation();
 
             if ($relation) {
                 $info = pathinfo($this->name());
@@ -17,6 +16,7 @@ trait BlankForm {
 
                 if ($relation['self-referencing']) {
                     $pattern = preg_quote($info['dirname'], '/');
+                    $table = $this->table();
                     $relation = $table->getComposition($table);
 
                     return preg_match("/^{$pattern}(\/[\d]+\/{$relation['alias']})?\/{$action}(\/[\d]+)?$/", $this->path());
@@ -52,8 +52,12 @@ trait BlankForm {
         return false;
     }
 
+    protected function getParentRelation() {
+        return $this->table()->getParentRelation();
+    }
+
     private function wrapParentId($form) {
-        $relation = $this->table()->getParentRelation();
+        $relation = $this->getParentRelation();
 
         if ($relation) {
             $args = $this->args();
