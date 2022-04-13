@@ -32,10 +32,14 @@ class MemberController {
         if (defined('AJAX')) {
             $this->response()->status(401);
         } else {
-            $this->response()->redirect(APP_ROOT . 'login/' . base64_urlencode($_SERVER['REQUEST_URI']));
+            $this->redirect();
         }
 
         return false;
+    }
+
+    protected function redirect() {
+        $this->response()->redirect(APP_ROOT . 'login/' . base64_urlencode($_SERVER['REQUEST_URI']));
     }
 
 }

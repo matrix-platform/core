@@ -25,7 +25,7 @@ class LoginForm extends Controller {
 
     protected function process($form) {
         $args = $this->args();
-        $path = $args ? base64_urldecode($args[0]) : APP_ROOT;
+        $path = $args ? base64_urldecode($args[0]) : $this->returnPath();
 
         $result = ['success' => true, 'path' => $path];
 
@@ -36,6 +36,10 @@ class LoginForm extends Controller {
         }
 
         return $result;
+    }
+
+    protected function returnPath() {
+        return APP_ROOT;
     }
 
 }

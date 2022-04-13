@@ -26,16 +26,10 @@ class ForgotSms extends Controller {
             return ['error' => 'error.retry-sms-later'];
         }
 
-        $mobile = @$form['mobile'];
-
-        if ($mobile === null) {
-            return ['error' => 'error.mobile-required'];
-        }
-
-        $member = model('Member')->find(['mobile' => $mobile]);
+        $member = $this->queryMember($form);
 
         if (!$member) {
-            return ['error' => 'error.mobile-not-found'];
+            return ['error' => 'error.member-not-found'];
         }
 
         if ($member['disabled']) {
@@ -56,6 +50,10 @@ class ForgotSms extends Controller {
         ]);
 
         return ['success' => true, 'message' => i18n('common.sms-success')];
+    }
+
+    protected function queryMember($form) {
+        return model('Member')->find(['mobile' => @$form['mobile']]);
     }
 
     protected function sendSms($mobile, $code) {

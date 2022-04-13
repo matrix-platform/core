@@ -89,12 +89,12 @@ class ListController extends Controller {
     protected function init() {
         $table = $this->table();
 
-        foreach ($table->getRelations() as $relation) {
+        foreach ($table->getRelations() as $alias => $relation) {
             if ($relation['type'] === 'composition' && !$relation['junction']) {
-                $name = "{$relation['alias']}_count";
+                $name = "{$alias}_count";
 
                 if (!isset($table->{$name})) {
-                    $table->add($name, "{$relation['alias']}.count");
+                    $table->add($name, "{$alias}.count");
                 }
             }
         }

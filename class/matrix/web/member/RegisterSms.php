@@ -11,6 +11,10 @@ class RegisterSms extends Controller {
         return ($this->method() === 'POST' && $this->name() === $this->path());
     }
 
+    protected function mobileExists($mobile) {
+        return model('Member')->count(['mobile' => $mobile]);
+    }
+
     protected function process($form) {
         $register = $this->get('Register');
 
@@ -36,7 +40,7 @@ class RegisterSms extends Controller {
             return ['error' => 'error.invalid-mobile'];
         }
 
-        if (model('Member')->count(['mobile' => $mobile])) {
+        if ($this->mobileExists($mobile)) {
             return ['error' => 'error.mobile-exists'];
         }
 
@@ -50,6 +54,7 @@ class RegisterSms extends Controller {
             'mobile' => $mobile,
             'code' => $code,
             'cooldown' => $cooldown,
+            'data' => $form,
             'time' => time(),
         ]);
 

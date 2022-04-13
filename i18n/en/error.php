@@ -34,8 +34,6 @@ return [
 
     'mobile-exists' => 'Mobile Exists',
 
-    'mobile-not-found' => 'Mobile Not Found',
-
     'mobile-required' => 'Mobile Required',
 
     'password-failed' => 'Change Password Failed',

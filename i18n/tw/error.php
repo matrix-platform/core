@@ -34,8 +34,6 @@ return [
 
     'mobile-exists' => '手機號碼已存在',
 
-    'mobile-not-found' => '查無此手機號碼',
-
     'mobile-required' => '請輸入手機號碼',
 
     'password-failed' => '變更密碼失敗',
