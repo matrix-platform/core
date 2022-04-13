@@ -61,13 +61,14 @@ $result['styles'] = $controller->remix($styles);
 //--
 
 $buttons = $controller->buttons() ?: [];
+$param = @$form['sublist'] ? '?sublist=1' : '';
 
 if (!isset($buttons['cancel'])) {
     $buttons['cancel'] = ['ranking' => 100];
 }
 
 if (!isset($buttons['insert']) && $controller->permitted("{$node}/insert")) {
-    $buttons['insert'] = ['path' => "{$path}/insert{$suffix}", 'ranking' => 200];
+    $buttons['insert'] = ['path' => "{$path}/insert{$suffix}{$param}", 'ranking' => 200];
 }
 
 $result['buttons'] = $buttons;

@@ -207,8 +207,9 @@ class ListController extends Controller {
     protected function process($form) {
         $criteria = $this->criteria();
         $export = @$form['export'];
+        $sublist = @$form['sublist'];
 
-        if ($export) {
+        if ($export || $sublist) {
             $page = 1;
             $size = 0;
         } else {
@@ -246,7 +247,7 @@ class ListController extends Controller {
             $count = $model->count($form);
 
             if ($count <= ($page - 1) * $size) {
-                $page = intval(ceil($count / $size));
+                $page = $size ? intval(ceil($count / $size)) : 0;
             }
 
             $data = $count ? $model->query($form, $orders ?: $this->defaultRanking(), $size, $page) : [];
@@ -254,7 +255,7 @@ class ListController extends Controller {
 
         return $this->subprocess($form, [
             'success' => true,
-            'view' => $export ? 'backend/export.php' : null,
+            'view' => $sublist ? 'backend/sublist.php' : ($export ? 'backend/export.php' : null),
             'count' => $count,
             'data' => $data,
             'page' => $page ?: 1,

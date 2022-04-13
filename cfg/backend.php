@@ -36,4 +36,6 @@ return [
 
     'password-form' => null,
 
+    'sublist' => null,
+
 ];

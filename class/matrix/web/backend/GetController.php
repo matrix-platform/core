@@ -24,11 +24,25 @@ class GetController extends Controller {
     }
 
     protected function process($form) {
-        $model = $this->table()->model();
+        $table = $this->table();
+        $model = $table->model();
         $data = $model->get($this->args()[0]);
 
         if (!$data) {
             return ['error' => 'error.data-not-found'];
+        }
+
+        $sublist = $this->sublist();
+
+        if ($sublist) {
+            foreach ($table->getRelations() as $alias => $relation) {
+                $node = "{$this->node()}{$alias}";
+
+                if ($relation['type'] === 'composition' && !$relation['junction'] && in_array($node, $sublist)) {
+                    $id = $data[$relation['column']->name()];
+                    $data["{$node}:count"] = $relation['foreign']->filter($relation['target']->equal($id))->count();
+                }
+            }
         }
 
         $data['.title'] = $model->toString($data);

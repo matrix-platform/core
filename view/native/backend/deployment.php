@@ -1,5 +1,6 @@
 <?php //>
 
+$param = @$form['sublist'] ? '?sublist=1' : '';
 $delegate = $result['controller'];
 $form = $result['form'];
 $model = $delegate->table()->model();
@@ -37,7 +38,7 @@ $result['data'] = $data;
 $buttons = ['cancel' => ['ranking' => 100]];
 
 if ($delegate->permitted("{$node}/update")) {
-    $buttons['update'] = ['path' => 'deployment/update/' . $result['path'], 'ranking' => 200];
+    $buttons['update'] = ['path' => "deployment/update/{$result['path']}{$param}", 'ranking' => 200];
 }
 
 $result['buttons'] = $buttons;

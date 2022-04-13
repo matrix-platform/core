@@ -2,20 +2,22 @@
 
 use matrix\utility\Func;
 
+$data = $result['data'];
+$menus = $controller->menus();
 $node = $controller->menu()['parent'];
 $table = $controller->table();
 
 //--
 
-$list = $table->model()->parents($result['data']);
-$list[] = $result['data'];
+$list = $table->model()->parents($data);
+$list[] = $data;
 $titles = array_filter(array_column($list, '.title'), 'is_string');
 
 $result['subtitle'] = array_pop($titles);
 
 //--
 
-$result['breadcrumbs'] = Func::breadcrumbs($controller->menus(), $controller->node(), $list);
+$result['breadcrumbs'] = Func::breadcrumbs($menus, $controller->node(), $list);
 
 //--
 
@@ -59,16 +61,35 @@ if ($table->versionable()) {
 //--
 
 $buttons = $controller->buttons() ?: [];
+$param = @$form['sublist'] ? '?sublist=1' : '';
 
 if (!isset($buttons['cancel'])) {
     $buttons['cancel'] = ['ranking' => 100];
 }
 
 if (!isset($buttons['update']) && $controller->permitted("{$node}/update")) {
-    $buttons['update'] = ['path' => "{$node}/update/{{ id }}", 'ranking' => 200];
+    $buttons['update'] = ['path' => "{$node}/update/{{ id }}{$param}", 'ranking' => 200];
 }
 
 $result['buttons'] = $buttons;
+
+//--
+
+$sublist = [];
+
+foreach ($controller->sublist() ?: [] as $name) {
+    if ($controller->permitted($name)) {
+        $menu = $menus[$name];
+        $path = render($menu['pattern'], $data);
+
+        $menu['path'] = "{$path}?sublist=1";
+        $menu['tab'] = str_replace('/', '-', $path);
+
+        $sublist[$name] = $menu;
+    }
+}
+
+$result['sublist'] = $sublist;
 
 //--
 
