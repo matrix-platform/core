@@ -2,6 +2,8 @@
 
 return [
 
+    'date' => 'Invalid Format',
+
     'double' => 'Invalid Format',
 
     'duplicated' => 'Existed',

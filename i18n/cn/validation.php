@@ -2,6 +2,8 @@
 
 return [
 
+    'date' => '格式错误',
+
     'double' => '格式错误',
 
     'duplicated' => '资料已存在',

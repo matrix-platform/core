@@ -39,7 +39,7 @@ class Login extends Controller {
             $this->forget();
         }
 
-        return ['success' => true];
+        return $this->subprocess($form, ['success' => true]);
     }
 
     protected function queryMember($form) {

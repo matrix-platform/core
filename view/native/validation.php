@@ -8,6 +8,7 @@ foreach ($result as $error) {
     $errors[] = [
         'name' => $error['name'],
         'message' => $error['message'] ?? i18n("validation.{$type}", $type),
+        'type' => $type,
     ];
 }
 

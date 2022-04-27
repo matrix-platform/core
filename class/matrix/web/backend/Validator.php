@@ -35,7 +35,8 @@ trait Validator {
 
                 if ($alias) {
                     $relation = $this->table()->getRelation($alias);
-                    $condition = [$relation['target']->equal($value)->with($language)];
+                    $condition = $relation['filter'];
+                    $condition[] = $relation['target']->equal($value)->with($language);
 
                     if (!$relation['foreign']->model()->count($condition)) {
                         $errors[] = ['name' => $name, 'type' => 'not-found'];

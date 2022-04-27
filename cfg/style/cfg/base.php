@@ -11,6 +11,8 @@ return [
     'embedded-content.body-beginning' => Textarea::class,
     'embedded-content.body-ending' => Textarea::class,
 
+    'sms.safe-point' => Integer::class,
+
     'system.debug' => Boolean::class,
     'system.event-secret-timeout' => Integer::class,
     'system.sms-cooldown' => Integer::class,
