@@ -29,10 +29,14 @@ return [
     'search' => '查询',
     'view' => '检视',
     'update' => '储存',
+    'history' => '异动纪录',
     'next' => '下一步',
 
     'operation' => '操作',
     'visible' => '显示',
+    'log-type' => '类型',
+    'log-time' => '时间',
+    'ip-address' => 'IP',
     'subtotal' => '小计',
     'list-rows' => '共 {{ count }} 笔资料，第 {{ page|raw }} 页，每页 {{ size|raw }} 笔',
 

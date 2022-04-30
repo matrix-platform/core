@@ -60,6 +60,12 @@ if ($table->versionable()) {
 
 //--
 
+$links = $controller->links() ?: [];
+
+$result['links'] = $links;
+
+//--
+
 $buttons = $controller->buttons() ?: [];
 $param = @$form['sublist'] ? '?sublist=1' : '';
 

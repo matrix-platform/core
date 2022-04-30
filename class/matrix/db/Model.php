@@ -103,6 +103,50 @@ class Model {
         return $this->find(['id' => $id]);
     }
 
+    public function history($id) {
+        $command = 'SELECT A.id,' .
+                         ' A.type,' .
+                         ' A.log_time,' .
+                         ' A.controller,' .
+                         ' A.user_id,' .
+                         ' B.username AS user,' .
+                         ' A.member_id,' .
+                         ' C.username AS member,' .
+                         ' A.ip,' .
+                         ' A.previous,' .
+                         ' A.current' .
+                    ' FROM base_manipulation_log AS A' .
+               ' LEFT JOIN base_user AS B ON (A.user_id = B.id)' .
+               ' LEFT JOIN common_member AS C ON (A.member_id = C.id)' .
+                   ' WHERE A.data_type = ?' .
+                     ' AND A.data_id = ?' .
+                ' ORDER BY A.id DESC';
+
+        $name = $this->table->name();
+
+        $statement = $this->db->prepare($command);
+        $statement->bindValue(1, $name, PDO::PARAM_STR);
+        $statement->bindValue(2, $id, PDO::PARAM_INT);
+
+        $this->execute($statement, [$name, $id]);
+
+        $rows = [];
+
+        foreach ($statement->fetchAll() as $row) {
+            if ($row['previous']) {
+                $row['previous'] = json_decode($row['previous'], true);
+            }
+
+            if ($row['current']) {
+                $row['current'] = json_decode($row['current'], true);
+            }
+
+            $rows[] = $row;
+        }
+
+        return $rows;
+    }
+
     public function insert($data) {
         $junctions = [];
 
@@ -469,7 +513,7 @@ class Model {
                 $diff = [];
 
                 foreach ($this->table->getColumns(false) as $name => $column) {
-                    if ($column->pseudo() || $column->readonly()) {
+                    if ($column->pseudo() || $column->readonly() || $column->traceable() === false) {
                         continue;
                     }
 
@@ -488,8 +532,12 @@ class Model {
                     }
                 }
 
+                if (!$diff) {
+                    return;
+                }
+
                 $type = self::UPDATE;
-                $curr = $diff ? json_encode($diff, JSON_UNESCAPED_UNICODE) : '{}';
+                $curr = json_encode($diff, JSON_UNESCAPED_UNICODE);
             } else {
                 $type = self::DELETE;
                 $curr = null;

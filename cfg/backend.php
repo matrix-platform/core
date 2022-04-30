@@ -14,6 +14,8 @@ return [
 
     'form-modal' => null,
 
+    'history' => null,
+
     'index' => null,
 
     'label' => null,

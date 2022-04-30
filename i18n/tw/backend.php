@@ -29,10 +29,14 @@ return [
     'search' => '查詢',
     'view' => '檢視',
     'update' => '儲存',
+    'history' => '異動紀錄',
     'next' => '下一步',
 
     'operation' => '操作',
     'visible' => '顯示',
+    'log-type' => '類型',
+    'log-time' => '時間',
+    'ip-address' => 'IP',
     'subtotal' => '小計',
     'list-rows' => '共 {{ count }} 筆資料，第 {{ page|raw }} 頁，每頁 {{ size|raw }} 筆',
 

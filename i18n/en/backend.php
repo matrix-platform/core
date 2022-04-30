@@ -29,10 +29,14 @@ return [
     'search' => 'Search',
     'view' => 'View',
     'update' => 'Save',
+    'history' => 'History',
     'next' => 'Next',
 
     'operation' => 'Operation',
     'visible' => 'Visible',
+    'log-type' => 'Type',
+    'log-time' => 'Time',
+    'ip-address' => 'IP',
     'subtotal' => 'Sub Total',
     'list-rows' => 'Total {{ count }} rows, {{ page|raw }} pages, {{ size|raw }} rows per page.',
 
