@@ -105,7 +105,7 @@ foreach ($controller->getColumns() as $name => $column) {
 
     if (is_array($column->options())) {
         if ($column->multiple()) {
-            $type = $column->sortable() ? 'sortable-options' : 'select';
+            $type = $column->sortable() ? 'sortable-options' : 'checkbox-group';
         } else if ($type !== 'radio' && $type !== 'select') {
             $type = $column->association() ? 'select' : 'radio';
         }

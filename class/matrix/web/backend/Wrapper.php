@@ -10,7 +10,7 @@ trait Wrapper {
                 $form = $this->wrapFile($form, $name, $column->privilege());
             } else if ($column->multiple()) {
                 if (is_array($form[$name])) {
-                    $form[$name] = implode(',', $form[$name]);
+                    $form[$name] = implode(',', array_filter($form[$name], function ($value) { return $value !== null; }));
                 }
             }
         }

@@ -40,7 +40,7 @@ foreach ($table->getColumns($controller->columns()) as $name => $column) {
         }
 
         if ($column->multiple()) {
-            $type = $column->sortable() ? 'sortable-options' : 'select';
+            $type = $column->sortable() ? 'sortable-options' : 'checkbox-group';
         } else if ($type !== 'radio' && $type !== 'select') {
             $type = $column->association() ? 'select' : 'radio';
         }
