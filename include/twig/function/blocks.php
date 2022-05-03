@@ -28,7 +28,7 @@ return new Twig\TwigFunction('blocks', function ($page) {
         }
 
         if (is_null($block['fluid'])) {
-            $block['fluid'] = $page['fluid'];
+            $block['fluid'] = @$page['fluid'];
         }
 
         $blocks[$block['id']] = $block;
