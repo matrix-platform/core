@@ -17,7 +17,7 @@ $tbl->add('title', Text::class)
     ->multilingual(MULTILINGUAL)
     ->required(true);
 
-$tbl->add('icon', Image::class);
+$tbl->add('icon', cfg('style/table.Menu.icon') ?: Image::class);
 
 $tbl->add('url', Text::class);
 

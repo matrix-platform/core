@@ -65,7 +65,10 @@ class GetController extends Controller {
 
                     if ($relation['type'] === 'composition' && !$relation['junction'] && in_array($node, $sublist)) {
                         $id = $data[$relation['column']->name()];
-                        $data["{$node}:count"] = $relation['foreign']->filter($relation['target']->equal($id))->count();
+
+                        $controller = load_resource("controller/backend/{$node}.php");
+                        $conditions = $controller->preprocess([$relation['target']->equal($id)]);
+                        $data["{$node}:count"] = $relation['foreign']->filter($conditions)->count();
                     }
                 }
             }
