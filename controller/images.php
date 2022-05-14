@@ -18,10 +18,14 @@ return new class() extends matrix\web\Controller {
         $args = $this->args();
 
         $path = array_pop($args);
-        $width = array_shift($args);
-        $height = array_shift($args);
+        $file = base64_urldecode($path);
 
-        $file = Func::optimize_image(base64_urldecode($path), intval($width), intval($height));
+        if (cfg('system.image-optimization')) {
+            $width = array_shift($args);
+            $height = array_shift($args);
+
+            $file = Func::optimize_image($file, intval($width), intval($height));
+        }
 
         return ['view' => '302.php', 'path' => APP_PATH . 'files/' . $file];
     }

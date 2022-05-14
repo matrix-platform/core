@@ -12,6 +12,8 @@ return [
 
     'event-secret-timeout' => 10000,
 
+    'image-optimization' => true,
+
     'languages' => 'en|tw',
 
     'max-thumb-size' => 1920,
