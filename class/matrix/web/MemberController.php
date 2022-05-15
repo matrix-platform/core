@@ -39,7 +39,7 @@ class MemberController {
     }
 
     protected function redirect() {
-        $this->response()->redirect(APP_ROOT . 'login/' . base64_urlencode($_SERVER['REQUEST_URI']));
+        $this->response()->redirect(APP_ROOT . cfg('frontend.login-path') . '/' . base64_urlencode($_SERVER['REQUEST_URI']));
     }
 
 }
