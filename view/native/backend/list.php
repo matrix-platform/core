@@ -76,7 +76,7 @@ if ($enable) {
 
 $filters = [];
 
-foreach ($controller->filters() ?: [] as $name => $column) {
+foreach ($table->getColumns($controller->filters() ?: []) as $name => $column) {
     $search = $column->searchStyle();
 
     if ($search === false) {
