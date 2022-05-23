@@ -82,7 +82,7 @@ function get_url($path) {
     if (defined('BASE_URL')) {
         return BASE_URL . $path;
     } else {
-        $protocol = @$_SERVER['HTTPS'] ? 'https' : 'http';
+        $protocol = @$_SERVER['HTTPS'] || @$_SERVER['REVERSE_PROXY'] ? 'https' : 'http';
 
         return "{$protocol}://{$_SERVER['HTTP_HOST']}{$path}";
     }
