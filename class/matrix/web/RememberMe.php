@@ -11,7 +11,11 @@ trait RememberMe {
             $this->removeToken();
 
             @unlink(APP_DATA . $this->getTokenName() . '/' . $token);
+
+            return true;
         }
+
+        return false;
     }
 
     abstract protected function getTokenName();

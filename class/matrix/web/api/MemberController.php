@@ -11,6 +11,7 @@ class MemberController extends Controller {
 
         if ($member) {
             define('MEMBER_ID', $member['id']);
+            define('MEMBER_TOKEN', $member['token']);
 
             return true;
         } else {

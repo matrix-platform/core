@@ -8,7 +8,7 @@ use matrix\db\column\Text;
 use matrix\db\column\Timestamp;
 use matrix\db\Table;
 
-$tbl = new Table('base_auth_token');
+$tbl = new Table('base_auth_token', false);
 
 $tbl->add('token', Text::class)
     ->readonly(true)
@@ -24,7 +24,8 @@ $tbl->add('target_id', Integer::class)
     ->readonly(true)
     ->required(true);
 
-$tbl->add('user_agent', Text::class);
+$tbl->add('user_agent', Text::class)
+    ->readonly(true);
 
 $tbl->add('ip', ModifierAddress::class);
 
