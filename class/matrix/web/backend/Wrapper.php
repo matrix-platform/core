@@ -19,13 +19,29 @@ trait Wrapper {
     }
 
     private function wrapModel($form) {
-        foreach ($this->table()->getColumns($this->columns()) as $name => $column) {
+        $columns = $this->columns();
+
+        foreach ($this->table()->getColumns($columns) as $name => $column) {
             if ($column->multilingual()) {
                 foreach (LANGUAGES as $language) {
                     $form = $this->wrapInput($column, $form, "{$name}__{$language}");
                 }
             } else {
                 $form = $this->wrapInput($column, $form, $name);
+            }
+        }
+
+        if (is_array($columns)) {
+            foreach ($this->table()->getColumns(false) as $name => $column) {
+                if (array_search($name, $columns) === false) {
+                    if ($column->multilingual()) {
+                        foreach (LANGUAGES as $language) {
+                            unset($form["{$name}__{$language}"]);
+                        }
+                    }
+
+                    unset($form[$name]);
+                }
             }
         }
 
