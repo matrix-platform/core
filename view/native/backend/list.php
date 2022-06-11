@@ -59,7 +59,7 @@ if (!isset($controls['deploy'])) {
     }
 }
 
-$result['controls'] = $controls;
+$result['controls'] = array_filter($controls);
 
 //--
 
