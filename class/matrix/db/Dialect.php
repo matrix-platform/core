@@ -87,7 +87,7 @@ trait Dialect {
         $expressions = [];
 
         foreach ($table->getColumns($columns) as $column) {
-            if ($column->pseudo() || $column->isJunction()) {
+            if ($column->pseudo() || $column->isWrapper()) {
                 continue;
             }
 
@@ -205,7 +205,7 @@ trait Dialect {
         $expressions = [];
 
         foreach ($table->getColumns($columns) as $column) {
-            if ($column->pseudo() || $column->readonly() || $column->isJunction()) {
+            if ($column->pseudo() || $column->readonly() || $column->isWrapper()) {
                 continue;
             }
 

@@ -43,6 +43,10 @@ class Wrapper {
         return ($this->decorated instanceof Junction);
     }
 
+    public function isWrapper() {
+        return true;
+    }
+
     public function relation() {
         return $this->relation;
     }

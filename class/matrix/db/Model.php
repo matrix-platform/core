@@ -155,8 +155,8 @@ class Model {
                 continue;
             }
 
-            if ($column->isJunction()) {
-                if (isset($data[$name])) {
+            if ($column->isWrapper()) {
+                if ($column->isJunction() && isset($data[$name])) {
                     $junctions[] = $column;
                 }
 
@@ -180,7 +180,7 @@ class Model {
         $statement = $this->db->prepare($command);
 
         foreach ($this->table->getColumns(false) as $name => $column) {
-            if ($column->pseudo() || $column->isJunction()) {
+            if ($column->pseudo() || $column->isWrapper()) {
                 continue;
             }
 
@@ -284,8 +284,8 @@ class Model {
                 continue;
             }
 
-            if ($column->isJunction()) {
-                if (key_exists($name, $data) && $previous[$name] !== $data[$name]) {
+            if ($column->isWrapper()) {
+                if ($column->isJunction() && key_exists($name, $data) && $previous[$name] !== $data[$name]) {
                     $junctions[$name] = $column;
                 }
 
@@ -316,7 +316,7 @@ class Model {
         $statement = $this->db->prepare($command);
 
         foreach ($this->table->getColumns(false) as $name => $column) {
-            if ($column->pseudo() || $column->readonly() || $column->isJunction()) {
+            if ($column->pseudo() || $column->readonly() || $column->isWrapper()) {
                 continue;
             }
 
