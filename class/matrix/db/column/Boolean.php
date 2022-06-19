@@ -10,6 +10,7 @@ class Boolean {
         $this->values = $values + [
             'formStyle' => 'radio',
             'options' => load_options('yes-no'),
+            'validation' => 'boolean',
         ];
     }
 

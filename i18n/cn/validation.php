@@ -2,6 +2,8 @@
 
 return [
 
+    'boolean' => '格式错误',
+
     'date' => '格式错误',
 
     'double' => '格式错误',

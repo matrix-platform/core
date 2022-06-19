@@ -2,6 +2,8 @@
 
 return [
 
+    'boolean' => 'Invalid Format',
+
     'date' => 'Invalid Format',
 
     'double' => 'Invalid Format',

@@ -41,6 +41,13 @@ trait Validator {
                     if (!$relation['foreign']->model()->count($condition)) {
                         $errors[] = ['name' => $name, 'type' => 'not-found'];
                     }
+                } else {
+                    $options = $column->options();
+                    $key = is_bool($value) ? var_export($value, true) : $value;
+
+                    if (is_array($options) && !key_exists($key, $options)) {
+                        $errors[] = ['name' => $name, 'type' => 'not-found'];
+                    }
                 }
 
                 if ($column->unique()) {
