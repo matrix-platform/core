@@ -42,6 +42,16 @@ trait CommonMember {
     }
 
     protected function queryValidMember($conditions) {
+        $today = date(cfg('system.date'));
+
+        if (isset($this->table->begin_date)) {
+            $conditions[] = $this->table->begin_date->notNull()->lessThanOrEqual($today);
+        }
+
+        if (isset($this->table->expire_date)) {
+            $conditions[] = $this->table->expire_date->isNull()->or()->greaterThan($today);
+        }
+
         $conditions['disabled'] = false;
 
         return $this->find($conditions);

@@ -63,6 +63,7 @@ class Register extends Controller {
             'username' => $mobile,
             'mobile' => $mobile,
             'password' => $form['password'],
+            'begin_date' => date(cfg('system.date')),
         ]);
     }
 
