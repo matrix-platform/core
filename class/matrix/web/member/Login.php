@@ -20,9 +20,11 @@ class Login extends Controller {
         }
 
         if ($member['password'] !== md5($member['id'] . '::' . @$form['password'])) {
-            model('MemberLog')->insert(['member_id' => $member['id'], 'type' => 4]);
-
-            return ['error' => 'error.password-not-matched'];
+            return [
+                'view' => 'login-failed.php',
+                'error' => 'error.password-not-matched',
+                'member_id' => $member['id'],
+            ];
         }
 
         if ($member['disabled']) {
