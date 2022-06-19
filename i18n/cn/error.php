@@ -28,6 +28,8 @@ return [
 
     'invalid-password' => '无效的密码格式',
 
+    'login-failed' => '登入失败',
+
     'member-disabled' => '帐号已停用',
 
     'member-not-found' => '查无帐号资讯',

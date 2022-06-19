@@ -28,6 +28,8 @@ return [
 
     'invalid-password' => '無效的密碼格式',
 
+    'login-failed' => '登入失敗',
+
     'member-disabled' => '帳號已停用',
 
     'member-not-found' => '查無帳號資訊',

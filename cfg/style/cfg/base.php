@@ -11,6 +11,11 @@ return [
     'embedded-content.body-beginning' => Textarea::class,
     'embedded-content.body-ending' => Textarea::class,
 
+    'security.ip-count' => Integer::class,
+    'security.ip-seconds' => Integer::class,
+    'security.member-count' => Integer::class,
+    'security.member-seconds' => Integer::class,
+
     'sms.safe-point' => Integer::class,
 
     'system.debug' => Boolean::class,

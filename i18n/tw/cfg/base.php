@@ -30,6 +30,8 @@ return [
     'line.scope' => 'Scope',
     'line.token_url' => 'Access Token 網址',
 
+    'security' => '安全設定',
+
     'sms' => '簡訊',
     'sms.method' => '廠商',
     'sms.key' => '帳號',

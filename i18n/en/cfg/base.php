@@ -30,6 +30,8 @@ return [
     'line.scope' => 'Scope',
     'line.token_url' => 'Access Token URL',
 
+    'security' => 'Security',
+
     'sms' => 'SMS',
     'sms.method' => 'Vendor',
     'sms.key' => 'Username',

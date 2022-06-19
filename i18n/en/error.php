@@ -28,6 +28,8 @@ return [
 
     'invalid-password' => 'Invalid Password',
 
+    'login-failed' => 'Login Failed',
+
     'member-disabled' => 'Member Disabled',
 
     'member-not-found' => 'Member Not Found',
