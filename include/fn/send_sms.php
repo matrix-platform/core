@@ -85,4 +85,28 @@ return new class() {
         return false;
     }
 
+    private function smsget($args) {
+        if ($args['key'] === '00000') {
+            $response = '{"stats":true,"error_code":"000","error_msg":"0|1|99999"}';
+        } else {
+            $response = file_get_contents(render($args['url'], $args));
+        }
+
+        $result = json_decode($response, true);
+
+        if ($result && $result['stats']) {
+            $this->log($args, $response);
+
+            $tokens = preg_split('/\|/', $result['error_msg']);
+
+            if ($tokens[2] < $args['safe-point']) {
+                $this->notify($matches[1], $args['safe-point']);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
 };
