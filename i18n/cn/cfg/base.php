@@ -21,6 +21,7 @@ return [
     'gmail.port' => '埠号',
     'gmail.secure' => '安全连线',
     'gmail.queue' => '发信伫列',
+    'gmail.sandbox' => '沙盒模式收件者',
 
     'line' => 'LINE Login',
     'line.auth_url' => 'Auth 网址',

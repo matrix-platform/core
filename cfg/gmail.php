@@ -16,4 +16,6 @@ return [
 
     'queue' => null,
 
+    'sandbox' => null,
+
 ];

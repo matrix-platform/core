@@ -14,6 +14,11 @@ return new class() {
     }
 
     private function send($options) {
+        if (@$options['sandbox']) {
+            $options['subject'] = "{$options['subject']} ({$options['to']})";
+            $options['to'] = $options['sandbox'];
+        }
+
         $mailer = new PHPMailer();
 
         $mailer->Host = $options['host'];
@@ -38,7 +43,7 @@ return new class() {
         $mailer->Body = render($options['content'], $options);
 
         foreach (preg_split('/[\s;,]/', $options['to'], 0, PREG_SPLIT_NO_EMPTY) as $to) {
-            $mailer->AddAddress($to);
+            $mailer->addBCC($to);
         }
 
         $log = [

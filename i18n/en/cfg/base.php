@@ -21,6 +21,7 @@ return [
     'gmail.port' => 'Port',
     'gmail.secure' => 'Secure',
     'gmail.queue' => 'Mail Queue',
+    'gmail.sandbox' => 'Sandbox Receiver',
 
     'line' => 'LINE Login',
     'line.auth_url' => 'Auth URL',
