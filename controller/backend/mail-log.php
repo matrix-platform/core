@@ -7,7 +7,7 @@ return new class('MailLog') extends matrix\web\backend\ListController {
             'receiver',
             'subject',
             'ip',
-            'create_time',
+            'send_time',
             'status',
         ]);
     }

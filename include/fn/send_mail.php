@@ -47,18 +47,26 @@ return new class() {
         }
 
         $log = [
-            'sender' => $options['username'],
             'receiver' => $options['to'],
             'subject' => $mailer->Subject,
             'content' => $mailer->Body,
         ];
 
-        $result = $mailer->send();
+        if (@$options['async']) {
+            $log['sender'] = $options['mailer'];
+            $log['status'] = 1;
 
-        if (!$result) {
-            logging('error')->error($mailer->ErrorInfo);
+            $result = true;
+        } else {
+            $log['sender'] = $options['username'];
 
-            $log['status'] = 9;
+            $result = $mailer->send();
+
+            if (!$result) {
+                logging('error')->error($mailer->ErrorInfo);
+
+                $log['status'] = 9;
+            }
         }
 
         model('MailLog')->insert($log);

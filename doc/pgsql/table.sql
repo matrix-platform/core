@@ -130,6 +130,7 @@ CREATE TABLE base_mail_log (
     content     TEXT      NOT NULL,
     ip          TEXT          NULL,
     create_time TIMESTAMP NOT NULL,
+    send_time   TIMESTAMP     NULL,
     status      INTEGER   NOT NULL
 );
 

@@ -12,7 +12,9 @@ return [
 
     'ip' => 'IP',
 
-    'create_time' => '寄送時間',
+    'create_time' => '建立時間',
+
+    'send_time' => '寄送時間',
 
     'status' => '狀態',
 

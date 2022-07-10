@@ -12,7 +12,9 @@ return [
 
     'ip' => 'IP',
 
-    'create_time' => 'Send Time',
+    'create_time' => 'Create Time',
+
+    'send_time' => 'Send Time',
 
     'status' => 'Status',
 
