@@ -43,10 +43,16 @@ trait Validator {
                     }
                 } else {
                     $options = $column->options();
-                    $key = is_bool($value) ? var_export($value, true) : $value;
 
-                    if (is_array($options) && !key_exists($key, $options)) {
-                        $errors[] = ['name' => $name, 'type' => 'not-found'];
+                    if (is_array($options)) {
+                        foreach (explode(',', $value) as $token) {
+                            $key = is_bool($token) ? var_export($token, true) : $token;
+
+                            if (!key_exists($key, $options)) {
+                                $errors[] = ['name' => $name, 'type' => 'not-found'];
+                                break;
+                            }
+                        }
                     }
                 }
 
