@@ -35,8 +35,8 @@ foreach ($table->getColumns($controller->columns()) as $name => $column) {
     }
 
     if (is_array($column->options())) {
-        if (!isset($form[$name])) {
-            $form[$name] = $column->default();
+        if (!isset($result['data'][$name])) {
+            $result['data'][$name] = $column->default();
         }
 
         if ($column->multiple()) {
