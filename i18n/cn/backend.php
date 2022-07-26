@@ -31,6 +31,7 @@ return [
     'update' => '储存',
     'history' => '异动纪录',
     'next' => '下一步',
+    'picker' => '选择',
 
     'operation' => '操作',
     'visible' => '显示',

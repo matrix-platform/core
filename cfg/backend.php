@@ -38,6 +38,10 @@ return [
 
     'password-form' => null,
 
+    'search-list' => null,
+
+    'search-modal' => null,
+
     'sublist' => null,
 
 ];

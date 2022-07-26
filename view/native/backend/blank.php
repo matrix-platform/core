@@ -34,7 +34,7 @@ foreach ($table->getColumns($controller->columns()) as $name => $column) {
         continue;
     }
 
-    if (is_array($column->options())) {
+    if ($type !== 'search' && is_array($column->options())) {
         if (!isset($result['data'][$name])) {
             $result['data'][$name] = $column->default();
         }

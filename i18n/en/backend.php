@@ -31,6 +31,7 @@ return [
     'update' => 'Save',
     'history' => 'History',
     'next' => 'Next',
+    'picker' => 'Pick',
 
     'operation' => 'Operation',
     'visible' => 'Visible',

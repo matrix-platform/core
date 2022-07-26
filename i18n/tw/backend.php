@@ -31,6 +31,7 @@ return [
     'update' => '儲存',
     'history' => '異動紀錄',
     'next' => '下一步',
+    'picker' => '選擇',
 
     'operation' => '操作',
     'visible' => '顯示',

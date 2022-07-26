@@ -34,7 +34,7 @@ foreach ($table->getColumns($controller->columns()) as $name => $column) {
         continue;
     }
 
-    if (is_array($column->options())) {
+    if ($type !== 'search' && is_array($column->options())) {
         if ($column->multiple()) {
             $type = $column->sortable() ? 'sortable-options' : 'checkbox-group';
         } else if ($type !== 'radio' && $type !== 'select') {
