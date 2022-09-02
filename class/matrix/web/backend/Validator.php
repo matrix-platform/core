@@ -45,9 +45,9 @@ trait Validator {
                     $options = $column->options();
 
                     if (is_array($options)) {
-                        foreach (explode(',', $value) as $token) {
-                            $key = is_bool($token) ? var_export($token, true) : $token;
+                        $token = is_bool($value) ? var_export($value, true) : $value;
 
+                        foreach (explode(',', $token) as $key) {
                             if (!key_exists($key, $options)) {
                                 $errors[] = ['name' => $name, 'type' => 'not-found'];
                                 break;
