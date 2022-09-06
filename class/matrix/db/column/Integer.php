@@ -10,7 +10,7 @@ class Integer {
         $this->values = $values + [
             'formStyle' => 'integer',
             'searchStyle' => 'between',
-            'validation' => 'integer',
+            'validation' => 'integer|integer.max|integer.min',
         ];
     }
 

@@ -26,6 +26,7 @@ return new class() {
         $content = load_i18n('template/sms-warning');
 
         if ($content['to']) {
+            $content['async'] = true;
             $content['current'] = $current;
             $content['safe'] = $safe;
 

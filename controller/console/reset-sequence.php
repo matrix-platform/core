@@ -25,7 +25,17 @@ return new class() extends matrix\cli\Controller {
 
                 foreach ($table->getColumns(false) as $column) {
                     if ($column instanceof FormNumber) {
-                        db()->reset($column->sequence());
+                        $resettable = false;
+
+                        switch ($column->reset()) {
+                        case FormNumber::RESET_DAILY:
+                            $resettable = true;
+                            break;
+                        }
+
+                        if ($resettable) {
+                            db()->reset($column->sequence());
+                        }
                     }
                 }
             }

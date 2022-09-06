@@ -10,7 +10,7 @@ class Double {
         $this->values = $values + [
             'formStyle' => 'double',
             'searchStyle' => 'between',
-            'validation' => 'double',
+            'validation' => 'double|double.max|double.min',
         ];
     }
 

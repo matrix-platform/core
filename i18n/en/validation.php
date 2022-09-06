@@ -7,6 +7,8 @@ return [
     'date' => 'Invalid Format',
 
     'double' => 'Invalid Format',
+    'double.max' => 'Greater Than Maximum',
+    'double.min' => 'Less Than Minimum',
 
     'duplicated' => 'Existed',
 
@@ -16,6 +18,10 @@ return [
 
     'image' => 'Invalid Image Format',
 
+    'integer' => 'Invalid Format',
+    'integer.max' => 'Greater Than Maximum',
+    'integer.min' => 'Less Than Minimum',
+
     'ip' => 'Invalid IP Format',
 
     'not-found' => 'Not Found',
@@ -23,6 +29,10 @@ return [
     'regex' => 'Dismatched',
 
     'required' => 'Required',
+
+    'time' => 'Invalid Format',
+
+    'timestamp' => 'Invalid Format',
 
     'url' => 'Invalid URL Format',
 

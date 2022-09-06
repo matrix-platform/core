@@ -60,7 +60,7 @@ class DeleteController extends Controller {
         return $this->subprocess($form, ['success' => true, 'list' => $list]);
     }
 
-    private function delete($table, $data) {
+    protected function delete($table, $data) {
         $data = $table->model()->delete($data);
 
         if ($data) {

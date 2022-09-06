@@ -6,11 +6,15 @@ class FormNumber {
 
     use type\Text;
 
+    const RESET_NONE = 0;
+    const RESET_DAILY = 1;
+
     public function __construct($values) {
         $this->values = $values + [
             'formStyle' => 'text',
             'length' => 3,
             'pattern' => 'Ymd',
+            'reset' => self::RESET_DAILY,
             'searchStyle' => 'like',
         ];
     }
