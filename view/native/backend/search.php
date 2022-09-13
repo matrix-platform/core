@@ -38,6 +38,7 @@ $actions = [];
 
 $actions['picker'] = [
     'picker' => true,
+    'path' => @$form['next-path'],
     'ranking' => 100,
 ];
 
@@ -45,4 +46,6 @@ $result['actions'] = $actions;
 
 //--
 
-lookup(cfg('backend.search-list'))->render($controller, $form, $result);
+$view = $controller->customView() ?: cfg('backend.search-list');
+
+lookup($view)->render($controller, $form, $result);
