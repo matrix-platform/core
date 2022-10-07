@@ -15,8 +15,8 @@ trait DateTime {
         return is_int($value) ? date($this->pattern(), $value) : $value;
     }
 
-    public function expression($dialect, $language = null, $prefix = null, $select = false) {
-        $expression = $this->columnExpression($dialect, $language, $prefix, $select);
+    public function expression($dialect, $language = null, $prefix = null, $name = null, $select = false) {
+        $expression = $this->columnExpression($dialect, $language, $prefix, $name, $select);
 
         return $select ? $dialect->makeDateTimeExpression($expression, $this->pattern()) : $expression;
     }

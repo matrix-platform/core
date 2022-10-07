@@ -15,8 +15,8 @@ class Junction {
         $this->values = ['multiple' => true, 'name' => $name];
     }
 
-    public function expression($dialect, $language = null, $prefix = null, $select = false) {
-        $expression = $this->columnExpression($dialect, $language, $prefix, $select);
+    public function expression($dialect, $language = null, $prefix = null, $name = null, $select = false) {
+        $expression = $this->columnExpression($dialect, $language, $prefix, $name, $select);
 
         return $select ? $dialect->makeImplodeExpression($expression, ',') : $expression;
     }

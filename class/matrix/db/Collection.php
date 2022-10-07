@@ -47,8 +47,8 @@ class Collection {
         return count($list) === 1 ? $list[0] : null;
     }
 
-    public function list($columns = false) {
-        return $this->model->query($this->conditions, true, 0, 1, $columns);
+    public function list($columns = false, $orders = true, $size = 0, $page = 1) {
+        return $this->model->query($this->conditions, $orders, $size, $page, $columns);
     }
 
     public function update($values) {

@@ -23,6 +23,7 @@ trait Column {
             'target' => $target,
             'parent' => $parent,
             'filter' => $filter,
+            'names' => [$target],
         ]);
 
         if ($parent) {
@@ -77,8 +78,8 @@ trait Column {
 
     abstract public function convert($value);
 
-    public function expression($dialect, $language = null, $prefix = null, $select = false) {
-        $mapping = $this->mapping();
+    public function expression($dialect, $language = null, $prefix = null, $name = null, $select = false) {
+        $mapping = $name ?: $this->mapping();
 
         if ($language !== null && $this->multilingual()) {
             $mapping = "{$mapping}__{$language}";

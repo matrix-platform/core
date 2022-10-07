@@ -56,7 +56,7 @@ trait Dialect {
 
     public function makeCountSelection($table, $criteria) {
         $command = "SELECT COUNT(*) FROM {$table->mapping()} AS _";
-        $command = $this->makeRelationJoin($command, $table);
+        $command = $this->makeRelationJoin($command, $table, $criteria);
 
         return $this->makeCriteria($command, $criteria);
     }
@@ -151,7 +151,7 @@ trait Dialect {
 
     abstract public function makeRandom();
 
-    public function makeSelection($table, $columns, $criteria, $orders) {
+    public function makeSelection($table, $columns, $criteria, $orders, $select = true) {
         $expressions = [];
         $multilinguals = [];
 
@@ -162,7 +162,7 @@ trait Dialect {
 
             if ($column->multilingual()) {
                 foreach (LANGUAGES as $lang) {
-                    $expression = $column->expression($this, $lang, null, true);
+                    $expression = $column->expression($this, $lang, null, null, $select);
                     $quoted = $this->quote("{$name}__{$lang}");
 
                     $expressions["{$name}__{$lang}"] = "{$expression} AS {$quoted}";
@@ -170,7 +170,7 @@ trait Dialect {
 
                 $multilinguals[$name] = true;
             } else {
-                $expression = $column->expression($this, null, null, true);
+                $expression = $column->expression($this, null, null, null, $select);
                 $quoted = $this->quote($name);
 
                 $expressions[$name] = "{$expression} AS {$quoted}";
@@ -185,7 +185,7 @@ trait Dialect {
         }
 
         $command = "SELECT {$names} FROM {$table->mapping()} AS _";
-        $command = $this->makeRelationJoin($command, $table);
+        $command = $this->makeRelationJoin($command, $table, $criteria);
         $command = $this->makeCriteria($command, $criteria);
 
         if ($orders) {
@@ -269,28 +269,34 @@ trait Dialect {
 
     abstract public function quote($name);
 
-    private function makeRelationJoin($command, $table) {
+    private function makeRelationJoin($command, $table, $criteria) {
         foreach ($table->getRelations() as $alias => $relation) {
             if (!@$relation['enable']) {
                 continue;
             }
 
             $column = $relation['column']->expression($this);
-            $foreign = $relation['foreign']->mapping();
             $target = $relation['target']->mapping();
 
             if ($relation['type'] === 'composition') {
+                $foreign = $relation['foreign']->mapping();
+
                 if ($relation['junction']) {
                     $reference = $relation['reference']->mapping();
                     $aggregate = $this->makeToArrayExpression($reference);
 
-                    $foreign = "(SELECT {$target}, {$aggregate} AS {$reference} FROM {$foreign} GROUP BY {$target})";
+                    $foreign = "SELECT {$target}, {$aggregate} AS {$reference} FROM {$foreign} GROUP BY {$target}";
                 } else {
-                    $foreign = "(SELECT {$target}, COUNT(*) AS count FROM {$foreign} GROUP BY {$target})";
+                    $foreign = "SELECT {$target}, COUNT(*) AS count FROM {$foreign} GROUP BY {$target}";
                 }
+            } else {
+                $sub = Criteria::create($relation['foreign'], $relation['filter']);
+                $foreign = $this->makeSelection($relation['foreign'], $relation['names'], $sub, [], false);
+
+                $criteria->prepend($sub);
             }
 
-            $command = "{$command} LEFT JOIN {$foreign} AS _{$alias} ON (_{$alias}.{$target} = {$column})";
+            $command = "{$command} LEFT JOIN ({$foreign}) AS _{$alias} ON (_{$alias}.{$target} = {$column})";
         }
 
         return $command;

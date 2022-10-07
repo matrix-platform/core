@@ -10,9 +10,11 @@ class Wrapper {
     use Helper, ValueObject;
 
     private $alias;
+    private $name;
     private $relation;
 
-    public function __construct($alias, $column, $relation) {
+    public function __construct($name, $alias, $column, $relation) {
+        $this->name = $name;
         $this->alias = $alias;
         $this->decorated = $column;
         $this->relation = $relation;
@@ -31,8 +33,12 @@ class Wrapper {
         return $this->decorated->convert($value);
     }
 
-    public function expression($dialect, $language = null, $prefix = null, $select = false) {
-        return $this->decorated->expression($dialect, $language, $prefix ?: $this->alias, $select);
+    public function expression($dialect, $language = null, $prefix = null, $name = null, $select = false) {
+        if ($this->decorated->isWrapper() && !$name) {
+            $name = $this->decorated->name;
+        }
+
+        return $this->decorated->expression($dialect, $language, $prefix ?: $this->alias, $name, $select);
     }
 
     public function isCounter() {

@@ -13,6 +13,8 @@ class Table {
 
     use ValueObject;
 
+    private static $idx = 0;
+
     private $columns = [];
     private $names = [];
     private $parent;
@@ -59,7 +61,7 @@ class Table {
 
             $this->names[] = $name;
         } else {
-            list($alias, $column) = preg_split('/\./', $typeName);
+            list($alias, $column) = preg_split('/\./', $typeName, 2);
 
             $relation = $this->getRelation($alias);
 
@@ -78,12 +80,16 @@ class Table {
 
                 $this->names[] = $name;
             } else {
+                $column = $this->probe($relation['foreign'], $column);
+
+                $this->relations[$alias]['names'][] = $column;
+
                 $column = $relation['foreign']->{$column};
 
                 array_splice($this->names, array_search($relation['column']->name(), $this->names), 0, $name);
             }
 
-            $column = new Wrapper($alias, $column, $relation);
+            $column = new Wrapper($name, $alias, $column, $relation);
 
             $this->relations[$alias]['enable'] = true;
         }
@@ -106,9 +112,19 @@ class Table {
 
         $columns = [];
 
-        foreach (is_array($names) ? $names : $this->names as $name) {
+        foreach (is_array($names) ? $names : $this->names as $alias => $name) {
             if (key_exists($name, $this->columns)) {
-                $columns[$name] = $this->columns[$name];
+                $columns[is_string($alias) ? $alias : $name] = $this->columns[$name];
+            } else if (str_contains($name, '.')) {
+                if (!is_string($alias)) {
+                    $alias = str_replace('.', '_', $name);
+                }
+
+                if (!key_exists($alias, $this->columns)) {
+                    $this->add($alias, $name);
+                }
+
+                $columns[$alias] = $this->columns[$alias];
             }
         }
 
@@ -223,6 +239,18 @@ class Table {
         if (@$relation['parent'] && $this->parent !== false) {
             $this->parent = $this->parent ? false : $alias;
         }
+    }
+
+    private function probe($foreign, $column) {
+        if (key_exists($column, $foreign->columns)) {
+            return $column;
+        }
+
+        $name = '_' . self::$idx++;
+
+        $foreign->add($name, $column)->invisible(true);
+
+        return $name;
     }
 
 }

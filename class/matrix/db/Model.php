@@ -33,7 +33,7 @@ class Model {
     }
 
     public function count($conditions = []) {
-        $criteria = $this->createCriteria($conditions, $this->filter);
+        $criteria = Criteria::create($this->table, $conditions, $this->filter);
         $command = $this->dialect->makeCountSelection($this->table, $criteria);
         $statement = $this->db->prepare($command);
 
@@ -51,7 +51,7 @@ class Model {
 
         $this->before(self::DELETE, $previous, null);
 
-        $criteria = $this->createCriteria(['id' => $previous['id']]);
+        $criteria = Criteria::create($this->table, ['id' => $previous['id']]);
         $command = $this->dialect->makeDeletion($this->table, $criteria);
         $statement = $this->db->prepare($command);
 
@@ -246,7 +246,7 @@ class Model {
     }
 
     public function query($conditions = [], $orders = true, $size = 0, $page = 1, $columns = false) {
-        $criteria = $this->createCriteria($conditions, $this->filter);
+        $criteria = Criteria::create($this->table, $conditions, $this->filter);
         $command = $this->dialect->makeSelection($this->table, $columns, $criteria, $orders);
 
         if ($size > 0 && $page > 0) {
@@ -311,7 +311,7 @@ class Model {
             $conditions[] = new Version($data['__version__']);
         }
 
-        $criteria = $this->createCriteria($conditions);
+        $criteria = Criteria::create($this->table, $conditions);
         $command = $this->dialect->makeUpdation($this->table, false, $criteria);
         $statement = $this->db->prepare($command);
 
@@ -384,50 +384,6 @@ class Model {
         }
 
         return $data;
-    }
-
-    private function createCriteria($conditions, $filter = false) {
-        if ($conditions instanceof Closure) {
-            $conditions = call_user_func($conditions, $this->table);
-        }
-
-        $criteria = Criteria::createAnd();
-
-        foreach ($conditions as $name => $value) {
-            if ($value instanceof Criterion) {
-                $criteria->add($value);
-            } else if (isset($this->table->{$name})) {
-                if ($value === null) {
-                    $criteria->add($this->table->{$name}->isNull());
-                } else if (is_array($value)) {
-                    $criteria->add($this->table->{$name}->in($value));
-                } else {
-                    $criteria->add($this->table->{$name}->equal($value));
-                }
-            }
-        }
-
-        if ($filter) {
-            $enable = $this->table->enableTime();
-
-            if ($enable) {
-                $column = $this->table->{$enable};
-                $now = date($column->pattern());
-
-                $criteria->add($column->notNull()->lessThanOrEqual($now));
-            }
-
-            $disable = $this->table->disableTime();
-
-            if ($disable) {
-                $column = $this->table->{$disable};
-                $now = date($column->pattern());
-
-                $criteria->add($column->isNull()->or()->greaterThan($now));
-            }
-        }
-
-        return $criteria;
     }
 
     private function deleteJunction($column, $data) {

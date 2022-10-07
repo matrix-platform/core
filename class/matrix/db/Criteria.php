@@ -4,6 +4,50 @@ namespace matrix\db;
 
 class Criteria implements Criterion {
 
+    public static function create($table, $conditions, $filter = false) {
+        if ($conditions instanceof Closure) {
+            $conditions = call_user_func($conditions, $table);
+        }
+
+        $criteria = static::createAnd();
+
+        foreach ($conditions as $name => $value) {
+            if ($value instanceof Criterion) {
+                $criteria->add($value);
+            } else if (isset($table->{$name})) {
+                if ($value === null) {
+                    $criteria->add($table->{$name}->isNull());
+                } else if (is_array($value)) {
+                    $criteria->add($table->{$name}->in($value));
+                } else {
+                    $criteria->add($table->{$name}->equal($value));
+                }
+            }
+        }
+
+        if ($filter) {
+            $enable = $table->enableTime();
+
+            if ($enable) {
+                $column = $table->{$enable};
+                $now = date($column->pattern());
+
+                $criteria->add($column->notNull()->lessThanOrEqual($now));
+            }
+
+            $disable = $table->disableTime();
+
+            if ($disable) {
+                $column = $table->{$disable};
+                $now = date($column->pattern());
+
+                $criteria->add($column->isNull()->or()->greaterThan($now));
+            }
+        }
+
+        return $criteria;
+    }
+
     public static function createAnd(...$criteria) {
         return new Criteria($criteria, ' AND ');
     }
@@ -14,6 +58,7 @@ class Criteria implements Criterion {
 
     private $criteria;
     private $operator;
+    private $prepends = [];
 
     private function __construct($criteria, $operator) {
         $this->criteria = $criteria;
@@ -27,6 +72,10 @@ class Criteria implements Criterion {
     }
 
     public function bind($statement, $bindings) {
+        foreach ($this->prepends as $criteria) {
+            $bindings = $criteria->bind($statement, $bindings);
+        }
+
         foreach ($this->criteria as $criterion) {
             $bindings = $criterion->bind($statement, $bindings);
         }
@@ -50,6 +99,10 @@ class Criteria implements Criterion {
         }
 
         return false;
+    }
+
+    public function prepend($criteria) {
+        $this->prepends[] = $criteria;
     }
 
     public function with($language) {
