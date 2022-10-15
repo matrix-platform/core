@@ -102,6 +102,7 @@ class ListController extends Controller {
 
     protected function wrap() {
         $form = parent::wrap();
+        $columns = $this->getColumns();
         $search = @$form['q'];
 
         if ($search) {
@@ -111,7 +112,6 @@ class ListController extends Controller {
         }
 
         if ($search) {
-            $columns = $this->getColumns();
             $conditions = [];
 
             foreach ($columns as $name => $column) {
