@@ -3,6 +3,7 @@
 namespace matrix\web\api;
 
 use Exception;
+use matrix\web\Attachment;
 use matrix\web\RequestHandler;
 
 class Controller {
@@ -41,6 +42,22 @@ class Controller {
 
     protected function set($name, $value) {
         throw new Exception('Unsupported operation.');
+    }
+
+    protected function wrapAttachment($form, $name, $privilege = null) {
+        $file = @$form[$name];
+
+        if (is_string($file)) {
+            if (load_file_data($file)) {
+                return $file;
+            }
+        } else {
+            if (@$file['name'] && @$file['data']) {
+                return Attachment::from($file['name'], $file['data'], null, $privilege);
+            }
+        }
+
+        return null;
     }
 
 }
