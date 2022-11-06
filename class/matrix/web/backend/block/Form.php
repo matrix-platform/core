@@ -15,7 +15,7 @@ trait Form {
 
             if ($field->options()) {
                 if ($field->multiple()) {
-                    $type = 'select';
+                    $type = $field->sortable() ? 'sortable-options' : 'checkbox-group';
                 } else if ($type !== 'radio' && $type !== 'select') {
                     $type = 'radio';
                 }
