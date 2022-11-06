@@ -14,13 +14,25 @@ class Criteria implements Criterion {
         foreach ($conditions as $name => $value) {
             if ($value instanceof Criterion) {
                 $criteria->add($value);
-            } else if (isset($table->{$name})) {
-                if ($value === null) {
-                    $criteria->add($table->{$name}->isNull());
-                } else if (is_array($value)) {
-                    $criteria->add($table->{$name}->in($value));
-                } else {
-                    $criteria->add($table->{$name}->equal($value));
+            } else {
+                if (str_contains($name, '.')) {
+                    $alias = str_replace('.', '_', $name);
+
+                    if (!isset($table->{$alias})) {
+                        $table->add($alias, $name);
+                    }
+
+                    $name = $alias;
+                }
+
+                if (isset($table->{$name})) {
+                    if ($value === null) {
+                        $criteria->add($table->{$name}->isNull());
+                    } else if (is_array($value)) {
+                        $criteria->add($table->{$name}->in($value));
+                    } else {
+                        $criteria->add($table->{$name}->equal($value));
+                    }
                 }
             }
         }
@@ -81,6 +93,10 @@ class Criteria implements Criterion {
         }
 
         return $bindings;
+    }
+
+    public function count() {
+        return count($this->criteria) + count($this->prepends);
     }
 
     public function make($dialect) {

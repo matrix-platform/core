@@ -304,43 +304,47 @@ class Model {
 
         $data = $this->before(self::UPDATE, $previous, $data);
 
-        $bindings = [];
-        $conditions = ['id' => $previous['id']];
+        $diff = $this->compare($previous, $data);
 
-        if ($this->table->versionable()) {
-            $conditions[] = new Version($data['__version__']);
-        }
+        if ($diff) {
+            $bindings = [];
+            $conditions = ['id' => $previous['id']];
 
-        $criteria = Criteria::create($this->table, $conditions);
-        $command = $this->dialect->makeUpdation($this->table, false, $criteria);
-        $statement = $this->db->prepare($command);
-
-        foreach ($this->table->getColumns(false) as $name => $column) {
-            if ($column->pseudo() || $column->readonly() || $column->isWrapper()) {
-                continue;
+            if ($this->table->versionable()) {
+                $conditions[] = new Version($data['__version__']);
             }
 
-            if ($column->multilingual()) {
-                foreach (LANGUAGES as $lang) {
-                    $value = $data["{$name}__{$lang}"];
+            $criteria = Criteria::create($this->table, $conditions);
+            $command = $this->dialect->makeUpdation($this->table, $diff, $criteria);
+            $statement = $this->db->prepare($command);
+
+            foreach ($this->table->getColumns($diff) as $name => $column) {
+                if ($column->pseudo() || $column->readonly() || $column->isWrapper()) {
+                    continue;
+                }
+
+                if ($column->multilingual()) {
+                    foreach (LANGUAGES as $lang) {
+                        $value = $data["{$name}__{$lang}"];
+                        $bindings[] = $value;
+
+                        $statement->bindValue(count($bindings), $value, $column->type());
+                    }
+                } else {
+                    $value = $data[$name];
                     $bindings[] = $value;
 
                     $statement->bindValue(count($bindings), $value, $column->type());
                 }
-            } else {
-                $value = $data[$name];
-                $bindings[] = $value;
-
-                $statement->bindValue(count($bindings), $value, $column->type());
             }
-        }
 
-        $this->execute($statement, $criteria->bind($statement, $bindings));
+            $this->execute($statement, $criteria->bind($statement, $bindings));
 
-        $this->cache->remove($previous['id']);
+            $this->cache->remove($previous['id']);
 
-        if ($statement->rowCount() !== 1) {
-            return false;
+            if ($statement->rowCount() !== 1) {
+                return false;
+            }
         }
 
         foreach ($junctions as $name => $column) {
@@ -383,7 +387,34 @@ class Model {
             }
         }
 
+        unset($data[$this->table->id()]);
+
         return $data;
+    }
+
+    private function compare($prev, $curr) {
+        $diff = [];
+
+        foreach ($this->table->getColumns(false) as $name => $column) {
+            if ($column->pseudo() || $column->readonly() || $column->isWrapper()) {
+                continue;
+            }
+
+            if ($column->multilingual()) {
+                foreach (LANGUAGES as $lang) {
+                    $prop = "{$name}__{$lang}";
+
+                    if ($prev[$prop] !== $curr[$prop]) {
+                        $diff[$name] = true;
+                        break;
+                    }
+                }
+            } else if ($prev[$name] !== $curr[$name]) {
+                $diff[$name] = true;
+            }
+        }
+
+        return array_keys($diff);
     }
 
     private function deleteJunction($column, $data) {

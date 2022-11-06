@@ -56,9 +56,13 @@ trait Dialect {
 
     public function makeCountSelection($table, $criteria) {
         $command = "SELECT COUNT(*) FROM {$table->mapping()} AS _";
-        $command = $this->makeRelationJoin($command, $table, $criteria);
 
-        return $this->makeCriteria($command, $criteria);
+        if ($criteria->count()) {
+            $command = $this->makeRelationJoin($command, $table, $criteria);
+            $command = $this->makeCriteria($command, $criteria);
+        }
+
+        return $command;
     }
 
     public function makeCriteria($command, $criteria) {
@@ -154,6 +158,7 @@ trait Dialect {
     public function makeSelection($table, $columns, $criteria, $orders, $select = true) {
         $expressions = [];
         $multilinguals = [];
+        $wrappers = [];
 
         foreach ($table->getColumns($columns) as $name => $column) {
             if ($column->pseudo()) {
@@ -175,6 +180,10 @@ trait Dialect {
 
                 $expressions[$name] = "{$expression} AS {$quoted}";
             }
+
+            if ($column->isWrapper()) {
+                $wrappers[] = $column;
+            }
         }
 
         $names = implode(', ', $expressions);
@@ -185,8 +194,11 @@ trait Dialect {
         }
 
         $command = "SELECT {$names} FROM {$table->mapping()} AS _";
-        $command = $this->makeRelationJoin($command, $table, $criteria);
-        $command = $this->makeCriteria($command, $criteria);
+
+        if ($wrappers || $criteria->count()) {
+            $command = $this->makeRelationJoin($command, $table, $criteria);
+            $command = $this->makeCriteria($command, $criteria);
+        }
 
         if ($orders) {
             if ($orders === true) {

@@ -47,6 +47,24 @@ class Collection {
         return count($list) === 1 ? $list[0] : null;
     }
 
+    public function increase($name, $value = 1) {
+        $list = [];
+
+        foreach ($this->model->query($this->conditions) as $row) {
+            $row[$name] += $value;
+
+            $row = $this->model->update($row);
+
+            if ($row) {
+                $list[] = $row;
+            } else {
+                return false;
+            }
+        }
+
+        return $list;
+    }
+
     public function list($columns = false, $orders = true, $size = 0, $page = 1) {
         return $this->model->query($this->conditions, $orders, $size, $page, $columns);
     }
