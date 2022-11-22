@@ -2,6 +2,8 @@
 
 namespace matrix\model;
 
+use matrix\utility\Func;
+
 trait CommonMember {
 
     public function queryById($id) {
@@ -35,7 +37,7 @@ trait CommonMember {
         }
 
         if (@$encrypt) {
-            $curr['password'] = md5("{$curr['id']}::{$curr['password']}");
+            $curr['password'] = Func::hash_password($curr);
         }
 
         return $curr;

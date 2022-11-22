@@ -13,7 +13,8 @@ $tbl->add('username', Text::class)
     ->required(true)
     ->unique(true);
 
-$tbl->add('password', Password::class);
+$tbl->add('password', Password::class)
+    ->traceable(false);
 
 $tbl->add('name', Text::class);
 

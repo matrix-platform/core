@@ -1,5 +1,7 @@
 <?php //>
 
+use matrix\utility\Func;
+
 return new class() extends matrix\web\UserController {
 
     protected function init() {
@@ -14,7 +16,7 @@ return new class() extends matrix\web\UserController {
 
         if ($current === null) {
             $errors[] = ['name' => 'current', 'type' => 'required'];
-        } else if ($user['password'] !== md5($user['id'] . '::' . $current)) {
+        } else if (!Func::verify_password($user, $current)) {
             $errors[] = ['name' => 'current', 'message' => i18n('error.password-not-matched')];
         }
 

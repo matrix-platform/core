@@ -4,6 +4,7 @@ namespace matrix\model;
 
 use matrix\core\AppException;
 use matrix\db\Model;
+use matrix\utility\Func;
 
 class User extends Model {
 
@@ -41,7 +42,7 @@ class User extends Model {
         }
 
         if (@$encrypt) {
-            $curr['password'] = md5("{$curr['id']}::{$curr['password']}");
+            $curr['password'] = Func::hash_password($curr);
         }
 
         return $curr;

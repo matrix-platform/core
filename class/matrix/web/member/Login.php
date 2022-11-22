@@ -2,6 +2,7 @@
 
 namespace matrix\web\member;
 
+use matrix\utility\Func;
 use matrix\web\Controller;
 use matrix\web\Security;
 
@@ -28,7 +29,7 @@ class Login extends Controller {
             return ['error' => 'error.login-failed'];
         }
 
-        if ($member['password'] !== md5($member['id'] . '::' . @$form['password'])) {
+        if (!Func::verify_password($member, @$form['password'])) {
             return [
                 'view' => 'login-failed.php',
                 'error' => 'error.password-not-matched',

@@ -15,7 +15,8 @@ $tbl->add('username', Text::class)
     ->unique(true)
     ->validation('regex');
 
-$tbl->add('password', Password::class);
+$tbl->add('password', Password::class)
+    ->traceable(false);
 
 $tbl->add('group_id', Integer::class)
     ->associate('group', 'Group');
