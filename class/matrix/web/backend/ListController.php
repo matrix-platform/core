@@ -51,7 +51,7 @@ class ListController extends Controller {
             $names = $this->columns();
 
             foreach ($this->table()->getColumns($names) as $name => $column) {
-                if ($column->invisible() && !$column->editable()) {
+                if ($column->invisible() && !$column->editable() && !$column->isWrapper()) {
                     continue;
                 }
 
