@@ -1,7 +1,7 @@
 <?php //>
 
 $error = $result['error'] ?? 'error.unknown';
-$message = $result['message'] ?? i18n($error, '');
+$message = @$result['message'] ?: i18n($error, '');
 $data = @$result['data'];
 
 if ($data) {
