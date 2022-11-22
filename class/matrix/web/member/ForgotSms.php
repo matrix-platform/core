@@ -38,7 +38,7 @@ class ForgotSms extends Controller {
 
         $code = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
 
-        if (!$this->sendSms($member['mobile'], $code)) {
+        if ($this->sendSms($member['mobile'], $code) !== true) {
             return ['error' => 'error.sms-failed'];
         }
 

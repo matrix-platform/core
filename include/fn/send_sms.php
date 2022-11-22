@@ -86,6 +86,34 @@ return new class() {
         return false;
     }
 
+    private function sms1111($args) {
+        if ($args['key'] === '00000') {
+            $response = '{"STATUS":"1_OK"}';
+        } else {
+            $response = file_get_contents(render($args['url'], $args));
+        }
+
+        $result = json_decode($response, true);
+
+        if ($result) {
+            $this->log($args, $response);
+
+            $status = @$result['STATUS'];
+
+            if ($status) {
+                list($status, $message) = preg_split('/_/', $status, 2);
+
+                if ($status === '1') {
+                    return true;
+                }
+
+                return $message;
+            }
+        }
+
+        return false;
+    }
+
     private function smsget($args) {
         if ($args['key'] === '00000') {
             $response = '{"stats":true,"error_code":"000","error_msg":"0|1|99999"}';
