@@ -334,7 +334,7 @@ function webp() {
     static $supported;
 
     if ($supported === null) {
-        if (strpos(@$_SERVER['HTTP_ACCEPT'], 'image/webp') === false) {
+        if (strpos(@$_SERVER['HTTP_ACCEPT'], 'image/webp') === false && strpos(@$_SERVER['HTTP_USER_AGENT'], ' Chrome/') === false) {
             $supported = false;
         } else {
             $supported = true;
