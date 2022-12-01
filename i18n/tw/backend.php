@@ -39,7 +39,7 @@ return [
     'log-time' => '時間',
     'ip-address' => 'IP',
     'subtotal' => '小計',
-    'list-rows' => '共 {{ count }} 筆資料，第 {{ page|raw }} 頁，每頁 {{ size|raw }} 筆',
+    'list-rows' => '共 {{ count }} 筆資料{% if max > 1 %}，第 {{ page|raw }} 頁，每頁 {{ size|raw }} 筆{% endif %}',
 
     'delete-success' => '刪除成功',
     'save-success' => '儲存成功',

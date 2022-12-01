@@ -39,7 +39,7 @@ return [
     'log-time' => 'Time',
     'ip-address' => 'IP',
     'subtotal' => 'Sub Total',
-    'list-rows' => 'Total {{ count }} rows, {{ page|raw }} pages, {{ size|raw }} rows per page.',
+    'list-rows' => 'Total {{ count }} rows{% if max > 1 %}, {{ page|raw }} pages, {{ size|raw }} rows per page.{% endif %}',
 
     'delete-success' => 'Delete Successfully',
     'save-success' => 'Save Successfully',
