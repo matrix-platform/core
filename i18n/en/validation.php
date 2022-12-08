@@ -34,6 +34,8 @@ return [
 
     'timestamp' => 'Invalid Format',
 
+    'tw-id' => 'Invalid Format',
+
     'url' => 'Invalid URL Format',
 
 ];
