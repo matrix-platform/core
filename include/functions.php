@@ -100,7 +100,7 @@ function isolate_require() {
     return require func_get_arg(0);
 }
 
-function load_bundle($name) {
+function load_bundle($name, $key = null, $value = null) {
     static $bundles = [];
 
     if (!key_exists($name, $bundles)) {
@@ -115,6 +115,14 @@ function load_bundle($name) {
         }
 
         $bundles[$name] = $bundle;
+    }
+
+    if ($key !== null) {
+        if ($value === null) {
+            unset($bundles[$name][$key]);
+        } else {
+            $bundles[$name][$key] = $value;
+        }
     }
 
     return $bundles[$name];
@@ -285,6 +293,18 @@ function routing($path, $method) {
     }
 
     return null;
+}
+
+function set_cfg($token, $value = null) {
+    list($name, $key) = preg_split('/\./', $token, 2);
+
+    load_bundle("cfg/{$name}", $key, $value);
+}
+
+function set_i18n($token, $value = null, $language = LANGUAGE) {
+    list($name, $key) = preg_split('/\./', $token, 2);
+
+    load_bundle("i18n/{$language}/{$name}", $key, $value);
 }
 
 function table($name, $cache = true) {
