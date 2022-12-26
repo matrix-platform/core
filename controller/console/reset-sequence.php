@@ -31,6 +31,16 @@ return new class() extends matrix\cli\Controller {
                         case FormNumber::RESET_DAILY:
                             $resettable = true;
                             break;
+                        case FormNumber::RESET_MONTHLY:
+                            if (date('d') === '01') {
+                                $resettable = true;
+                            }
+                            break;
+                        case FormNumber::RESET_YEARLY:
+                            if (date('md') === '0101') {
+                                $resettable = true;
+                            }
+                            break;
                         }
 
                         if ($resettable) {

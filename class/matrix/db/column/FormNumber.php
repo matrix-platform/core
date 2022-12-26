@@ -8,6 +8,8 @@ class FormNumber {
 
     const RESET_NONE = 0;
     const RESET_DAILY = 1;
+    const RESET_MONTHLY = 3;
+    const RESET_YEARLY = 5;
 
     public function __construct($values) {
         $this->values = $values + [
