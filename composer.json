@@ -8,17 +8,14 @@
     ],
     "license": "MIT",
     "require": {
-        "dompdf/dompdf": "^1.0",
-        "facebook/graph-sdk": "^5.7",
         "filp/whoops": "^2.14",
-        "google/apiclient": "^2.11",
         "intervention/image": "^2.7",
         "mhor/php-mediainfo": "^5.4",
-        "monolog/monolog": "^2.3",
-        "nesbot/carbon": "^2.53",
-        "phpmailer/phpmailer": "^6.5",
-        "phpoffice/phpspreadsheet": "^1.18",
-        "twig/string-extra": "^3.3",
-        "twig/twig": "^3.3"
+        "monolog/monolog": "^2.8",
+        "nesbot/carbon": "^2.64",
+        "phpmailer/phpmailer": "^6.7",
+        "phpoffice/phpspreadsheet": "^1.26",
+        "twig/string-extra": "^3.5",
+        "twig/twig": "^3.5"
     }
 }

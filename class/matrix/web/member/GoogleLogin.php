@@ -17,6 +17,7 @@ class GoogleLogin extends Controller {
     protected function process($form) {
         $client = new Client();
         $client->setAuthConfig(APP_DATA . $this->config());
+        $client->setRedirectUri(get_url(APP_ROOT . substr($this->path(), 1)));
 
         $auth = $client->authenticate(@$form['code']);
 
