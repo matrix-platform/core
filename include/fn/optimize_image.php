@@ -56,19 +56,22 @@ return function ($image, $width = 0, $height = 0) {
 
     $folder = $data['privilege'] ? (APP_HOME . 'files/') : FILES_HOME;
     $optimize = "{$folder}{$file}";
-    $source = "{$folder}{$path}";
 
-    if (!file_exists($optimize) && file_exists($source)) {
-        $img = ImageManagerStatic::make($source);
+    if (!file_exists($optimize)) {
+        try {
+            $img = ImageManagerStatic::make("{$folder}{$path}");
 
-        if ($w) {
-            $img->resize($w, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+            if ($w) {
+                $img->resize($w, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+
+            $img->save($optimize);
+            $img->destroy();
+        } catch (Exception $ignore) {
+            return $path;
         }
-
-        $img->save($optimize);
-        $img->destroy();
     }
 
     return $file;
