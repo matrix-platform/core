@@ -20,12 +20,7 @@ if (cfg('system.debug')) {
     (new Run())->prependHandler($handler)->register();
 }
 
-if (@$_SERVER['REVERSE_PROXY'] && $_SERVER['REVERSE_PROXY'] === $_SERVER['REMOTE_ADDR']) {
-    $addresses = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-    define('REMOTE_ADDR', trim(end($addresses)));
-} else {
-    define('REMOTE_ADDR', $_SERVER['REMOTE_ADDR']);
-}
+define('REMOTE_ADDR', $_SERVER['REMOTE_ADDR']);
 
 $path = $_SERVER['PATH_INFO'] ?? '/';
 $method = $_SERVER['REQUEST_METHOD'];
