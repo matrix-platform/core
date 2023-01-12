@@ -29,7 +29,8 @@ $tbl->add('size', Integer::class)
 $tbl->add('hash', Text::class)
     ->readonly(true);
 
-$tbl->add('description', Textarea::class);
+$tbl->add('description', Textarea::class)
+    ->multilingual(MULTILINGUAL);
 
 $tbl->add('mime_type', Text::class)
     ->readonly(true);
