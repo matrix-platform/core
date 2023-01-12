@@ -56,9 +56,10 @@ return function ($image, $width = 0, $height = 0) {
 
     $folder = $data['privilege'] ? (APP_HOME . 'files/') : FILES_HOME;
     $optimize = "{$folder}{$file}";
+    $source = "{$folder}{$path}";
 
-    if (!file_exists($optimize)) {
-        $img = ImageManagerStatic::make("{$folder}{$path}");
+    if (!file_exists($optimize) && file_exists($source)) {
+        $img = ImageManagerStatic::make($source);
 
         if ($w) {
             $img->resize($w, null, function ($constraint) {
