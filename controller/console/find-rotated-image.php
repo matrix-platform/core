@@ -7,7 +7,7 @@ return new class() extends matrix\cli\Controller {
     protected function process($form) {
         foreach (model('File')->query() as $file) {
             if (strtok($file['mime_type'], '/') === 'image') {
-                $folder = $file['privilege'] ? (APP_HOME . 'files/') : FILES_HOME;
+                $folder = $file['privilege'] ? PRIV_FILES_HOME : FILES_HOME;
                 $source = "{$folder}{$file['path']}";
                 $exif = @exif_read_data($source);
 

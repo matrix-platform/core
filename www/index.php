@@ -1,7 +1,6 @@
 <?php //>
 
 define('APP_HOME', dirname(__DIR__) . '/');
-define('FILES_HOME', APP_HOME . 'www/files/');
 define('VENDOR_HOME', APP_HOME . 'vendor/');
 
 require VENDOR_HOME . 'autoload.php';

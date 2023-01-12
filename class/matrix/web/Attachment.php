@@ -17,7 +17,7 @@ class Attachment {
     }
 
     public static function from($filename, $content, $description, $privilege = null) {
-        $folder = $privilege ? (APP_HOME . 'files/p') : FILES_HOME;
+        $folder = $privilege ? (PRIV_FILES_HOME . 'p') : FILES_HOME;
 
         if (preg_match('/^data:/', $content)) {
             $file = tempnam(create_folder($folder . date('Ymd')), '');

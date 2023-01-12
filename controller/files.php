@@ -21,12 +21,14 @@ return new class() extends matrix\web\Controller {
         if ($data) {
             switch ($data['privilege']) {
             case 1:
-                if (!$this->user()) {
+                if (!$this->user() || !file_exists(PRIV_FILES_HOME . $file)) {
                     $data = null;
                 }
                 break;
             default:
-                $data = null;
+                if (!file_exists(FILES_HOME . $file)) {
+                    $data = null;
+                }
             }
         }
 

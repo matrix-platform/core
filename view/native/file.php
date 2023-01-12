@@ -3,7 +3,7 @@
 $data = $result['data'];
 $file = $result['file'];
 
-$folder = $data['privilege'] ? (APP_HOME . 'files/') : FILES_HOME;
+$folder = $data['privilege'] ? PRIV_FILES_HOME : FILES_HOME;
 $path = "{$folder}{$file}";
 
 if ($data['path'] === $file) {

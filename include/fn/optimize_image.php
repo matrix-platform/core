@@ -54,7 +54,7 @@ return function ($image, $width = 0, $height = 0) {
         $file = "{$path}.{$to}";
     }
 
-    $folder = $data['privilege'] ? (APP_HOME . 'files/') : FILES_HOME;
+    $folder = $data['privilege'] ? PRIV_FILES_HOME : FILES_HOME;
     $optimize = "{$folder}{$file}";
 
     if (!file_exists($optimize)) {
