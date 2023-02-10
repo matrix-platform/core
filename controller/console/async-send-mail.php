@@ -11,7 +11,7 @@ return new class() extends matrix\cli\Controller {
     protected function process($form) {
         $model = model('MailLog');
 
-        foreach ($model->query(['status' => 1]) as $item) {
+        foreach ($model->query(['status' => 1], true, 10) as $item) {
             $options = load_cfg($item['sender']);
 
             if ($this->send($item['receiver'], $item['subject'], $item['content'], $options)) {
@@ -24,6 +24,8 @@ return new class() extends matrix\cli\Controller {
             $item['sender'] = $options['username'];
 
             $model->update($item);
+
+            sleep(2);
         }
 
         return ['success' => true];
