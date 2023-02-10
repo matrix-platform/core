@@ -105,7 +105,7 @@ class Table {
         return $conditions === null ? $collection : $collection->filter($conditions);
     }
 
-    public function getColumns($names = null) {
+    public function getColumns($names = null, $orders = null) {
         if ($names === false) {
             return $this->columns;
         }
@@ -125,6 +125,20 @@ class Table {
                 }
 
                 $columns[$alias] = $this->columns[$alias];
+            }
+        }
+
+        if ($orders) {
+            foreach ($orders as $name) {
+                if ($name !== '?') {
+                    if ($name[0] === '-') {
+                        $name = substr($name, 1);
+                    }
+
+                    if (!key_exists($name, $columns)) {
+                        $columns[$name] = $this->columns[$name];
+                    }
+                }
             }
         }
 

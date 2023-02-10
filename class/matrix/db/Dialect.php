@@ -156,11 +156,21 @@ trait Dialect {
     abstract public function makeRandom();
 
     public function makeSelection($table, $columns, $criteria, $orders, $select = true) {
+        if (!is_array($orders)) {
+            if ($orders === true) {
+                $orders = [$table->ranking() ?: $table->id()];
+            } else if (is_string($orders)) {
+                $orders = [$orders];
+            } else {
+                $orders = null;
+            }
+        }
+
         $expressions = [];
         $multilinguals = [];
         $wrappers = [];
 
-        foreach ($table->getColumns($columns) as $name => $column) {
+        foreach ($table->getColumns($columns, $orders) as $name => $column) {
             if ($column->pseudo()) {
                 continue;
             }
@@ -201,10 +211,6 @@ trait Dialect {
         }
 
         if ($orders) {
-            if ($orders === true) {
-                $orders = [$table->ranking() ?: $table->id()];
-            }
-
             $command = $this->makeOrder($command, $expressions + $multilinguals, $orders);
         }
 
