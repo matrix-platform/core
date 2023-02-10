@@ -66,13 +66,13 @@ trait RequestHandler {
     }
 
     protected function wrapJson() {
-        $form = json_decode(file_get_contents('php://input'), true);
+        $form = $this->jsonDecode(file_get_contents('php://input'));
 
         return is_array($form) ? $form : [];
     }
 
     protected function wrapPost() {
-        $form = key_exists('JSON', $_POST) ? json_decode($_POST['JSON'], true) : $_POST;
+        $form = key_exists('JSON', $_POST) ? $this->jsonDecode($_POST['JSON']) : $_POST;
 
         foreach ($_FILES as $name => $value) {
             $files = [];
@@ -97,6 +97,10 @@ trait RequestHandler {
         }
 
         return $form;
+    }
+
+    private function jsonDecode($text) {
+        return json_decode(preg_replace('/[[:^print:]]/u', '', $text), true);
     }
 
 }
