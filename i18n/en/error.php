@@ -46,6 +46,8 @@ return [
 
     'permission-denied' => 'Permission Denied',
 
+    'resend-failed' => 'Resend Failed',
+
     'retry-sms-later' => 'SMS has been sent, please try again later',
 
     'sms-failed' => 'SMS Failed',

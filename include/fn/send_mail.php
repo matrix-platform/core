@@ -19,46 +19,20 @@ return new class() {
             $options['to'] = $options['sandbox'];
         }
 
-        $mailer = new PHPMailer();
-
-        $mailer->Host = $options['host'];
-        $mailer->Port = $options['port'];
-        $mailer->SMTPAuth = true;
-        $mailer->Username = $options['username'];
-        $mailer->Password = $options['password'];
-
-        if ($options['secure']) {
-            $mailer->SMTPSecure = $options['secure'];
-        } else {
-            $mailer->SMTPAutoTLS = false;
-        }
-
-        $mailer->isHTML(true);
-        $mailer->isSMTP();
-
-        $mailer->CharSet = 'utf-8';
-        $mailer->From = $options['username'];
-        $mailer->FromName = $options['from'];
-        $mailer->Subject = render($options['subject'], $options);
-        $mailer->Body = render($options['content'], $options);
-
-        foreach (preg_split('/[\s;,]/', $options['to'], 0, PREG_SPLIT_NO_EMPTY) as $to) {
-            $mailer->addBCC($to);
-        }
-
         $log = [
+            'mailer' => $options['mailer'],
+            'sender' => $options['username'],
             'receiver' => $options['to'],
-            'subject' => $mailer->Subject,
-            'content' => $mailer->Body,
+            'subject' => render($options['subject'], $options),
+            'content' => render($options['content'], $options),
         ];
 
         if (@$options['async']) {
-            $log['sender'] = $options['mailer'];
             $log['status'] = 1;
 
             $result = true;
         } else {
-            $log['sender'] = $options['username'];
+            $mailer = Func::create_mailer($log['receiver'], $log['subject'], $log['content'], $options);
 
             $result = $mailer->send();
 
@@ -76,6 +50,7 @@ return new class() {
 
     private function queue($options) {
         $log = model('MailLog')->insert([
+            'mailer' => $options['queue'],
             'sender' => $options['from'],
             'receiver' => $options['to'],
             'subject' => render($options['subject'], $options),

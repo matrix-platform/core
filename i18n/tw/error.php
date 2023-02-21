@@ -46,6 +46,8 @@ return [
 
     'permission-denied' => '權限不足',
 
+    'resend-failed' => '重發失敗',
+
     'retry-sms-later' => '簡訊已發送，請稍候再試',
 
     'sms-failed' => '簡訊發送失敗',

@@ -2,7 +2,7 @@
 
 // php www/index.php /console/async-send-mail
 
-use PHPMailer\PHPMailer\PHPMailer;
+use matrix\utility\Func;
 
 return new class() extends matrix\cli\Controller {
 
@@ -12,7 +12,7 @@ return new class() extends matrix\cli\Controller {
         $model = model('MailLog');
 
         foreach ($model->query(['status' => 1], true, 10) as $item) {
-            $options = load_cfg($item['sender']);
+            $options = load_cfg($item['mailer']);
 
             if ($this->send($item['receiver'], $item['subject'], $item['content'], $options)) {
                 $item['send_time'] = date(cfg('system.timestamp'));
@@ -20,8 +20,6 @@ return new class() extends matrix\cli\Controller {
             } else {
                 $item['status'] = 9;
             }
-
-            $item['sender'] = $options['username'];
 
             $model->update($item);
 
@@ -36,32 +34,7 @@ return new class() extends matrix\cli\Controller {
     }
 
     private function send($receiver, $subject, $body, $options) {
-        $mailer = new PHPMailer();
-
-        $mailer->Host = $options['host'];
-        $mailer->Port = $options['port'];
-        $mailer->SMTPAuth = true;
-        $mailer->Username = $options['username'];
-        $mailer->Password = $options['password'];
-
-        if ($options['secure']) {
-            $mailer->SMTPSecure = $options['secure'];
-        } else {
-            $mailer->SMTPAutoTLS = false;
-        }
-
-        $mailer->isHTML(true);
-        $mailer->isSMTP();
-
-        $mailer->CharSet = 'utf-8';
-        $mailer->From = $options['username'];
-        $mailer->FromName = $options['from'];
-        $mailer->Subject = $subject;
-        $mailer->Body = $body;
-
-        foreach (preg_split('/[\s;,]/', $receiver, 0, PREG_SPLIT_NO_EMPTY) as $to) {
-            $mailer->addBCC($to);
-        }
+        $mailer = Func::create_mailer($receiver, $subject, $body, $options);
 
         return $mailer->send();
     }

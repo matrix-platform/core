@@ -32,6 +32,7 @@ return [
     'history' => '异动纪录',
     'next' => '下一步',
     'picker' => '选择',
+    'resend' => '重发',
 
     'operation' => '操作',
     'visible' => '显示',
@@ -42,6 +43,7 @@ return [
     'list-rows' => '共 {{ count }} 笔资料{% if max > 1 %}，第 {{ page|raw }} 页，每页 {{ size|raw }} 笔{% endif %}',
 
     'delete-success' => '删除成功',
+    'resend-success' => '重发成功',
     'save-success' => '储存成功',
 
     'confirm-delete' => '删除确认',

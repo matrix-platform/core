@@ -124,6 +124,7 @@ CREATE TABLE base_sms_log (
 
 CREATE TABLE base_mail_log (
     id          INTEGER   NOT NULL PRIMARY KEY,
+    mailer      TEXT      NOT NULL,
     sender      TEXT      NOT NULL,
     receiver    TEXT      NOT NULL,
     subject     TEXT      NOT NULL,

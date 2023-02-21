@@ -32,6 +32,7 @@ return [
     'history' => 'History',
     'next' => 'Next',
     'picker' => 'Pick',
+    'resend' => 'Resend',
 
     'operation' => 'Operation',
     'visible' => 'Visible',
@@ -42,6 +43,7 @@ return [
     'list-rows' => 'Total {{ count }} rows{% if max > 1 %}, {{ page|raw }} pages, {{ size|raw }} rows per page.{% endif %}',
 
     'delete-success' => 'Delete Successfully',
+    'resend-success' => 'Resend Successfully',
     'save-success' => 'Save Successfully',
 
     'confirm-delete' => 'Delete Confirmation',

@@ -10,6 +10,9 @@ use matrix\db\Table;
 
 $tbl = new Table('base_mail_log');
 
+$tbl->add('mailer', Text::class)
+    ->required(true);
+
 $tbl->add('sender', Text::class)
     ->required(true);
 

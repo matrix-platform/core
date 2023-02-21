@@ -32,6 +32,7 @@ return [
     'history' => '異動紀錄',
     'next' => '下一步',
     'picker' => '選擇',
+    'resend' => '重發',
 
     'operation' => '操作',
     'visible' => '顯示',
@@ -42,6 +43,7 @@ return [
     'list-rows' => '共 {{ count }} 筆資料{% if max > 1 %}，第 {{ page|raw }} 頁，每頁 {{ size|raw }} 筆{% endif %}',
 
     'delete-success' => '刪除成功',
+    'resend-success' => '重發成功',
     'save-success' => '儲存成功',
 
     'confirm-delete' => '刪除確認',

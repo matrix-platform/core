@@ -82,6 +82,8 @@ return [
 
             'mail-log/' => ['parent' => 'mail-log', 'tag' => 'query'],
 
+            'mail-log/resend' => ['parent' => 'mail-log', 'tag' => 'query'],
+
         'system-log' => ['icon' => 'far fa-list-alt', 'ranking' => 600, 'parent' => 'system', 'group' => true, 'tag' => 'query'],
 
             'system-log/' => ['parent' => 'system-log', 'tag' => 'query'],
