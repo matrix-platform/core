@@ -1,9 +1,14 @@
 <?php //>
 
 return function ($payload, $key) {
-    $cipher = 'aes-128-gcm';
-    $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($cipher));
-    $text = openssl_encrypt($payload, $cipher, $key, 0, $iv, $tag);
+    $cipher = 'AES-256-CBC';
+    $length = openssl_cipher_iv_length($cipher);
 
-    return base64_urlencode($text . ':' . base64_encode($iv) . ':' . base64_encode($tag));
+    $iv = openssl_random_pseudo_bytes($length);
+    $data = openssl_encrypt($payload, $cipher, $key, OPENSSL_RAW_DATA, $iv);
+
+    $text = $iv . $data;
+    $hash = hash('md5', $text, true);
+
+    return base64_urlencode($text . $hash);
 };
