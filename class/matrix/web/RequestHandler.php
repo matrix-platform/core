@@ -100,7 +100,7 @@ trait RequestHandler {
     }
 
     private function jsonDecode($text) {
-        return json_decode(preg_replace('/[[:^print:]]/u', '', $text), true);
+        return json_decode(preg_replace('/[^[:print:]]/u', '', $text), true);
     }
 
 }
