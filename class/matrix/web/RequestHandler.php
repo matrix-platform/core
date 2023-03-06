@@ -100,7 +100,10 @@ trait RequestHandler {
     }
 
     private function jsonDecode($text) {
-        return json_decode(preg_replace('/[^[:print:]]/u', '', $text), true);
+        $text = preg_replace_callback('/\\\\u([0-9a-f]{4})/i', fn ($m) => mb_convert_encoding(pack('H*', $m[1]), 'UTF-8', 'UCS-2BE'), $text);
+        $text = preg_replace('/[^[:print:]]/u', '', $text);
+
+        return json_decode($text, true);
     }
 
 }
