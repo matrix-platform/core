@@ -4,7 +4,7 @@ cp -R ${folder}/www .
 cp ${folder}/doc/htaccess www/.htaccess
 [ ! -f config.php ] && cp ${folder}/doc/config-sample.php .
 
-mkdir -p cfg class controller/backend data doc files i18n logs menu table view/{native,twig} www/files
+mkdir -p cfg class controller/backend data doc files i18n logs menu table view/native view/twig www/files
 chmod 777 data files logs www/files
 
 touch .gitignore
