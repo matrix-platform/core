@@ -1,6 +1,6 @@
 <?php //>
 
-return function ($text, $key) {
+return function ($text, $key = null) {
     $text = base64_urldecode($text);
 
     $hash = substr($text, -16);
@@ -16,5 +16,5 @@ return function ($text, $key) {
     $iv = substr($text, 0, $length);
     $data = substr($text, $length);
 
-    return openssl_decrypt($data, $cipher, $key, OPENSSL_RAW_DATA, $iv);
+    return openssl_decrypt($data, $cipher, $key ?: cfg('system.default-key'), OPENSSL_RAW_DATA, $iv);
 };

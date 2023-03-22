@@ -12,6 +12,8 @@ return [
 
     'event-secret-timeout' => 10000,
 
+    'default-key' => '',
+
     'image-optimization' => true,
 
     'languages' => 'en|tw',
