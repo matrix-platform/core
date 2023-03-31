@@ -36,6 +36,8 @@ return [
 
     'tw-id' => 'Invalid Format',
 
+    'tw-tax-id' => 'Invalid Format',
+
     'url' => 'Invalid URL Format',
 
 ];
