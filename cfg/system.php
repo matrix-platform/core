@@ -6,13 +6,13 @@ return [
 
     'debug' => false,
 
+    'default-key' => '',
+
     'event-notify-url' => null,
 
     'event-secret' => '',
 
     'event-secret-timeout' => 10000,
-
-    'default-key' => '',
 
     'image-optimization' => true,
 

@@ -2,6 +2,8 @@
 
 return [
 
+    'sender' => null,
+
     'from' => null,
 
     'username' => null,

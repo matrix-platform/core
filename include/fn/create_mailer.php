@@ -21,7 +21,7 @@ return function ($receiver, $subject, $body, $options) {
     $mailer->isSMTP();
 
     $mailer->CharSet = 'utf-8';
-    $mailer->From = $options['username'];
+    $mailer->From = $options['sender'] ?? $options['username'];
     $mailer->FromName = $options['from'];
     $mailer->Subject = $subject;
     $mailer->Body = $body;
