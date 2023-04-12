@@ -1,8 +1,10 @@
 /.vscode/
 /config-sample.php
 /data/
+/files/
 /logs/
 /vendor/
 /version
 /www/.htaccess
+/www/files/
 /www/index.php
