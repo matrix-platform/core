@@ -6,6 +6,8 @@ return [
 
     'date' => 'Invalid Format',
 
+    'domain' => 'Not Found',
+
     'double' => 'Invalid Format',
     'double.max' => 'Greater Than Maximum',
     'double.min' => 'Less Than Minimum',

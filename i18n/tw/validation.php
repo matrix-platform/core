@@ -6,6 +6,8 @@ return [
 
     'date' => '格式錯誤',
 
+    'domain' => '查無資料',
+
     'double' => '格式錯誤',
     'double.max' => '超過上限',
     'double.min' => '低於下限',
