@@ -128,6 +128,7 @@ class Attachment {
             'parent_id' => $parent_id,
             'size' => $this->info['size'],
             'hash' => $this->info['hash'],
+            'privilege' => $this->info['privilege'],
         ]);
 
         if ($duplicated) {

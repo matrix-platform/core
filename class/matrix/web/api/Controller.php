@@ -19,6 +19,8 @@ class Controller {
     }
 
     public function execute() {
+        $this->response()->headers(['Access-Control-Allow-Headers' => '*', 'Access-Control-Allow-Origin' => '*']);
+
         if ($this->authenticate()) {
             $this->handle();
         }

@@ -6,7 +6,7 @@ return [
 
     'debug' => false,
 
-    'default-key' => '',
+    'default-key' => 'SECRET',
 
     'event-notify-url' => null,
 
