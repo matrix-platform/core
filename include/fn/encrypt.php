@@ -1,10 +1,14 @@
 <?php //>
 
 return function ($payload, $key = null) {
-    $cipher = 'AES-256-CBC';
-    $length = openssl_cipher_iv_length($cipher);
+    static $iv;
 
-    $iv = openssl_random_pseudo_bytes($length);
+    $cipher = 'AES-256-CBC';
+
+    if ($iv === null) {
+        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($cipher));
+    }
+
     $data = openssl_encrypt($payload, $cipher, $key ?: cfg('system.default-key'), OPENSSL_RAW_DATA, $iv);
 
     $text = $iv . $data;

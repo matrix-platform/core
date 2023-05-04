@@ -15,6 +15,7 @@ if ($data['path'] === $file) {
 }
 
 $controller->response()->file($path)->headers([
+    'Content-Disposition' => 'inline;filename="' . addslashes($data['name']) . '"',
     'Content-Length' => $size,
     'Content-Type' => $type,
 ]);
