@@ -15,11 +15,13 @@ return [
 
     'gmail' => 'Gmail SMTP',
     'gmail.from' => 'From Name',
-    'gmail.password' => 'Password',
-    'gmail.username' => 'Username',
+    'gmail.sender' => 'Sender',
     'gmail.host' => 'Host',
     'gmail.port' => 'Port',
     'gmail.secure' => 'Secure',
+    'gmail.username' => 'Username',
+    'gmail.password' => 'Password',
+    'gmail.auth' => 'Auth Type',
     'gmail.queue' => 'Mail Queue',
     'gmail.sandbox' => 'Sandbox Receiver',
 

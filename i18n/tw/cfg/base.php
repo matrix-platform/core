@@ -14,12 +14,14 @@ return [
     'facebook.default_graph_version' => '版本',
 
     'gmail' => 'Gmail SMTP',
-    'gmail.from' => '寄件者名稱',
-    'gmail.password' => '密碼',
-    'gmail.username' => '帳號',
+    'gmail.from' => '寄件者',
+    'gmail.sender' => '寄件者信箱',
     'gmail.host' => '主機',
     'gmail.port' => '埠號',
     'gmail.secure' => '安全連線',
+    'gmail.username' => '帳號',
+    'gmail.password' => '密碼',
+    'gmail.auth' => '驗證類型',
     'gmail.queue' => '發信佇列',
     'gmail.sandbox' => '沙盒模式收件者',
 

@@ -11,6 +11,10 @@ return function ($receiver, $subject, $body, $options) {
     $mailer->Username = $options['username'];
     $mailer->Password = $options['password'];
 
+    if ($options['auth']) {
+        $mailer->AuthType = $options['auth'];
+    }
+
     if ($options['secure']) {
         $mailer->SMTPSecure = $options['secure'];
     } else {
