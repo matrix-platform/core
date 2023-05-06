@@ -22,6 +22,40 @@ class Dialect {
         return "ARRAY_TO_STRING({$expression}, '{$separator}')";
     }
 
+    public function makeOrder($command, $columns, $orders) {
+        $expressions = [];
+
+        foreach ($orders as $name) {
+            if ($name === '?') {
+                $expressions[] = $this->makeRandom();
+            } else {
+                if ($name[0] === '-') {
+                    $name = substr($name, 1);
+                    $type = 'DESC NULLS LAST';
+                } else {
+                    $type = 'ASC';
+                }
+
+                if (key_exists($name, $columns)) {
+                    if ($columns[$name] === true) {
+                        $name = $name . '__' . LANGUAGE;
+                    }
+
+                    $quoted = $this->quote($name);
+                    $expressions[] = "{$quoted} {$type}";
+                }
+            }
+        }
+
+        if ($expressions) {
+            $order = implode(', ', $expressions);
+
+            return "{$command} ORDER BY {$order}";
+        }
+
+        return $command;
+    }
+
     public function makePager($command, $size, $page) {
         $offset = $size * ($page - 1);
 
