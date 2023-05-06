@@ -29,6 +29,16 @@ class Collection {
         return $list;
     }
 
+    public function deleteOne() {
+        $data = $this->get();
+
+        if ($data) {
+            $data = $this->model->delete($data);
+        }
+
+        return $data;
+    }
+
     public function filter($conditions) {
         if (is_array($conditions)) {
             $this->conditions = array_merge($this->conditions, $conditions);
@@ -85,6 +95,18 @@ class Collection {
         }
 
         return $list;
+    }
+
+    public function updateOne($values) {
+        $data = $this->get();
+
+        if ($data) {
+            unset($values['id']);
+
+            $data = $this->model->update(array_merge($data, $values));
+        }
+
+        return $data;
     }
 
 }

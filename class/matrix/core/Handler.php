@@ -28,7 +28,7 @@ trait Handler {
             try {
                 $result = $this->process($form);
             } catch (AppException $exception) {
-                $result = ['error' => $exception->getError(), 'message' => $exception->getMessage()];
+                $result = ['error' => $exception->getError(), 'message' => $exception->getMessage(), 'extra' => $exception->getExtra()];
             } finally {
                 $success = @$result['success'];
 

@@ -240,6 +240,16 @@ function model($name) {
     return table($name)->model();
 }
 
+function now() {
+    static $now;
+
+    if ($now === null) {
+        $now = date(cfg('system.timestamp'));
+    }
+
+    return $now;
+}
+
 function render($template, $data) {
     $twig = new Environment(new ArrayLoader(['template' => $template]));
 
@@ -315,6 +325,16 @@ function table($name, $cache = true) {
     }
 
     throw new Exception("Table `{$name}` not found.");
+}
+
+function today() {
+    static $today;
+
+    if ($today === null) {
+        $today = date(cfg('system.date'));
+    }
+
+    return $today;
 }
 
 function union_resource($path) {

@@ -231,6 +231,10 @@ class Table {
         return $this->relations;
     }
 
+    public function insert($data) {
+        return $this->model()->insert($data);
+    }
+
     public function model() {
         return db()->model($this);
     }
