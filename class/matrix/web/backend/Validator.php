@@ -2,6 +2,8 @@
 
 namespace matrix\web\backend;
 
+use matrix\db\column\Id;
+
 trait Validator {
 
     protected function validate($form) {
@@ -31,6 +33,10 @@ trait Validator {
             $type = $column->validate($value);
 
             if ($type === true) {
+                if ($column instanceof Id) {
+                    return $errors;
+                }
+
                 $alias = $column->association();
 
                 if ($alias) {
