@@ -32,6 +32,7 @@ spl_autoload_register(function ($name) {
 
 define('APP_PATH', preg_replace('/^\/?(.*\/)?[^\/]+$/', '/$1', $_SERVER['SCRIPT_NAME']));
 
+require find_resource('include/helpers.php');
 require find_resource(PHP_SAPI === 'cli' ? 'include/cli.php' : 'include/web.php');
 
 $languages = cfg('system.languages');

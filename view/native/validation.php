@@ -1,5 +1,8 @@
 <?php //>
 
+logging('validation')->debug($controller->name(), $form);
+logging('validation')->debug($controller->name(), $result);
+
 $errors = [];
 
 foreach ($result as $error) {

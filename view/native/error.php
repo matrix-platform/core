@@ -1,5 +1,8 @@
 <?php //>
 
+logging('error-response')->debug($controller->name(), $form);
+logging('error-response')->debug($controller->name(), $result);
+
 $error = $result['error'] ?? 'error.unknown';
 $message = @$result['message'] ?: i18n($error, '');
 $data = @$result['data'];
