@@ -12,7 +12,7 @@ trait Integer {
     public function convert($value) {
         $value = intval($value);
 
-        return $value > 2147483647 || $value < -2147483648 ? 0 : $value;
+        return $value > 2147483647 || $value < -2147483648 ? null : $value;
     }
 
     public function type() {
