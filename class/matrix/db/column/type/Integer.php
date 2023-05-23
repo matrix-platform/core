@@ -10,7 +10,9 @@ trait Integer {
     use Column;
 
     public function convert($value) {
-        return intval($value);
+        $value = intval($value);
+
+        return $value > 2147483647 || $value < -2147483648 ? 0 : $value;
     }
 
     public function type() {
