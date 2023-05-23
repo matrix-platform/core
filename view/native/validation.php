@@ -10,7 +10,7 @@ foreach ($result as $error) {
 
     $errors[] = [
         'name' => $error['name'],
-        'message' => $error['message'] ?? i18n("validation.{$type}", $type),
+        'message' => $controller->validation($error) ?: i18n("validation.{$type}", $type),
         'type' => $type,
     ];
 }

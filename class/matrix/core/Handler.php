@@ -8,6 +8,10 @@ trait Handler {
 
     use ValueObject;
 
+    public function validation($error) {
+        return @$error['message'];
+    }
+
     protected function handle() {
         $this->init();
 

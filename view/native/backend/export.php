@@ -72,7 +72,7 @@ $headerStyle = [
 ];
 
 foreach ($columns as $name => $column) {
-    setValue($sheet, $x, $y, $column->label() ?: i18n("table/{$table->name()}.{$name}"));
+    setValue($sheet, $x, $y, $column->label() ?: i18n($column->i18n()));
 
     $sheet->getCellByColumnAndRow($x, $y)->getStyle()->applyFromArray($headerStyle);
 

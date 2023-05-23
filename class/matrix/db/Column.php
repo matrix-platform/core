@@ -96,6 +96,10 @@ trait Column {
         return $value;
     }
 
+    public function i18n() {
+        return "table/{$this->table()->name()}.{$this->name()}";
+    }
+
     public function regenerate($value) {
         return $value;
     }

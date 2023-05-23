@@ -27,7 +27,7 @@ trait Validator {
 
         if ($value === null) {
             if ($this->isRequired($column, key_exists($name, $form))) {
-                $errors[] = ['name' => $name, 'type' => 'required'];
+                $errors[] = ['column' => $column, 'name' => $name, 'type' => 'required'];
             }
         } else {
             $type = $column->validate($value);
@@ -45,7 +45,7 @@ trait Validator {
                     $condition[] = $relation['target']->equal($value)->with($language);
 
                     if (!$relation['foreign']->model()->count($condition)) {
-                        $errors[] = ['name' => $name, 'type' => 'not-found'];
+                        $errors[] = ['column' => $column, 'name' => $name, 'type' => 'not-found'];
                     }
                 } else {
                     $options = $column->options();
@@ -55,7 +55,7 @@ trait Validator {
 
                         foreach (explode(',', $token) as $key) {
                             if (!key_exists($key, $options)) {
-                                $errors[] = ['name' => $name, 'type' => 'not-found'];
+                                $errors[] = ['column' => $column, 'name' => $name, 'type' => 'not-found'];
                                 break;
                             }
                         }
@@ -72,11 +72,11 @@ trait Validator {
                     }
 
                     if ($this->table()->model()->count($condition)) {
-                        $errors[] = ['name' => $name, 'type' => 'duplicated'];
+                        $errors[] = ['column' => $column, 'name' => $name, 'type' => 'duplicated'];
                     }
                 }
             } else {
-                $errors[] = ['name' => $name, 'type' => $type];
+                $errors[] = ['column' => $column, 'name' => $name, 'type' => $type];
             }
         }
 

@@ -87,7 +87,7 @@ foreach ($table->getColumns($controller->filters() ?: []) as $name => $column) {
 
     $filters[] = [
         'column' => $column,
-        'i18n' => "table/{$table->name()}.{$name}",
+        'i18n' => $column->i18n(),
         'name' => $name,
         'search' => $options ? null : $search,
         'type' => $options ? 'select' : ($search === 'like' ? 'text' : $column->formStyle()),
@@ -113,7 +113,7 @@ foreach ($controller->getColumns() as $name => $column) {
 
     $styles[] = [
         'column' => $column,
-        'i18n' => "table/{$table->name()}.{$name}",
+        'i18n' => $column->i18n(),
         'name' => $name,
         'readonly' => !$column->editable(),
         'type' => $type,

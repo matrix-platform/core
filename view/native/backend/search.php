@@ -23,7 +23,7 @@ foreach ($controller->getColumns() as $name => $column) {
 
     $styles[] = [
         'column' => $column,
-        'i18n' => "table/{$table->name()}.{$name}",
+        'i18n' => $column->i18n(),
         'name' => $name,
         'readonly' => !$column->editable(),
         'type' => $type,

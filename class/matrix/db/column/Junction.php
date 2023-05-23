@@ -21,6 +21,10 @@ class Junction {
         return $select ? $dialect->makeImplodeExpression($expression, ',') : $expression;
     }
 
+    public function i18n() {
+        return $this->column->i18n();
+    }
+
     public function mapping() {
         return $this->column->mapping();
     }

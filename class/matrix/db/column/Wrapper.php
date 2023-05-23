@@ -12,12 +12,14 @@ class Wrapper {
     private $alias;
     private $name;
     private $relation;
+    private $table;
 
-    public function __construct($name, $alias, $column, $relation) {
+    public function __construct($name, $alias, $table, $column, $relation) {
         $this->name = $name;
         $this->alias = $alias;
         $this->decorated = $column;
         $this->relation = $relation;
+        $this->table = $table;
         $this->values = [];
 
         if (!$this->isJunction()) {
@@ -39,6 +41,14 @@ class Wrapper {
         }
 
         return $this->decorated->expression($dialect, $language, $prefix ?: $this->alias, $name, $select);
+    }
+
+    public function i18n() {
+        if ($this->isCounter()) {
+            return "table/{$this->table->name()}.{$this->name}";
+        } else {
+            return $this->decorated->i18n();
+        }
     }
 
     public function isCounter() {

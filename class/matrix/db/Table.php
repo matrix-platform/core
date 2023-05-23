@@ -89,7 +89,7 @@ class Table {
                 array_splice($this->names, array_search($relation['column']->name(), $this->names), 0, $name);
             }
 
-            $column = new Wrapper($name, $alias, $column, $relation);
+            $column = new Wrapper($name, $alias, $this, $column, $relation);
 
             $this->relations[$alias]['enable'] = true;
         }
