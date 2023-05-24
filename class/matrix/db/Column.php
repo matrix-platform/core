@@ -10,6 +10,7 @@ trait Column {
     use Helper, ValueObject;
 
     protected static $defaults = [
+        'i18n' => 'internationalization',
         'listStyle' => 'formStyle',
         'mapping' => 'name',
     ];
@@ -96,8 +97,10 @@ trait Column {
         return $value;
     }
 
-    public function i18n() {
-        return "table/{$this->table()->name()}.{$this->name()}";
+    public function internationalization() {
+        $table = $this->table();
+
+        return $table ? "table/{$table->name()}.{$this->name()}" : null;
     }
 
     public function regenerate($value) {

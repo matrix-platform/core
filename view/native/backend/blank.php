@@ -49,7 +49,6 @@ foreach ($table->getColumns($controller->columns()) as $name => $column) {
     $styles[] = [
         'column' => $column,
         'disabled' => $column->disabled(),
-        'i18n' => $column->i18n(),
         'name' => $name,
         'required' => $controller->isRequired($column),
         'type' => $type,

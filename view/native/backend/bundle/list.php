@@ -11,8 +11,8 @@ $result['breadcrumbs'] = Func::breadcrumbs($controller->menus(), $path, []);
 //--
 
 $result['styles'] = [
-    ['column' => ['unordered' => true], 'i18n' => 'backend.bundle-name', 'name' => 'name', 'readonly' => true, 'type' => 'text'],
-    ['column' => ['unordered' => true], 'i18n' => 'backend.bundle-remark', 'name' => 'remark', 'readonly' => true, 'type' => 'text'],
+    ['column' => ['unordered' => true, 'i18n' => 'backend.bundle-name'], 'name' => 'name', 'readonly' => true, 'type' => 'text'],
+    ['column' => ['unordered' => true, 'i18n' => 'backend.bundle-remark'], 'name' => 'remark', 'readonly' => true, 'type' => 'text'],
 ];
 
 //--

@@ -21,7 +21,7 @@ class Junction {
         return $select ? $dialect->makeImplodeExpression($expression, ',') : $expression;
     }
 
-    public function i18n() {
+    public function internationalization() {
         return $this->column->i18n();
     }
 

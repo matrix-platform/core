@@ -9,6 +9,8 @@ class Wrapper {
 
     use Helper, ValueObject;
 
+    protected static $defaults = ['i18n' => 'internationalization'];
+
     private $alias;
     private $name;
     private $relation;
@@ -43,7 +45,7 @@ class Wrapper {
         return $this->decorated->expression($dialect, $language, $prefix ?: $this->alias, $name, $select);
     }
 
-    public function i18n() {
+    public function internationalization() {
         if ($this->isCounter()) {
             return "table/{$this->table->name()}.{$this->name}";
         } else {
