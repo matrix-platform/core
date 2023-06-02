@@ -5,8 +5,12 @@ use Intervention\Image\ImageManagerStatic;
 return function ($image, $width = 0, $height = 0) {
     $data = is_array($image) ? $image : load_file_data($image);
 
-    if (!$data || strtok($data['mime_type'], '/') !== 'image') {
+    if (!$data) {
         return $image;
+    }
+
+    if (strtok($data['mime_type'], '/') !== 'image') {
+        return $data['path'];
     }
 
     $type = strtok('/');
