@@ -46,11 +46,7 @@ class Wrapper {
     }
 
     public function internationalization() {
-        if ($this->isCounter()) {
-            return "table/{$this->table->name()}.{$this->name}";
-        } else {
-            return $this->decorated->i18n();
-        }
+        return "table/{$this->table->name()}.{$this->name}";
     }
 
     public function isCounter() {
