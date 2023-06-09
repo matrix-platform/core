@@ -16,7 +16,7 @@ class Attachment {
         self::$files = [];
     }
 
-    public static function from($filename, $content, $description, $privilege = null) {
+    public static function from($filename, $content, $description, $privilege = 0) {
         $folder = $privilege ? (PRIV_FILES_HOME . 'p') : FILES_HOME;
 
         if (preg_match('/^data:/', $content)) {
@@ -68,7 +68,7 @@ class Attachment {
 
     private $info;
 
-    public function __construct($name, $file, $description = null, $privilege = null) {
+    public function __construct($name, $file, $description = null, $privilege = 0) {
         if (strtolower(pathinfo($name, PATHINFO_EXTENSION)) === 'svg') {
             $svg = "{$file}.svg";
             rename($file, $svg);
