@@ -100,6 +100,10 @@ $result['filters'] = $filters;
 $styles = [];
 
 foreach ($controller->getColumns() as $name => $column) {
+    if ($column->invisible()) {
+        continue;
+    }
+
     $type = $column->listStyle();
 
     if (is_array($column->options())) {
