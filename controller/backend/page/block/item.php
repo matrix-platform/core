@@ -16,11 +16,11 @@ return new class('BlockItem') extends matrix\web\backend\ListController {
                     continue;
                 }
 
+                $field->i18n(key_exists($name, $bundle) ? "{$prefix}.{$name}" : "label.{$name}");
                 $field->multilingual($table->{$name}->multilingual());
 
                 $fields[] = [
                     'column' => $field,
-                    'i18n' => key_exists($name, $bundle) ? "{$prefix}.{$name}" : "label.{$name}",
                     'name' => $name,
                     'readonly' => true,
                     'type' => $field->options() ? 'select' : $type,

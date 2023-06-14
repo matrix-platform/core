@@ -25,9 +25,10 @@ trait Form {
                 $field->multilingual($table->{$name}->multilingual());
             }
 
+            $field->i18n(key_exists($name, $bundle) ? "{$prefix}.{$name}" : "label.{$name}");
+
             $fields[] = [
                 'column' => $field,
-                'i18n' => key_exists($name, $bundle) ? "{$prefix}.{$name}" : "label.{$name}",
                 'name' => $name,
                 'required' => $field->required(),
                 'type' => $type,

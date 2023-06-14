@@ -19,6 +19,7 @@ $result['breadcrumbs'] = Func::breadcrumbs($controller->menus(), $controller->no
 $styles = [];
 
 foreach ($result['default'] as $name => $value) {
+    $i18n = "{$prefix}.{$name}";
     $options = cfg("style/{$prefix}.{$name}.options");
     $tab = $tabbed && preg_match('/^([^_]+)_.*$/', $name, $matches) ? $matches[1] : null;
 
@@ -31,17 +32,16 @@ foreach ($result['default'] as $name => $value) {
             $type = 'radio';
         }
 
-        $column = ['options' => $options, 'tab' => $tab];
+        $column = ['i18n' => $i18n, 'options' => $options, 'tab' => $tab];
     } else {
         $class = cfg("style/{$prefix}.{$name}") ?: Text::class;
-        $column = new $class(['tab' => $tab]);
+        $column = new $class(['i18n' => $i18n, 'tab' => $tab]);
 
         $type = $column->formStyle();
     }
 
     $styles[] = [
         'column' => $column,
-        'i18n' => "{$prefix}.{$name}",
         'name' => $name,
         'placeholder' => $value,
         'type' => $type,
