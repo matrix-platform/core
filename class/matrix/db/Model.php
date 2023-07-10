@@ -546,8 +546,8 @@ class Model {
         $statement = $this->db->prepare('INSERT INTO base_manipulation_log (type,controller,user_id,member_id,ip,data_type,data_id,previous,current) VALUES (?,?,?,?,?,?,?,?,?)');
         $statement->bindValue(1, $type, PDO::PARAM_INT);
         $statement->bindValue(2, constant('CONTROLLER'), PDO::PARAM_STR);
-        $statement->bindValue(3, @constant('USER_ID'), PDO::PARAM_INT);
-        $statement->bindValue(4, @constant('MEMBER_ID') ?: @constant('VENDOR_ID'), PDO::PARAM_INT);
+        $statement->bindValue(3, defined('USER_ID') ? USER_ID : null, PDO::PARAM_INT);
+        $statement->bindValue(4, defined('MEMBER_ID') ? MEMBER_ID : (defined('VENDOR_ID') ? VENDOR_ID : null), PDO::PARAM_INT);
         $statement->bindValue(5, constant('REMOTE_ADDR'), PDO::PARAM_STR);
         $statement->bindValue(6, $this->table->name(), PDO::PARAM_STR);
         $statement->bindValue(7, $dataId, PDO::PARAM_INT);

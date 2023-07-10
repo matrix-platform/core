@@ -42,9 +42,9 @@ function db($prefix = 'DB') {
     static $instances = [];
 
     if (!key_exists($prefix, $instances)) {
-        $name = @constant("{$prefix}_NAME");
-        $user = @constant("{$prefix}_USER");
-        $password = @constant("{$prefix}_PASSWORD");
+        $name = constant("{$prefix}_NAME");
+        $user = constant("{$prefix}_USER");
+        $password = constant("{$prefix}_PASSWORD");
 
         if ($name && $user) {
             $instances[$prefix] = new Connection($name, $user, $password);

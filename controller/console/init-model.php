@@ -171,7 +171,7 @@ return new class() extends matrix\cli\Controller {
     }
 
     private function save($file, $content, $debug) {
-        if ($debug || file_exists($file) || !@file_put_contents($file, $content)) {
+        if ($debug || file_exists($file) || !file_put_contents($file, $content)) {
             echo "------------------------------------------------------------\n";
             echo $file . "\n";
             echo "============================================================\n";

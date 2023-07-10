@@ -32,12 +32,16 @@ foreach ($result['default'] as $name => $value) {
             $type = 'radio';
         }
 
+        if (cfg("style/{$prefix}.{$name}.multiple")) {
+            $type = cfg("style/{$prefix}.{$name}.sortable") ? 'sortable-options' : 'checkbox-group';
+        }
+
         $column = ['i18n' => $i18n, 'options' => $options, 'tab' => $tab];
     } else {
         $class = cfg("style/{$prefix}.{$name}") ?: Text::class;
         $column = new $class(['i18n' => $i18n, 'tab' => $tab]);
 
-        $type = $column->formStyle();
+        $type = cfg("style/{$prefix}.{$name}.style") ?: $column->formStyle();
     }
 
     $styles[] = [
