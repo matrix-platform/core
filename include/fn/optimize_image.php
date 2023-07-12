@@ -15,6 +15,10 @@ return function ($image, $width = 0, $height = 0) {
 
     $type = strtok('/');
 
+    if ($type === 'svg+xml') {
+        return $data['path'];
+    }
+
     if (webp()) {
         $to = 'webp';
     } else {
@@ -63,7 +67,7 @@ return function ($image, $width = 0, $height = 0) {
 
     if (!file_exists($optimize)) {
         try {
-            $img = ImageManagerStatic::make("{$folder}{$path}");
+            $img = ImageManagerStatic::make("{$folder}{$path}")->orientate();
 
             if ($w) {
                 $img->resize($w, null, function ($constraint) {
