@@ -11,7 +11,7 @@ return new Twig\TwigFunction('query', function ($name, $filter = [], $size = 0) 
             if ($column->association() && $column->multiple()) {
                 $conditions[] = $column->like("%{$value}%");
             } else {
-                $conditions[] = $column->equal($value);
+                $conditions[] = is_array($value) ? $column->in($value) : $column->equal($value);
             }
         }
     }

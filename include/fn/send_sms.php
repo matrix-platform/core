@@ -34,6 +34,26 @@ return new class() {
         }
     }
 
+    private function as1010($args) {
+        if ($args['key'] === '00000') {
+            $response = 1;
+        } else {
+            $response = intval(file_get_contents(render($args['url'], $args)));
+        }
+
+        if ($response === 1) {
+            $this->log($args, $response);
+
+            return true;
+        }
+
+        if ($response === 4) {
+            $this->notify(0, $args['safe-point']);
+        }
+
+        return false;
+    }
+
     private function every8d($args) {
         $context = [
             'http' => [

@@ -18,6 +18,8 @@ trait MemberAware {
                 $current = @$member['original_user'] ? model('Member')->get($member['id']) : model('Member')->queryById($member['id']);
 
                 if ($current && $current['password'] === $member['password']) {
+                    $current['original_user'] = @$member['original_user'];
+
                     $this->member = $current;
 
                     $this->set('Member', $current);

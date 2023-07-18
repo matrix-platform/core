@@ -10,7 +10,7 @@ return new class('Block') extends matrix\web\backend\ListController {
         $this->columns('module', 'title', 'item_count');
 
         $this->controls([
-            'new' => ['path' => 'page/{{ page_id }}/block/prepare-new', 'ranking' => 100],
+            'new' => $this->permitted('page/block/prepare-new') ? ['path' => 'page/{{ page_id }}/block/prepare-new', 'ranking' => 100] : false,
         ]);
     }
 
