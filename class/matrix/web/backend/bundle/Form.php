@@ -59,6 +59,7 @@ trait Form {
 
     private function save($form, $file, $data) {
         $diff = [];
+        $inputs = $this->inputs();
 
         foreach ($data as $name => $value) {
             $new = @$form[$name];
@@ -69,8 +70,16 @@ trait Form {
 
             if ($new instanceof Attachment) {
                 $diff[$name] = $new->save();
-            } else if ($new !== $value) {
-                $diff[$name] = $new;
+            } else {
+                $input = @$inputs[$name];
+
+                if ($input) {
+                    $new = $input->convert($new);
+                }
+
+                if ($new !== $value) {
+                    $diff[$name] = $new;
+                }
             }
         }
 
