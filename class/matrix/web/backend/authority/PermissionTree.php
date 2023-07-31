@@ -33,8 +33,7 @@ trait PermissionTree {
         }
 
         $styles[] = [
-            'column' => ['options' => $nodes],
-            'i18n' => "table/{$this->table()->name()}.permissions",
+            'column' => ['i18n' => "table/{$this->table()->name()}.permissions", 'options' => $nodes],
             'name' => 'permissions',
             'type' => 'checkbox-tree',
         ];
