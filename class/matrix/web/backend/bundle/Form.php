@@ -74,7 +74,11 @@ trait Form {
                 $input = @$inputs[$name];
 
                 if ($input) {
-                    $new = $input->convert($new);
+                    if (is_array($new)) {
+                        $new = array_map([$input, 'convert'], $new);
+                    } else {
+                        $new = $input->convert($new);
+                    }
                 }
 
                 if ($new !== $value) {
