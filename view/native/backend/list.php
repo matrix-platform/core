@@ -185,29 +185,29 @@ if ($controller->permitted("{$node}/")) {
             'ranking' => 100,
         ];
     }
+}
 
-    if ($enable || $disable) {
-        $now = date(cfg('system.timestamp'));
+if ($enable || $disable) {
+    $now = date(cfg('system.timestamp'));
 
-        foreach ($result['data'] as &$data) {
-            $data['.visible'] = true;
+    foreach ($result['data'] as &$data) {
+        $data['.visible'] = true;
 
-            if ($enable) {
-                if (!$data[$enable] || strcmp($data[$enable], $now) > 0) {
-                    $data['.visible'] = false;
-                }
-            }
-
-            if ($disable) {
-                if ($data[$disable] && strcmp($data[$disable], $now) < 0) {
-                    $data['.visible'] = false;
-                }
+        if ($enable) {
+            if (!$data[$enable] || strcmp($data[$enable], $now) > 0) {
+                $data['.visible'] = false;
             }
         }
 
-        if (!isset($switches['visible'])) {
-            $switches['visible'] = ['ranking' => 100];
+        if ($disable) {
+            if ($data[$disable] && strcmp($data[$disable], $now) < 0) {
+                $data['.visible'] = false;
+            }
         }
+    }
+
+    if (!isset($switches['visible'])) {
+        $switches['visible'] = ['ranking' => 100];
     }
 }
 
