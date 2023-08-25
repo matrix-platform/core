@@ -179,7 +179,9 @@ function load_options($name) {
     $options = [];
 
     foreach (load_i18n("options/{$name}") as $value => $title) {
-        $options[$value] = ['title' => $title];
+        if (!is_null($title)) {
+            $options[$value] = ['title' => $title];
+        }
     }
 
     return $options;
