@@ -3,7 +3,7 @@
 return new class() extends matrix\web\backend\Controller {
 
     public function available() {
-        if ($this->method() === 'POST') {
+        if (in_array($this->method(), ['GET', 'POST'])) {
             $pattern = preg_quote($this->name(), '/');
 
             return preg_match("/^{$pattern}\/[\w-]+$/", $this->path());
@@ -33,11 +33,11 @@ return new class() extends matrix\web\backend\Controller {
             'content' => json_encode($content, JSON_PRETTY_PRINT),
         ]);
 
-        return [
-            'success' => true,
-            'type' => 'open',
-            'path' => APP_ROOT,
-        ];
+        if ($this->method() === 'GET') {
+            return ['success' => true, 'view' => '302.php', 'path' => APP_ROOT];
+        } else {
+            return ['success' => true, 'type' => 'open', 'path' => APP_ROOT];
+        }
     }
 
 };
