@@ -16,6 +16,8 @@ return [
 
     'secure' => 'ssl',
 
+    'auth' => null,
+
     'queue' => null,
 
     'sandbox' => null,
