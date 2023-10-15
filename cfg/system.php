@@ -8,6 +8,8 @@ return [
 
     'default-key' => 'SECRET',
 
+    'event-broadcast-url' => null,
+
     'event-notify-url' => null,
 
     'event-secret' => '',
