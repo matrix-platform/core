@@ -29,6 +29,22 @@ trait RequestHandler {
         }
     }
 
+    protected function wrapAttachment($form, $name, $privilege = null) {
+        $file = @$form[$name];
+
+        if (is_string($file)) {
+            if (load_file_data($file)) {
+                return $file;
+            }
+        } else {
+            if (@$file['name'] && @$file['data']) {
+                return Attachment::from($file['name'], $file['data'], null, $privilege);
+            }
+        }
+
+        return null;
+    }
+
     protected function wrapFile($form, $name, $privilege = null) {
         $filename = @$form["{$name}#filename"];
         $content = @$form[$name];
