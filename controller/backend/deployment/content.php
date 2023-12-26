@@ -39,6 +39,7 @@ return new class() extends matrix\web\backend\Controller {
                 'view' => 'backend/deployment.php',
                 'controller' => $controller,
                 'form' => $conditions,
+                'image' => $table->image(),
                 'data' => $data,
                 'path' => $path,
             ];

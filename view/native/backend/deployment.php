@@ -25,13 +25,15 @@ $result['titles'] = $titles;
 
 //--
 
-$data = [];
+if (!$result['image']) {
+    $data = [];
 
-foreach ($result['data'] as $row) {
-    $data[] = ['id' => $row['id'], 'title' => $model->toString($row)];
+    foreach ($result['data'] as $row) {
+        $data[] = ['id' => $row['id'], 'title' => $model->toString($row)];
+    }
+
+    $result['data'] = $data;
 }
-
-$result['data'] = $data;
 
 //--
 
