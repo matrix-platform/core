@@ -4,6 +4,7 @@ use matrix\db\column\Boolean;
 use matrix\db\column\Color;
 use matrix\db\column\DisableTime;
 use matrix\db\column\EnableTime;
+use matrix\db\column\Image;
 use matrix\db\column\Text;
 use matrix\db\column\Textarea;
 use matrix\db\Table;
@@ -20,6 +21,11 @@ $tbl->add('title', Text::class)
 
 $tbl->add('description', Textarea::class)
     ->multilingual(MULTILINGUAL);
+
+$tbl->add('keywords', Text::class)
+    ->multilingual(MULTILINGUAL);
+
+$tbl->add('image', Image::class);
 
 $tbl->add('fluid', Boolean::class)
     ->default(false)

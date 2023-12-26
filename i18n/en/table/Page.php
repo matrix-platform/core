@@ -8,6 +8,10 @@ return [
 
     'description' => 'Description',
 
+    'keywords' => 'Keywords',
+
+    'image' => 'Image',
+
     'fluid' => 'Viewport Width',
 
     'color' => 'Default Text Color',

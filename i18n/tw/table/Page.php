@@ -8,6 +8,10 @@ return [
 
     'description' => '簡述',
 
+    'keywords' => '關鍵字',
+
+    'image' => '圖片',
+
     'fluid' => '滿版寬度',
 
     'color' => '預設文字顏色',

@@ -158,6 +158,8 @@ CREATE TABLE base_page (
     path         TEXT      NOT NULL UNIQUE,
     title        TEXT          NULL,
     description  TEXT          NULL,
+    keywords     TEXT          NULL,
+    image        TEXT          NULL,
     fluid        BOOLEAN   NOT NULL,
     color        TEXT          NULL,
     bg_color     TEXT          NULL,
