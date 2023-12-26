@@ -320,9 +320,27 @@ function set_i18n($token, $value = null, $language = LANGUAGE) {
 }
 
 function table($name, $cache = true) {
+    static $cloneables, $exportables;
+
+    if ($cloneables === null) {
+        $cloneables = preg_split('/\|/', cfg('backend.cloneable-table'), 0, PREG_SPLIT_NO_EMPTY);
+    }
+
+    if ($exportables === null) {
+        $exportables = preg_split('/\|/', cfg('backend.exportable-table'), 0, PREG_SPLIT_NO_EMPTY);
+    }
+
     $table = load_resource("table/{$name}.php", true, $cache);
 
     if ($table) {
+        if (in_array($name, $cloneables)) {
+            $table->cloneable(true);
+        }
+
+        if (in_array($name, $exportables)) {
+            $table->exportable(true);
+        }
+
         return $table->name($name);
     }
 
