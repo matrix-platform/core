@@ -13,7 +13,9 @@ class ListController extends Controller {
             'defaultPage' => 1,
             'defaultPageSize' => 10,
             'defaultRanking' => true,
+            'exportView' => 'backend/export.php',
             'modalForm' => cfg('backend.modal-form'),
+            'sublistView' => 'backend/sublist.php',
             'table' => table($name),
             'view' => 'backend/list.php',
         ];
@@ -255,7 +257,7 @@ class ListController extends Controller {
 
         return $this->subprocess($form, [
             'success' => true,
-            'view' => $sublist ? 'backend/sublist.php' : ($export ? 'backend/export.php' : null),
+            'view' => $sublist ? $this->sublistView() : ($export ? $this->exportView() : null),
             'count' => $count,
             'data' => $data,
             'page' => $page ?: 1,
