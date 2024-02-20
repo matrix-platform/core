@@ -104,6 +104,11 @@ class ListController extends Controller {
 
     protected function wrap() {
         $form = parent::wrap();
+
+        if (@$form['export']) {
+            $this->columns(null);
+        }
+
         $columns = $this->getColumns();
         $search = @$form['q'];
 
