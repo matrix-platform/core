@@ -49,7 +49,7 @@ return [
     'confirm-delete' => '删除确认',
     'confirm-delete-message' => '您确定要删除资料吗？',
 
-    'copyright' => 'Copyright © 2022',
+    'copyright' => 'Copyright © 2024',
 
     'login-title' => '登入',
     'login-logo' => '后台管理系统',
