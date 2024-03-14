@@ -114,7 +114,6 @@ class ListController extends Controller {
             $this->export = true;
         }
 
-        $columns = $this->getColumns();
         $search = @$form['q'];
 
         if ($search) {
@@ -124,6 +123,7 @@ class ListController extends Controller {
         }
 
         if ($search) {
+            $columns = $this->filters() ? $this->table()->getColumns($this->filters()) : $this->getColumns();
             $conditions = [];
 
             foreach ($columns as $name => $column) {
