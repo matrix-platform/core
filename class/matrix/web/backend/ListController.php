@@ -6,7 +6,12 @@ use matrix\db\Criteria;
 
 class ListController extends Controller {
 
+    protected static $defaults = [
+        'exportColumns' => 'columns',
+    ];
+
     private $columns;
+    private $export;
 
     public function __construct($name) {
         $this->values = [
@@ -50,7 +55,7 @@ class ListController extends Controller {
         if ($this->columns === null) {
             $this->columns = [];
 
-            $names = $this->columns();
+            $names = $this->export ? $this->exportColumns() : $this->columns();
 
             foreach ($this->table()->getColumns($names) as $name => $column) {
                 if ($column->invisible() && !$column->editable() && !$column->isWrapper()) {
@@ -106,7 +111,7 @@ class ListController extends Controller {
         $form = parent::wrap();
 
         if (@$form['export']) {
-            $this->columns(null);
+            $this->export = true;
         }
 
         $columns = $this->getColumns();
@@ -213,10 +218,9 @@ class ListController extends Controller {
 
     protected function process($form) {
         $criteria = $this->criteria();
-        $export = @$form['export'];
         $sublist = @$form['sublist'];
 
-        if ($export || $sublist) {
+        if ($this->export || $sublist) {
             $page = 1;
             $size = 0;
         } else {
@@ -235,14 +239,14 @@ class ListController extends Controller {
 
         $orders = preg_split('/[, ]/', @$form['o'], 0, PREG_SPLIT_NO_EMPTY);
 
-        if ($this->passive() && !$criteria && !$export) {
+        if ($this->passive() && !$criteria && !$this->export) {
             $count = 0;
             $data = null;
         } else {
             $form[] = $criteria;
             $form[] = $this->groupFilter(@$form['g']);
 
-            if ($export) {
+            if ($this->export) {
                 $args = @$form['args'];
 
                 if ($args && is_array($args)) {
@@ -262,7 +266,7 @@ class ListController extends Controller {
 
         return $this->subprocess($form, [
             'success' => true,
-            'view' => $sublist ? $this->sublistView() : ($export ? $this->exportView() : null),
+            'view' => $sublist ? $this->sublistView() : ($this->export ? $this->exportView() : null),
             'count' => $count,
             'data' => $data,
             'page' => $page ?: 1,
