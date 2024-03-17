@@ -9,6 +9,10 @@ if (strtolower(@$_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
     define('AJAX', true);
 }
 
+if (strtolower(@$_SERVER['HTTPS']) === 'on' || strtolower(@$_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https') {
+    define('HTTPS', true);
+}
+
 if (cfg('system.debug')) {
     if (defined('AJAX')) {
         $handler = new JsonResponseHandler();

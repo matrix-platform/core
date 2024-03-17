@@ -29,7 +29,14 @@ trait Session {
 
         if ($exists || $force) {
             if (!$exists) {
-                session_set_cookie_params(['httponly' => true, 'path' => APP_PATH, 'samesite' => 'none', 'secure' => true]);
+                $params = ['httponly' => true, 'path' => APP_PATH];
+
+                if (defined('HTTPS')) {
+                    $params['samesite'] = 'none';
+                    $params['secure'] = true;
+                }
+
+                session_set_cookie_params($params);
             }
 
             session_name('matrix');

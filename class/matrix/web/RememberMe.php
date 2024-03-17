@@ -69,13 +69,14 @@ trait RememberMe {
     }
 
     private function setToken($value, $expires = 86400 * 365) {
-        setcookie($this->getTokenName(), $value, [
-            'expires' => time() + $expires,
-            'httponly' => true,
-            'path' => APP_PATH,
-            'samesite' => 'none',
-            'secure' => true,
-        ]);
+        $params = ['expires' => time() + $expires, 'httponly' => true, 'path' => APP_PATH];
+
+        if (defined('HTTPS')) {
+            $params['samesite'] = 'none';
+            $params['secure'] = true;
+        }
+
+        setcookie($this->getTokenName(), $value, $params);
     }
 
 }

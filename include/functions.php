@@ -82,7 +82,7 @@ function get_url($path) {
     if (defined('BASE_URL')) {
         return BASE_URL . $path;
     } else {
-        $protocol = @$_SERVER['HTTPS'] === 'on' || @$_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ? 'https' : 'http';
+        $protocol = defined('HTTPS') ? 'https' : 'http';
 
         return "{$protocol}://{$_SERVER['HTTP_HOST']}{$path}";
     }
