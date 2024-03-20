@@ -436,6 +436,26 @@ class Model {
                 continue;
             }
 
+            if (!$this->db->supportedBooleanValue() && $column->type() === PDO::PARAM_BOOL) {
+                if ($column->multilingual()) {
+                    foreach (LANGUAGES as $lang) {
+                        $prop = "{$name}__{$lang}";
+
+                        foreach ($rows as &$row) {
+                            if ($row[$prop] !== null) {
+                                $row[$prop] = !!$row[$prop];
+                            }
+                        }
+                    }
+                } else {
+                    foreach ($rows as &$row) {
+                        if ($row[$name] !== null) {
+                            $row[$name] = !!$row[$name];
+                        }
+                    }
+                }
+            }
+
             if ($column->multilingual()) {
                 $local = $name . '__' . LANGUAGE;
 

@@ -6,6 +6,7 @@ use PDO;
 
 class Connection {
 
+    private $boolean = false;
     private $caches = [];
     private $delegate;
     private $dialect;
@@ -28,6 +29,10 @@ class Connection {
 
         $this->dialect = new $dialect();
         $this->sequence = new $sequence($this);
+
+        if ($type === 'pgsql') {
+            $this->boolean = true;
+        }
     }
 
     public function begin() {
@@ -66,6 +71,10 @@ class Connection {
         return $this->dialect;
     }
 
+    public function lastId() {
+        return $this->delegate ? $this->delegate->lastInsertId() : 0;
+    }
+
     public function model($table) {
         $name = $table->name();
 
@@ -90,6 +99,7 @@ class Connection {
         if (!$this->delegate) {
             $this->delegate = new PDO($this->name, $this->user, $this->password, [
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_ORACLE_NULLS => PDO::NULL_EMPTY_STRING,
             ]);
@@ -116,6 +126,10 @@ class Connection {
         if ($this->delegate && $this->delegate->inTransaction()) {
             $this->delegate->rollBack();
         }
+    }
+
+    public function supportedBooleanValue() {
+        return $this->boolean;
     }
 
 }

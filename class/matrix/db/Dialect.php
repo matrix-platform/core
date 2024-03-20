@@ -121,8 +121,6 @@ trait Dialect {
 
     abstract public function makePager($command, $size, $page);
 
-    abstract public function makeRandom();
-
     public function makeSelection($table, $columns, $criteria, $orders, $select = true) {
         if (!is_array($orders)) {
             if ($orders === true) {

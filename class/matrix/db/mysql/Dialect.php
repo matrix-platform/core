@@ -1,6 +1,6 @@
 <?php //>
 
-namespace matrix\db\pgsql;
+namespace matrix\db\mysql;
 
 use matrix\db\Dialect as DialectTrait;
 
@@ -9,17 +9,17 @@ class Dialect {
     use DialectTrait;
 
     public function makeDateTimeExpression($expression, $pattern) {
-        $format = str_replace(['Y', 'm', 'd', 'H', 'i', 's'], ['YYYY', 'MM', 'DD', 'HH24', 'MI', 'SS'], $pattern);
+        $format = str_replace(['Y', 'm', 'd', 'H', 'i', 's'], ['%Y', '%m', '%d', '%H', '%i', '%s'], $pattern);
 
-        return "TO_CHAR({$expression}, '{$format}')";
+        return "DATE_FORMAT({$expression}, '{$format}')";
     }
 
     public function makeDefaultExpression($expression, $default) {
-        return "COALESCE({$expression}, {$default})";
+        return "IFNULL({$expression}, {$default})";
     }
 
     public function makeImplodeExpression($expression, $separator) {
-        return "ARRAY_TO_STRING({$expression}, '{$separator}')";
+        return "REPLACE(REPLACE(REPLACE(JSON_UNQUOTE({$expression}), ' ', ''), '[', ''), ']', '')";
     }
 
     public function makeOrder($command, $columns, $orders) {
@@ -27,11 +27,11 @@ class Dialect {
 
         foreach ($orders as $name) {
             if ($name === '?') {
-                $expressions[] = 'RANDOM()';
+                $expressions[] = 'RAND()';
             } else {
                 if ($name[0] === '-') {
                     $name = substr($name, 1);
-                    $type = 'DESC NULLS LAST';
+                    $type = 'DESC';
                 } else {
                     $type = 'ASC';
                 }
@@ -42,7 +42,7 @@ class Dialect {
                     }
 
                     $quoted = $this->quote($name);
-                    $expressions[] = "{$quoted} {$type}";
+                    $expressions[] = "{$quoted} IS NULL, {$quoted} {$type}";
                 }
             }
         }
@@ -59,19 +59,19 @@ class Dialect {
     public function makePager($command, $size, $page) {
         $offset = $size * ($page - 1);
 
-        return "{$command} LIMIT {$size} OFFSET {$offset}";
+        return "{$command} LIMIT {$offset}, {$size}";
     }
 
     public function makeToArrayExpression($expression) {
-        return "ARRAY_AGG({$expression} ORDER BY id)";
+        return "CAST(CONCAT('[', GROUP_CONCAT({$expression} ORDER BY id), ']') AS JSON)";
     }
 
     public function overlap($expression, $values) {
-        return "{$expression} && STRING_TO_ARRAY(?, ',')::INTEGER[]";
+        return "JSON_OVERLAPS({$expression}, CAST(CONCAT('[', ?, ']') AS JSON))";
     }
 
     public function quote($name) {
-        return "\"{$name}\"";
+        return "`{$name}`";
     }
 
 }
