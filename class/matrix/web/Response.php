@@ -28,6 +28,10 @@ class Response {
         $content = $this->content();
 
         if (strlen($content)) {
+            if ($this->xml()) {
+                header('Content-Type: text/xml; charset=UTF-8');
+            }
+
             echo $content;
             return;
         }

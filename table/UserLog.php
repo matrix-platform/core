@@ -3,6 +3,7 @@
 use matrix\db\column\CreateTime;
 use matrix\db\column\CreatorAddress;
 use matrix\db\column\Integer;
+use matrix\db\column\Text;
 use matrix\db\column\Textarea;
 use matrix\db\Table;
 
@@ -30,6 +31,10 @@ $tbl->add('content', Textarea::class)
     ->readonly(true);
 
 $tbl->add('ip', CreatorAddress::class);
+
+$tbl->add('timestamp', Text::class)
+    ->invisible(true)
+    ->readonly(true);
 
 $tbl->add('create_time', CreateTime::class);
 

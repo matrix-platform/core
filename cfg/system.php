@@ -6,6 +6,8 @@ return [
 
     'debug' => false,
 
+    'default-iv' => null,
+
     'default-key' => 'SECRET',
 
     'event-broadcast-url' => null,

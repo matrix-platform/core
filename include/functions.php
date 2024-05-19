@@ -56,6 +56,34 @@ function db($prefix = 'DB') {
     return $instances[$prefix];
 }
 
+function decrypt_data($text, $key = null, $iv = null) {
+    $text = base64_urldecode($text);
+
+    if ($key === null) {
+        $key = cfg('system.default-key');
+    }
+
+    if ($iv === null) {
+        $iv = cfg('system.default-iv');
+    }
+
+    return openssl_decrypt(substr($text, 0, -16), 'AES-256-GCM', $key, OPENSSL_RAW_DATA, $iv ?: $key, substr($text, -16));
+}
+
+function encrypt_data($payload, $key = null, $iv = null) {
+    if ($key === null) {
+        $key = cfg('system.default-key');
+    }
+
+    if ($iv === null) {
+        $iv = cfg('system.default-iv');
+    }
+
+    $data = openssl_encrypt($payload, 'AES-256-GCM', $key, OPENSSL_RAW_DATA, $iv ?: $key, $tag);
+
+    return base64_encode($data . $tag);
+}
+
 function find_resource($path) {
     foreach (RESOURCE_FOLDERS as $folder) {
         $file = $folder . $path;

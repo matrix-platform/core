@@ -15,18 +15,22 @@ trait RequestHandler {
     protected function wrap() {
         switch ($this->method()) {
         case 'GET':
-            return $this->wrapGet();
+            $form = $this->wrapGet();
+            break;
 
         case 'POST':
             if (preg_match('/application\/json/i', @$_SERVER['CONTENT_TYPE'])) {
-                return array_replace($this->wrapGet(), $this->wrapJson());
+                $form = array_replace($this->wrapGet(), $this->wrapJson());
             } else {
-                return array_replace($this->wrapGet(), $this->wrapPost());
+                $form = array_replace($this->wrapGet(), $this->wrapPost());
             }
+            break;
 
         default:
             return [];
         }
+
+        return $this->decrypt($form);
     }
 
     protected function wrapAttachment($form, $name, $privilege = null) {
@@ -110,6 +114,34 @@ trait RequestHandler {
             }
 
             $form[$name] = $files;
+        }
+
+        return $form;
+    }
+
+    private function decrypt($form) {
+        if (key_exists('DATA', $form)) {
+            if (key_exists('KEY', $form)) {
+                openssl_private_decrypt(base64_urldecode($form['KEY']), $decrypted, file_get_contents(APP_DATA . 'rsa-private-key'), OPENSSL_PKCS1_OAEP_PADDING);
+
+                $aes = json_decode($decrypted, true);
+                $aes['iv'] = base64_decode($aes['iv']);
+                $aes['key'] = base64_decode($aes['key']);
+
+                $this->set("MATRIX_AES", $aes);
+
+                unset($form['KEY']);
+            } else {
+                $aes = $this->get("MATRIX_AES");
+            }
+
+            $decrypted = $this->jsonDecode(decrypt_data($form['DATA'], $aes['key'], $aes['iv']));
+
+            if (is_array($decrypted)) {
+                $form = array_replace($form, $decrypted);
+
+                unset($form['DATA']);
+            }
         }
 
         return $form;

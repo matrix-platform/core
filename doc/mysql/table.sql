@@ -35,6 +35,7 @@ CREATE TABLE base_member_log (
     type        INTEGER   NOT NULL, -- options: member-log-type
     content     TEXT          NULL,
     ip          TEXT      NOT NULL,
+    timestamp   TEXT          NULL,
     create_time TIMESTAMP NOT NULL
 ) ENGINE=InnoDB;
 
@@ -55,6 +56,7 @@ CREATE TABLE base_vendor_log (
     type        INTEGER   NOT NULL, -- options: vendor-log-type
     content     TEXT          NULL,
     ip          TEXT      NOT NULL,
+    timestamp   TEXT          NULL,
     create_time TIMESTAMP NOT NULL
 ) ENGINE=InnoDB;
 
@@ -74,6 +76,7 @@ CREATE TABLE base_user_log (
     type        INTEGER   NOT NULL, -- options: user-log-type
     content     TEXT          NULL,
     ip          TEXT      NOT NULL,
+    timestamp   TEXT          NULL,
     create_time TIMESTAMP NOT NULL
 ) ENGINE=InnoDB;
 
