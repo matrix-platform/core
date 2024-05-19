@@ -12,3 +12,5 @@ touch .gitignore
 for path in $(cat ${folder}/doc/gitignore) ; do
     grep -qxF "$path" .gitignore || echo "$path" >> .gitignore
 done
+
+php www/index.php /console/init-rsa-keys
