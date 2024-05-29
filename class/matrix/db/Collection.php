@@ -57,6 +57,16 @@ class Collection {
         return count($list) === 1 ? $list[0] : null;
     }
 
+    public function group($name, $columns = false, $orders = true, $size = 0, $page = 1) {
+        $grouping = [];
+
+        foreach ($this->list($columns, $orders, $size, $page) as $row) {
+            $grouping[$row[$name]][] = $row;
+        }
+
+        return $grouping;
+    }
+
     public function increase($name, $value = 1) {
         $list = [];
 
@@ -77,6 +87,16 @@ class Collection {
 
     public function list($columns = false, $orders = true, $size = 0, $page = 1) {
         return $this->model->query($this->conditions, $orders, $size, $page, $columns);
+    }
+
+    public function map($name = 'id', $columns = false, $orders = true, $size = 0, $page = 1) {
+        $mapping = [];
+
+        foreach ($this->list($columns, $orders, $size, $page) as $row) {
+            $mapping[$row[$name]] = $row;
+        }
+
+        return $mapping;
     }
 
     public function update($values) {
