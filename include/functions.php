@@ -106,6 +106,14 @@ function get_data_file($path, $verify = true) {
     return false;
 }
 
+function get_image_url($image, $width = 0, $height = 0) {
+    if ($image) {
+        return get_url(APP_PATH . 'images/' . $width . '/' . $height . '/' . base64_urlencode($image));
+    }
+
+    return null;
+}
+
 function get_url($path) {
     if (defined('BASE_URL')) {
         return BASE_URL . $path;
