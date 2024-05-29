@@ -14,6 +14,8 @@ return [
 
     'register-form' => null,
 
+    'url-pattern' => '/\bhttps?:\/\/[-\w+&@#\/%?=~|!:,.;]*[-\w+&@#\/%=~|]/',
+
     'vendor-login-form' => null,
 
 ];
