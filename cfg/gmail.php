@@ -18,6 +18,8 @@ return [
 
     'auth' => null,
 
+    'async' => false,
+
     'queue' => null,
 
     'sandbox' => null,

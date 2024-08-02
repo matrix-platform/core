@@ -22,6 +22,7 @@ return [
     'gmail.username' => 'Username',
     'gmail.password' => 'Password',
     'gmail.auth' => 'Auth Type',
+    'gmail.async' => 'Scheduled Sending',
     'gmail.queue' => 'Mail Queue',
     'gmail.sandbox' => 'Sandbox Receiver',
 

@@ -11,6 +11,8 @@ return [
     'embedded-content.body-beginning' => Textarea::class,
     'embedded-content.body-ending' => Textarea::class,
 
+    'gmail.async' => Boolean::class,
+
     'security.ip-count' => Integer::class,
     'security.ip-seconds' => Integer::class,
     'security.member-count' => Integer::class,

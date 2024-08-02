@@ -22,6 +22,7 @@ return [
     'gmail.username' => '帐号',
     'gmail.password' => '密码',
     'gmail.auth' => '验证类型',
+    'gmail.async' => '排程发送',
     'gmail.queue' => '发信伫列',
     'gmail.sandbox' => '沙盒模式收件者',
 
