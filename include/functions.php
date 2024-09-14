@@ -408,11 +408,15 @@ function union_resource($path) {
 }
 
 function validate($value, $options) {
-    if (is_string($options)) {
+    if (is_array($options)) {
+        $validation = @$options['validation'];
+    } else {
         $validation = $options;
         $options = [];
-    } else {
-        $validation = @$options['validation'];
+    }
+
+    if ($validation instanceof Closure) {
+        return call_user_func($validation, $value, $options);
     }
 
     foreach (preg_split('/\|/', $validation, 0, PREG_SPLIT_NO_EMPTY) as $type) {

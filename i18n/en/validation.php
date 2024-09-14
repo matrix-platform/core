@@ -2,6 +2,8 @@
 
 return [
 
+    'array' => 'Invalid Format',
+
     'boolean' => 'Invalid Format',
 
     'date' => 'Invalid Format',
@@ -26,11 +28,16 @@ return [
 
     'ip' => 'Invalid IP Format',
 
+    'length.max' => 'The Word Count Exceeds The Upper Limit',
+    'length.min' => 'The Word Count Is Below The Minimum Limit',
+
     'not-found' => 'Not Found',
 
     'regex' => 'Dismatched',
 
     'required' => 'Required',
+
+    'string' => 'Invalid Format',
 
     'time' => 'Invalid Format',
 

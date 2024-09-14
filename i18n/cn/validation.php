@@ -2,6 +2,8 @@
 
 return [
 
+    'array' => '格式错误',
+
     'boolean' => '格式错误',
 
     'date' => '格式错误',
@@ -26,11 +28,16 @@ return [
 
     'ip' => 'IP 格式错误',
 
+    'length.max' => '字数超过上限',
+    'length.min' => '字数低于下限',
+
     'not-found' => '查无资料',
 
     'regex' => '格式错误',
 
     'required' => '必填',
+
+    'string' => '格式错误',
 
     'time' => '格式错误',
 
