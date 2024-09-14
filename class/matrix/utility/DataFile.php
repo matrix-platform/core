@@ -33,7 +33,7 @@ trait DataFile {
                 $file = "{$folder}/{$token}";
 
                 if (!file_exists($file)) {
-                    file_put_contents($file, json_encode($data));
+                    file_put_contents($file, json_encode($data, JSON_UNESCAPED_UNICODE));
 
                     return $token;
                 }

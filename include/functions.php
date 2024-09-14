@@ -70,7 +70,7 @@ function decrypt_data($text, $key = null, $iv = null) {
     return openssl_decrypt(substr($text, 0, -16), 'AES-256-GCM', $key, OPENSSL_RAW_DATA, $iv ?: $key, substr($text, -16));
 }
 
-function encrypt_data($payload, $key = null, $iv = null) {
+function encrypt_data($payload, $key = null, $iv = null, $safe = false) {
     if ($key === null) {
         $key = cfg('system.default-key');
     }
@@ -81,7 +81,7 @@ function encrypt_data($payload, $key = null, $iv = null) {
 
     $data = openssl_encrypt($payload, 'AES-256-GCM', $key, OPENSSL_RAW_DATA, $iv ?: $key, $tag);
 
-    return base64_encode($data . $tag);
+    return $safe ? base64_urlencode($data . $tag) : base64_encode($data . $tag);
 }
 
 function find_resource($path) {

@@ -148,10 +148,17 @@ trait RequestHandler {
     }
 
     private function jsonDecode($text) {
+        $text = preg_replace('/[[:cntrl:]]/', '', $text);
         $text = preg_replace_callback('/\\\\u([0-9a-f]{4})/i', fn ($m) => mb_convert_encoding(pack('H*', $m[1]), 'UTF-8', 'UCS-2BE'), $text);
-        $text = preg_replace('/[^[:print:]]/u', '', $text);
 
-        return json_decode($text, true);
+        $json = json_decode($text, true);
+
+        if ($json === null && json_last_error() !== JSON_ERROR_NONE) {
+            header("HTTP/1.1 400 Bad Request");
+            exit;
+        }
+
+        return $json;
     }
 
 }
