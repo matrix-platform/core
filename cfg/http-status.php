@@ -2,6 +2,8 @@
 
 return [
 
+    206 => 'Partial Content',
+
     401 => 'Unauthorized',
 
     403 => 'Forbidden',
