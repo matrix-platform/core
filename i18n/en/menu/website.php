@@ -30,4 +30,8 @@ return [
 
                     'page/block/item/new' => 'New Block Item',
 
+        'privacy-policy' => 'Privacy Policy',
+
+        'service-terms' => 'Terms of Service',
+
 ];

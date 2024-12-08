@@ -56,4 +56,12 @@ return [
 
                     'page/block/item/update' => ['parent' => 'page/block/item', 'tag' => 'update'],
 
+        'privacy-policy' => ['icon' => 'far fa-file-alt', 'ranking' => 2000, 'parent' => 'website', 'group' => true, 'tag' => 'query'],
+
+            'privacy-policy/update' => ['parent' => 'privacy-policy', 'tag' => 'update'],
+
+        'service-terms' => ['icon' => 'fas fa-file-alt', 'ranking' => 2100, 'parent' => 'website', 'group' => true, 'tag' => 'query'],
+
+            'service-terms/update' => ['parent' => 'service-terms', 'tag' => 'update'],
+
 ];

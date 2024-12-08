@@ -30,4 +30,8 @@ return [
 
                     'page/block/item/new' => '新增区块子项目',
 
+        'privacy-policy' => '隐私权政策',
+
+        'service-terms' => '服务条款',
+
 ];
