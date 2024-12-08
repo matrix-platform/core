@@ -12,4 +12,8 @@ return [
     'sms.forgot' => '重設密碼驗證簡訊',
     'sms.register' => '註冊驗證簡訊',
 
+    'website-info.title' => '名稱',
+    'website-info.favicon' => '圖示',
+    'website-info.logo' => 'Logo',
+
 ];

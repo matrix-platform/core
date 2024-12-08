@@ -34,4 +34,6 @@ return [
 
         'service-terms' => 'Terms of Service',
 
+        'website-info' => 'Website Info',
+
 ];

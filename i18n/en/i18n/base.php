@@ -12,4 +12,8 @@ return [
     'sms.forgot' => 'Reset Password SMS',
     'sms.register' => 'Registration SMS',
 
+    'website-info.title' => 'Name',
+    'website-info.favicon' => 'Favicon',
+    'website-info.logo' => 'Logo',
+
 ];

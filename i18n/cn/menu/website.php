@@ -34,4 +34,6 @@ return [
 
         'service-terms' => '服务条款',
 
+        'website-info' => '网站资讯',
+
 ];

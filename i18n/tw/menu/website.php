@@ -34,4 +34,6 @@ return [
 
         'service-terms' => '服務條款',
 
+        'website-info' => '網站資訊',
+
 ];

@@ -64,4 +64,8 @@ return [
 
             'service-terms/update' => ['parent' => 'service-terms', 'tag' => 'update'],
 
+        'website-info' => ['icon' => 'fas fa-cog', 'ranking' => 2200, 'parent' => 'website', 'group' => true, 'tag' => 'query'],
+
+            'website-info/update' => ['parent' => 'website-info', 'tag' => 'update'],
+
 ];

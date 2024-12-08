@@ -12,4 +12,8 @@ return [
     'sms.forgot' => '重设密码验证简讯',
     'sms.register' => '注册验证简讯',
 
+    'website-info.title' => '名称',
+    'website-info.favicon' => '图示',
+    'website-info.logo' => 'Logo',
+
 ];
