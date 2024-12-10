@@ -4,6 +4,8 @@ return [
 
     'title' => 'Title',
 
+    'subtitle' => 'Subtitle',
+
     'icon' => 'Icon',
 
     'url' => 'URL',
@@ -13,7 +15,5 @@ return [
     'enable_time' => 'Enable Time',
 
     'disable_time' => 'Disable Time',
-
-    'ranking' => 'Ranking',
 
 ];

@@ -6,6 +6,8 @@ return [
 
     'title' => '標題',
 
+    'subtitle' => '副標',
+
     'description' => '簡述',
 
     'keywords' => '關鍵字',

@@ -2,7 +2,9 @@
 
 return [
 
-    'title' => '名称',
+    'title' => '标题',
+
+    'subtitle' => '副标',
 
     'icon' => '图示',
 
@@ -13,7 +15,5 @@ return [
     'enable_time' => '上架时间',
 
     'disable_time' => '下架时间',
-
-    'ranking' => '排序',
 
 ];

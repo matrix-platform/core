@@ -6,6 +6,4 @@ return [
 
     'disable_time' => 'Disable Time',
 
-    'ranking' => 'Ranking',
-
 ];

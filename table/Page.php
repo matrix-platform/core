@@ -19,6 +19,9 @@ $tbl->add('title', Text::class)
     ->multilingual(MULTILINGUAL)
     ->required(true);
 
+$tbl->add('subtitle', Text::class)
+    ->multilingual(MULTILINGUAL);
+
 $tbl->add('description', Textarea::class)
     ->multilingual(MULTILINGUAL);
 

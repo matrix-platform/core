@@ -20,8 +20,6 @@ return [
 
     'disable_time' => '下架时间',
 
-    'ranking' => '排序',
-
     'item_count' => '子项目',
 
 ];

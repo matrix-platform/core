@@ -6,6 +6,8 @@ return [
 
     'title' => 'Title',
 
+    'subtitle' => 'Subtitle',
+
     'description' => 'Description',
 
     'keywords' => 'Keywords',

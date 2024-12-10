@@ -6,6 +6,8 @@ return [
 
     'title' => '标题',
 
+    'subtitle' => '副标',
+
     'description' => '简述',
 
     'keywords' => '关键字',

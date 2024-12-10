@@ -6,6 +6,4 @@ return [
 
     'disable_time' => '下架時間',
 
-    'ranking' => '排序',
-
 ];

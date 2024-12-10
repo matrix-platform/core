@@ -20,8 +20,6 @@ return [
 
     'disable_time' => 'Disable Time',
 
-    'ranking' => 'Ranking',
-
     'item_count' => 'Block Item',
 
 ];
