@@ -3,9 +3,11 @@
 return [
 
     'privacy-policy.title' => '標題',
+    'privacy-policy.subtitle' => '副標',
     'privacy-policy.content' => '內容',
 
     'service-terms.title' => '標題',
+    'service-terms.subtitle' => '副標',
     'service-terms.content' => '內容',
 
     'sms' => '簡訊樣板',
