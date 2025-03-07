@@ -1,7 +1,7 @@
 <?php //>
 
 return function ($text) {
-    if (preg_match('/^[\d]{8}$/', $text)) {
+    if (preg_match('/^\d{8}$/', $text)) {
         $sum1 = 0;
         $sum2 = 0;
 
@@ -12,7 +12,7 @@ return function ($text) {
             $num = $codes[$i] * $numbers[$i];
             $num = intval($num / 10) + ($num % 10);
 
-            if ($i === 6 && $codes[$i] === 7) {
+            if ($i === 6 && $codes[6] === 7) {
                 $sum1 += intval($num / 10);
                 $sum2 += $num % 10;
             } else {

@@ -1,7 +1,7 @@
 <?php //>
 
 return function ($text) {
-    if (preg_match('/^[a-zA-Z][1-2][\d]{8}$/', $text)) {
+    if (preg_match('/^[a-zA-Z][12]\d{8}$/', $text)) {
         $codes = str_split($text);
         $numbers = [0, 8, 7, 6, 5, 4, 3, 2, 1, 1];
 

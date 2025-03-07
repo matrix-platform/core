@@ -99,6 +99,10 @@ class Collection {
         return $mapping;
     }
 
+    public function pluck($column, $orders = true, $size = 0, $page = 1) {
+        return array_column($this->list([$column], $orders, $size, $page), $column);
+    }
+
     public function update($values) {
         $list = [];
 
