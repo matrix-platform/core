@@ -46,6 +46,8 @@ trait Handler {
                     if ($tx) {
                         $tx->rollback();
                     }
+
+                    $this->cleanup();
                 }
             }
 
@@ -58,10 +60,6 @@ trait Handler {
                     $view = $this->errorView() ?: cfg('default.error-view');
                 }
             }
-        }
-
-        if (!$success) {
-            $this->cleanup();
         }
 
         lookup($view)->render($this, $form, $result);
