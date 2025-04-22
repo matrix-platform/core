@@ -1,5 +1,5 @@
 <?php //>
 
-return function ($payload, $key = null, $iv = null) {
-    return encrypt_data($payload, $key, $iv);
+return function ($payload, $key = null, $iv = null, $safe = false) {
+    return encrypt_data($payload, $key, $iv, $safe);
 };
